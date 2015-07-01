@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Zend</title>
+	<atom:link href="http://www.armetiz.info/tag/zend-framework/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Doctrine 2 &amp; i18n</title>
+		<link>http://www.armetiz.info/doctrine-2-internationalization/</link>
+		<comments>http://www.armetiz.info/doctrine-2-internationalization/#comments</comments>
+		<pubDate>Fri, 14 Oct 2011 08:57:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Doctrine]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[i18n]]></category>
+		<category><![CDATA[Information]]></category>
+		<category><![CDATA[Internationalisation]]></category>
+		<category><![CDATA[Langue]]></category>
+		<category><![CDATA[Monde]]></category>
+		<category><![CDATA[Système]]></category>
+		<category><![CDATA[Traduction]]></category>
+		<category><![CDATA[Translation]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2154</guid>
+		<description><![CDATA[Doctrine 2 est dépourvu &#8211; en natif &#8211; de système de traduction. Grâce au système d&#8217;extension, des contributeurs dont certains membres de l&#8217;équipe de développement Doctrine ont développés Gedmo, un.. <a href="http://www.armetiz.info/doctrine-2-internationalization/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/10/dbal_icon1.png"><img src="http://www.armetiz.info/files/2011/10/dbal_icon1.png" alt="" width="75" height="75" class="alignright size-full wp-image-2162" /></a><strong>Doctrine 2</strong> est dépourvu &#8211; en natif &#8211; de système de traduction.<br />
+Grâce au système d&#8217;extension, des contributeurs dont certains membres de l&#8217;équipe de développement Doctrine ont développés <a href="https://github.com/l3pp4rd/DoctrineExtensions">Gedmo</a>, un pack d&#8217;extension pour Doctrine.</p>
+<p>Cette extension inclue :
+<ul>
+<li>Tree</li>
+<li><strong>Translatable</strong></li>
+<li>Sluggable</li>
+<li>Timestampable</li>
+<li>Loggable</li>
+<li>Sortable</li>
+</ul>
+<p>Nous nous intéresserons à <strong>Translatable</strong> qui nous permettra de traduire nos données.</p>
+<p>Travaillant avec le <strong>Framework Zend</strong>, les exemples seront orientés pour cette architecture, il est à noter que cela n&#8217;est pas un pré-requit et que cela fonctionnera avec ou sans Zend Framework.</p>
+<h3>Fonctionnement</h3>
+<p>Le module <strong>i18n</strong> de Gedmo fonctionne grâce à l&#8217;utilisation d&#8217;un table annexe contenant la traduction de certaines propriétés de vos Entités.<br />
+La table de traduction contient donc <strong>le nom du champs traduite</strong>, <strong>la langue</strong>, <strong>la valeur</strong>, <strong>le type d&#8217;objet</strong> ainsi qu&#8217;une <strong>reference vers cet objet</strong>.</p>
+<p>Par défaut, l&#8217;extension aura besoin de la table : <strong>ext_translations</strong><br />
+Les champs suivant seront ainsi necessaire :</p>
+<ul>
+<li>id</li>
+<li>content</li>
+<li>field</li>
+<li>locale</li>
+<li>foreign_key</li>
+<li>object_class</li>
+</ul>
+<p>Voici un jeu de donnée qui vous permettra de mieux comprendre l&#8217;utilisation de ce type de structure :</p>
+<blockquote>
+<ul>
+<li>content : Un día me voy a comprar el mundo</li>
+<li>field : title</li>
+<li>locale : es_es</li>
+<li>foreign_key : 3</li>
+<li>object_class : EntityArticle</li>
+</ul>
+<ul>
+<li>content : Un jour j&#8217;achèterai le monde</li>
+<li>field : title</li>
+<li>locale : fr_fr</li>
+<li>foreign_key : 3</li>
+<li>object_class : EntityArticle</li>
+</ul>
+<ul>
+<li>content : Le monde semble être à l&#8217;agonie, que pouvons nous faire pour le sauver.</li>
+<li>field : description</li>
+<li>locale : fr_fr</li>
+<li>foreign_key : 3</li>
+<li>object_class : EntityArticle</li>
+</ul>
+</blockquote>
+<p>A noter, que les données relatives à la langue par défaut de votre application sont stockés au sein de la table gerant directement votre entité.<br />
+Par défaut, nous utilisons la langue &#8220;<strong>en_US</strong>&#8220;, ce qui signifie que la table <strong>ext_translations</strong> ne contiendra pas de traduction pour &#8220;en_US&#8221;.<br />
+Dans mon exemple, ces données seront stockés dans la table &#8220;<strong>articles</strong>&#8221; de l&#8217;entité <strong>EntityArticle</strong></p>
+<p>Ainsi, l&#8217;extension stockera l&#8217;ensemble des traductions de votre application au sein d&#8217;une même table.<br />
+Attention, le champs &#8220;<strong>forien_key</strong>&#8221; ne correspond pas à une clé étrangère pour votre base de donnée relationnelle.<br />
+Une des possibilités de l&#8217;extension consiste à pouvoir définir une table spécifique à la traduction d&#8217;une Entités, ainsi vous pourrez définir une vrai <strong>clé étrangère</strong> au sein de votre <strong>RDBMS</strong>.</p>
+<h3>Exploitation</h3>
+<p>Au niveau de l&#8217;exploitation des données,<br />
+Vous définirez la langue utilisée au sein de votre application lors de l&#8217;execution, cela correspondra normalement à la langue de l&#8217;utilisateur.<br />
+Il ne restera plus qu&#8217;a utiliser votre application comme vous en avez l&#8217;habitude.</p>
+<p>Nous partons du principe que votre environnement Doctrine est correctement configuré et fonctionnel.</p>
+<p>Voici la configuration minimum a définir :</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000088;">$classLoader</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineCommonClassLoader<span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">'Gedmo'</span><span style="color: #339933;">,</span> APPLICATION_PATH <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/../library/'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$classLoader</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">register</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$config</span> &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineORMConfiguration<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$driverChain</span>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineORMMappingDriverDriverChain<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$entityDriver</span> &nbsp; &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineORMMappingDriverXmlDriver <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$translatableDriver</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$config</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">newDefaultAnnotationDriver</span><span style="color: #009900;">&#40;</span> APPLICATION_PATH <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/../library/DoctrineExtensions/Gedmo/Translatable/Entity'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$driverChain</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addDriver</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$entityDriver</span><span style="color: #339933;">,</span> &nbsp; &nbsp; <span style="color: #0000ff;">'EntityArticle'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$driverChain</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addDriver</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$translatableDriver</span><span style="color: #339933;">,</span> &nbsp; <span style="color: #0000ff;">'GedmoTranslatable'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$config</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setMetadataDriverImpl</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$driverChain</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$eventManager</span> &nbsp; &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineCommonEventManager<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$translatableListener</span> &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> GedmoTranslatableTranslationListener<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+<span style="color: #000088;">$translatableListener</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setTranslationFallback</span><span style="color: #009900;">&#40;</span> <span style="color: #009900; font-weight: bold;">true</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$eventManager</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addEventSubscriber</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$translatableListener</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$entityManager</span> <span style="color: #339933;">=</span> DoctrineORMEntityManager<span style="color: #339933;">::</span><span style="color: #004000;">create</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$conn</span><span style="color: #339933;">,</span> <span style="color: #000088;">$config</span><span style="color: #339933;">,</span> <span style="color: #000088;">$eventManager</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Ensuite, il faut configurer vos entités.<br />
+J&#8217;utilise le XML Mapping, vous trouverez facilement l&#8217;équivalence pour YAML / Annotation.</p>
+<div class="codecolorer-container xml blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="xml codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Nous avons simplement ajouté le noeud XML <strong>gedmo:translatable</strong> à notre champs afin de spécifier que celui-ci peut-être traduit.<br />
+A noter qu&#8217;il faut inclure l&#8217;espace de nom <strong>xmlns:gedmo</strong>.</p>
+<p>Voici un exemple d&#8217;utilisation avec Doctrine</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">//En utilisant la langue par défaut qui est l'anglais,</span><br />
+<span style="color: #000088;">$article</span> &nbsp; &nbsp;<span style="color: #339933;">=</span> <span style="color: #000088;">$entityManager</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'EntityArticle'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$article</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getTitle</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <br />
+<span style="color: #666666; font-style: italic;">//One day I'll buy the world</span><br />
+<br />
+<span style="color: #666666; font-style: italic;">//En spécifiant la langue espagnole,</span><br />
+<span style="color: #000088;">$translatableListener</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setTranslatableLocale</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;es_es&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$article</span> &nbsp; &nbsp;<span style="color: #339933;">=</span> <span style="color: #000088;">$entityManager</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'EntityArticle'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$article</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getTitle</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <br />
+<span style="color: #666666; font-style: italic;">//Un día me voy a comprar el mundo</span></div></td></tr></tbody></table></div>
+<h3>Entity de traduction</h3>
+<p>Nous avons vu précédemment que les traductions sont par défaut stockées dans la table <strong>ext_translations</strong>.<br />
+Voyons comment utiliser une table dédiée à la traduction d&#8217;une entité. Cela permettra en plus d&#8217;avoir une structure de base de donnée plus propre, et d&#8217;avoir des clés étrangère au sein de votre RDBMS.</p>
+<div class="codecolorer-container xml blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="xml codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp; &nbsp; &nbsp; &nbsp; ..</div></td></tr></tbody></table></div>
+<p>Créons la class ArticleTranslation qui n&#8217;a rien de bien extraordinaire, sauf qu&#8217;elle doit étendre AbstractTranslation qui va définir les differentes propriétés de votre table de traduction.</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000000; font-weight: bold;">namespace</span> Entity<br />
+<br />
+<span style="color: #000000; font-weight: bold;">use</span> GedmoTranslatableEntityAbstractTranslation<span style="color: #339933;">;</span><br />
+<span style="color: #000000; font-weight: bold;">use</span> DoctrineORMMapping <span style="color: #b1b100;">as</span> ORM<span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000000; font-weight: bold;">class</span> ArticleTranslation <span style="color: #000000; font-weight: bold;">extends</span> AbstractTranslation<br />
+<span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>A cela, ajoutons le fichier de mapping.</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Il ne vous reste plus qu&#8217;a créer la table article_translation avec les champs énuméré en début d&#8217;article.</p>
+<h3>Conclusion</h3>
+<p>Comparer à Doctrine 1, la mise en place de l&#8217;internationalisation pour votre application peut sembler plus difficile. Par contre, l&#8217;exploitation de cette implementation est tout simplement <strong>user-friendly</strong>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/doctrine-2-internationalization/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>Recherche développeur PHP5 / ZEND &#8211; Paris</title>
+		<link>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/</link>
+		<comments>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/#comments</comments>
+		<pubDate>Thu, 31 Mar 2011 12:29:38 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Konbini]]></category>
+		<category><![CDATA[Annonce]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[CDI]]></category>
+		<category><![CDATA[Embauche]]></category>
+		<category><![CDATA[Emplois]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[R&D]]></category>
+		<category><![CDATA[Recherche]]></category>
+		<category><![CDATA[Recrutement]]></category>
+		<category><![CDATA[Zend]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1993</guid>
+		<description><![CDATA[L&#8217;équipe de technique de Konbini recrute ! On recherche un développeur passionné avec des compétences avancées sur le Framework Zend &#38; des connaissances sur le Framework Doctrine 1.2 et/ou 2... <a href="http://www.armetiz.info/recherche-developpeur-php5-zend-paris/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.konbini.com"><img alt="logo konbini" src="http://static.konbini.com/images/logo_130_130.gif" class="alignleft" width="130" height="130" /></a>L&#8217;équipe de technique de <a href="https://remixjobs.com/emploi/Developpement/Developpeur-euse-PHP5-MySQL-ZEND-H-F/4698">Konbini recrute</a> !</p>
+<p>On recherche un développeur passionné avec des compétences avancées sur le <strong>Framework Zend</strong> &amp; des connaissances sur le <strong>Framework Doctrine</strong> 1.2 et/ou 2.</p>
+<p>En description de poste, voici l&#8217;annonce officielle : <i>vos principales missions seront le développement continu de l’application métier de Konbini ayant pour finalité de développer un écosystème cohérent autour de l’activité de production, diffusion et monétisation de contenus vidéos. Vous participerez également à l’ingénierie et à la mise en place des services des applications client de la plateforme publique de Konbini.</i>.</p>
+<p>Des connaissances en HTML, XML, CSS &amp; jQuery sont bien évidemment necessaires.</p>
+<p>Nous travaillons beaucoup avec les technologies Adobe sur des projets <strong>ActionScript 3</strong> pure ou <strong>Flex</strong>. Si vous avez des notions sur ces langages, vous serez moins perdu lors de nos discutions en pause café <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>A titre personnel, l&#8217;ambiance chez <a href="http://blog.konbini.com">Konbini</a> est tres agréable et vous changera complètement des <strong>SSII</strong><strong> ou <strong>WebAgency</strong>. Si vous recherchez une aventure qui sorte de l&#8217;ordinaire avec des <strong>projets ambitieux</strong>, contactez nous !</p>
+<p>Lien vers l&#8217;offre <a href="https://remixjobs.com/emploi/Developpement/Developpeur-euse-PHP5-MySQL-ZEND-H-F/4698">RemixJobs</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Authentification et Autorisation avec Zend AMF</title>
+		<link>http://www.armetiz.info/authentification-autorisation-zend-amf/</link>
+		<comments>http://www.armetiz.info/authentification-autorisation-zend-amf/#comments</comments>
+		<pubDate>Mon, 05 Jul 2010 08:23:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[AS3]]></category>
+		<category><![CDATA[CRUD]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Server]]></category>
+		<category><![CDATA[Service]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1786</guid>
+		<description><![CDATA[Nous allons voir comment mettre en place l&#8217;authentification et l&#8217;autorisation lorsque l&#8217;on souhaite travailler avec Zend et le protocole AMF. Au niveau des pré-requit, vous devez avoir une architecture Zend.. <a href="http://www.armetiz.info/authentification-autorisation-zend-amf/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Nous allons voir comment mettre en place <strong>l&#8217;authentification</strong> et <strong>l&#8217;autorisation</strong> lorsque l&#8217;on souhaite travailler avec Zend et le protocole AMF.</p>
+<p>Au niveau des pré-requit, vous devez avoir une architecture <strong>Zend et AMF opérationnelle</strong>.<br />
+Aussi, je vous conseils de lire la documentation sur <a href="http://framework.zend.com/manual/fr/zend.auth.introduction.html">Zend_Auth</a> et <a href="http://framework.zend.com/manual/fr/zend.acl.introduction.html">Zend_Acl</a>.<br />
+Vous devez avoir compris la notion de <strong>rôle</strong> et de <strong>ressource</strong>.</p>
+<h3>Objectifs</h3>
+<p>Si vous fournissez des services à travers le réseau, et qu&#8217;ils peuvent avoir un impact sur la cohérence des données, vous vous devez de sécuriser l&#8217;accès à ces services.</p>
+<p>Sécurisé l&#8217;accès signifie restreinte l&#8217;accès, mais aussi chiffrer les communications.<br />
+Nous ne traiterons pas la partie chiffrement des échanges, pour cela je vous laissez chercher de la documentation sur HTTPS.</p>
+<h3>Point de départ</h3>
+<p>Ci-dessous, un exemple de contrôleur Zend offrant des services AMF.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class ServiceController extends Zend_Controller_Action<br />
+{<br />
+&nbsp; &nbsp; public function init()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_helper-&amp;gt;viewRenderer-&amp;gt;setNoRender();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_helper-&amp;gt;layout-&amp;gt;disableLayout();<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public function amfAction()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; $server = new Zend_Amf_Server();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; //Liste des services<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;Service_User&quot; );<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;Service_Book&quot; );<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;ZendAmfServiceBrowser&quot; );<br />
+<br />
+&nbsp; &nbsp; //Mapping des objets PHP avec les objets ActionScript &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; $server-&amp;gt;setClassMap('UserDTO', 'Model_DTO_User');<br />
+&nbsp; &nbsp; $server-&amp;gt;setClassMap('BookDTO', 'Model_DTO_Book');<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; $server-&amp;gt;setProduction(false);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; ZendAmfServiceBrowser::$ZEND_AMF_SERVER = $server;<br />
+<br />
+&nbsp; &nbsp; echo ($server-&amp;gt;handle());<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Nous avons donc <u>deux services</u>, et <u>deux types d&#8217;objets</u> pouvant être utilisés.</p>
+<p>Vous remarquerez l&#8217;utilisation de <a href="http://www.zamfbrowser.org/">ZamfBrowser</a>, ce service couplé avec une application Adobe AIR permet de travailler facilement avec les services.</p>
+<p>Voici à quoi ressemble les prototypes d&#8217;un de mes services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Service_Book<br />
+{<br />
+&nbsp; &nbsp; public function createBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function readBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function updateBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function deleteBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function isRentBy (Model_DTO_User $oUser) {}<br />
+}</div></td></tr></tbody></table></div>
+<blockquote><p>L&#8217;autre service est composé lui aussi des méthodes <strong>CRUD</strong> (Create, Read, Update, Delete), ainsi que d&#8217;autres fonctions métiers.</p></blockquote>
+<p>Sachant que mon application cliente Flash utilise ces services, il est très facile à un utilisateur de découvrir <strong>l&#8217;URI de la passerelle AMF</strong>.<br />
+En l&#8217;état, une personne ayant l&#8217;accès à ma passerelle AMF pourrai utiliser toutes les fonctions de mes services. Ce qui implique qu&#8217;il puisse modifier ma base de données.</p>
+<p><em>Remarquer que si l&#8217;on supprime le service de ZamfBrowser, l&#8217;utilisateur n&#8217;aura pas accès à la liste exhaustive des services. Si vous êtes en production, je vous conseils donc de supprimer ce service pour des raisons de sécurité.</em></p>
+<h3>Mise en place de l&#8217;authentification</h3>
+<p>Nous allons commencer par mettre en place l&#8217;authentification,<br />
+Sachant que nous utilisons un client Flash, il est logique d&#8217;utiliser <strong>Zend_Amf_Adobe_Auth</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$authAdapter = new Zend_Amf_Adobe_Auth(APPLICATION_PATH . '/config/password.xml');<br />
+$server-&amp;gt;setAuth($authAdapter );</div></td></tr></tbody></table></div>
+<p>Avec ces deux lignes, nous avons mis en place l&#8217;authentification au niveau du serveur.<br />
+Il vous reste à définir le fichier password.xml</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Le fichier password.xml contient les identifiants et les mots de passe des utilisateurs.<br />
+C&#8217;est à ce niveau que vous définissez les affectations d&#8217;identifiants à un rôle.</p>
+<p>Si vous avez besoin de plus de souplesse au niveau de la gestion des identifiants, je vous conseils la lecture de <a href="http://framework.zend.com/manual/fr/zend.auth.adapter.dbtable.html">Authentification avec une table de base de données</a>.</p>
+<p><em>Il est à noter, que si vous ne spécifier aucun identifiant lors de votre connexion au serveur AMF vous serez considéré comme un invité : <strong>Zend_Amf_Constants::GUEST_ROLE</strong></em></p>
+<h3>Mise en place de l&#8217;autorisation</h3>
+<p>Maintenant que nous avons correctement définit l&#8217;authentification, passons à l&#8217;autorisation.<br />
+C&#8217;est maintenant que nous allons donner les autorisations ou refus d&#8217;accès aux services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Avec ces deux lignes, vous avez définit une <strong>Acces Control List</strong>.<br />
+Vous le constatez, aucune autorisation n&#8217;est définit; mais il est important de noter que maintenant, <strong>plus personne n&#8217;a accès à vos services</strong>.</p>
+<p>Pour donner l&#8217;accès à nos deux services à n&#8217;importe qui, nous allons procéder comme suit :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('Service_User') );<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('Service_Book') );<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('ZendAmfServiceBrowser') );<br />
+<br />
+$acl-&amp;gt;allow (null, 'Service_User');<br />
+$acl-&amp;gt;allow (null, 'Service_Book');<br />
+$acl-&amp;gt;allow (null, 'ZendAmfServiceBrowser);<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Ci-dessus, nous avons une liste explicite des autorisations.<br />
+Si nous avions voulu faire dans l&#8217;implicite, nous aurions procédé ainsi :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$acl-&amp;gt;allow ();<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Pour aller plus loin dans l&#8217;explication, nous allons maintenant définir l&#8217;ensemble de nos autorisations.</p>
+<blockquote><p>Nous souhaitons que le rôle administrateur est accès à tout, et nous souhaitons que les utilisateurs non authentifiés n&#8217;est pas accès aux fonctions de mise à jour.</p></blockquote>
+<p>Rappelez-vous, nous avons vu plus haut que vous étiez connecter avec le rôle invité lorsque vous ne spécifiez aucun identifiant.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+<br />
+//Définition les rôles.<br />
+$acl-&amp;gt;addRole ( new Zend_Acl_Role(Zend_Amf_Constants::GUEST_ROLE) );<br />
+<br />
+//Définition des autorisations<br />
+$acl-&amp;gt;allow ();<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;create&quot;);<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;update&quot;);<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;delete&quot;);<br />
+<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p><u>Premièrement,</u><br />
+Nous avons dû définir le rôle invité pour pouvoir travailler ses autorisations.</p>
+<p><u>Deuxièmement,</u><br />
+Nous avons utilisé le principe des listes noires. Si nous avions utilisez un système de liste blanche, nous aurions du définir l&#8217;ensemble des rôles, et l&#8217;ensemble des autorisations.<br />
+C&#8217;est donc en partant du principe que tout le monde a accès à tout, que nous avons fermé les portes aux anonymes.</p>
+<p><u><strong>Explication des fonctions Deny &amp; Allow :</strong></u><br />
+<strong>Zend_Acl::deny</strong> et <strong>Zend_Acl::allow</strong> utilisent les mêmes arguments.<br />
+Le premier paramètre correspond à un rôle, cela ne change pas des ACL Zend classique.<br />
+Le deuxième paramètre correspond à une ressource. Avec Zend AMF, une ressource correspond à un Service.<br />
+Le troisième paramètre correspond ici à la fonction d&#8217;un service AMF.</p>
+<p>Nous avons utiliser <strong>null</strong> au niveau du deuxième paramètre pour dire : <strong>tout les services</strong>.</p>
+<h3>initAcl</h3>
+<p>Ce dernier paragraphe pour vous parlez de mon opposition face aux spécifications de la documentation <a href="http://framework.zend.com/manual/1.10/en/zend.amf.server.html">Zend_AMF_Server</a> :</p>
+<blockquote><p><em>If the ACL object is set, and the class being called defines initAcl() method, this method will be called with the ACL object as an argument. The class then can create additional ACL rules and return TRUE, or return FALSE if no access control is required for this class.</em></p></blockquote>
+<p>En gros, il existe une autre manière de définir les autorisations,<br />
+Si vous avez définit un ACL au niveau de votre Serveur AMF. Ce dernier vérifiera l&#8217;existence d&#8217;une fonction <strong>initAcl</strong> sur les services lorsqu&#8217;ils seront appelés.</p>
+<p>Cette fonction est ce que l&#8217;on appel un <a href="http://fr.wikipedia.org/wiki/Hook_%28informatique%29">Hook</a>, et vous permets de définir les autorisations et refus au sein de la définition même de vos services.<br />
+Autant vous dire que <strong>niveau maintenance et centralisation de l&#8217;information c&#8217;est très moyen</strong>..<br />
+De plus, si l&#8217;on pend l&#8217;exemple de <strong>ZendAmfServiceBrowser</strong>, vous allez devoir modifier la définition de ce service, et cela à chaque fois qu&#8217;il y aura une nouvelle version ?</p>
+<p>Voici un exemple de fonctionnement</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Service_Book<br />
+{<br />
+&nbsp; &nbsp; public function initAcl ($acl)<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'create');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'update');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'delete');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return true;<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p><strong>Pour aller plus loin</strong> : Vous trouverez un article dédié à l&#8217;authentification pour Zend AMF Server avec une base de données : <a href="http://www.armetiz.info/zend-authentication-database/">AMF / Zend Authentication using Database</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/authentification-autorisation-zend-amf/feed/</wfw:commentRss>
+		<slash:comments>22</slash:comments>
+		</item>
+		<item>
+		<title>Mise en production de Zend Framework sur un serveur mutualisé</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/</link>
+		<comments>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comments</comments>
+		<pubDate>Fri, 04 Jun 2010 08:06:56 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Zend]]></category>
+		<category><![CDATA[Astuces]]></category>
+		<category><![CDATA[Conseils]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[htaccess]]></category>
+		<category><![CDATA[Mutualisé]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[RewriteRule]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724</guid>
+		<description><![CDATA[Lorsque l&#8217;on dispose d&#8217;un serveur dédié, la mise en production d&#8217;une application Zend Framework est assez simple; il suffit de modifier le DocumentRoot du VirtualHost. Si l&#8217;on dispose d&#8217;un hébergement.. <a href="http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/06/zend-framework1.png"><img src="http://www.armetiz.info/files/2010/06/zend-framework1.png" alt="Zend Framework Logo" width="185" height="187" class="alignright size-full wp-image-1727" /></a>Lorsque l&#8217;on dispose d&#8217;un serveur dédié, la mise en production d&#8217;une application Zend Framework est assez simple; il suffit de modifier le <strong>DocumentRoot</strong> du <strong>VirtualHost</strong>.</p>
+<p>Si l&#8217;on dispose d&#8217;un hébergement mutualisé, il faut aussi pouvoir proposer à nos visiteurs un accès au site via <strong>www.domain.tld</strong> et non pas www.domain.tld/public/</p>
+<h3>Première solution</h3>
+<p>La première solution, consiste à déplacer le fichier /public/index.php à la racine du domaine et de modifier la définition de la constante <strong>APPLICATION_PATH</strong> de ce même fichier.<br />
+Le seul soucis de cette solution, c&#8217;est que les appels aux ressources de type <strong>CSS</strong> ou <strong>JS</strong> devront être modifiés pour pointer vers www.domain.tld/public/<br />
+Personnellement, je trouve cela complètement nul&#8230;</p>
+<h3>Deuxième solution</h3>
+<p>La deuxième solution &#8211; bien plus élégante &#8211; passe par l&#8217;ajout d&#8217;un .htaccess à la racine du domaine.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">RewriteEngine On<br />
+# Only apply to URLs on this domain<br />
+RewriteCond %{HTTP_HOST} ^(www.)?domain.tld$<br />
+<br />
+# Only apply to URLs that aren't already under folder.<br />
+RewriteCond %{REQUEST_URI} !^/public/<br />
+<br />
+# Don't apply to URLs that go to existing files or folders.<br />
+RewriteCond %{REQUEST_FILENAME} !-f<br />
+RewriteCond %{REQUEST_FILENAME} !-d<br />
+<br />
+# Rewrite all those to insert /folder.<br />
+RewriteRule ^(.*)$ /public/$1<br />
+<br />
+# Also redirect the root folder.<br />
+RewriteCond %{HTTP_HOST} ^(www.)?domain.tld$<br />
+RewriteRule ^(/)?$ public/index.php [L]</div></td></tr></tbody></table></div>
+<p>Là, tout est magique et fonctionne sans <strong>aucune autre modification</strong> de l&#8217;application.<br />
+Pour protéger l&#8217;accès à vos autres répertoires, et principalement <strong>/application</strong> qui contient surement vos <strong>mots de passe BDD</strong> non chiffrés. Rajouter un fichier .htaccess contenant</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">deny from all</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/feed/</wfw:commentRss>
+		<slash:comments>19</slash:comments>
+		</item>
+		<item>
+		<title>Transfer Object Assembler avec Doctrine 1</title>
+		<link>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/</link>
+		<comments>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/#comments</comments>
+		<pubDate>Mon, 31 May 2010 10:06:12 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Doctrine]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[DBAL]]></category>
+		<category><![CDATA[DTO]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Konbini]]></category>
+		<category><![CDATA[ORM]]></category>
+		<category><![CDATA[Pattern]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1693</guid>
+		<description><![CDATA[Le pattern Transfert Object TO, Data Transfert Object DTO, ou encore Value Object VO permet d&#8217;échanger des données entre deux applications. Wikipédia : Son but est de simplifier les transferts.. <a href="http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/05/doctrine1.gif"><img src="http://www.armetiz.info/files/2010/05/doctrine1.gif" alt="doctrine" width="191" height="53" class="alignright size-full wp-image-1710" /></a>Le <a href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/TransferObject.html">pattern Transfert Object</a> <strong>TO</strong>, <strong>Data Transfert Object DTO</strong>, ou encore <strong>Value Object VO</strong> permet d&#8217;échanger des données entre deux applications.</p>
+<p>Wikipédia : <em>Son but est de simplifier les transferts de données entre les sous-systèmes d&#8217;une application logiciel. Les objets de transfert de données sont souvent utilisés en conjonction des objets d&#8217;accès aux données.</em></p>
+<p>Qui dit <strong>Transfert Object</strong>, veux aussi dire <a href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/TransferObjectAssembler.html">Transfert Object Assembler</a>. </p>
+<h3>Conversion d&#8217;object</h3>
+<p>Le pattern <strong>Transfert Object Assembler</strong> permet de passer d&#8217;un DTO à un Objet d&#8217;accès au données, et inversement.<br />
+C&#8217;est le moyen le plus simple pour travailler avec le pattern Data Transert Object et un <strong>ORM</strong>.</p>
+<h3>Domain Object Model -&gt; Data Transfert Object</h3>
+<p>Avec l&#8217;<a href="http://www.doctrine-project.org/">ORM Doctrine</a>, le transfert d&#8217;un &#8220;<strong>Domain Object Model DOM</strong>&#8221; ou ici <strong>Doctrine_Record</strong> vers un <strong>DTO</strong> est très simple.<br />
+Il suffit de réaliser un parser qui analyse l&#8217;objet issu de Doctrine, et qui remplit les données du DTO.</p>
+<h3>Data Transfert Object -&gt; Domain Object Model</h3>
+<p>Convertir un DTO vers un DOM peut s&#8217;avère plus complexe.<br />
+En effet, Doctrine utilise des collections d&#8217;objet qui lui sont propres, mais a aussi besoin de connaitre les clés primaires et leurs contenus pour pouvoir créer un objet. Car un objet issu de Doctrine_Record n&#8217;a pas les même propriétés quand il est existant en base de donnée, ou qu&#8217;il est en phase d&#8217;être sauvegardé.</p>
+<h3>Implémentation de Transfer Object Assembler</h3>
+<p>Une implémentation du pattern <strong>Transfert Object Assembler</strong> vient de voir le jour après moult et moult péripéties.</p>
+<p>Cette implémentation permet donc le transférer de DTOs à partir de DOMs et inversement.<br />
+Associer au pattern Service Layer, cela peut s&#8217;avérer être très pratique.</p>
+<p>Voici un exemple simple d&#8217;utilisation :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$oProgram = new ProgramDTO ();<br />
+$oProgram-&amp;gt;title = &quot;Dorothe&quot;;<br />
+<br />
+$oVideoDTO = new VideoDTO ();<br />
+$oVideoDTO-&amp;gt;idVideo = 30;<br />
+$oVideoDTO-&amp;gt;program = $oProgram;<br />
+<br />
+$oAssembler = $new Assembler ();<br />
+$oVideo = $oAssembler-&amp;gt;createDomainObject ($oVideoDTO);<br />
+$oVideo-&amp;gt;save ();</div></td></tr></tbody></table></div>
+<p>Nous avons ici créé une nouvelle entrée dans la table programs, et réalisé une liaison entre ce nouvel objet et la vidéo existante d&#8217;identifiant 30.<br />
+Le tout one-shot !</p>
+<p>L&#8217;intérêt de cette implémentation, c&#8217;est d&#8217;être fonctionnel avec :</p>
+<ul>
+<li>Les objets persistant</li>
+<li>Les objets non-persistant</li>
+<li>Les compositions d&#8217;objets sur N niveau</li>
+</ul>
+<h3>Utilisation avec le pattern Service Layer</h3>
+<p>Nous allons voir l&#8217;exemple le plus simple, soit l&#8217;implémentation des méthodes CRUD pour un objet générique.<br />
+L&#8217;utilisation du nommage des classes provient de l&#8217;utilisation de Zend Framework.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br />50<br />51<br />52<br />53<br />54<br />55<br />56<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function create (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; &nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler &nbsp; &nbsp; = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; &nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, true);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;save ();<br />
+&nbsp; &nbsp; $poVideoDTO-&amp;gt;idShow&nbsp; = $oModelVideo-&amp;gt;idShow;<br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function read (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $query&nbsp; = Doctrine_Query::create ()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;select (&quot;video.*&quot;)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;from (&quot;Model_Video video&quot;)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;where (&quot;video.id_show = ?&quot;, $piIdVideo);<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $query-&amp;gt;fetchOne ();<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; return $oAssembler-&amp;gt;createTransfertObject ($oModelVideo);<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function update (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, true);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;save ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function delete (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, false);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;delete ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}</div></td></tr></tbody></table></div>
+<h3>Téléchargement</h3>
+<p>Contenu de l&#8217;archive :</p>
+<ul>
+<li>Implémentation du pattern Transfer Object Assembler</li>
+<li>Interface du pattern Transfer Object Assembler</li>
+<li>Classe de définition d&#8217;un DTO</li>
+</ul>
+<p>Pour faire fonctionner l&#8217;assembler. Vous devez définir une classe qui hérite de Assembler, et ainsi surchargez la propriété $_relationships avec vos liaisons entre DTO et DOM.</p>
+<p><strong>Dernière mise à jour : 20 Septembre 2010</strong><br />
+<a href='http://www.armetiz.info/wp-content/uploads/2010/09/Transfert_Object_Assembler_Doctrine_1.2.zip'>Transfert_Object_Assembler_Doctrine_1.2.zip</a> &#8211; 6 Ko.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/feed/</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.015 seconds using apc
+Object Caching 1281/1282 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:21 by W3 Total Cache -->

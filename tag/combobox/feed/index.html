@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; ComboBox</title>
+	<atom:link href="http://www.armetiz.info/tag/combobox/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>AS 3 : Modifier l&#8217;apparence du composant ComboBox de Flash</title>
+		<link>http://www.armetiz.info/as-3-modifier-lapparence-du-composant-combobox-de-flash/</link>
+		<comments>http://www.armetiz.info/as-3-modifier-lapparence-du-composant-combobox-de-flash/#comments</comments>
+		<pubDate>Fri, 23 May 2008 14:01:01 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[ComboBox]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=16</guid>
+		<description><![CDATA[Si vous utilisez un ComboBox, vous voudrez très certainement modifier son apparence. Pour modifier l&#8217;extérieur de ce composant, double-cliquer sur votre ComboBox de bibliothèque, et modifier tout ce que vous.. <a href="http://www.armetiz.info/as-3-modifier-lapparence-du-composant-combobox-de-flash/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Si vous utilisez un ComboBox, vous voudrez très certainement modifier son apparence.<br />
+Pour modifier l&#8217;extérieur de ce composant, double-cliquer sur votre ComboBox de bibliothèque, et modifier tout ce que vous voulez.</p>
+<p>Pour la gestion de l&#8217;affichage textuel, il faudra voir à passer du coté AS 3 et utiliser la classe TextFormat.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">import flash.text.TextFormatAlign;<br />
+import flash.text.TextFormat;<br />
+<br />
+var unFormat : TextFormat;<br />
+<br />
+unFormat &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;= new TextFormat (null, null, 0xFFFFFF, true);<br />
+unFormat.align &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;= TextFormatAlign.RIGHT;<br />
+unFormat.rightMargin &nbsp; &nbsp;= 20;<br />
+<br />
+//applique le style au champ de texte intégré<br />
+monComboBox.textField.setStyle(&quot;textFormat&quot;, unFormat);<br />
+<br />
+//applique le style au menu déroulant<br />
+monComboBox.dropdown.setRendererStyle(&quot;textFormat&quot;, unFormat);</div></td></tr></tbody></table></div>
+<p>Cette exemple mettra le texte en blanc, gras, aligner à droite, et avec une marge à droite de 20px</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/as-3-modifier-lapparence-du-composant-combobox-de-flash/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.011 seconds using apc
+Object Caching 332/342 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:17:48 by W3 Total Cache -->

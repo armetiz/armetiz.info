@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; English</title>
+	<atom:link href="http://www.armetiz.info/tag/english/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Install NodeJS on CentOS</title>
+		<link>http://www.armetiz.info/install-nodejs-on-centos/</link>
+		<comments>http://www.armetiz.info/install-nodejs-on-centos/#comments</comments>
+		<pubDate>Fri, 27 Jul 2012 09:58:22 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[English]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Real-Time]]></category>
+		<category><![CDATA[Server]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=2594</guid>
+		<description><![CDATA[NodeJS isn&#8217;t available neither on centos base repositories nor on EPEL. To install NodeJS, you can do it from a specific repository or you can compile it. From repository To.. <a href="http://www.armetiz.info/install-nodejs-on-centos/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://nodejs.org/">NodeJS</a> isn&#8217;t available neither on centos <a href="http://wiki.centos.org/AdditionalResources/Repositories/">base repositories</a> nor on <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a>.<br />
+To install NodeJS, you can do it from a <a href="http://nodejs.tchol.org/">specific repository</a> or you can compile it.</p>
+<h3>From repository</h3>
+<p>To install NodeJS from repository on a RHEL based distribution, including our CentOS, just do :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;nodejs.rpm&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>nodejs.tchol.org<span style="color: #000000; font-weight: bold;">/</span>repocfg<span style="color: #000000; font-weight: bold;">/</span>el<span style="color: #000000; font-weight: bold;">/</span>nodejs-stable-release.noarch.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum localinstall</span> <span style="color: #660033;">--nogpgcheck</span> nodejs.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum install</span> nodejs-compat-symlinks npm<br />
+<span style="color: #c20cb9; font-weight: bold;">rm</span> nodejs.rpm</div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-v</span><br />
+<span style="color: #666666; font-style: italic;">#v0.6.18</span></div></td></tr></tbody></table></div>
+<h3>From source</h3>
+<p>To compile NodeJS from source on your CentOS, you have to install <strong>missing dependancies</strong> : <strong>gcc-c++, python and libssl-dev</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> gcc-c++ python libssl-dev<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;node.tar.gz&quot;</span> <span style="color: #ff0000;">&quot;http://nodejs.org/dist/node-latest.tar.gz&quot;</span><br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> node.tar.gz <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> node-v<span style="color: #000000; font-weight: bold;">*</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-v</span><br />
+<span style="color: #666666; font-style: italic;">#v0.8.4</span></div></td></tr></tbody></table></div>
+<h3>Play with a simple &#8220;Hello world&#8221;</h3>
+<p>Just launch node in <strong>interactive mode</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-i</span></div></td></tr></tbody></table></div>
+<p>Type a Javascript command.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #339933;">&gt;</span> console.<span style="color: #660066;">log</span> <span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Hello World&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+Hello world<br />
+undefined<br />
+<span style="color: #339933;">&gt;</span></div></td></tr></tbody></table></div>
+<h3>About version</h3>
+<p>As you can see, the repository provides an old version of NodeJS (0.6.14) compared to the latest released (0.8.4).</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/install-nodejs-on-centos/feed/</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.015 seconds using apc
+Object Caching 543/544 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:14:34 by W3 Total Cache -->

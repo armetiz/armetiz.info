@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Install NodeJS on CentOS</title>
+	<atom:link href="http://www.armetiz.info/install-nodejs-on-centos/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info/install-nodejs-on-centos/</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Thu, 03 Apr 2014 20:26:43 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>By: Thomas</title>
+		<link>http://www.armetiz.info/install-nodejs-on-centos/#comment-867</link>
+		<dc:creator><![CDATA[Thomas]]></dc:creator>
+		<pubDate>Tue, 09 Apr 2013 07:15:13 +0000</pubDate>
+		<guid isPermaLink="false">http://armetiz.info/?p=2594#comment-867</guid>
+		<description><![CDATA[Hi @radu,
+The &#039;configure&#039; file is located inside the &quot;node-*&quot; folder that you just have downloaded.
+Check twice ;)]]></description>
+		<content:encoded><![CDATA[<p>Hi @radu,<br />
+The &#8216;configure&#8217; file is located inside the &#8220;node-*&#8221; folder that you just have downloaded.<br />
+Check twice 😉</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: radu</title>
+		<link>http://www.armetiz.info/install-nodejs-on-centos/#comment-858</link>
+		<dc:creator><![CDATA[radu]]></dc:creator>
+		<pubDate>Fri, 05 Apr 2013 08:08:17 +0000</pubDate>
+		<guid isPermaLink="false">http://armetiz.info/?p=2594#comment-858</guid>
+		<description><![CDATA[Hello,
+
+On my Centos6.4-x64 I try to recompile, but I get 
+
+[root@server node-v0.10.3-darwin-x64]# ./configure
+-bash: ./configure: No such file or directory
+
+so I get blocked [ to my level of knowledge ]
+
+Can you please help out ?
+
+Many thanks,
+
+Radu]]></description>
+		<content:encoded><![CDATA[<p>Hello,</p>
+<p>On my Centos6.4-x64 I try to recompile, but I get </p>
+<p>[root@server node-v0.10.3-darwin-x64]# ./configure<br />
+-bash: ./configure: No such file or directory</p>
+<p>so I get blocked [ to my level of knowledge ]</p>
+<p>Can you please help out ?</p>
+<p>Many thanks,</p>
+<p>Radu</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Clemorphy</title>
+		<link>http://www.armetiz.info/install-nodejs-on-centos/#comment-744</link>
+		<dc:creator><![CDATA[Clemorphy]]></dc:creator>
+		<pubDate>Fri, 07 Dec 2012 16:09:08 +0000</pubDate>
+		<guid isPermaLink="false">http://armetiz.info/?p=2594#comment-744</guid>
+		<description><![CDATA[Je viens de voir que tu es français. Vu que le billet est en anglais, je ne m&#039;étais pas posé la question ...
+Effectivement un &#039;yum remove nodejs&#039; m&#039;a débarassé de l&#039;ancienne version.
+Et j&#039;ai refait un lien symbolique de /usr/bin/node vers ma version plus récente.
+
+Merci.]]></description>
+		<content:encoded><![CDATA[<p>Je viens de voir que tu es français. Vu que le billet est en anglais, je ne m&#8217;étais pas posé la question &#8230;<br />
+Effectivement un &#8216;yum remove nodejs&#8217; m&#8217;a débarassé de l&#8217;ancienne version.<br />
+Et j&#8217;ai refait un lien symbolique de /usr/bin/node vers ma version plus récente.</p>
+<p>Merci.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/install-nodejs-on-centos/#comment-742</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Fri, 07 Dec 2012 15:24:04 +0000</pubDate>
+		<guid isPermaLink="false">http://armetiz.info/?p=2594#comment-742</guid>
+		<description><![CDATA[I guess you can remove the &quot;node&quot; from repository like any other package with yum.
+
+Armetiz.]]></description>
+		<content:encoded><![CDATA[<p>I guess you can remove the &#8220;node&#8221; from repository like any other package with yum.</p>
+<p>Armetiz.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Clemorphy</title>
+		<link>http://www.armetiz.info/install-nodejs-on-centos/#comment-741</link>
+		<dc:creator><![CDATA[Clemorphy]]></dc:creator>
+		<pubDate>Fri, 07 Dec 2012 14:27:22 +0000</pubDate>
+		<guid isPermaLink="false">http://armetiz.info/?p=2594#comment-741</guid>
+		<description><![CDATA[Hi.
+
+I first did the&quot;From repository&quot; method  (from another website, but it was exactly like yours) and it worked.
+node -v indicates v0.6.18
+
+But since it was not the latest version, I decided to do the &#039;from source&quot; method (from this page)
+It worked too, but I think the other version is still installed, because when I type &#039;node -v&#039;, it still shows v0.6.18
+when I go to the directory in which I compiled node, and I type &#039;./node -v&#039;, it shows v0.8.15.
+
+But how can I link the command &quot;node&quot; to the version that I just compiled ?
+How can I remove the old version ?
+
+Thx.]]></description>
+		<content:encoded><![CDATA[<p>Hi.</p>
+<p>I first did the&#8221;From repository&#8221; method  (from another website, but it was exactly like yours) and it worked.<br />
+node -v indicates v0.6.18</p>
+<p>But since it was not the latest version, I decided to do the &#8216;from source&#8221; method (from this page)<br />
+It worked too, but I think the other version is still installed, because when I type &#8216;node -v&#8217;, it still shows v0.6.18<br />
+when I go to the directory in which I compiled node, and I type &#8216;./node -v&#8217;, it shows v0.8.15.</p>
+<p>But how can I link the command &#8220;node&#8221; to the version that I just compiled ?<br />
+How can I remove the old version ?</p>
+<p>Thx.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: NodeJS &#8211; Mise en production &#124; Armetiz</title>
+		<link>http://www.armetiz.info/install-nodejs-on-centos/#comment-641</link>
+		<dc:creator><![CDATA[NodeJS &#8211; Mise en production &#124; Armetiz]]></dc:creator>
+		<pubDate>Tue, 11 Sep 2012 10:07:44 +0000</pubDate>
+		<guid isPermaLink="false">http://armetiz.info/?p=2594#comment-641</guid>
+		<description><![CDATA[[...] NodeJS installé [...]]]></description>
+		<content:encoded><![CDATA[<p>[&#8230;] NodeJS installé [&#8230;]</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 7/12 queries in 0.002 seconds using apc
+Object Caching 312/313 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:09:28 by W3 Total Cache -->

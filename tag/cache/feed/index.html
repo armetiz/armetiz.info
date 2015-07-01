@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Cache</title>
+	<atom:link href="http://www.armetiz.info/tag/cache/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>CentOS 6 &#8211; Installer APC</title>
+		<link>http://www.armetiz.info/centos-6-installer-apc/</link>
+		<comments>http://www.armetiz.info/centos-6-installer-apc/#comments</comments>
+		<pubDate>Wed, 28 Dec 2011 13:32:31 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[APC]]></category>
+		<category><![CDATA[Cache]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Optimisation]]></category>
+		<category><![CDATA[PHP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2185</guid>
+		<description><![CDATA[Apres avoir installé et configuré correctement votre environnement LAMP sous CentOS 6 vous souhaitez installer APC. Ce dont vous avez besoin avant de commencer : &#8211; PEAR, &#8211; les interfaces.. <a href="http://www.armetiz.info/centos-6-installer-apc/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/12/centos1.png"><img src="http://www.armetiz.info/files/2011/12/centos1.png" alt="centos" width="128" height="128" class="alignright size-full wp-image-2188" /></a>Apres avoir installé et configuré correctement votre environnement LAMP sous CentOS 6 vous souhaitez <strong>installer APC</strong>.</p>
+<p>Ce dont vous avez besoin avant de commencer :<br />
+&#8211; <strong>PEAR</strong>,<br />
+&#8211; les interfaces de développement de PHP, Apache &amp; PCRE,<br />
+&#8211; un <strong>compilateur C</strong> &amp; l&#8217;outil <strong>Make</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">yum install php-pear php-devel httpd-devel pcre-devel gcc make</div></td></tr></tbody></table></div>
+<p>Ensuite, on lance la compilation de l&#8217;extension APC.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">pecl install apc</div></td></tr></tbody></table></div>
+<p>Voici les questions qui vous seront posées, personnellement j&#8217;ai utilisé les valeurs par défaut.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">Enable internal debugging in APC [no] : <br />
+Enable per request file info about files used from the APC cache [no] : <br />
+Enable spin locks (EXPERIMENTAL) [no] : <br />
+Enable memory protection (EXPERIMENTAL) [no] : <br />
+Enable pthread mutexes (default) [yes] : <br />
+Enable pthread read/write locks (EXPERIMENTAL) [no] :</div></td></tr></tbody></table></div>
+<p>On active l&#8217;<strong>extension PHP</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">echo &quot;extension=apc.so&quot; &amp;gt; /etc/php.d/apc.ini</div></td></tr></tbody></table></div>
+<p>Et on redémarre Apache.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">service httpd restart</div></td></tr></tbody></table></div>
+<p>Vous pouvez vérifier que vous avez correctement installé APC via <strong>phpinfo</strong>().</p>
+<p>Aussi, n&#8217;hésiter pas à utiliser le script PHP d&#8217;administration de APC.<br />
+Ici, nous le copions dans notre répertoire HTTP.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">cp /usr/share/pear/apc.php /var/www/apc.php</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-6-installer-apc/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.002 seconds using apc
+Object Caching 543/544 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:19 by W3 Total Cache -->

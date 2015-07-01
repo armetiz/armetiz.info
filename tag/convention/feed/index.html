@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Convention</title>
+	<atom:link href="http://www.armetiz.info/tag/convention/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>[Flash] Convention de nommage &#8211; QUID &#8220;int &amp; uint&#8221;</title>
+		<link>http://www.armetiz.info/convention-nommage-int-uint-actionscript/</link>
+		<comments>http://www.armetiz.info/convention-nommage-int-uint-actionscript/#comments</comments>
+		<pubDate>Wed, 09 Sep 2009 12:00:09 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[Convention]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[Explication]]></category>
+		<category><![CDATA[Normes]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1254</guid>
+		<description><![CDATA[Les conventions de nommage font parties de la vie d&#8217;un développeur qui souhaite faire du bon boulot. En effet, cela permet une meilleur compréhension visuelle. Ce qui est pratique pour.. <a href="http://www.armetiz.info/convention-nommage-int-uint-actionscript/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://fr.wikipedia.org/wiki/Convention_de_nommage_%28programmation%29">Les conventions de nommage</a> font parties de la vie d&#8217;un développeur qui souhaite faire du bon boulot.<br />
+En effet, cela permet une <strong>meilleur compréhension visuelle</strong>. Ce qui est pratique pour détecter certains problèmes évidents.</p>
+<p>Bref, la convention de nommage concernant les classes est celle-ci :
+<ul>
+<li>1ère lettre en majuscule</li>
+<li>Mélange de minuscule, majuscule avec la première lettre de chaque mot en majuscule</li>
+<li>Donner des noms simples et descriptifs</li>
+<li>Éviter les acronymes : hormis ceux commum (XML, URL, HTML, &#8230;)</li>
+</ul>
+<h3>Analyse du contexte Flash</h3>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">var _monText : String = &quot;Hello world&quot;;<br />
+var _monNombre : int = 42;<br />
+var _monGrandNombre : int = int.MAX_VALUE;</div></td></tr></tbody></table></div>
+<p>En Flash, il existe deux types <strong>int</strong> et <strong>uint</strong> tout deux primitifs comme <strong>String</strong> ou <strong>Number</strong>. Ces types ont deux constantes de classe (MAX_VALUE, et MIN_VALUE).</p>
+<p>Il s&#8217;agit donc de Classes, alors <strong>pourquoi la convention de nommage n&#8217;a pas été respectée</strong> ?</p>
+<p>Après une recherche &#8211; très rapide grâce aux membres de mediabox &#8211; il en ressort que <em>int</em> et <em>uint </em>appartient à Number.</p>
+<p>Si on analyse le code ci-dessous, on peut se rendre compte que le constructeur d&#8217;une variable de type <strong>int</strong> ou <strong>uint</strong> est <strong>Number</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">var n_num: Number = 12.3;<br />
+trace(n_num[&quot;constructor&quot;]); // [class Number]<br />
+&nbsp;<br />
+var n_int: int = 12;<br />
+trace(n_int[&quot;constructor&quot;]); // [class Number]<br />
+&nbsp;<br />
+var n_uint: uint = 12;<br />
+trace(n_uint[&quot;constructor&quot;]); // [class Number]<br />
+&nbsp;<br />
+trace(n_num[&quot;constructor&quot;] == n_int[&quot;constructor&quot;]); // true<br />
+trace (typeof (n_num) + &quot; &quot; + typeof (n_int) + &quot; &quot; + typeof (n_uint)); //number number number</div></td></tr></tbody></table></div>
+<p>Grâce à cette démonstration par le code, nous pouvons constater que Flash respect bien la convention de nommage sur les classes, car <strong>int</strong> et <strong>uint</strong> ne sont que de &#8220;simples&#8221; appels à <strong>Number</strong>.</p>
+<p>Maintenant, QUID de la gestion mémoire ?</p>
+<p>PS: Autre blog, autre temps, <a href="http://troyworks.com/blog/2007/12/02/as3-understanding-uint-int-number/">troyworks</a> s&#8217;est posé la même question sous une autre forme. Assez perturbant tout cela.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/convention-nommage-int-uint-actionscript/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.010 seconds using apc
+Object Caching 379/380 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:08 by W3 Total Cache -->

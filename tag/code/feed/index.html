@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Code</title>
+	<atom:link href="http://www.armetiz.info/tag/code/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Pattern Singleton en Flash</title>
+		<link>http://www.armetiz.info/pattern-singleton-en-flash/</link>
+		<comments>http://www.armetiz.info/pattern-singleton-en-flash/#comments</comments>
+		<pubDate>Tue, 17 Nov 2009 09:49:41 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[Code]]></category>
+		<category><![CDATA[Pattern]]></category>
+		<category><![CDATA[Singleton]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1419</guid>
+		<description><![CDATA[Suite au commentaire de webstorming sur l&#8217;article : Flash – Restreindre l’instanciation d’une classe par un seul objet. Voici l&#8217;implémentation du pattern singleton en Flash. 1234567891011121314151617181920212223public class PatternSingleton { &#160;.. <a href="http://www.armetiz.info/pattern-singleton-en-flash/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Suite au commentaire de <a href="http://www.armetiz.info/flash-restreindre-instanciation-class-objet/#comment-333">webstorming</a> sur l&#8217;article : <a href="http://www.armetiz.info/flash-restreindre-instanciation-class-objet/">Flash – Restreindre l’instanciation d’une classe par un seul objet</a>.</p>
+<p>Voici l&#8217;implémentation du <a href="http://fr.wikipedia.org/wiki/Singleton_(patron_de_conception)">pattern singleton</a> en Flash.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">public class PatternSingleton<br />
+{<br />
+&nbsp; &nbsp; private static var _instance : Object;<br />
+<br />
+&nbsp; &nbsp; public function PatternSingleton () : void<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (_instance)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new Error (&quot;Pattern Singleton : only one instance is permit&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; _instance = this;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function sayHello () : String<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return &quot;Hello World&quot;;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public static function get instance () : PatternSingleton<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (!_instance)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; new PatternSingleton ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return PatternSingleton (_instance);<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Nous avons donc une class ne pouvant être instanciée qu&#8217;une seule fois, et accessible de n&#8217;importe où au sein de notre application.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">trace (PatternSingleton.instance.sayHello ());</div></td></tr></tbody></table></div>
+<h3>Wikipédia</h3>
+<p><a href="http://wiki.flexx.fr/doku.php?id=tutoriaux:flex:pattern_singleton_as3">L&#8217;implémentation</a> que l&#8217;on trouve sur <a href="http://fr.wikipedia.org/wiki/Singleton_%28patron_de_conception%29#Actionscript_3">Wikipédia</a> est différente de celle ci-dessus.<br />
+En effet, elle utilise la définition d&#8217;une constante globale sans modification du constructeur.<br />
+Le problème induit, c&#8217;est que l&#8217;instanciation multiple n&#8217;est pas interdite au sein de l&#8217;application. Et la compréhension par un débutant est moins aisée.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/pattern-singleton-en-flash/feed/</wfw:commentRss>
+		<slash:comments>11</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.092 seconds using apc
+Object Caching 383/394 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:08 by W3 Total Cache -->

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; AMF</title>
+	<atom:link href="http://www.armetiz.info/tag/amf/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>AMF / Zend Authentication using Database</title>
+		<link>http://www.armetiz.info/zend-authentication-database/</link>
+		<comments>http://www.armetiz.info/zend-authentication-database/#comments</comments>
+		<pubDate>Tue, 19 Oct 2010 08:16:06 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[Authentification]]></category>
+		<category><![CDATA[Base de données]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Service]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843</guid>
+		<description><![CDATA[Cet article s&#8217;inscrit à la suite du précèdent billet : Authentification &#38; Autorisation avec Zend AMF. Zend_Amf_Adobe_Auth est une classe livré avec Zend 1.10. Elle peut être utilisée comme service.. <a href="http://www.armetiz.info/zend-authentication-database/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cet article s&#8217;inscrit à la suite du précèdent billet : <a href="http://www.armetiz.info/authentification-autorisation-zend-amf">Authentification &amp; Autorisation avec Zend AMF</a>.</p>
+<p><strong>Zend_Amf_Adobe_Auth</strong> est une classe livré avec Zend 1.10. Elle peut être utilisée comme service d&#8217;authentification pour un serveur <strong>Zend_Amf_Server</strong>. Le soucis, c&#8217;est que cette classe fonctionne conjointement avec un fichier XML réputé statique.</p>
+<p>Voici donc le code d&#8217;une classe qui permet l&#8217;authentification d&#8217;un utilisateur AMF via la base de données.<br />
+Sachant que nous développons cela pour offrir des services AMF, cette classe utilisera la logique métier implémentée au sein des services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Auth_AmfDatabase extends Zend_Amf_Auth_Abstract<br />
+{<br />
+&nbsp; &nbsp; protected $_acl;<br />
+&nbsp; &nbsp; protected $_users = array();<br />
+<br />
+&nbsp; &nbsp; public function __construct()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_acl = new Zend_Acl();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oServiceRole &nbsp; = new Service_Role ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oRoles &nbsp; &nbsp; = $oServiceRole-&amp;gt;fetchAll ( );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; foreach ( $oRoles as $oRole )<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_acl-&amp;gt;addRole ( new Zend_Acl_Role( $oRole-&amp;gt;title ) );<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function getAcl()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return $this-&amp;gt;_acl;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function authenticate()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (empty($this-&amp;gt;_username) ||<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; empty($this-&amp;gt;_password)) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; require_once 'Zend/Auth/Adapter/Exception.php';<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new Zend_Auth_Adapter_Exception('Username/password should be set');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oServiceUser &nbsp; = new Service_User ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oUser&nbsp; &nbsp; &nbsp; = $oServiceUser-&amp;gt;authentication ( $this-&amp;gt;_username, $this-&amp;gt;_password );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; if ( null == $oUser )<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return new Zend_Auth_Result(Zend_Auth_Result::FAILURE,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; null,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('Username and / or Password not found')<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; else<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id = new stdClass();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id-&amp;gt;role = $oUser-&amp;gt;role-&amp;gt;code;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id-&amp;gt;name = $oUser-&amp;gt;username;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return new Zend_Auth_Result(Zend_Auth_Result::SUCCESS, $id);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Le <strong>constructeur</strong> récupère l&#8217;ensemble des rôles existants en base de données pour peupler l&#8217;objet ACL.<br />
+La méthode <strong>authenticate</strong> va vérifier le couple Login / Password, et en cas de succès va retourner un objet <strong>Zend_Auth_Result</strong> contenant lui même un objet standard.<br />
+Cet objet standard doit avoir une propriété <strong>role</strong> et <strong>name</strong>, le <strong>rôle</strong> contiendra l&#8217;identifiant que vous avez définit dans vos autorisations ACL. Le <strong>name</strong> devra contenir le login de votre utilisateur.</p>
+<p>Cette classe a été inspirée par <strong>Zend_Amf_Adobe_Auth</strong>. N&#8217;hésitez pas à l&#8217;adapter pour vos propres besoins.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/zend-authentication-database/feed/</wfw:commentRss>
+		<slash:comments>20</slash:comments>
+		</item>
+		<item>
+		<title>Authentification et Autorisation avec Zend AMF</title>
+		<link>http://www.armetiz.info/authentification-autorisation-zend-amf/</link>
+		<comments>http://www.armetiz.info/authentification-autorisation-zend-amf/#comments</comments>
+		<pubDate>Mon, 05 Jul 2010 08:23:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[AS3]]></category>
+		<category><![CDATA[CRUD]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Server]]></category>
+		<category><![CDATA[Service]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1786</guid>
+		<description><![CDATA[Nous allons voir comment mettre en place l&#8217;authentification et l&#8217;autorisation lorsque l&#8217;on souhaite travailler avec Zend et le protocole AMF. Au niveau des pré-requit, vous devez avoir une architecture Zend.. <a href="http://www.armetiz.info/authentification-autorisation-zend-amf/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Nous allons voir comment mettre en place <strong>l&#8217;authentification</strong> et <strong>l&#8217;autorisation</strong> lorsque l&#8217;on souhaite travailler avec Zend et le protocole AMF.</p>
+<p>Au niveau des pré-requit, vous devez avoir une architecture <strong>Zend et AMF opérationnelle</strong>.<br />
+Aussi, je vous conseils de lire la documentation sur <a href="http://framework.zend.com/manual/fr/zend.auth.introduction.html">Zend_Auth</a> et <a href="http://framework.zend.com/manual/fr/zend.acl.introduction.html">Zend_Acl</a>.<br />
+Vous devez avoir compris la notion de <strong>rôle</strong> et de <strong>ressource</strong>.</p>
+<h3>Objectifs</h3>
+<p>Si vous fournissez des services à travers le réseau, et qu&#8217;ils peuvent avoir un impact sur la cohérence des données, vous vous devez de sécuriser l&#8217;accès à ces services.</p>
+<p>Sécurisé l&#8217;accès signifie restreinte l&#8217;accès, mais aussi chiffrer les communications.<br />
+Nous ne traiterons pas la partie chiffrement des échanges, pour cela je vous laissez chercher de la documentation sur HTTPS.</p>
+<h3>Point de départ</h3>
+<p>Ci-dessous, un exemple de contrôleur Zend offrant des services AMF.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class ServiceController extends Zend_Controller_Action<br />
+{<br />
+&nbsp; &nbsp; public function init()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_helper-&amp;gt;viewRenderer-&amp;gt;setNoRender();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_helper-&amp;gt;layout-&amp;gt;disableLayout();<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public function amfAction()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; $server = new Zend_Amf_Server();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; //Liste des services<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;Service_User&quot; );<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;Service_Book&quot; );<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;ZendAmfServiceBrowser&quot; );<br />
+<br />
+&nbsp; &nbsp; //Mapping des objets PHP avec les objets ActionScript &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; $server-&amp;gt;setClassMap('UserDTO', 'Model_DTO_User');<br />
+&nbsp; &nbsp; $server-&amp;gt;setClassMap('BookDTO', 'Model_DTO_Book');<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; $server-&amp;gt;setProduction(false);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; ZendAmfServiceBrowser::$ZEND_AMF_SERVER = $server;<br />
+<br />
+&nbsp; &nbsp; echo ($server-&amp;gt;handle());<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Nous avons donc <u>deux services</u>, et <u>deux types d&#8217;objets</u> pouvant être utilisés.</p>
+<p>Vous remarquerez l&#8217;utilisation de <a href="http://www.zamfbrowser.org/">ZamfBrowser</a>, ce service couplé avec une application Adobe AIR permet de travailler facilement avec les services.</p>
+<p>Voici à quoi ressemble les prototypes d&#8217;un de mes services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Service_Book<br />
+{<br />
+&nbsp; &nbsp; public function createBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function readBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function updateBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function deleteBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function isRentBy (Model_DTO_User $oUser) {}<br />
+}</div></td></tr></tbody></table></div>
+<blockquote><p>L&#8217;autre service est composé lui aussi des méthodes <strong>CRUD</strong> (Create, Read, Update, Delete), ainsi que d&#8217;autres fonctions métiers.</p></blockquote>
+<p>Sachant que mon application cliente Flash utilise ces services, il est très facile à un utilisateur de découvrir <strong>l&#8217;URI de la passerelle AMF</strong>.<br />
+En l&#8217;état, une personne ayant l&#8217;accès à ma passerelle AMF pourrai utiliser toutes les fonctions de mes services. Ce qui implique qu&#8217;il puisse modifier ma base de données.</p>
+<p><em>Remarquer que si l&#8217;on supprime le service de ZamfBrowser, l&#8217;utilisateur n&#8217;aura pas accès à la liste exhaustive des services. Si vous êtes en production, je vous conseils donc de supprimer ce service pour des raisons de sécurité.</em></p>
+<h3>Mise en place de l&#8217;authentification</h3>
+<p>Nous allons commencer par mettre en place l&#8217;authentification,<br />
+Sachant que nous utilisons un client Flash, il est logique d&#8217;utiliser <strong>Zend_Amf_Adobe_Auth</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$authAdapter = new Zend_Amf_Adobe_Auth(APPLICATION_PATH . '/config/password.xml');<br />
+$server-&amp;gt;setAuth($authAdapter );</div></td></tr></tbody></table></div>
+<p>Avec ces deux lignes, nous avons mis en place l&#8217;authentification au niveau du serveur.<br />
+Il vous reste à définir le fichier password.xml</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Le fichier password.xml contient les identifiants et les mots de passe des utilisateurs.<br />
+C&#8217;est à ce niveau que vous définissez les affectations d&#8217;identifiants à un rôle.</p>
+<p>Si vous avez besoin de plus de souplesse au niveau de la gestion des identifiants, je vous conseils la lecture de <a href="http://framework.zend.com/manual/fr/zend.auth.adapter.dbtable.html">Authentification avec une table de base de données</a>.</p>
+<p><em>Il est à noter, que si vous ne spécifier aucun identifiant lors de votre connexion au serveur AMF vous serez considéré comme un invité : <strong>Zend_Amf_Constants::GUEST_ROLE</strong></em></p>
+<h3>Mise en place de l&#8217;autorisation</h3>
+<p>Maintenant que nous avons correctement définit l&#8217;authentification, passons à l&#8217;autorisation.<br />
+C&#8217;est maintenant que nous allons donner les autorisations ou refus d&#8217;accès aux services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Avec ces deux lignes, vous avez définit une <strong>Acces Control List</strong>.<br />
+Vous le constatez, aucune autorisation n&#8217;est définit; mais il est important de noter que maintenant, <strong>plus personne n&#8217;a accès à vos services</strong>.</p>
+<p>Pour donner l&#8217;accès à nos deux services à n&#8217;importe qui, nous allons procéder comme suit :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('Service_User') );<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('Service_Book') );<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('ZendAmfServiceBrowser') );<br />
+<br />
+$acl-&amp;gt;allow (null, 'Service_User');<br />
+$acl-&amp;gt;allow (null, 'Service_Book');<br />
+$acl-&amp;gt;allow (null, 'ZendAmfServiceBrowser);<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Ci-dessus, nous avons une liste explicite des autorisations.<br />
+Si nous avions voulu faire dans l&#8217;implicite, nous aurions procédé ainsi :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$acl-&amp;gt;allow ();<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Pour aller plus loin dans l&#8217;explication, nous allons maintenant définir l&#8217;ensemble de nos autorisations.</p>
+<blockquote><p>Nous souhaitons que le rôle administrateur est accès à tout, et nous souhaitons que les utilisateurs non authentifiés n&#8217;est pas accès aux fonctions de mise à jour.</p></blockquote>
+<p>Rappelez-vous, nous avons vu plus haut que vous étiez connecter avec le rôle invité lorsque vous ne spécifiez aucun identifiant.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+<br />
+//Définition les rôles.<br />
+$acl-&amp;gt;addRole ( new Zend_Acl_Role(Zend_Amf_Constants::GUEST_ROLE) );<br />
+<br />
+//Définition des autorisations<br />
+$acl-&amp;gt;allow ();<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;create&quot;);<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;update&quot;);<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;delete&quot;);<br />
+<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p><u>Premièrement,</u><br />
+Nous avons dû définir le rôle invité pour pouvoir travailler ses autorisations.</p>
+<p><u>Deuxièmement,</u><br />
+Nous avons utilisé le principe des listes noires. Si nous avions utilisez un système de liste blanche, nous aurions du définir l&#8217;ensemble des rôles, et l&#8217;ensemble des autorisations.<br />
+C&#8217;est donc en partant du principe que tout le monde a accès à tout, que nous avons fermé les portes aux anonymes.</p>
+<p><u><strong>Explication des fonctions Deny &amp; Allow :</strong></u><br />
+<strong>Zend_Acl::deny</strong> et <strong>Zend_Acl::allow</strong> utilisent les mêmes arguments.<br />
+Le premier paramètre correspond à un rôle, cela ne change pas des ACL Zend classique.<br />
+Le deuxième paramètre correspond à une ressource. Avec Zend AMF, une ressource correspond à un Service.<br />
+Le troisième paramètre correspond ici à la fonction d&#8217;un service AMF.</p>
+<p>Nous avons utiliser <strong>null</strong> au niveau du deuxième paramètre pour dire : <strong>tout les services</strong>.</p>
+<h3>initAcl</h3>
+<p>Ce dernier paragraphe pour vous parlez de mon opposition face aux spécifications de la documentation <a href="http://framework.zend.com/manual/1.10/en/zend.amf.server.html">Zend_AMF_Server</a> :</p>
+<blockquote><p><em>If the ACL object is set, and the class being called defines initAcl() method, this method will be called with the ACL object as an argument. The class then can create additional ACL rules and return TRUE, or return FALSE if no access control is required for this class.</em></p></blockquote>
+<p>En gros, il existe une autre manière de définir les autorisations,<br />
+Si vous avez définit un ACL au niveau de votre Serveur AMF. Ce dernier vérifiera l&#8217;existence d&#8217;une fonction <strong>initAcl</strong> sur les services lorsqu&#8217;ils seront appelés.</p>
+<p>Cette fonction est ce que l&#8217;on appel un <a href="http://fr.wikipedia.org/wiki/Hook_%28informatique%29">Hook</a>, et vous permets de définir les autorisations et refus au sein de la définition même de vos services.<br />
+Autant vous dire que <strong>niveau maintenance et centralisation de l&#8217;information c&#8217;est très moyen</strong>..<br />
+De plus, si l&#8217;on pend l&#8217;exemple de <strong>ZendAmfServiceBrowser</strong>, vous allez devoir modifier la définition de ce service, et cela à chaque fois qu&#8217;il y aura une nouvelle version ?</p>
+<p>Voici un exemple de fonctionnement</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Service_Book<br />
+{<br />
+&nbsp; &nbsp; public function initAcl ($acl)<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'create');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'update');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'delete');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return true;<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p><strong>Pour aller plus loin</strong> : Vous trouverez un article dédié à l&#8217;authentification pour Zend AMF Server avec une base de données : <a href="http://www.armetiz.info/zend-authentication-database/">AMF / Zend Authentication using Database</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/authentification-autorisation-zend-amf/feed/</wfw:commentRss>
+		<slash:comments>22</slash:comments>
+		</item>
+		<item>
+		<title>Transfer Object Assembler avec Doctrine 1</title>
+		<link>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/</link>
+		<comments>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/#comments</comments>
+		<pubDate>Mon, 31 May 2010 10:06:12 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Doctrine]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[DBAL]]></category>
+		<category><![CDATA[DTO]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Konbini]]></category>
+		<category><![CDATA[ORM]]></category>
+		<category><![CDATA[Pattern]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1693</guid>
+		<description><![CDATA[Le pattern Transfert Object TO, Data Transfert Object DTO, ou encore Value Object VO permet d&#8217;échanger des données entre deux applications. Wikipédia : Son but est de simplifier les transferts.. <a href="http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/05/doctrine1.gif"><img src="http://www.armetiz.info/files/2010/05/doctrine1.gif" alt="doctrine" width="191" height="53" class="alignright size-full wp-image-1710" /></a>Le <a href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/TransferObject.html">pattern Transfert Object</a> <strong>TO</strong>, <strong>Data Transfert Object DTO</strong>, ou encore <strong>Value Object VO</strong> permet d&#8217;échanger des données entre deux applications.</p>
+<p>Wikipédia : <em>Son but est de simplifier les transferts de données entre les sous-systèmes d&#8217;une application logiciel. Les objets de transfert de données sont souvent utilisés en conjonction des objets d&#8217;accès aux données.</em></p>
+<p>Qui dit <strong>Transfert Object</strong>, veux aussi dire <a href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/TransferObjectAssembler.html">Transfert Object Assembler</a>. </p>
+<h3>Conversion d&#8217;object</h3>
+<p>Le pattern <strong>Transfert Object Assembler</strong> permet de passer d&#8217;un DTO à un Objet d&#8217;accès au données, et inversement.<br />
+C&#8217;est le moyen le plus simple pour travailler avec le pattern Data Transert Object et un <strong>ORM</strong>.</p>
+<h3>Domain Object Model -&gt; Data Transfert Object</h3>
+<p>Avec l&#8217;<a href="http://www.doctrine-project.org/">ORM Doctrine</a>, le transfert d&#8217;un &#8220;<strong>Domain Object Model DOM</strong>&#8221; ou ici <strong>Doctrine_Record</strong> vers un <strong>DTO</strong> est très simple.<br />
+Il suffit de réaliser un parser qui analyse l&#8217;objet issu de Doctrine, et qui remplit les données du DTO.</p>
+<h3>Data Transfert Object -&gt; Domain Object Model</h3>
+<p>Convertir un DTO vers un DOM peut s&#8217;avère plus complexe.<br />
+En effet, Doctrine utilise des collections d&#8217;objet qui lui sont propres, mais a aussi besoin de connaitre les clés primaires et leurs contenus pour pouvoir créer un objet. Car un objet issu de Doctrine_Record n&#8217;a pas les même propriétés quand il est existant en base de donnée, ou qu&#8217;il est en phase d&#8217;être sauvegardé.</p>
+<h3>Implémentation de Transfer Object Assembler</h3>
+<p>Une implémentation du pattern <strong>Transfert Object Assembler</strong> vient de voir le jour après moult et moult péripéties.</p>
+<p>Cette implémentation permet donc le transférer de DTOs à partir de DOMs et inversement.<br />
+Associer au pattern Service Layer, cela peut s&#8217;avérer être très pratique.</p>
+<p>Voici un exemple simple d&#8217;utilisation :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$oProgram = new ProgramDTO ();<br />
+$oProgram-&amp;gt;title = &quot;Dorothe&quot;;<br />
+<br />
+$oVideoDTO = new VideoDTO ();<br />
+$oVideoDTO-&amp;gt;idVideo = 30;<br />
+$oVideoDTO-&amp;gt;program = $oProgram;<br />
+<br />
+$oAssembler = $new Assembler ();<br />
+$oVideo = $oAssembler-&amp;gt;createDomainObject ($oVideoDTO);<br />
+$oVideo-&amp;gt;save ();</div></td></tr></tbody></table></div>
+<p>Nous avons ici créé une nouvelle entrée dans la table programs, et réalisé une liaison entre ce nouvel objet et la vidéo existante d&#8217;identifiant 30.<br />
+Le tout one-shot !</p>
+<p>L&#8217;intérêt de cette implémentation, c&#8217;est d&#8217;être fonctionnel avec :</p>
+<ul>
+<li>Les objets persistant</li>
+<li>Les objets non-persistant</li>
+<li>Les compositions d&#8217;objets sur N niveau</li>
+</ul>
+<h3>Utilisation avec le pattern Service Layer</h3>
+<p>Nous allons voir l&#8217;exemple le plus simple, soit l&#8217;implémentation des méthodes CRUD pour un objet générique.<br />
+L&#8217;utilisation du nommage des classes provient de l&#8217;utilisation de Zend Framework.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br />50<br />51<br />52<br />53<br />54<br />55<br />56<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function create (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; &nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler &nbsp; &nbsp; = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; &nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, true);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;save ();<br />
+&nbsp; &nbsp; $poVideoDTO-&amp;gt;idShow&nbsp; = $oModelVideo-&amp;gt;idShow;<br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function read (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $query&nbsp; = Doctrine_Query::create ()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;select (&quot;video.*&quot;)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;from (&quot;Model_Video video&quot;)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;where (&quot;video.id_show = ?&quot;, $piIdVideo);<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $query-&amp;gt;fetchOne ();<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; return $oAssembler-&amp;gt;createTransfertObject ($oModelVideo);<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function update (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, true);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;save ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function delete (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, false);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;delete ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}</div></td></tr></tbody></table></div>
+<h3>Téléchargement</h3>
+<p>Contenu de l&#8217;archive :</p>
+<ul>
+<li>Implémentation du pattern Transfer Object Assembler</li>
+<li>Interface du pattern Transfer Object Assembler</li>
+<li>Classe de définition d&#8217;un DTO</li>
+</ul>
+<p>Pour faire fonctionner l&#8217;assembler. Vous devez définir une classe qui hérite de Assembler, et ainsi surchargez la propriété $_relationships avec vos liaisons entre DTO et DOM.</p>
+<p><strong>Dernière mise à jour : 20 Septembre 2010</strong><br />
+<a href='http://www.armetiz.info/wp-content/uploads/2010/09/Transfert_Object_Assembler_Doctrine_1.2.zip'>Transfert_Object_Assembler_Doctrine_1.2.zip</a> &#8211; 6 Ko.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/feed/</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.011 seconds using apc
+Object Caching 887/888 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:15:43 by W3 Total Cache -->

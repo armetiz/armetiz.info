@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Installer FMS 4 sur Debian 5.0</title>
+	<atom:link href="http://www.armetiz.info/installer-fms-4-sur-debian-5-0/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Thu, 03 Apr 2014 20:26:43 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>By: michael</title>
+		<link>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/#comment-1016</link>
+		<dc:creator><![CDATA[michael]]></dc:creator>
+		<pubDate>Thu, 11 Jul 2013 02:54:49 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1820#comment-1016</guid>
+		<description><![CDATA[Hi Chris, I&#039;m using Ubuntu 12.04LTS x64 and also had issues.  I believe this is what is required for my version hopefully this gives you some ideas.
+
+sudo apt-get install libnspr4-dev
+
+# Edit installFMS look for the line &quot; exit_no_libcap(){  &quot;
+# changed it to &quot; exit_no_libcap-dev (){&quot; and 
+# do same thing to the &quot;exit_wrong_libcap &quot;
+# do same thing to the &quot;exit_no_libcap $TEMPARCH    at line 292
+
+# make a symbolic link to the real library
+sudo ln -s /usr/lib/libcap-ng.so.0.0.0 libcap.so.2
+              lrwxrwxrwx  1 root root     27 Jul 11 09:36 libcap.so.2 -&gt; /usr/lib/libcap-ng.so.0.0.0
+
+cheers]]></description>
+		<content:encoded><![CDATA[<p>Hi Chris, I&#8217;m using Ubuntu 12.04LTS x64 and also had issues.  I believe this is what is required for my version hopefully this gives you some ideas.</p>
+<p>sudo apt-get install libnspr4-dev</p>
+<p># Edit installFMS look for the line &#8221; exit_no_libcap(){  &#8221;<br />
+# changed it to &#8221; exit_no_libcap-dev (){&#8221; and<br />
+# do same thing to the &#8220;exit_wrong_libcap &#8221;<br />
+# do same thing to the &#8220;exit_no_libcap $TEMPARCH    at line 292</p>
+<p># make a symbolic link to the real library<br />
+sudo ln -s /usr/lib/libcap-ng.so.0.0.0 libcap.so.2<br />
+              lrwxrwxrwx  1 root root     27 Jul 11 09:36 libcap.so.2 -&gt; /usr/lib/libcap-ng.so.0.0.0</p>
+<p>cheers</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Christophe</title>
+		<link>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/#comment-770</link>
+		<dc:creator><![CDATA[Christophe]]></dc:creator>
+		<pubDate>Fri, 11 Jan 2013 11:40:18 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1820#comment-770</guid>
+		<description><![CDATA[Bonjour,
+Merci pour ce tutoriel bien expliqué.
+Je n&#039;arrive pas à installer FMS sur un dédié Debian.
+J&#039;ai reussi à récupérer un version 4 &quot;FlashMediaServer4_x64.tar.gz&quot; sur le net, à l&#039;installation j&#039;ai ce message d&#039;erreur: 
+A required package, libcap, was not found on your Linux x86_64 Debian.
+       Please install required package and run Adobe Flash Media Server installer again.
+
+Mais Libcap est bien installé:
+root@xxxxxxx:# apt-get install libcap2
+Lecture des listes de paquets... Fait
+Construction de l&#039;arbre des dépendances
+Lecture des informations d&#039;état... Fait
+libcap2 est déjà la plus récente version disponible.
+
+Je ne sais plus quoi faire, si quelqu&#039;un peux m&#039;aider, ce serait cool.
+
+Merci]]></description>
+		<content:encoded><![CDATA[<p>Bonjour,<br />
+Merci pour ce tutoriel bien expliqué.<br />
+Je n&#8217;arrive pas à installer FMS sur un dédié Debian.<br />
+J&#8217;ai reussi à récupérer un version 4 &#8220;FlashMediaServer4_x64.tar.gz&#8221; sur le net, à l&#8217;installation j&#8217;ai ce message d&#8217;erreur:<br />
+A required package, libcap, was not found on your Linux x86_64 Debian.<br />
+       Please install required package and run Adobe Flash Media Server installer again.</p>
+<p>Mais Libcap est bien installé:<br />
+root@xxxxxxx:# apt-get install libcap2<br />
+Lecture des listes de paquets&#8230; Fait<br />
+Construction de l&#8217;arbre des dépendances<br />
+Lecture des informations d&#8217;état&#8230; Fait<br />
+libcap2 est déjà la plus récente version disponible.</p>
+<p>Je ne sais plus quoi faire, si quelqu&#8217;un peux m&#8217;aider, ce serait cool.</p>
+<p>Merci</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Olivier FONTES</title>
+		<link>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/#comment-526</link>
+		<dc:creator><![CDATA[Olivier FONTES]]></dc:creator>
+		<pubDate>Fri, 29 Oct 2010 16:48:11 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1820#comment-526</guid>
+		<description><![CDATA[Salut,
+Un petit plus, j&#039;ai testé cette install sur une machine Virtuelle OpenVz, dans ce cas là on doit aussi rajouter le package libcap2
+ apt-get install libcap2
+
+++]]></description>
+		<content:encoded><![CDATA[<p>Salut,<br />
+Un petit plus, j&#8217;ai testé cette install sur une machine Virtuelle OpenVz, dans ce cas là on doit aussi rajouter le package libcap2<br />
+ apt-get install libcap2</p>
+<p>++</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anne</title>
+		<link>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/#comment-525</link>
+		<dc:creator><![CDATA[Anne]]></dc:creator>
+		<pubDate>Wed, 29 Sep 2010 15:35:18 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1820#comment-525</guid>
+		<description><![CDATA[Il veux surement parlait d&#039;une version ou il a juste installé le “Basic Ubuntu server” et la version minimal de Gnome.]]></description>
+		<content:encoded><![CDATA[<p>Il veux surement parlait d&#8217;une version ou il a juste installé le “Basic Ubuntu server” et la version minimal de Gnome.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/#comment-524</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Thu, 23 Sep 2010 08:03:11 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1820#comment-524</guid>
+		<description><![CDATA[Qu&#039;entends-tu par version &quot;light&quot; de Debian ?]]></description>
+		<content:encoded><![CDATA[<p>Qu&#8217;entends-tu par version &#8220;light&#8221; de Debian ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Antivirus</title>
+		<link>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/#comment-523</link>
+		<dc:creator><![CDATA[Antivirus]]></dc:creator>
+		<pubDate>Wed, 22 Sep 2010 21:04:34 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1820#comment-523</guid>
+		<description><![CDATA[Merci de l&#039;info ;)
+
+Par contre une question me taraude...
+
+Est ce que Flash Media Server 4 peut s&#039;installer sur une version &quot;light&quot; de Debian ?
+
+Sur un notebook avec une version allégé en fait.]]></description>
+		<content:encoded><![CDATA[<p>Merci de l&#8217;info 😉</p>
+<p>Par contre une question me taraude&#8230;</p>
+<p>Est ce que Flash Media Server 4 peut s&#8217;installer sur une version &#8220;light&#8221; de Debian ?</p>
+<p>Sur un notebook avec une version allégé en fait.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anne</title>
+		<link>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/#comment-522</link>
+		<dc:creator><![CDATA[Anne]]></dc:creator>
+		<pubDate>Tue, 14 Sep 2010 10:27:49 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1820#comment-522</guid>
+		<description><![CDATA[Merci pour cette explication détaillée.]]></description>
+		<content:encoded><![CDATA[<p>Merci pour cette explication détaillée.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Stage de pilotage</title>
+		<link>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/#comment-521</link>
+		<dc:creator><![CDATA[Stage de pilotage]]></dc:creator>
+		<pubDate>Fri, 10 Sep 2010 08:58:20 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1820#comment-521</guid>
+		<description><![CDATA[C&#039;est vraiment pas mal cette version !]]></description>
+		<content:encoded><![CDATA[<p>C&#8217;est vraiment pas mal cette version !</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 7/12 queries in 0.003 seconds using apc
+Object Caching 330/331 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:11:36 by W3 Total Cache -->

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; 2003</title>
+	<atom:link href="http://www.armetiz.info/tag/2003/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Tentative de jonction au domaine</title>
+		<link>http://www.armetiz.info/tentative-jonction-domain/</link>
+		<comments>http://www.armetiz.info/tentative-jonction-domain/#comments</comments>
+		<pubDate>Fri, 17 Apr 2009 14:35:45 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Windows]]></category>
+		<category><![CDATA[2003]]></category>
+		<category><![CDATA[2008]]></category>
+		<category><![CDATA[Clavier]]></category>
+		<category><![CDATA[Client]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[Domaine]]></category>
+		<category><![CDATA[Jonction]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[Raccourcis]]></category>
+		<category><![CDATA[Résolution]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=984</guid>
+		<description><![CDATA[Mise en situation : Migration d’un parc informatique d’un domaine LYON qui n’existe plus Un domaine de niveau fonctionnel 2000 mixte au FDQN : formation.local Un serveur DNS intégré à.. <a href="http://www.armetiz.info/tentative-jonction-domain/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<h3>Mise en situation :</h3>
+<ul>
+<li>Migration d’un parc informatique d’un domaine LYON qui n’existe plus</li>
+<li>Un domaine de niveau fonctionnel 2000 mixte au <a href="http://fr.wikipedia.org/wiki/Fully_qualified_domain_name">FDQN</a> : formation.local</li>
+<li>Un serveur DNS intégré à Active Directory et configuré lors du DCPROMO</li>
+<li>Un parc informatique assez homogène avec des clients Windows XP</li>
+</ul>
+<h3>Le problème :</h3>
+<p>Nous passons l’ensemble des postes sous FORMATION. Et nous rencontrons un problème à partir du troisième poste “<strong>Erreur lors d’une tentative de jonction au domaine</strong> FORMATION”. Certains postes fonctionnent et d’autres non.</p>
+<h3>Solutions potentielles</h3>
+<p>Après moult vérifications et tentatives, rien n’y fait, jusqu’au moment où &#8220;Victoire !&#8221;<br />
+Voici le résultat de nos recherches, et donc les points qui sont à vérifier si vous rencontrez ce problème.</p>
+<ul>
+<li>Si le nom de l’ordinateur est présent dans &#8220;Computers&#8221; sur l’AD, supprimez le. Théoriquement cela ne pose pas de soucis, mais il peut s’avérer que dans la pratique ce ne soit pas pareil.</li>
+<li>Dans la boite de saisie du nom de domaine, assurez vous d’utiliser le nom DNS et non NetBIOS. Pour nous, cela sera <em>formation.local</em> au lieu de <em>FORMATION</em>. Dans le cas où la configuration NetBIOS ai été modifiée sur votre réseau.</li>
+<li>Videz votre cache DNS grâce à la commande <strong>ipconfig /flushdns</strong>. Faire l’ajout du poste client dans le domaine même si vous savez qu’il va échouer. Vérifiez votre cache DNS grâce à la commande <strong>ipconfig /displaydns</strong>. Vous devriez avoir une réponse sur <strong>_ldap._tcp.dc._msdcs.formation.local</strong> vers le FQDN de votre contrôleur de domaine. Si la résolution de nom n’a pas fonctionné, vérifier vos paramètres au niveau du serveur DNS.</li>
+<li>Au niveau des Firewall, le <strong>port 445</strong> doit être ouvert entre le client et le DC.</li>
+<li><a href="http://support.microsoft.com/kb/908372/en-us">Microsoft a publié une KB</a>. Personnellement la modification des clés de registre n’a rien changé. Mais certains utilisateurs ont été contant de trouver cette astuce.</li>
+<li>Vérifiez l’activation du service “<strong>Assistant TCP/IP NetBIOS</strong>“. Cela à réglé le problème chez nous. Et c’est d’ailleurs pour moi un grand mystère. Si quelqu’un a une explication a proposer, je suis preneur.</li>
+</ul>
+<h3>Raccourcis</h3>
+<p>Voici une petite liste de raccourcis pour aller plus vite et vous la péter devant vos copains les administrateurs :p</p>
+<ul>
+<li><strong>sysdm.cpl</strong> Propriétés Systèmes et ajouter le poste au domaine (serveur / client)</li>
+<li><strong>ncpa.cpl</strong> Panneau d’administration des cartes réseaux (serveur / client)</li>
+<li><strong>dsa.msc</strong> Gestion des utilisateurs d’Active Directory (serveur)</li>
+<li><strong>services.msc</strong> Gestion des services de la machine (serveur / client)</li>
+<li><strong>compmgmt.msc</strong> Gestion locale de l’ordinateur (serveur / client)</li>
+<li><strong>ipconfig /displaydns</strong> Affiche le cache DNS (Il contient aussi le contenu du fichier C:/Windows/System32/Drivers/etc/host)</li>
+<li><strong>ipconfig /flushdns</strong> Vide le cache DNS</li>
+<li><strong>nbtstat -c</strong> Affiche le cache NetBIOS</li>
+<li><strong>nbtstat -R</strong> Vide le cache NetBIOS</li>
+</ul>
+<p>PS : Cette article a été re-publié suite à un <a href="http://www.armetiz.info/indisponibilite-et-perte-de-donnees/">crash de la base de donnée</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/tentative-jonction-domain/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.004 seconds using apc
+Object Caching 317/332 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:30 by W3 Total Cache -->

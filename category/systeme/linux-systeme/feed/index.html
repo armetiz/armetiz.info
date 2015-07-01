@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Linux</title>
+	<atom:link href="http://www.armetiz.info/category/systeme/linux-systeme/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Apache 2.2 &#8211; Custom HTTP Header &amp; Redirect</title>
+		<link>http://www.armetiz.info/apache-2-2-custom-http-header-redirect/</link>
+		<comments>http://www.armetiz.info/apache-2-2-custom-http-header-redirect/#comments</comments>
+		<pubDate>Fri, 24 Aug 2012 13:54:46 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[Configuration]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[HTTPS]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Pound]]></category>
+		<category><![CDATA[rewrite]]></category>
+		<category><![CDATA[Varnish]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2702</guid>
+		<description><![CDATA[Derniérement j&#8217;ai eu besoin de fournir une ressource differente en fonction du protocole utilisé. Un fichier robots.txt pour autoriser l&#8217;indéxation sur HTTP et le refuser sur HTTPS. Le soucis, c&#8217;est.. <a href="http://www.armetiz.info/apache-2-2-custom-http-header-redirect/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Derniérement j&#8217;ai eu besoin de fournir une ressource differente en fonction du protocole utilisé.<br />
+Un fichier <strong>robots.txt</strong> pour autoriser l&#8217;indéxation sur <strong>HTTP</strong> et le refuser sur <strong>HTTPS</strong>.</p>
+<p>Le soucis, c&#8217;est que notre serveur HTTP est derrière un reverse proxy HTTPS to HTTP (<a href="http://www.apsis.ch/pound">Pound</a>), et qu&#8217;en l&#8217;état le serveur HTTP n&#8217;a pas moyen de savoir si l&#8217;utilisateur a demandé une connexion SSL ou non.</p>
+<p>Pour pouvoir réaliser ce besoin, nous injectons un header HTTP au niveau du reverse proxy Pound : <strong>X-Forwarded-Proto</strong> qui contient la valeur &#8220;https&#8221;</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">ListenHTTPS<br />
+&nbsp; &nbsp; xHTTP 2<br />
+&nbsp; &nbsp; Address 1.2.3.4<br />
+&nbsp; &nbsp; Port &nbsp; &nbsp;443<br />
+&nbsp; &nbsp; Cert &nbsp; &nbsp;&quot;/etc/ssl/certs/private/domain.tld.pem&quot;<br />
+&nbsp; &nbsp; HeadRemove &quot;X-Forwarded-Proto&quot;<br />
+&nbsp; &nbsp; AddHeader &quot;X-Forwarded-Proto: https&quot;<br />
+End</div></td></tr></tbody></table></div>
+<p><img src="http://www.armetiz.info/files/2012/08/apache_logo.png" alt="" title="apache_logo" width="150" height="149" class="alignleft size-full wp-image-2710" />Maintenant,<br />
+Le serveur HTTP peut savoir si l&#8217;utilisateur a établit une connexion sécurisé ou non.<br />
+Nous réalisons donc une ré-écriture d&#8217;URL en fonction de ce Custom HTTP Header.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">RewriteCond %{HTTP:X-Forwarded-Proto} ^https$<br />
+RewriteCond %{REQUEST_URI} ^/robots.txt$<br />
+RewriteRule ^(.*)$ /robots_https.txt [L]</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/apache-2-2-custom-http-header-redirect/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Intégrité md5</title>
+		<link>http://www.armetiz.info/integrite-md5/</link>
+		<comments>http://www.armetiz.info/integrite-md5/#comments</comments>
+		<pubDate>Fri, 03 Aug 2012 08:22:43 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Hash]]></category>
+		<category><![CDATA[Intégrité]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[MD5]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2555</guid>
+		<description><![CDATA[Pour vérifier l&#8217;intégrité de vos fichiers, il faut enregistrer leur état à un instant T et vérifier cet été à un instant T+1. Pour cela, le plus simple est de.. <a href="http://www.armetiz.info/integrite-md5/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pour vérifier l&#8217;intégrité de vos fichiers, il faut enregistrer leur état à un <strong>instant T</strong> et vérifier cet été à un <strong>instant T+1</strong>.<br />
+Pour cela, le plus simple est de réaliser un hash de chacun des fichiers, et de vérifier ce hash régulièrement.</p>
+<p>Récupérer un <a href="http://fr.wikipedia.org/wiki/MD5">hash md5</a> de l&#8217;ensemble des fichiers d&#8217;un répertoire. Il s&#8217;agit ici de la prise de référence.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">find tld.domain.www/ -type f -print0 | xargs -0 md5sum &gt;&gt; tld.domain.www.md5</div></td></tr></tbody></table></div>
+<p>Pour vérifier l&#8217;intégrité de vos fichiers par rapport à votre référence.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">md5sum -c tld.domain.www.md5 | grep -v &quot;OK&quot;</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/integrite-md5/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Vérification de la configuration Varnish</title>
+		<link>http://www.armetiz.info/varnish-test-configuration/</link>
+		<comments>http://www.armetiz.info/varnish-test-configuration/#comments</comments>
+		<pubDate>Mon, 30 Jul 2012 13:30:51 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[cdn]]></category>
+		<category><![CDATA[Configuration]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[memo]]></category>
+		<category><![CDATA[unix]]></category>
+		<category><![CDATA[Varnish]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=2625</guid>
+		<description><![CDATA[Avant de redémarrer votre daemon Varnish pour prendre en compte la nouvelle configuration, vous pouvez tester le fichier de configuration. 1varnishd -C -f /etc/varnish/default.vcl L&#8217;option -C permet d&#8217;afficher le code.. <a href="http://www.armetiz.info/varnish-test-configuration/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Avant de redémarrer votre <a href="http://fr.wikipedia.org/wiki/Daemon_(informatique)">daemon</a> Varnish pour prendre en compte la nouvelle configuration, vous pouvez tester le fichier de configuration.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">varnishd -C -f /etc/varnish/default.vcl</div></td></tr></tbody></table></div>
+<p>L&#8217;option <strong>-C</strong> permet d&#8217;afficher le code <a href="https://www.varnish-cache.org/docs/3.0/reference/vcl.html">VCL</a> compilé en C. Et l&#8217;option <strong>-f</strong> permet de sélectionner le fichier de configuration VCL à compiler.<br />
+Avec cette commande, vous pourrez avoir la ligne contenant l&#8217;erreur.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/varnish-test-configuration/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Install NodeJS on CentOS</title>
+		<link>http://www.armetiz.info/install-nodejs-on-centos/</link>
+		<comments>http://www.armetiz.info/install-nodejs-on-centos/#comments</comments>
+		<pubDate>Fri, 27 Jul 2012 09:58:22 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[English]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Real-Time]]></category>
+		<category><![CDATA[Server]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=2594</guid>
+		<description><![CDATA[NodeJS isn&#8217;t available neither on centos base repositories nor on EPEL. To install NodeJS, you can do it from a specific repository or you can compile it. From repository To.. <a href="http://www.armetiz.info/install-nodejs-on-centos/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://nodejs.org/">NodeJS</a> isn&#8217;t available neither on centos <a href="http://wiki.centos.org/AdditionalResources/Repositories/">base repositories</a> nor on <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a>.<br />
+To install NodeJS, you can do it from a <a href="http://nodejs.tchol.org/">specific repository</a> or you can compile it.</p>
+<h3>From repository</h3>
+<p>To install NodeJS from repository on a RHEL based distribution, including our CentOS, just do :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;nodejs.rpm&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>nodejs.tchol.org<span style="color: #000000; font-weight: bold;">/</span>repocfg<span style="color: #000000; font-weight: bold;">/</span>el<span style="color: #000000; font-weight: bold;">/</span>nodejs-stable-release.noarch.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum localinstall</span> <span style="color: #660033;">--nogpgcheck</span> nodejs.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum install</span> nodejs-compat-symlinks npm<br />
+<span style="color: #c20cb9; font-weight: bold;">rm</span> nodejs.rpm</div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-v</span><br />
+<span style="color: #666666; font-style: italic;">#v0.6.18</span></div></td></tr></tbody></table></div>
+<h3>From source</h3>
+<p>To compile NodeJS from source on your CentOS, you have to install <strong>missing dependancies</strong> : <strong>gcc-c++, python and libssl-dev</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> gcc-c++ python libssl-dev<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;node.tar.gz&quot;</span> <span style="color: #ff0000;">&quot;http://nodejs.org/dist/node-latest.tar.gz&quot;</span><br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> node.tar.gz <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> node-v<span style="color: #000000; font-weight: bold;">*</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-v</span><br />
+<span style="color: #666666; font-style: italic;">#v0.8.4</span></div></td></tr></tbody></table></div>
+<h3>Play with a simple &#8220;Hello world&#8221;</h3>
+<p>Just launch node in <strong>interactive mode</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-i</span></div></td></tr></tbody></table></div>
+<p>Type a Javascript command.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #339933;">&gt;</span> console.<span style="color: #660066;">log</span> <span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Hello World&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+Hello world<br />
+undefined<br />
+<span style="color: #339933;">&gt;</span></div></td></tr></tbody></table></div>
+<h3>About version</h3>
+<p>As you can see, the repository provides an old version of NodeJS (0.6.14) compared to the latest released (0.8.4).</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/install-nodejs-on-centos/feed/</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		</item>
+		<item>
+		<title>Symfony2 &#8211; Coloration app/console</title>
+		<link>http://www.armetiz.info/symfony2-coloration-appconsole/</link>
+		<comments>http://www.armetiz.info/symfony2-coloration-appconsole/#comments</comments>
+		<pubDate>Thu, 28 Jun 2012 09:18:28 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Administration]]></category>
+		<category><![CDATA[CLI]]></category>
+		<category><![CDATA[Console]]></category>
+		<category><![CDATA[Gestion]]></category>
+		<category><![CDATA[Symfony]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2534</guid>
+		<description><![CDATA[Pour avoir la coloration lorsque vous utilisez la console de Symfony2, vous devez avoir php-posix d&#8217;installé. Sous CentOS, vous devez installer le paquet php-process qui contient php-posix. 1yum install php-process.. <a href="http://www.armetiz.info/symfony2-coloration-appconsole/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pour avoir la coloration lorsque vous utilisez la console de Symfony2, vous devez avoir <strong>php-posix</strong> d&#8217;installé.</p>
+<p>Sous CentOS, vous devez installer le paquet <strong>php-process</strong> qui contient php-posix.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">yum install php-process</div></td></tr></tbody></table></div>
+<p>Sous Debian, cela est disponible dans le paquet <strong>php5-cli</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">apt-get install php5-cli</div></td></tr></tbody></table></div>
+<p><a href="http://www.armetiz.info/files/2012/06/Capture-d’écran-2012-06-28-à-11.15.361.png"><img class="size-medium wp-image-2535" src="http://www.armetiz.info/files/2012/06/Capture-d’écran-2012-06-28-à-11.15.361-300x61.png" alt="" width="300" height="61" /></a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/symfony2-coloration-appconsole/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>CentOS – Installer le module h264 streaming pour Lighttpd</title>
+		<link>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/</link>
+		<comments>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/#comments</comments>
+		<pubDate>Tue, 12 Jun 2012 10:20:48 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[h264]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Installation]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Lighttpd]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Streaming]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2505</guid>
+		<description><![CDATA[Nous allons commencer avec l&#8217;installation de lighttpd. Personnellement, j&#8217;utilise les repository EPEL pour le faire. 1yum install lighttpd Installation des outils et des headers. 1yum install automake autoconf libtool bzip2-devel.. <a href="http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Nous allons commencer avec l&#8217;installation de lighttpd. Personnellement, j&#8217;utilise les repository EPEL pour le faire.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> lighttpd</div></td></tr></tbody></table></div>
+<p>Installation des outils et des headers.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> <span style="color: #c20cb9; font-weight: bold;">autoconf</span> libtool bzip2-devel zlib-devel <span style="color: #c20cb9; font-weight: bold;">gcc</span> <span style="color: #c20cb9; font-weight: bold;">make</span> pcre-devel</div></td></tr></tbody></table></div>
+<p><strong>Note</strong>: Avant de commencer, il est à noter que le lien donné par <a href="http://h264.code-shop.com/trac/wiki/Mod-H264-Streaming-Lighttpd-Version2">code-shop</a> pour la compilation du module h264 avec Lighttpd 1.4.x ne contient pas les fichiers nécessaires à la compilation du module.<br />
+Voici donc la version que j&#8217;avais utilisé pour la compilation sous <a href="http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/">Debian avec Lighttpd 1.4.19</a>. Cela fonctionne parfaitement sous <strong>CentOS6</strong> avec <strong>Lighttpd 1.4.28</strong>. </p>
+<p>Download de <a href="http://armetiz.info/wp-content/uploads/2012/06/lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar1.gz">lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz</a></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>armetiz.info<span style="color: #000000; font-weight: bold;">/</span>wp-content<span style="color: #000000; font-weight: bold;">/</span>uploads<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">2012</span><span style="color: #000000; font-weight: bold;">/</span>06<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar1.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz</div></td></tr></tbody></table></div>
+<p>Ensuite, nous allons telecharger les sources correspondant à la version précedement installé de Lighttpd.<br />
+Actuellement, sous CentOS 6 avec EPEL, il s&#8217;agit de Lighttp 1.4.28</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;lighttpd-1.4.28.tar.gz&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>download.lighttpd.net<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span>releases-<span style="color: #000000;">1.4</span>.x<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> lighttpd-1.4.28.tar.gz</div></td></tr></tbody></table></div>
+<p>Copie des modules h264 dans les sources de la 1.4.28</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.c mod_streaming_export.h moov.<span style="color: #000000; font-weight: bold;">*</span> mp4_io.<span style="color: #000000; font-weight: bold;">*</span> mp4_process.<span style="color: #000000; font-weight: bold;">*</span> mp4_reader.<span style="color: #000000; font-weight: bold;">*</span> mp4_writer.<span style="color: #000000; font-weight: bold;">*</span> output_bucket.<span style="color: #000000; font-weight: bold;">*</span> output_mp4.<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">vim</span> Makefile.am</div></td></tr></tbody></table></div>
+<p>Vous pouvez rajouter les lignes suivantes après la définition du module <strong>mod_flv_streaming</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">lib_LTLIBRARIES += mod_h264_streaming.la<br />
+mod_h264_streaming_la_SOURCES = mod_h264_streaming.c \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mod_streaming_export.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; moov.c moov.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_io.c mp4_io.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_reader.c mp4_reader.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_writer.c mp4_writer.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_process.c mp4_process.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_bucket.c output_bucket.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_mp4.c output_mp4.h<br />
+mod_h264_streaming_la_CFLAGS = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>AM_CFLAGS<span style="color: #7a0874; font-weight: bold;">&#41;</span> -DBUILDING_H264_STREAMING<br />
+mod_h264_streaming_la_LDFLAGS = <span style="color: #660033;">-module</span> <span style="color: #660033;">-export-dynamic</span> <span style="color: #660033;">-avoid-version</span> <span style="color: #660033;">-no-undefined</span><br />
+mod_h264_streaming_la_LIBADD = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>common_libadd<span style="color: #7a0874; font-weight: bold;">&#41;</span></div></td></tr></tbody></table></div>
+<p>On va s&#8217;occuper de la compilation</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28<span style="color: #000000; font-weight: bold;">/</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>autogen.sh<br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #660033;">--prefix</span>=<span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>On va maintenant récupérer le .so que l&#8217;on vient de compiler et correspondant au module h264.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span>lib<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.so <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>lib64<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<p>Alors que les étapes spécifiques aux binaires sont terminés,<br />
+Voici la partie configuration : <strong>/etc/lighttpd/conf.d/h264.conf</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">## /etc/lighttpd/conf.d/h264.conf</span><br />
+<span style="color: #666666; font-style: italic;">#######################################################################</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## &nbsp;H264 Module </span><br />
+<span style="color: #666666; font-style: italic;">## --------------- </span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## see http://h264.code-shop.com/trac/wiki/Mod-H264-Streaming-Lighttpd-Version2</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<br />
+server.modules += <span style="color: #7a0874; font-weight: bold;">&#40;</span> <span style="color: #ff0000;">&quot;mod_h264_streaming&quot;</span> <span style="color: #7a0874; font-weight: bold;">&#41;</span><br />
+<br />
+h264-streaming.extensions = <span style="color: #7a0874; font-weight: bold;">&#40;</span> <span style="color: #ff0000;">&quot;.mp4&quot;</span> <span style="color: #7a0874; font-weight: bold;">&#41;</span><br />
+<span style="color: #666666; font-style: italic;">#######################################################################</span></div></td></tr></tbody></table></div>
+<p>Dans le fichier <strong>/etc/lighttpd/modules.conf</strong>, nous allons ajouter le chargement du fichier de configuration précédemment créé.</p>
+<p>Apres le scope concernant <strong>server.modules</strong>, nous ajoutons</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">## /etc/lighttpd/modules.conf</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## mod_h264_streaming</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+include <span style="color: #ff0000;">&quot;conf.d/h264.conf&quot;</span></div></td></tr></tbody></table></div>
+<h3>Mise à jour</h3>
+<p>Attention, lorsque vous allez mettre à jour vos paquets via &#8220;<strong>yum update</strong>&#8220;, il est fort probable d&#8217;obtenir l&#8217;erreur suivante lors du démarrage de lighttpd.</p>
+<blockquote><p>
+(plugin.c.421) plugin-version doesn&#8217;t match lighttpd-version for h264_streaming<br />
+(server.c.926) Initialization of plugins failed. Going down.
+</p></blockquote>
+<p>En gros, le <strong>module h264</strong> que vous avez compiler n&#8217;est plus valide pour la nouvelle version de <strong>lighttpd</strong> que vous avez récupéré suite à une mise à jour.</p>
+<p>Dans un premier temps, désactiver le module h264 afin de pouvoir lancer lighttpd correctement :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">## /etc/lighttpd/modules.conf</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## mod_h264_streaming</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">#include &quot;conf.d/h264.conf&quot;</span></div></td></tr></tbody></table></div>
+<p>Une fois fait, vous pouvez démarrer <strong>lighttpd</strong> tranquillement et recommencer la compilation du <strong>module h264</strong>.<br />
+Pour cela, rien de plus simple: reprenez le tutoriel à son début en prenant soin de récuperer les sources de lighttpd correspondant à la version installée.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>CentOS 6 &#8211; Apache &amp; NFS</title>
+		<link>http://www.armetiz.info/centos-6-apache-nfs/</link>
+		<comments>http://www.armetiz.info/centos-6-apache-nfs/#comments</comments>
+		<pubDate>Thu, 19 Apr 2012 11:39:41 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Administration]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Configuration]]></category>
+		<category><![CDATA[NFS]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[SELinux]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2197</guid>
+		<description><![CDATA[SELinux est installé et activé par défaut sur les installations CentOS 6. Pour mettre en place une infrastructure Web éclatée, j&#8217;ai choisis de mettre en place un serveur NFS qui.. <a href="http://www.armetiz.info/centos-6-apache-nfs/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://wiki.centos.org/HowTos/SELinux">SELinux</a> est installé et activé par défaut sur les installations CentOS 6.</p>
+<p>Pour mettre en place une infrastructure Web éclatée, j&#8217;ai choisis de mettre en place un serveur NFS qui héberge les fichiers de mes applications PHP.<br />
+Les serveurs Apache sont donc configurés comme des clients NFS, et le DocumentRoot point vers le point de montage NFS.</p>
+<p>Au démarrage d&#8217;Apache :<br />
+<strong>Warning: DocumentRoot [/var/www/tld.domain/subdomains/foo/httpdocs] does not exist</strong></p>
+<p>Ce problème peut-être causé par un défault de configuration de SELinux,<br />
+Pour vérifier on désactive SELinux et on relance Apache.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">setenforce Permissive<br />
+service httpd restart</div></td></tr></tbody></table></div>
+<p>Si Apache démarre correctement, c&#8217;est donc bien une configuration SELinux qui bloque.<br />
+Il faut modifier un <a href="http://wiki.centos.org/TipsAndTricks/SelinuxBooleans">booléen SELinux</a> : <strong>httpd_use_nfs</strong> qui est à &#8220;off&#8221; par défaut.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">setsebool httpd_use_nfs on</div></td></tr></tbody></table></div>
+<p>Cela fonctionnera aussi apres un reboot de votre serveur.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-6-apache-nfs/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>CentOS 6 &#8211; Varnish &amp; MaxMind GeoIP</title>
+		<link>http://www.armetiz.info/centos-6-varnish-geoip/</link>
+		<comments>http://www.armetiz.info/centos-6-varnish-geoip/#comments</comments>
+		<pubDate>Tue, 06 Mar 2012 10:10:27 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[GeoIP]]></category>
+		<category><![CDATA[Header]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[HTTPS]]></category>
+		<category><![CDATA[Infrastructure]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[MaxMind]]></category>
+		<category><![CDATA[Module]]></category>
+		<category><![CDATA[Pays]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Système]]></category>
+		<category><![CDATA[Varnish]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2202</guid>
+		<description><![CDATA[Nous allons voir comment déporter le système de géo-localisation IP sur Varnish. L&#8217;objectif final est de permettre à vos backends de récupérer le Pays de l&#8217;utilisateur au sein de la.. <a href="http://www.armetiz.info/centos-6-varnish-geoip/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/12/centos1.png"><img src="http://www.armetiz.info/files/2011/12/centos1.png" alt="centos" width="128" height="128" class="alignright size-full wp-image-2188" /></a>Nous allons voir comment déporter le système de <strong>géo-localisation IP</strong> sur Varnish.<br />
+L&#8217;objectif final est de permettre à vos backends de récupérer le Pays de l&#8217;utilisateur au sein de la requête HTTP.</p>
+<p>Par défault, Varnish n&#8217;intègre pas de système de géo-localisation par IP, en revanche il existe quelques plugins qui permettent l&#8217;utilisation de <a href="http://www.maxmind.com/app/c">GeoIP de MaxMind</a>.</p>
+<p>Voici les parties de l&#8217;article :</p>
+<ul>
+<li>Installation de Varnish</li>
+<li>Installation de GeoIP pour Varnish</li>
+<li>Configuration du Varnish Module</li>
+<li>Configuration de SELinux</li>
+</ul>
+<p>A noter que nous avons opter pour le <a href="https://www.varnish-cache.org/docs/3.0/reference/vmod.html">VMOD</a> <a href="https://github.com/leed25d/geoip-vmod">Geoip-vmod par leed25d</a>. Contrairement aux autres plugins, celui-ci ne travail pas le header HTTP de manière autonome. Ce sera à vous de le faire, et grâce à cela vous allez pouvoir choisir comment&#8230;</p>
+<h3>Varnish</h3>
+<p>Pour compiler le VMOD, il vous faudra récupérer les sources de Varnish et les compiler même si vous choisissez l&#8217;installation par YUM.<br />
+De mon coté, je n&#8217;utilise pas en production la version que je compile mais la version provenant du dépot <a href="https://www.varnish-cache.org/">varnish-cache.org</a>. A vous de voir.</p>
+<p>Commençons par l&#8217;installation de Varnish via YUM (cf. <a href="https://www.varnish-cache.org/installation/redhat">Doc officielle</a>):</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">rpm <span style="color: #660033;">--nosignature</span> <span style="color: #660033;">-i</span> http:<span style="color: #000000; font-weight: bold;">//</span>repo.varnish-cache.org<span style="color: #000000; font-weight: bold;">/</span>redhat<span style="color: #000000; font-weight: bold;">/</span>varnish-<span style="color: #000000;">3.0</span><span style="color: #000000; font-weight: bold;">/</span>el5<span style="color: #000000; font-weight: bold;">/</span>noarch<span style="color: #000000; font-weight: bold;">/</span>varnish-release-<span style="color: #000000;">3.0</span>-<span style="color: #000000;">1</span>.noarch.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum install</span> varnish</div></td></tr></tbody></table></div>
+<p>Pour compiler Varnish nous allons avoir besoin de quelques outils et des sources.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> pcre-devel <span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> curl <span style="color: #660033;">-o</span> varnish-source.tar.gz http:<span style="color: #000000; font-weight: bold;">//</span>repo.varnish-cache.org<span style="color: #000000; font-weight: bold;">/</span>source<span style="color: #000000; font-weight: bold;">/</span>varnish-3.0.2.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xvzf</span> varnish-source.tar.gz</div></td></tr></tbody></table></div>
+<p>On lance la compilation de Varnish.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> varnish-3.0.2<span style="color: #000000; font-weight: bold;">/</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span></div></td></tr></tbody></table></div>
+<p>Normalement, Varnish a été compilé dans votre repertoire <strong>$HOME/varnish-3.0.2/</strong>.</p>
+<h3>GeoIP VMOD</h3>
+<p>On récupère les sources sur <a href="https://github.com/leed25d/geoip-vmod">github</a>.</p>
+<p>Après l&#8217;installation de quelques outils dont GeoIP, on lance la compilation du VMOD.<br />
+Attention, pour les version 32Bits utiliser <strong>VMODDIR=/usr/lib/varnish/vmods/</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> <span style="color: #c20cb9; font-weight: bold;">unzip</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> autoinstall libtool geoip geoip-devel<br />
+<span style="color: #c20cb9; font-weight: bold;">unzip</span> leed25d-geoip-vmod-<span style="color: #7a0874; font-weight: bold;">&#91;</span>REVISION<span style="color: #7a0874; font-weight: bold;">&#93;</span>.zip<br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> leed25d-geoip-vmod-<span style="color: #7a0874; font-weight: bold;">&#91;</span>REVISION<span style="color: #7a0874; font-weight: bold;">&#93;</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>autogen.sh<br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #007800;">VARNISHSRC</span>=<span style="color: #007800;">$HOME</span><span style="color: #000000; font-weight: bold;">/</span>varnish-3.0.2<span style="color: #000000; font-weight: bold;">/</span> <span style="color: #007800;">VMODDIR</span>=<span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>lib64<span style="color: #000000; font-weight: bold;">/</span>varnish<span style="color: #000000; font-weight: bold;">/</span>vmods<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>Suite à l&#8217;installation Varnish, penser à ouvrir votre firewall.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/sysconfig/iptables</span><br />
+<span style="color: #660033;">-A</span> INPUT <span style="color: #660033;">-m</span> tcp <span style="color: #660033;">-p</span> tcp <span style="color: #660033;">--dport</span> <span style="color: #000000;">80</span> <span style="color: #660033;">-j</span> ACCEPT</div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">service iptables restart</div></td></tr></tbody></table></div>
+<p>De même, il faut configurer Varnish pour écouter sur le <strong>port 80</strong> à la place du <strong>6081</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/sysconfig/varnish&lt;/strong&gt;</span><br />
+<span style="color: #007800;">VARNISH_LISTEN_PORT</span>=<span style="color: #000000;">80</span></div></td></tr></tbody></table></div>
+<p>Ensuite, on va vérifier que l&#8217;on peut lancer Varnish en chargeant le plugin GeoIP.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/varnish/default.vcl</span><br />
+<span style="color: #666666; font-style: italic;">#Top of file.</span><br />
+import geoip;</div></td></tr></tbody></table></div>
+<p>On va lancer le processus en debug pour voir si tout se passe bien :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">varnishd <span style="color: #660033;">-d</span> <span style="color: #660033;">-f</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>varnish<span style="color: #000000; font-weight: bold;">/</span>default.vcl<br />
+start</div></td></tr></tbody></table></div>
+<p>Si vous n&#8217;avez pas d&#8217;erreur, c&#8217;est une bonne chose. Sinon, vérifier les étapes ci-dessus.</p>
+<p>On va donc pouvoir inclure le pays de l&#8217;utilisateur dans le Header HTTP en suivant l&#8217;exemple de l&#8217;auteur du VMOD</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #339933;">#/etc/varnish/default.vcl</span><br />
+import geoip<span style="color: #339933;">;</span><br />
+<br />
+sub vcl_recv <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP <span style="color: #339933;">=</span> geoip.<span style="color: #202020;">country</span><span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For<span style="color: #009900;">&#41;</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>Maintenant on va pouvoir mettre Varnish en démarrage automatique.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">chkconfig varnish on<br />
+service varnish start</div></td></tr></tbody></table></div>
+<p><strong>Attention:</strong><br />
+Sachant que vous êtes sous CentOS, SELinux est surement activé et bloquera l&#8217;access au fichier de données <strong>/usr/share/GeoIP/GeoIP.dat</strong>. Vous pouvez le désactiver ou aller voir à la fin de l&#8217;article comment le configurer aux petits oignons.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">setenforce <span style="color: #000000;">0</span></div></td></tr></tbody></table></div>
+<p>Et pour finir, un peu de ménage.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-Rf</span> varnish-<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-Rf</span> leed25d-<span style="color: #000000; font-weight: bold;">*</span><br />
+<span style="color: #c20cb9; font-weight: bold;">yum remove</span> pcre-devel <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">unzip</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> autoinstall geoip-devel</div></td></tr></tbody></table></div>
+<h3>Pour aller plus loin</h3>
+<p>Avec la configuration ci-dessus,<br />
+Si un client de France se connecte directement à Varnish, lorsqu&#8217;une requête sera générée pour atteindre vos backends elle contiendra : <strong>X-GeoIP: FR</strong></p>
+<p>Vous pourrez donc récupérer le pays de l&#8217;utilisateur en analysant le contenu de la requête HTTP.<br />
+Il est à noter que GeoIP retourne le code pays &#8220;<strong>AA</strong>&#8221; lorsqu&#8217;il ne parvient pas à faire la détection.</p>
+<p>Voici comment vous pouvez exploiter le contenu du header en PHP :</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000088;">$headers</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/apache_request_headers"><span style="color: #990000;">apache_request_headers</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$headers</span> <span style="color: #339933;">&amp;&amp;</span> <a href="http://www.php.net/is_array"><span style="color: #990000;">is_array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$headers</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <a href="http://www.php.net/array_key_exists"><span style="color: #990000;">array_key_exists</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;X-GeoIP&quot;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$headers</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$headers</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">&quot;X-GeoIP&quot;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><br />
+<br />
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">==</span> <span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">||</span> <span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;AA&quot;</span> <span style="color: #339933;">==</span> <span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getDefaultCountry</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><br />
+<br />
+<span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/strtoupper"><span style="color: #990000;">strtoupper</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Retournons du coté de Varnish.<br />
+Comment les choses vont se passer si vous ajoutez un <strong>Proxy en amont de Varnish</strong>. Par exemple, <a href="http://www.apsis.ch/pound">Pound</a> pour gérer le protocole HTTPS.</p>
+<p>La detection du pays ne fonctionnera plus normalement car la valeur contenu dans le script VCL &#8216;<strong>client.ip</strong>&#8216; correspondra à l&#8217;IP de votre serveur Pound.</p>
+<p>Nous allons donc devoir travailler avec un autre Header HTTP: <a href="http://en.wikipedia.org/wiki/X-Forwarded-For">X-Forwarded-For</a>. Celui-ci permet de conserver l&#8217;historique des différents point de passage d&#8217;une requête HTTP et contient l&#8217;IP du client qui a initié la connection HTTP.</p>
+<p>Lorsque les différents Proxy implementent correctement ce standard, le champs <strong>X-Forwarded-For</strong> contient l&#8217;IP du client, le proxy A, le proxy B, etc.. le tout séparé avec des virgules.</p>
+<p>Voici comment en tenir compte au sein de votre configuration VCL :</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sub vcl_recv <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">restarts</span> <span style="color: #339933;">==</span> <span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">x</span><span style="color: #339933;">-</span>forwarded<span style="color: #339933;">-</span><span style="color: #b1b100;">for</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">+</span> <span style="color: #ff0000;">&quot;, &quot;</span> <span style="color: #339933;">+</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+<br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP <span style="color: #339933;">=</span> geoip.<span style="color: #202020;">country</span><span style="color: #009900;">&#40;</span>regsub <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For<span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;(,.*)&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>Maintenant parlons un peu du <strong>système de cache de Varnish</strong>.<br />
+Si vous avez besoin de connaitre le pays de l&#8217;utilisateur, il y a donc fort à parier que le contenu retourné à l&#8217;utilisateur sera different en fonction de son Pays.</p>
+<p>En résumé, pour une URL : <strong>/mon-url</strong>, en fonction du Pays utilisateur le contenu sera different.<br />
+Si on conserve la spécification par défaut de Varnish qui consiste à mettre en cache les données provenant d&#8217;une même URL, vous allez avoir quelques mauvaises surprises.</p>
+<p>Voici comment tenir compte du pays de l&#8217;utilisateur pour gérer les données qui sont mises en cache.</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sub vcl_hash <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; hash_data<span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">url</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; hash_data<span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span>hash<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<h3>SELinux</h3>
+<p>Sous Centos, il y a SELinux.<br />
+Si vous n&#8217;êtes pas un expert en <strong>sécurité Linux</strong>. Voici comment faire fonctionner <strong>Varnish &amp; GeoIP</strong> sans désactiver SELinux.<br />
+Le processus Varnish fait parti d&#8217;un contexte SELinux different du fichier GetIP.dat qui est installé avec GeoIP.<br />
+Du coup, nous allons faire un module pour SELinux afin d&#8217;autoriser varnish_t à lire les contextes de type usr_t.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">mkdir</span> ~<span style="color: #000000; font-weight: bold;">/</span>myvarnish; <span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>myvarnish;<br />
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;policy_module(myvarnish, 1.0.0) optional_policy(<span style="color: #780078;">` gen_require(`</span> type varnishd_t; ') files_read_usr_files(varnishd_t) ')&quot;</span> <span style="color: #000000; font-weight: bold;">&gt;</span> myvarnish.te<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #660033;">-f</span> <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>share<span style="color: #000000; font-weight: bold;">/</span>selinux<span style="color: #000000; font-weight: bold;">/</span>devel<span style="color: #000000; font-weight: bold;">/</span>Makefile myvarnish.pp<br />
+semodule <span style="color: #660033;">-i</span> myvarnish.pp</div></td></tr></tbody></table></div>
+<p>Pour le coup, cette partie provient d&#8217;une discussion avec une personne sur #SELinux on <em>freenode</em>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-6-varnish-geoip/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Pound HTTPS 2 HTTP &#8211; Format Certificat</title>
+		<link>http://www.armetiz.info/pound-https-2-http-certificat-pem-format/</link>
+		<comments>http://www.armetiz.info/pound-https-2-http-certificat-pem-format/#comments</comments>
+		<pubDate>Fri, 02 Mar 2012 05:00:34 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Infrastructure]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[HTTPS]]></category>
+		<category><![CDATA[Pound]]></category>
+		<category><![CDATA[Proxy]]></category>
+		<category><![CDATA[SSL]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2224</guid>
+		<description><![CDATA[Au niveau de la configuration, Pound peut prendre un fichier .pem contenant les certificats du serveurs ainsi que des certificats intermédiaires jusqu&#8217;à l&#8217;autorité de certification ROOT. Ce que je ne.. <a href="http://www.armetiz.info/pound-https-2-http-certificat-pem-format/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Au niveau de la configuration, <strong><a href="http://www.apsis.ch/pound/">Pound</a></strong> peut prendre un fichier .pem contenant les <strong>certificats du serveurs</strong> ainsi que des <strong>certificats intermédiaires</strong> jusqu&#8217;à l&#8217;autorité de <strong>certification ROOT</strong>.</p>
+<p>Ce que je ne savais pas et que j&#8217;ai eu beaucoup de mal à trouver, c&#8217;est qu&#8217;il faut inclure la <strong>clé privée du certificat</strong> pour que Pound puisse démarrer.<br />
+Sans cette clé privée, voici l&#8217;erreur que vous pouvez avoir : SSL_CTX_use_PrivateKey_file Error</p>
+<p>Du coups, voici le format à utiliser :</p>
+<blockquote><p>
+&#8212;&#8211;BEGIN PRIVATE KEY&#8212;&#8211;<br />
+Server key (pasted in the new key here)<br />
+&#8212;&#8211;END PRIVATE KEY&#8212;&#8211;</p>
+<p>&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;<br />
+Server certificate<br />
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;</p>
+<p>&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;<br />
+Verisign Intermediate CA (for Extended Validation Certificates)<br />
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;</p>
+<p>&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;<br />
+Verisign Root CA (Self signed)<br />
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;
+</p></blockquote>
+<p>PS : Information trouvée sur une archive Mailing List :<a href="http://www.apsis.ch/pound/pound_list/archive/2007/2007-11/1195693266000">apsis</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/pound-https-2-http-certificat-pem-format/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Linux &#8211; Trouver les fichiers contenant une chaine de caractere</title>
+		<link>http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/</link>
+		<comments>http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/#comments</comments>
+		<pubDate>Thu, 01 Mar 2012 10:43:15 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[automatique]]></category>
+		<category><![CDATA[Fichier]]></category>
+		<category><![CDATA[find]]></category>
+		<category><![CDATA[gnu]]></category>
+		<category><![CDATA[memo]]></category>
+		<category><![CDATA[Post-it]]></category>
+		<category><![CDATA[Recherche]]></category>
+		<category><![CDATA[unix]]></category>
+		<category><![CDATA[xargs]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2221</guid>
+		<description><![CDATA[Voici une commande Linux qui affichera les fichiers contenant The Big Brains Company Recherche au sein du répertoire /var/www/ avec un chemin absolu 123$ grep -lR &#34;The Big Brains Company&#34;.. <a href="http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Voici une commande Linux qui affichera les fichiers contenant <strong><a href="http://thebigbrainscompany.com">The Big Brains Company</a></strong></p>
+<p>Recherche au sein du répertoire <strong>/var/www/</strong> avec un chemin absolu</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #660033;">-lR</span> <span style="color: #ff0000;">&quot;The Big Brains Company&quot;</span> <span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span>com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>shared<span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml<br />
+<span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span>com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>releases<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">20140718184541</span><span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml</div></td></tr></tbody></table></div>
+<p>Recherche au sein du répertoire <strong>/var/www/</strong> avec un chemin relatif</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ <span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span><br />
+$ <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #660033;">-lR</span> <span style="color: #ff0000;">&quot;The Big Brains Company&quot;</span> <span style="color: #000000; font-weight: bold;">*</span><br />
+com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>shared<span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml<br />
+com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>releases<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">20140718184541</span><span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml</div></td></tr></tbody></table></div>
+<p>Pour finir,<br />
+Une alternative qui fera de vous un vrai barbu.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">find</span> . <span style="color: #000000; font-weight: bold;">|</span> <span style="color: #c20cb9; font-weight: bold;">xargs</span> <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #ff0000;">'The Big Brains Company'</span> <span style="color: #660033;">-sl</span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 9/12 queries in 0.002 seconds using apc
+Object Caching 2659/2660 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:09:24 by W3 Total Cache -->

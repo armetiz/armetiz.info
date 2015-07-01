@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Apache</title>
+	<atom:link href="http://www.armetiz.info/tag/apache/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Apache 2.2 &#8211; Custom HTTP Header &amp; Redirect</title>
+		<link>http://www.armetiz.info/apache-2-2-custom-http-header-redirect/</link>
+		<comments>http://www.armetiz.info/apache-2-2-custom-http-header-redirect/#comments</comments>
+		<pubDate>Fri, 24 Aug 2012 13:54:46 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[Configuration]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[HTTPS]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Pound]]></category>
+		<category><![CDATA[rewrite]]></category>
+		<category><![CDATA[Varnish]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2702</guid>
+		<description><![CDATA[Derniérement j&#8217;ai eu besoin de fournir une ressource differente en fonction du protocole utilisé. Un fichier robots.txt pour autoriser l&#8217;indéxation sur HTTP et le refuser sur HTTPS. Le soucis, c&#8217;est.. <a href="http://www.armetiz.info/apache-2-2-custom-http-header-redirect/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Derniérement j&#8217;ai eu besoin de fournir une ressource differente en fonction du protocole utilisé.<br />
+Un fichier <strong>robots.txt</strong> pour autoriser l&#8217;indéxation sur <strong>HTTP</strong> et le refuser sur <strong>HTTPS</strong>.</p>
+<p>Le soucis, c&#8217;est que notre serveur HTTP est derrière un reverse proxy HTTPS to HTTP (<a href="http://www.apsis.ch/pound">Pound</a>), et qu&#8217;en l&#8217;état le serveur HTTP n&#8217;a pas moyen de savoir si l&#8217;utilisateur a demandé une connexion SSL ou non.</p>
+<p>Pour pouvoir réaliser ce besoin, nous injectons un header HTTP au niveau du reverse proxy Pound : <strong>X-Forwarded-Proto</strong> qui contient la valeur &#8220;https&#8221;</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">ListenHTTPS<br />
+&nbsp; &nbsp; xHTTP 2<br />
+&nbsp; &nbsp; Address 1.2.3.4<br />
+&nbsp; &nbsp; Port &nbsp; &nbsp;443<br />
+&nbsp; &nbsp; Cert &nbsp; &nbsp;&quot;/etc/ssl/certs/private/domain.tld.pem&quot;<br />
+&nbsp; &nbsp; HeadRemove &quot;X-Forwarded-Proto&quot;<br />
+&nbsp; &nbsp; AddHeader &quot;X-Forwarded-Proto: https&quot;<br />
+End</div></td></tr></tbody></table></div>
+<p><img src="http://www.armetiz.info/files/2012/08/apache_logo.png" alt="" title="apache_logo" width="150" height="149" class="alignleft size-full wp-image-2710" />Maintenant,<br />
+Le serveur HTTP peut savoir si l&#8217;utilisateur a établit une connexion sécurisé ou non.<br />
+Nous réalisons donc une ré-écriture d&#8217;URL en fonction de ce Custom HTTP Header.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">RewriteCond %{HTTP:X-Forwarded-Proto} ^https$<br />
+RewriteCond %{REQUEST_URI} ^/robots.txt$<br />
+RewriteRule ^(.*)$ /robots_https.txt [L]</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/apache-2-2-custom-http-header-redirect/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Installer l&#8217;extension intl</title>
+		<link>http://www.armetiz.info/installer-lextension-intl/</link>
+		<comments>http://www.armetiz.info/installer-lextension-intl/#comments</comments>
+		<pubDate>Mon, 14 May 2012 12:17:58 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Symfony]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2429</guid>
+		<description><![CDATA[Pour travailler dans de bonne condition avec Symfony2, il vous faut l&#8217;extension intl. Voici la démarche à suivre pour l&#8217;installer avec pear. installer un compilateur C++ &#38; les libraries libicu-devel.. <a href="http://www.armetiz.info/installer-lextension-intl/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pour travailler dans de bonne condition avec Symfony2, il vous faut l&#8217;extension <strong>intl</strong>.</p>
+<p>Voici la démarche à suivre pour l&#8217;installer avec <strong>pear</strong>.</p>
+<p>installer un compilateur C++ &amp; les libraries libicu-devel libicu</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">yum install gcc-c++ libicu libicu-devel</div></td></tr></tbody></table></div>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">pear channel-update pear.php.net<br />
+pear upgrade PEAR<br />
+pecl channel-update pecl.php.net<br />
+pear install intl</div></td></tr></tbody></table></div>
+<p>Créer le fichier <strong>/etc/php.d/intl.ini</strong> et ajouter</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">extension=intl.so</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/installer-lextension-intl/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>CentOS 6 &#8211; Installer APC</title>
+		<link>http://www.armetiz.info/centos-6-installer-apc/</link>
+		<comments>http://www.armetiz.info/centos-6-installer-apc/#comments</comments>
+		<pubDate>Wed, 28 Dec 2011 13:32:31 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[APC]]></category>
+		<category><![CDATA[Cache]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Optimisation]]></category>
+		<category><![CDATA[PHP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2185</guid>
+		<description><![CDATA[Apres avoir installé et configuré correctement votre environnement LAMP sous CentOS 6 vous souhaitez installer APC. Ce dont vous avez besoin avant de commencer : &#8211; PEAR, &#8211; les interfaces.. <a href="http://www.armetiz.info/centos-6-installer-apc/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/12/centos1.png"><img src="http://www.armetiz.info/files/2011/12/centos1.png" alt="centos" width="128" height="128" class="alignright size-full wp-image-2188" /></a>Apres avoir installé et configuré correctement votre environnement LAMP sous CentOS 6 vous souhaitez <strong>installer APC</strong>.</p>
+<p>Ce dont vous avez besoin avant de commencer :<br />
+&#8211; <strong>PEAR</strong>,<br />
+&#8211; les interfaces de développement de PHP, Apache &amp; PCRE,<br />
+&#8211; un <strong>compilateur C</strong> &amp; l&#8217;outil <strong>Make</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">yum install php-pear php-devel httpd-devel pcre-devel gcc make</div></td></tr></tbody></table></div>
+<p>Ensuite, on lance la compilation de l&#8217;extension APC.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">pecl install apc</div></td></tr></tbody></table></div>
+<p>Voici les questions qui vous seront posées, personnellement j&#8217;ai utilisé les valeurs par défaut.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">Enable internal debugging in APC [no] : <br />
+Enable per request file info about files used from the APC cache [no] : <br />
+Enable spin locks (EXPERIMENTAL) [no] : <br />
+Enable memory protection (EXPERIMENTAL) [no] : <br />
+Enable pthread mutexes (default) [yes] : <br />
+Enable pthread read/write locks (EXPERIMENTAL) [no] :</div></td></tr></tbody></table></div>
+<p>On active l&#8217;<strong>extension PHP</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">echo &quot;extension=apc.so&quot; &amp;gt; /etc/php.d/apc.ini</div></td></tr></tbody></table></div>
+<p>Et on redémarre Apache.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">service httpd restart</div></td></tr></tbody></table></div>
+<p>Vous pouvez vérifier que vous avez correctement installé APC via <strong>phpinfo</strong>().</p>
+<p>Aussi, n&#8217;hésiter pas à utiliser le script PHP d&#8217;administration de APC.<br />
+Ici, nous le copions dans notre répertoire HTTP.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">cp /usr/share/pear/apc.php /var/www/apc.php</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-6-installer-apc/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Recherche développeur PHP5 / ZEND &#8211; Paris</title>
+		<link>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/</link>
+		<comments>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/#comments</comments>
+		<pubDate>Thu, 31 Mar 2011 12:29:38 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Konbini]]></category>
+		<category><![CDATA[Annonce]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[CDI]]></category>
+		<category><![CDATA[Embauche]]></category>
+		<category><![CDATA[Emplois]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[R&D]]></category>
+		<category><![CDATA[Recherche]]></category>
+		<category><![CDATA[Recrutement]]></category>
+		<category><![CDATA[Zend]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1993</guid>
+		<description><![CDATA[L&#8217;équipe de technique de Konbini recrute ! On recherche un développeur passionné avec des compétences avancées sur le Framework Zend &#38; des connaissances sur le Framework Doctrine 1.2 et/ou 2... <a href="http://www.armetiz.info/recherche-developpeur-php5-zend-paris/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.konbini.com"><img alt="logo konbini" src="http://static.konbini.com/images/logo_130_130.gif" class="alignleft" width="130" height="130" /></a>L&#8217;équipe de technique de <a href="https://remixjobs.com/emploi/Developpement/Developpeur-euse-PHP5-MySQL-ZEND-H-F/4698">Konbini recrute</a> !</p>
+<p>On recherche un développeur passionné avec des compétences avancées sur le <strong>Framework Zend</strong> &amp; des connaissances sur le <strong>Framework Doctrine</strong> 1.2 et/ou 2.</p>
+<p>En description de poste, voici l&#8217;annonce officielle : <i>vos principales missions seront le développement continu de l’application métier de Konbini ayant pour finalité de développer un écosystème cohérent autour de l’activité de production, diffusion et monétisation de contenus vidéos. Vous participerez également à l’ingénierie et à la mise en place des services des applications client de la plateforme publique de Konbini.</i>.</p>
+<p>Des connaissances en HTML, XML, CSS &amp; jQuery sont bien évidemment necessaires.</p>
+<p>Nous travaillons beaucoup avec les technologies Adobe sur des projets <strong>ActionScript 3</strong> pure ou <strong>Flex</strong>. Si vous avez des notions sur ces langages, vous serez moins perdu lors de nos discutions en pause café <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>A titre personnel, l&#8217;ambiance chez <a href="http://blog.konbini.com">Konbini</a> est tres agréable et vous changera complètement des <strong>SSII</strong><strong> ou <strong>WebAgency</strong>. Si vous recherchez une aventure qui sorte de l&#8217;ordinaire avec des <strong>projets ambitieux</strong>, contactez nous !</p>
+<p>Lien vers l&#8217;offre <a href="https://remixjobs.com/emploi/Developpement/Developpeur-euse-PHP5-MySQL-ZEND-H-F/4698">RemixJobs</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Les bonnes pratiques d&#8217;un serveur LAMP</title>
+		<link>http://www.armetiz.info/bonnes-pratiques-serveur-lamp/</link>
+		<comments>http://www.armetiz.info/bonnes-pratiques-serveur-lamp/#comments</comments>
+		<pubDate>Mon, 04 May 2009 19:27:29 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[CMS]]></category>
+		<category><![CDATA[Conseils]]></category>
+		<category><![CDATA[Infogérance]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Tutorial]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1060</guid>
+		<description><![CDATA[Suite à l&#8217;acquisition d&#8217;un serveur dédié chez OVH pour en faire principalement un serveur LAMP. Nous avons cherché à configurer au mieux notre serveur. Les questions que nous avons eu.. <a href="http://www.armetiz.info/bonnes-pratiques-serveur-lamp/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Suite à l&#8217;acquisition d&#8217;un serveur dédié chez OVH pour en faire principalement un <a href="http://fr.wikipedia.org/wiki/LAMP">serveur LAMP</a>. Nous avons cherché à configurer au mieux notre serveur.</p>
+<p><a href="http://www.armetiz.info/wp-content/uploads/2009/05/debian-logo-portrait.jpg"><img src="http://www.armetiz.info/wp-content/uploads/2009/05/debian-logo-portrait.jpg" alt="debian-logo-portrait" width="105" height="140" class="alignright size-full wp-image-1075" /></a>Les questions que nous avons eu sont du type : &#8220;<strong>Où mettre mes scripts PHP ?</strong>&#8220;, &#8220;<strong>Comment gérer les partitions systèmes ?</strong>&#8220;, &#8220;<strong>Quelles sont les paquets à installer ?</strong>&#8220;, ou encore &#8220;<strong>Comment sécuriser son serveur, et quel niveau de paranoïa avoir ?</strong>&#8220;.</p>
+<p>Dans un soucis de professionnalisme, nous avons souhaité confirmer nos connaissances en utilisant Google, des forums et même des livres (C&#8217;est pour dire !)</p>
+<p>Plusieurs articles verront donc le jour pour répondre à ces questions et par la même occasion <strong>centraliser l&#8217;information</strong>. Voici le plan :</p>
+<ul>
+<li>Système d&#8217;exploitation : GNU/Linux Debian</li>
+<li>Apache</li>
+<li>MySQL</li>
+<li>PHP</li>
+</ul>
+<p><a href="http://www.armetiz.info/wp-content/uploads/2009/05/mysql.jpeg"><img src="http://www.armetiz.info/wp-content/uploads/2009/05/mysql-150x117.jpg" alt="mysql" width="150" height="117" class="alignleft size-thumbnail wp-image-1076" /></a></p>
+<h3>Introduction aux bonnes pratiques LAMP.</h3>
+<p>Les raisons qui nous poussent à sécuriser notre serveur sont évidentes, et l&#8217;utilisation de normes aussi. De nombreuses personnes laissent à désirer la configuration de leur serveur en faisant confiance aux paramètres par défaut. Ce n&#8217;est pas forcement un tord car parfois, il vaut mieux ne rien faire que faire mal. Mais quitte à ne rien faire, prenez un serveur mutualisé ou <a href="http://www.armetiz.info/contact/">demander nous</a> <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br />
+Un serveur en production que l&#8217;on n&#8217;a pas configuré, qui s&#8217;arrête sans raison ou qui ne fonctionne pas correctement peut s&#8217;avérer être un vrai calvaire pour l&#8217;administrateur qui s&#8217;en occupe.</p>
+<h4>On ne sait rien, on a tout à apprendre</h4>
+<p>Commencer par vous dire que vous ne savez rien et vérifier par étape vos connaissances.<br />
+On devient trop facilement un vieux grigou qui croit tout savoir et qui ne fait que des conneries.<br />
+Si l&#8217;on est venu à écrire cette article, c&#8217;est que nous avons commencé par nous dire &#8220;<em>Bon, nous voulons un serveur LAMP, comment procéder ? Je ne suis plus sûr de&#8230;</em>&#8221; Et c&#8217;est d&#8217;ailleurs grâce à ce genre de question que l&#8217;on apprend pleins de nouvelles choses. Car d&#8217;un lien hypertexte à un autre, on en apprend des choses.</p>
+<p>Vraiment, ne soyez sûr de rien, vérifiez toujours à deux fois vos connaissances.</p>
+<h4>Utilisation de machine virtuelle</h4>
+<p>Pensez à avoir une <strong>machine virtuelle ayant le plus de caractéristiques communes avec votre serveur dédié</strong>.<br />
+<a href="http://www.virtualbox.org/"><img src="http://www.armetiz.info/wp-content/uploads/2009/05/virtualbox-140x150.png" alt="virtualbox" width="140" height="150" class="alignright size-thumbnail wp-image-1077" /></a>Lorsque vous souhaitez ajouter un paquet ou faire une modification même la plus simple, effectué là sur votre machine virtuelle.</p>
+<p>Optez pour les mêmes conditions d&#8217;accès au prompt.<br />
+Il est fort probable que vous utilisiez un accès SSH pour vous connecter sur le dédié, faite de même pour votre machine virtuelle. L&#8217;exemple qui donne raison à cette bonne pratique, c&#8217;est l&#8217;ajout d&#8217;une règle au firewall qui bloque l&#8217;accès SSH. Résultat vous n&#8217;avez plus aucun accès à votre serveur dédié et vous devrez dans de nombreux cas réinstaller le système.</p>
+<h4>Ne pas bruler la corde par les deux bouts</h4>
+<p>Commencez par le début, et profitez du temps que vous avez avant de mettre en production pour effectuer vos réglages. Car ce n&#8217;est pas une fois en production qu&#8217;il faudra faire de belles gaffes.<br />
+L&#8217;utilisation d&#8217;une VM &#8211; <strong>V</strong>irtual <strong>M</strong>achine &#8211; est ici mise en avant. Car en production, vous pourrez faire vos testes sur la VM sans risquer d&#8217;avoir des <strong>erreurs 404</strong>.<br />
+De plus, si vous avez installé en parallèle votre dédié et votre VM, vous aurez une configuration réellement identique l&#8217;une pour l&#8217;autre, ce qui vous permettra d&#8217;assurer encore plus au niveau de vos tests.</p>
+<h4>Être à jour</h4>
+<p>Vous pensez que je vais vous parlez de votre machine ? Et bien non, pas encore, cela viendra dans le chapitre approprié sur votre <a href="http://www.armetiz.info/bonnes-pratiqu…serveur-apachebonnes-pratiques-serveur-linux">Système d&#8217;exploitation GNU/Linux</a> <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br />
+Le sujet de cette sous-partie, c&#8217;est vous. Nous avons commencé par dire que vous ne saviez rien. Vous devez donc vous tenir informé sur l&#8217;ensemble des logiciels de votre machine.<br />
+Je ne dit pas que vous devez suivre une formation pour administrateur système expérimenté.<br />
+Mais vous devez au moins faire l&#8217;effort de vous abonner à un flux <strong>RSS sur la sécurité</strong> de votre distribution, de ces nouveaux paquets, des failles sur PHP ou sur les applications hébergées.</p>
+<h4>Postscriptum</h4>
+<p>Les articles ne sont pas encore écrit, si vous souhaitez avoir des explications sur la configuration Linux, Apache, MySQL ou PHP. N&#8217;hésitez pas à le demander dans les commentaires.<br />
+C&#8217;est avant tout pour moi un moyen de mettre au clair mes idées, de savoir comment je vais configurer le serveur et surtout d&#8217;avoir un post-it amélioré.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/bonnes-pratiques-serveur-lamp/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>EasyPHP is not dead</title>
+		<link>http://www.armetiz.info/easyphp-is-not-dead/</link>
+		<comments>http://www.armetiz.info/easyphp-is-not-dead/#comments</comments>
+		<pubDate>Wed, 21 Jan 2009 12:25:57 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Windows]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[EasyPHP]]></category>
+		<category><![CDATA[LAMP]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[WAMP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=706</guid>
+		<description><![CDATA[EasyPHP n'est pas mort, une nouvelle version a vu le jours le 9 Janvier 2009.
+Venez découvrir le logiciel qui fut le premier serveur PHP sous Windows.]]></description>
+				<content:encoded><![CDATA[<p>Depuis le 9 Janvier, <a href="http://www.easyphp.org" target="_blank">EasyPHP</a> est disponible en version 3.<br />
+Cela faisait très longtemps que l&#8217;équipe avait laissée le développement à la dérive, et nous étions bloqué sur une <a href="http://sourceforge.net/project/showfiles.php?group_id=14045&amp;package_id=103438">version 2.0beta</a>.</p>
+<p><a href="http://www.easyphp.org" target="_blank"><img src="http://www.armetiz.info/wp-content/uploads/2009/01/top_title.gif" alt="EasyPHP " width="226" height="40" class="size-full aligncenter" /></a></p>
+<p>Les informations sur cette nouvelle version sont inexistantes, on peut penser qu&#8217;il s&#8217;agit surtout d&#8217;un <strong>nouveau package</strong> de version.</p>
+<ul>
+<li><strong>Apache</strong> : 2.2.1</li>
+<li><strong>PHP</strong> : 5.2.8</li>
+<li><strong>MySQL</strong> : 5.1.30</li>
+<li>PhpMyAdmin : 3.1.1</li>
+<li>SQLiteManager : 1.2.0</li>
+</ul>
+<p><a href="http://www.easyphp.org" target="_blank">EasyPHP</a> n&#8217;étant plus maintenu à jours, beaucoup d&#8217;utilisateur sont passés à <a href="http://www.wampserver.com" target="_blank">Wamp</a> qui était et est toujours régulièrement mis à jours.</p>
+<p>Étant un ancien aficionados EasyPHP, je suis bien contant de le savoir à nouveau dans la course.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/easyphp-is-not-dead/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/17 queries in 0.008 seconds using apc
+Object Caching 1015/1074 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:07:20 by W3 Total Cache -->

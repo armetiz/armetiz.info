@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; h264</title>
+	<atom:link href="http://www.armetiz.info/tag/h264/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>CentOS – Installer le module h264 streaming pour Lighttpd</title>
+		<link>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/</link>
+		<comments>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/#comments</comments>
+		<pubDate>Tue, 12 Jun 2012 10:20:48 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[h264]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Installation]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Lighttpd]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Streaming]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2505</guid>
+		<description><![CDATA[Nous allons commencer avec l&#8217;installation de lighttpd. Personnellement, j&#8217;utilise les repository EPEL pour le faire. 1yum install lighttpd Installation des outils et des headers. 1yum install automake autoconf libtool bzip2-devel.. <a href="http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Nous allons commencer avec l&#8217;installation de lighttpd. Personnellement, j&#8217;utilise les repository EPEL pour le faire.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> lighttpd</div></td></tr></tbody></table></div>
+<p>Installation des outils et des headers.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> <span style="color: #c20cb9; font-weight: bold;">autoconf</span> libtool bzip2-devel zlib-devel <span style="color: #c20cb9; font-weight: bold;">gcc</span> <span style="color: #c20cb9; font-weight: bold;">make</span> pcre-devel</div></td></tr></tbody></table></div>
+<p><strong>Note</strong>: Avant de commencer, il est à noter que le lien donné par <a href="http://h264.code-shop.com/trac/wiki/Mod-H264-Streaming-Lighttpd-Version2">code-shop</a> pour la compilation du module h264 avec Lighttpd 1.4.x ne contient pas les fichiers nécessaires à la compilation du module.<br />
+Voici donc la version que j&#8217;avais utilisé pour la compilation sous <a href="http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/">Debian avec Lighttpd 1.4.19</a>. Cela fonctionne parfaitement sous <strong>CentOS6</strong> avec <strong>Lighttpd 1.4.28</strong>. </p>
+<p>Download de <a href="http://armetiz.info/wp-content/uploads/2012/06/lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar1.gz">lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz</a></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>armetiz.info<span style="color: #000000; font-weight: bold;">/</span>wp-content<span style="color: #000000; font-weight: bold;">/</span>uploads<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">2012</span><span style="color: #000000; font-weight: bold;">/</span>06<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar1.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz</div></td></tr></tbody></table></div>
+<p>Ensuite, nous allons telecharger les sources correspondant à la version précedement installé de Lighttpd.<br />
+Actuellement, sous CentOS 6 avec EPEL, il s&#8217;agit de Lighttp 1.4.28</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;lighttpd-1.4.28.tar.gz&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>download.lighttpd.net<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span>releases-<span style="color: #000000;">1.4</span>.x<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> lighttpd-1.4.28.tar.gz</div></td></tr></tbody></table></div>
+<p>Copie des modules h264 dans les sources de la 1.4.28</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.c mod_streaming_export.h moov.<span style="color: #000000; font-weight: bold;">*</span> mp4_io.<span style="color: #000000; font-weight: bold;">*</span> mp4_process.<span style="color: #000000; font-weight: bold;">*</span> mp4_reader.<span style="color: #000000; font-weight: bold;">*</span> mp4_writer.<span style="color: #000000; font-weight: bold;">*</span> output_bucket.<span style="color: #000000; font-weight: bold;">*</span> output_mp4.<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">vim</span> Makefile.am</div></td></tr></tbody></table></div>
+<p>Vous pouvez rajouter les lignes suivantes après la définition du module <strong>mod_flv_streaming</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">lib_LTLIBRARIES += mod_h264_streaming.la<br />
+mod_h264_streaming_la_SOURCES = mod_h264_streaming.c \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mod_streaming_export.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; moov.c moov.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_io.c mp4_io.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_reader.c mp4_reader.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_writer.c mp4_writer.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_process.c mp4_process.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_bucket.c output_bucket.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_mp4.c output_mp4.h<br />
+mod_h264_streaming_la_CFLAGS = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>AM_CFLAGS<span style="color: #7a0874; font-weight: bold;">&#41;</span> -DBUILDING_H264_STREAMING<br />
+mod_h264_streaming_la_LDFLAGS = <span style="color: #660033;">-module</span> <span style="color: #660033;">-export-dynamic</span> <span style="color: #660033;">-avoid-version</span> <span style="color: #660033;">-no-undefined</span><br />
+mod_h264_streaming_la_LIBADD = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>common_libadd<span style="color: #7a0874; font-weight: bold;">&#41;</span></div></td></tr></tbody></table></div>
+<p>On va s&#8217;occuper de la compilation</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28<span style="color: #000000; font-weight: bold;">/</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>autogen.sh<br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #660033;">--prefix</span>=<span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>On va maintenant récupérer le .so que l&#8217;on vient de compiler et correspondant au module h264.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span>lib<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.so <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>lib64<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<p>Alors que les étapes spécifiques aux binaires sont terminés,<br />
+Voici la partie configuration : <strong>/etc/lighttpd/conf.d/h264.conf</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">## /etc/lighttpd/conf.d/h264.conf</span><br />
+<span style="color: #666666; font-style: italic;">#######################################################################</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## &nbsp;H264 Module </span><br />
+<span style="color: #666666; font-style: italic;">## --------------- </span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## see http://h264.code-shop.com/trac/wiki/Mod-H264-Streaming-Lighttpd-Version2</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<br />
+server.modules += <span style="color: #7a0874; font-weight: bold;">&#40;</span> <span style="color: #ff0000;">&quot;mod_h264_streaming&quot;</span> <span style="color: #7a0874; font-weight: bold;">&#41;</span><br />
+<br />
+h264-streaming.extensions = <span style="color: #7a0874; font-weight: bold;">&#40;</span> <span style="color: #ff0000;">&quot;.mp4&quot;</span> <span style="color: #7a0874; font-weight: bold;">&#41;</span><br />
+<span style="color: #666666; font-style: italic;">#######################################################################</span></div></td></tr></tbody></table></div>
+<p>Dans le fichier <strong>/etc/lighttpd/modules.conf</strong>, nous allons ajouter le chargement du fichier de configuration précédemment créé.</p>
+<p>Apres le scope concernant <strong>server.modules</strong>, nous ajoutons</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">## /etc/lighttpd/modules.conf</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## mod_h264_streaming</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+include <span style="color: #ff0000;">&quot;conf.d/h264.conf&quot;</span></div></td></tr></tbody></table></div>
+<h3>Mise à jour</h3>
+<p>Attention, lorsque vous allez mettre à jour vos paquets via &#8220;<strong>yum update</strong>&#8220;, il est fort probable d&#8217;obtenir l&#8217;erreur suivante lors du démarrage de lighttpd.</p>
+<blockquote><p>
+(plugin.c.421) plugin-version doesn&#8217;t match lighttpd-version for h264_streaming<br />
+(server.c.926) Initialization of plugins failed. Going down.
+</p></blockquote>
+<p>En gros, le <strong>module h264</strong> que vous avez compiler n&#8217;est plus valide pour la nouvelle version de <strong>lighttpd</strong> que vous avez récupéré suite à une mise à jour.</p>
+<p>Dans un premier temps, désactiver le module h264 afin de pouvoir lancer lighttpd correctement :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">## /etc/lighttpd/modules.conf</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## mod_h264_streaming</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">#include &quot;conf.d/h264.conf&quot;</span></div></td></tr></tbody></table></div>
+<p>Une fois fait, vous pouvez démarrer <strong>lighttpd</strong> tranquillement et recommencer la compilation du <strong>module h264</strong>.<br />
+Pour cela, rien de plus simple: reprenez le tutoriel à son début en prenant soin de récuperer les sources de lighttpd correspondant à la version installée.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Debian &#8211; Installer le module h264 streaming pour Lighttpd</title>
+		<link>http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/</link>
+		<comments>http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/#comments</comments>
+		<pubDate>Thu, 17 Mar 2011 10:44:08 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[h264]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Installation]]></category>
+		<category><![CDATA[Lighttpd]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Streaming]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1970</guid>
+		<description><![CDATA[Ce tutoriel est un condensé de mes recherches sur Internet pour l&#8217;installation du module h264 streaming pour Lighttpd. Voici les deux principales ressources : h264.code-shop.com &#38; Debian root ( allemand.. <a href="http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Ce tutoriel est un condensé de mes recherches sur Internet pour l&#8217;installation du module <a href="http://h264.code-shop.com">h264 streaming</a> pour <strong>Lighttpd</strong>.</p>
+<p>Voici les deux principales ressources : <a href="http://h264.code-shop.com/trac/wiki/Mod-H264-Streaming-Lighttpd-Version2">h264.code-shop.com</a> &amp; <a href="http://www.debianroot.de/server/lighttpd-mp4h264-video-streaming-mod_h264_streaming-1168.html">Debian root ( allemand )</a>.</p>
+<p>L&#8217;objectif des prochaines commandes est de recompiler Lighttpd pour récupérer les modules h264-streaming et les copier dans le Lighttpd qui est géré par votre gestionnaire de paquet.</p>
+<p>Installation des paquets utiles à la compilation de Lighttpd.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get install</span> build-essential <span style="color: #c20cb9; font-weight: bold;">automake</span> <span style="color: #c20cb9; font-weight: bold;">autoconf</span> libtool pkg-config libpcre3-dev zlib1g-dev libbz2-dev libfam-dev</div></td></tr></tbody></table></div>
+<p>Les paquets : <strong>libpcre3-dev zlib1g-dev libbz2-dev libfam-dev</strong> ne sont pas nécessaires. Si vous ne souhaitez pas les installés, penser à invoquer la commande <strong>./configure</strong> avec les options <strong>&#8211;without-pcre &#8211;without-zlib &#8211;without-bzip2 &#8211;without-fam</strong></p>
+<p>S&#8217;il n&#8217;est pas déjà présent sur votre Debian, installons Lighttpd.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get install</span> lighttpd</div></td></tr></tbody></table></div>
+<p>Téléchargeons les sources de <strong>Lighttpd 1.4.18</strong> contenant le module <strong>h264 streaming</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+<span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>h264.code-shop.com<span style="color: #000000; font-weight: bold;">/</span>download<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-zxvf</span> lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz</div></td></tr></tbody></table></div>
+<p>Téléchargeons les sources de Lighttpd géré par votre gestionnaire de paquet. Lors de la rédaction de l&#8217;article, Debian Lenny utilise Lighttpd version 1.4.19.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get <span style="color: #7a0874; font-weight: bold;">source</span></span> lighttpd</div></td></tr></tbody></table></div>
+<p>Copions les quelques fichiers sources utiles à la compilation du module h264 streaming.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.c mod_streaming_export.h moov.<span style="color: #000000; font-weight: bold;">*</span> mp4_io.<span style="color: #000000; font-weight: bold;">*</span> mp4_process.<span style="color: #000000; font-weight: bold;">*</span> <br />
+mp4_reader.<span style="color: #000000; font-weight: bold;">*</span> mp4_writer.<span style="color: #000000; font-weight: bold;">*</span> output_bucket.<span style="color: #000000; font-weight: bold;">*</span> output_mp4.<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.19<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<p>Nous allons modifier le fichier <strong>Makefile</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.19<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">vim</span> Makefile.am</div></td></tr></tbody></table></div>
+<p>Vous pouvez rajouter les lignes suivantes après la définition du module <strong>mod_flv_streaming</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">lib_LTLIBRARIES += mod_h264_streaming.la<br />
+mod_h264_streaming_la_SOURCES = mod_h264_streaming.c <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mod_streaming_export.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; moov.c moov.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_io.c mp4_io.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_reader.c mp4_reader.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_writer.c mp4_writer.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_process.c mp4_process.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_bucket.c output_bucket.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_mp4.c output_mp4.h<br />
+mod_h264_streaming_la_CFLAGS = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>AM_CFLAGS<span style="color: #7a0874; font-weight: bold;">&#41;</span> -DBUILDING_H264_STREAMING<br />
+mod_h264_streaming_la_LDFLAGS = <span style="color: #660033;">-module</span> <span style="color: #660033;">-export-dynamic</span> <span style="color: #660033;">-avoid-version</span> <span style="color: #660033;">-no-undefined</span><br />
+mod_h264_streaming_la_LIBADD = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>common_libadd<span style="color: #7a0874; font-weight: bold;">&#41;</span></div></td></tr></tbody></table></div>
+<p>On lance la compilation. Le résultat sera enregistré dans <strong>/opt/lighttpd.</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.19<br />
+.<span style="color: #000000; font-weight: bold;">/</span>autogen.sh<br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #660033;">--enable-maintainer-mode</span> <span style="color: #660033;">--prefix</span>=<span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>Copions les binaires du module h264 dans l&#8217;installation de Lighttpd géré par votre gestionnaire de paquet.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span>lib<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.so mod_expire.so mod_secdownload.so <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>lib<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<p>Éditer le fichier /etc/lighttpd/lighttpd.conf et rajouter :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">server.modules = <span style="color: #7a0874; font-weight: bold;">&#40;</span> <br />
+&nbsp; ...,<br />
+&nbsp; <span style="color: #ff0000;">&quot;mod_h264_streaming&quot;</span>,<br />
+&nbsp; ...<br />
+<span style="color: #7a0874; font-weight: bold;">&#41;</span><br />
+h264-streaming.extensions = <span style="color: #7a0874; font-weight: bold;">&#40;</span> <span style="color: #ff0000;">&quot;.mp4&quot;</span> <span style="color: #7a0874; font-weight: bold;">&#41;</span></div></td></tr></tbody></table></div>
+<p>Maintenant que tout est fini, vous pouvez relancer votre serveur HTTP et profiter.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.022 seconds using apc
+Object Caching 1265/1281 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:14:35 by W3 Total Cache -->

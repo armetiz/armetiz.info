@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: AMF / Zend Authentication using Database</title>
+	<atom:link href="http://www.armetiz.info/zend-authentication-database/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info/zend-authentication-database/</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Thu, 03 Apr 2014 20:26:43 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>By: stéphane</title>
+		<link>http://www.armetiz.info/zend-authentication-database/#comment-556</link>
+		<dc:creator><![CDATA[stéphane]]></dc:creator>
+		<pubDate>Thu, 13 Jan 2011 17:27:25 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843#comment-556</guid>
+		<description><![CDATA[Merci, c&#039;est exactement ce que je cherchais à faire depuis plusieurs jours et votre solution fonctionne.
+Stéphane]]></description>
+		<content:encoded><![CDATA[<p>Merci, c&#8217;est exactement ce que je cherchais à faire depuis plusieurs jours et votre solution fonctionne.<br />
+Stéphane</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/zend-authentication-database/#comment-555</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Fri, 22 Oct 2010 07:49:22 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843#comment-555</guid>
+		<description><![CDATA[@ZendAdept, L&#039;appel est effectué automatiquement par Zend_AMF_Server.. Regarde de plus près cette classe, tu vas apprendre de nombreuses choses.
+Essai de te débrouiller un peu tout seul ;)]]></description>
+		<content:encoded><![CDATA[<p>@ZendAdept, L&#8217;appel est effectué automatiquement par Zend_AMF_Server.. Regarde de plus près cette classe, tu vas apprendre de nombreuses choses.<br />
+Essai de te débrouiller un peu tout seul 😉</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ZendAdept</title>
+		<link>http://www.armetiz.info/zend-authentication-database/#comment-554</link>
+		<dc:creator><![CDATA[ZendAdept]]></dc:creator>
+		<pubDate>Thu, 21 Oct 2010 21:48:34 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843#comment-554</guid>
+		<description><![CDATA[Ouf j&#039;y suis enfin parvenu :)
+
+@kyfr4n : merci tu m&#039;as bien aidé j&#039;avais le même soucis ;)
+
+@Thomas : merci grandement pour tes conseils et ta patience ;)
+
+J&#039;avais le problème que je n&#039;appelais pas directement la méthode authenticate(). Donc j&#039;avais toujours &quot;Unauthenticated access not allowed&quot;. En rajoutant l&#039;appel de cette méthode dans mon constructeur c&#039;est bon. Par contre Thomas, je pourrais savoir comment et où tu appèles cette méthode ? Fais tu quelque chose de ce genre à la place ?
+
+$auth = new Auth_AmfDatabase();
+$auth-&gt;authenticate();
+$server-&gt;setAuth($auth);
+
+Merci]]></description>
+		<content:encoded><![CDATA[<p>Ouf j&#8217;y suis enfin parvenu <img src="http://www.armetiz.info/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>@kyfr4n : merci tu m&#8217;as bien aidé j&#8217;avais le même soucis 😉</p>
+<p>@Thomas : merci grandement pour tes conseils et ta patience 😉</p>
+<p>J&#8217;avais le problème que je n&#8217;appelais pas directement la méthode authenticate(). Donc j&#8217;avais toujours &#8220;Unauthenticated access not allowed&#8221;. En rajoutant l&#8217;appel de cette méthode dans mon constructeur c&#8217;est bon. Par contre Thomas, je pourrais savoir comment et où tu appèles cette méthode ? Fais tu quelque chose de ce genre à la place ?</p>
+<p>$auth = new Auth_AmfDatabase();<br />
+$auth-&gt;authenticate();<br />
+$server-&gt;setAuth($auth);</p>
+<p>Merci</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kyfr4n</title>
+		<link>http://www.armetiz.info/zend-authentication-database/#comment-553</link>
+		<dc:creator><![CDATA[kyfr4n]]></dc:creator>
+		<pubDate>Wed, 20 Oct 2010 11:49:13 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843#comment-553</guid>
+		<description><![CDATA[Merci 1000 fois Thomas, j&#039;ai réussi à faire mon principe d&#039;authentification !!!
+J&#039;avais un problème, c&#039;était qu&#039;une fois mon authentification faite, Zend_Auth-&gt;getIdentity() ne me renvoyait jamais rien. Je pensais que la persistance d&#039;identité se faisait automatiquement, mais à priori non...
+
+Pour ceux qui rencontrent ce problème, il faut juste penser à ajouter :
+$authInstance = Zend_Auth::getInstance();
+$authInstance-&gt;getStorage()-&gt;write($identity);
+
+au moment de l&#039;identification. J&#039;espère ne pas avoir raconté de bêtises.
+
+Merci encore Thomas pour ces très précieuses informations.]]></description>
+		<content:encoded><![CDATA[<p>Merci 1000 fois Thomas, j&#8217;ai réussi à faire mon principe d&#8217;authentification !!!<br />
+J&#8217;avais un problème, c&#8217;était qu&#8217;une fois mon authentification faite, Zend_Auth-&gt;getIdentity() ne me renvoyait jamais rien. Je pensais que la persistance d&#8217;identité se faisait automatiquement, mais à priori non&#8230;</p>
+<p>Pour ceux qui rencontrent ce problème, il faut juste penser à ajouter :<br />
+$authInstance = Zend_Auth::getInstance();<br />
+$authInstance-&gt;getStorage()-&gt;write($identity);</p>
+<p>au moment de l&#8217;identification. J&#8217;espère ne pas avoir raconté de bêtises.</p>
+<p>Merci encore Thomas pour ces très précieuses informations.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ZendAdept</title>
+		<link>http://www.armetiz.info/zend-authentication-database/#comment-552</link>
+		<dc:creator><![CDATA[ZendAdept]]></dc:creator>
+		<pubDate>Wed, 20 Oct 2010 11:37:29 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843#comment-552</guid>
+		<description><![CDATA[Oui mais le serveur est le point d&#039;entrée et il lance les méthodes qui vont justement me définir mon adapter avec les setters donc comment le connaitre à l&#039;avance ?
+
+Force est de constater que la force ne m&#039;accompagne pas ^^]]></description>
+		<content:encoded><![CDATA[<p>Oui mais le serveur est le point d&#8217;entrée et il lance les méthodes qui vont justement me définir mon adapter avec les setters donc comment le connaitre à l&#8217;avance ?</p>
+<p>Force est de constater que la force ne m&#8217;accompagne pas ^^</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/zend-authentication-database/#comment-551</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Wed, 20 Oct 2010 11:18:33 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843#comment-551</guid>
+		<description><![CDATA[@ZendAdept,
+A ce niveau, c&#039;est un soucis lié à ton infrastructure.. Seule la force te permettra de t&#039;en sortir ;)]]></description>
+		<content:encoded><![CDATA[<p>@ZendAdept,<br />
+A ce niveau, c&#8217;est un soucis lié à ton infrastructure.. Seule la force te permettra de t&#8217;en sortir 😉</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ZendAdept</title>
+		<link>http://www.armetiz.info/zend-authentication-database/#comment-550</link>
+		<dc:creator><![CDATA[ZendAdept]]></dc:creator>
+		<pubDate>Wed, 20 Oct 2010 10:33:07 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843#comment-550</guid>
+		<description><![CDATA[Ok merci Thomas :)
+
+Sinon pour mon système d&#039;authentification je suis toujours paumé ^^
+
+En effet ce serait simple de faire un :
+
+$server-&gt;setAuth($authAdapter);
+
+avec un adapter base de données, sauf que je connais pas forcément sur le moment la base à utiliser. Exemple : quand l&#039;utilisateur n&#039;est pas encore connecté...Après avec un getter je dois pouvoir m&#039;en tirer mais avant...]]></description>
+		<content:encoded><![CDATA[<p>Ok merci Thomas <img src="http://www.armetiz.info/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Sinon pour mon système d&#8217;authentification je suis toujours paumé ^^</p>
+<p>En effet ce serait simple de faire un :</p>
+<p>$server-&gt;setAuth($authAdapter);</p>
+<p>avec un adapter base de données, sauf que je connais pas forcément sur le moment la base à utiliser. Exemple : quand l&#8217;utilisateur n&#8217;est pas encore connecté&#8230;Après avec un getter je dois pouvoir m&#8217;en tirer mais avant&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/zend-authentication-database/#comment-549</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Wed, 20 Oct 2010 07:45:38 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843#comment-549</guid>
+		<description><![CDATA[@ZendAdept, tu es libre de faire ce que tu souhaite.. Techniquement, je ne vois aucune contre indication.]]></description>
+		<content:encoded><![CDATA[<p>@ZendAdept, tu es libre de faire ce que tu souhaite.. Techniquement, je ne vois aucune contre indication.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: electrofrog</title>
+		<link>http://www.armetiz.info/zend-authentication-database/#comment-548</link>
+		<dc:creator><![CDATA[electrofrog]]></dc:creator>
+		<pubDate>Tue, 19 Oct 2010 19:53:28 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843#comment-548</guid>
+		<description><![CDATA[Mais qu&#039;est ce qui ce passe ici ??? Mais c&#039;est la ruée ! C&#039;est le délire !]]></description>
+		<content:encoded><![CDATA[<p>Mais qu&#8217;est ce qui ce passe ici ??? Mais c&#8217;est la ruée ! C&#8217;est le délire !</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ZendAdept</title>
+		<link>http://www.armetiz.info/zend-authentication-database/#comment-547</link>
+		<dc:creator><![CDATA[ZendAdept]]></dc:creator>
+		<pubDate>Tue, 19 Oct 2010 18:36:55 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843#comment-547</guid>
+		<description><![CDATA[Oui en effet Thomas ;)
+
+je pense que je peux m&#039;en sortir finalement :)
+
+Par contre tu parles des grains de sel mais de mon côté j&#039;en génère un pour chaque utilisateur à l&#039;inscription (stockés dans une table users), c&#039;est possible de gérer l&#039;authentification lors du login en introduisant mon champs salt ? Je pense que oui et le lien zend ici http://framework.zend.com/manual/1.10/fr/zend.auth.adapter.dbtable.html semble me le confirmer mais je voudrais en être certain ?]]></description>
+		<content:encoded><![CDATA[<p>Oui en effet Thomas 😉</p>
+<p>je pense que je peux m&#8217;en sortir finalement <img src="http://www.armetiz.info/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Par contre tu parles des grains de sel mais de mon côté j&#8217;en génère un pour chaque utilisateur à l&#8217;inscription (stockés dans une table users), c&#8217;est possible de gérer l&#8217;authentification lors du login en introduisant mon champs salt ? Je pense que oui et le lien zend ici <a href="http://framework.zend.com/manual/1.10/fr/zend.auth.adapter.dbtable.html" rel="nofollow">http://framework.zend.com/manual/1.10/fr/zend.auth.adapter.dbtable.html</a> semble me le confirmer mais je voudrais en être certain ?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 7/13 queries in 0.009 seconds using apc
+Object Caching 347/350 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:10:54 by W3 Total Cache -->

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; bug</title>
+	<atom:link href="http://www.armetiz.info/tag/bug/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Flash &#8211; Modification du domaine d&#8217;application</title>
+		<link>http://www.armetiz.info/flash-modification-du-domaine-dapplication/</link>
+		<comments>http://www.armetiz.info/flash-modification-du-domaine-dapplication/#comments</comments>
+		<pubDate>Wed, 30 Mar 2011 13:46:42 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[bug]]></category>
+		<category><![CDATA[Domain]]></category>
+		<category><![CDATA[Jira]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[Shared]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1985</guid>
+		<description><![CDATA[Cette article fait suite à une incapacité technique de ma part à comprendre les comportements concernant le fonctionnement du domaine d&#8217;application. Voici l&#8217;énoncer du problème, nous avons deux fichiers SWF.. <a href="http://www.armetiz.info/flash-modification-du-domaine-dapplication/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cette article fait suite à une incapacité technique de ma part à comprendre les comportements concernant le fonctionnement du domaine d&#8217;application.</p>
+<p>Voici l&#8217;énoncer du problème, nous avons deux fichiers SWF présents sur deux domaines différents.<br />
+Nous souhaitons simplement pouvoir utiliser une librairie partagée entre ces deux SWF et donc utiliser des définitions de classes communes.<br />
+L&#8217;objectif est donc d&#8217;utiliser un seul domaine d&#8217;application pour les deux SWF.</p>
+<p>D’après la <a href="http://help.adobe.com/fr_FR/as3/dev/WSd75bf4610ec9e22f43855da312214da1d8f-8000.html">méthode officielle</a>,</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">var _loader : Loader = new Loader ();<br />
+var _request : URLRequest = new URLRequest ( &quot;http://www.example.com/foo.swf&quot;);<br />
+var _context : ContextLoader = new ContextLoader ();<br />
+<br />
+_context.applicationDomain = ApplicationDomain.currentDomain;<br />
+<br />
+_loader.load ( _request, _context );</div></td></tr></tbody></table></div>
+<p>Le problème a été retourné dans tout les sens.. nous n&#8217;avons jamais eu les mêmes domaines d&#8217;applications pour l&#8217;enfant et le parent.</p>
+<p>De plus, il est simple de vérifier si deux SWF utilise le même domaine d&#8217;application.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">trace ( String ( __loader.contentLoaderInfo.applicationDomain == ApplicationDomain.currentDomain ) ) ;<br />
+//false systématiquement</div></td></tr></tbody></table></div>
+<p>Les crossdomain sont présents sur les deux serveurs, et les utilisations de <strong>Security.allowDomain (&#8220;*&#8221;);</strong> n&#8217;ont pas été oubliées.</p>
+<p>Aussi, le soucis reste le même lorsque nous travaillons en local et que l&#8217;on charge le SWF avec un chemin relatif.<br />
+Ce qui est étrange, c&#8217;est que dans ce cas les définitions de classes sont utilisables et donne l&#8217;impression d&#8217;un seul domaine d&#8217;application. </p>
+<p>Du coups, j&#8217;y perds totalement mon latin. A savoir que nous avons tester avec le player 10.2.152 et 10.1</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/flash-modification-du-domaine-dapplication/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Windows 7 &#8211; Pas d&#8217;accès Internet</title>
+		<link>http://www.armetiz.info/windows-7-pas-acces-internet/</link>
+		<comments>http://www.armetiz.info/windows-7-pas-acces-internet/#comments</comments>
+		<pubDate>Mon, 28 Dec 2009 13:16:23 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Windows]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Bonjour]]></category>
+		<category><![CDATA[bug]]></category>
+		<category><![CDATA[CS3]]></category>
+		<category><![CDATA[DHCP]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Routage]]></category>
+		<category><![CDATA[Seven]]></category>
+		<category><![CDATA[Windows 7]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1483</guid>
+		<description><![CDATA[L&#8217;article a été mis à jours le 14 Avril 2010. Si vous recherchez une entreprise de maintenance informatique proposant des services de qualité pour un faible coût, je vous conseille.. <a href="http://www.armetiz.info/windows-7-pas-acces-internet/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><em>L&#8217;article a été mis à jours le 14 Avril 2010.</em></p>
+<blockquote><p>Si vous recherchez une entreprise de <strong>maintenance informatique</strong> proposant des services de qualité pour un <strong>faible coût</strong>, je vous conseille de contacter <a href="http://www.turnaway.fr">Turnaway.fr</a>.</p></blockquote>
+<p>Lorsque l&#8217;on allume son ordinateur équipé de Windows 7, il arrive que l&#8217;on ne puisse pas accéder à Internet alors que tout les autres ordinateurs fonctionnent parfaitement.<br />
+Les configurations réseaux sont fournies par un <strong>serveur DHCP</strong> correctement configuré et testé depuis longtemps.</p>
+<h3>Les syndromes</h3>
+<p>Des messages : <strong>Réseau non identifié</strong> ou <strong>Pas d&#8217;accès Internet</strong></p>
+<p><a href="http://www.armetiz.info/files/2009/12/taskbar1.png"><img src="http://www.armetiz.info/files/2009/12/taskbar1.png" alt="Pas d&#039;acces Internet" width="295" height="216" class="size-full wp-image-1493" /></a><br />
+<a href="http://www.armetiz.info/files/2009/12/reseau1.png"><img src="http://www.armetiz.info/files/2009/12/reseau1.png" alt="Pas d&#039;acces Internet" width="466" height="140" class="size-full wp-image-1491" /></a></p>
+<p>Ce qui est étrange sur le screenshot ci-dessus, c&#8217;est qu&#8217;il existe deux &#8220;réseaux&#8221; sur une seule connexion physique alors qu&#8217;il s&#8217;agit d&#8217;une configuration réseau standard.</p>
+<h3>L&#8217;explication</h3>
+<p>L&#8217;explication se situe au niveau de la<strong> table de routage IPv4</strong>.<br />
+<a href="http://www.armetiz.info/files/2009/12/route1.png"><img src="http://www.armetiz.info/files/2009/12/route1.png" alt="Table de routage" width="488" height="205" class="aligncenter size-full wp-image-1492" /></a></p>
+<p>En effet, nous remarquons à travers la table de routage qu&#8217;il existe <strong>deux routes par défaut</strong>. A la limite, cela peut arriver, mais avec une métrique identique cela risque de ne pas fonctionner correctement.</p>
+<h3>La solution 1 &#8211; Temporaire</h3>
+<p>Voici la solution que j&#8217;utilise :<br />
+<strong>Supprimer les routes par défaut</strong>; avec un Invité de commande lancé avec les droits d&#8217;administrateur :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">route DELETE 0.0.0.0</div></td></tr></tbody></table></div>
+<p><strong>relancer la découverte DHCP</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">ipconfig /renew</div></td></tr></tbody></table></div>
+<h3>La solution 2 &#8211; Permanente</h3>
+<p>A ceux qui ont le problème, avez-vous un logiciel Adobe ? Comme <strong>Photoshop CS3</strong> ou <strong>Flash CS3</strong> ? Si oui, nous avons trouver le fautif !<br />
+<strong>Adobe CS3</strong> installe un logiciel de découverte réseau basé sur le protocole <a href="http://en.wikipedia.org/wiki/Bonjour_%28software%29">Bonjour</a> de <strong>Apple</strong>. Celui-ci lui permet de trouver les serveurs <a href="http://www.adobe.com/fr/products/creativesuite/versioncue">Version Cue</a> qui sont à proximités. </p>
+<blockquote><p><em>Pour plus d&#8217;information sur l&#8217;utilisation de Bonjour par Adobe CS3, voici une <a href="http://kb2.adobe.com/cps/400/kb400982.html">TechNote</a> en anglais.</em></p></blockquote>
+<p><a href="http://www.armetiz.info/files/2009/12/adobe-lq1.png"><img src="http://www.armetiz.info/files/2009/12/adobe-lq1.png" alt="" width="43" height="72" class="alignright size-full wp-image-1665" /></a></p>
+<p>Le logiciel est installé sous forme de service ce qui nous permet de le désactiver simplement.</p>
+<p>Pour désactiver le service :</p>
+<ul>
+<li>Aller dans le gestionnaire de service : <strong>services.msc</strong></li>
+<li>Clique droit sur &#8220;la chose&#8221; qui commence par <strong>##Id_String1&#8230;.##</strong>, allez dans les  <strong>propriétés</strong></li>
+<li>Pour <strong>Type de démarrage</strong>, sélectionner <strong>Désactivé</strong></li>
+</ul>
+<p>En redémarrant votre ordinateur, vous ne devriez plus avoir le problème.</p>
+<blockquote><p><em>Nous pouvons signifier que le problème ne touche que les utilisateurs de Adobe CS3 et Windows 7.<br />
+Cela s&#8217;explique par une implémentation différente de Bonjour au sein de Adobe CS4 et supérieur.</em></p></blockquote>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/windows-7-pas-acces-internet/feed/</wfw:commentRss>
+		<slash:comments>24</slash:comments>
+		</item>
+		<item>
+		<title>Fait étrange avec un TextField et une class de document</title>
+		<link>http://www.armetiz.info/fait-etrange-avec-un-textfield-et-une-class-de-document/</link>
+		<comments>http://www.armetiz.info/fait-etrange-avec-un-textfield-et-une-class-de-document/#comments</comments>
+		<pubDate>Sat, 01 Mar 2008 20:47:22 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[bug]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=23</guid>
+		<description><![CDATA[Pour un projet, j&#8217;ai eu à travailler avec une class de document et des TextField. Je suis tombé sur un étrange problème. Mise en situation : &#8211; Créer un fichier.. <a href="http://www.armetiz.info/fait-etrange-avec-un-textfield-et-une-class-de-document/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pour un projet, j&#8217;ai eu à travailler avec une class de document et des TextField. Je suis tombé sur un étrange problème.</p>
+<p>Mise en situation :<br />
+&#8211; Créer un fichier Flash AS 3 (monFlash.fla), et un fichier AS 3 (MonDocument.as)<br />
+&#8211; Faite de MonDocument.as la classe de document de monFlash.fla<br />
+&#8211; Rajouter une image clé à cette animation<br />
+&#8211; Sur chacune des deux images, placer un TextField dynamique de nom d&#8217;occurrence “monText”<br />
+&#8211; Passons maintenant à MonDocument.as</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">package<br />
+{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; import flash.display.MovieClip;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; import flash.text.TextField;<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; public class MonDocument extends MovieClip<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; public function MonDocument ()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; stop ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; trace (this.numChildren); &nbsp; &nbsp; &nbsp; //affiche: 1<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; trace (getChildAt (0)); &nbsp; &nbsp; &nbsp; &nbsp; //affiche: [object TextField]<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; nextFrame ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; trace (this.numChildren); &nbsp; &nbsp; &nbsp; //affiche: 1<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; trace (getChildAt (0)); &nbsp; &nbsp; &nbsp; &nbsp; //affiche: null<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; trace (typeof (getChildAt (0))); &nbsp; &nbsp; &nbsp; &nbsp;//affiche: object<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>On remarque que sur l&#8217;image 1, on a un objet de type TextField, ce qui est parfaitement normal.<br />
+Passons à l&#8217;image suivante avec nextFrame ().<br />
+Nous avons toujours un objet sur scène, mais quand on regarde d&#8217;un peu plus près, on s&#8217;aperçoit que c&#8217;est un objet qui n&#8217;a pas été déclaré (trace retourne null…).<br />
+En allant plus loin, on veut connaître le type de cet objet, et on voit qu&#8217;il s&#8217;agit d&#8217;un object, et non d&#8217;un TextField… Bon certes tout est object, mais quand même, cela est très étrange.</p>
+<p>On peut essayer de déclarer nous même notre TextField en décochant l&#8217;option “Déclarer automatiquement les occurrences de scène” dans “Fichier -&gt; Paramètre de publication -&gt; onglet Flash -&gt; Paramètre” (ou Maj + shift + F12 ), mais cela ne change rien… C&#8217;est exactement le même problème.</p>
+<p><strong>Édit</strong> : Une explication et une solution au problème a été écrit en commentaire.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/fait-etrange-avec-un-textfield-et-une-class-de-document/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.025 seconds using apc
+Object Caching 597/618 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:13:58 by W3 Total Cache -->

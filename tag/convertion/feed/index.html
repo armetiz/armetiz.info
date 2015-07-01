@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Convertion</title>
+	<atom:link href="http://www.armetiz.info/tag/convertion/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>[PHP] Convertir IP en entier</title>
+		<link>http://www.armetiz.info/php-convertir-ip-entier/</link>
+		<comments>http://www.armetiz.info/php-convertir-ip-entier/#comments</comments>
+		<pubDate>Tue, 12 Jan 2010 12:12:14 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Convertion]]></category>
+		<category><![CDATA[Geolocalisation]]></category>
+		<category><![CDATA[IP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1575</guid>
+		<description><![CDATA[Voici un petit script PHP qui permet de convertir une adresse IP en entier. 127.0.0.1 donne 2130706433 Cela peut-être intéressant pour les systèmes de géolocalisation par IP. 1234567891011121314151617181920212223echo ipToDecimal (&#34;127.0.0.1&#34;);.. <a href="http://www.armetiz.info/php-convertir-ip-entier/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Voici un petit script PHP qui permet de convertir une adresse IP en entier.</p>
+<blockquote><p>127.0.0.1 donne 2130706433</p></blockquote>
+<p>Cela peut-être intéressant pour les systèmes de géolocalisation par IP.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">echo ipToDecimal (&quot;127.0.0.1&quot;); //Affiche 2130706433<br />
+<br />
+function ipToDecimal ($_pIP)<br />
+{<br />
+&nbsp; &nbsp; $aIPDecimale&nbsp; &nbsp; = explode (&quot;.&quot;, $_pIP);<br />
+<br />
+&nbsp; &nbsp; for ($i = 0 ; $i &amp;lt; count ($aIPDecimale) ; $i++)<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $aIPDecimale[$i] = fillZero (decbin ($aIPDecimale[$i]));<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; $ipDecimal&nbsp; = fillZero (bindec (implode ($aIPDecimale)), 10);<br />
+&nbsp; &nbsp; return $ipDecimal;<br />
+}<br />
+<br />
+function fillZero ($_pBinary, $_pLimit = 8)<br />
+{<br />
+&nbsp; &nbsp; while (strlen ($_pBinary) &amp;lt; $_pLimit)<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $_pBinary = &amp;quot;0&amp;quot; . $_pBinary;<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; return $_pBinary;<br />
+}</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/php-convertir-ip-entier/feed/</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.002 seconds using apc
+Object Caching 335/336 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:17:09 by W3 Total Cache -->

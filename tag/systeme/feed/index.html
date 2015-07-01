@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Système</title>
+	<atom:link href="http://www.armetiz.info/tag/systeme/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>NodeJS &#8211; Mise en production</title>
+		<link>http://www.armetiz.info/node-js-mise-production-simple/</link>
+		<comments>http://www.armetiz.info/node-js-mise-production-simple/#comments</comments>
+		<pubDate>Tue, 11 Sep 2012 10:07:39 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Déploiement]]></category>
+		<category><![CDATA[Didacticiel]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[MEP]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[Tutoriel]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2748</guid>
+		<description><![CDATA[La mise en production d&#8217;une application NodeJS est une étape importante dans la vie de votre application. Il existe de nombreuses solutions utilisant forever, upstart, monit ou le script shell.. <a href="http://www.armetiz.info/node-js-mise-production-simple/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>La mise en production d&#8217;une application <a href="http://nodejs.org/">NodeJS</a> est une étape importante dans la vie de votre application.</p>
+<p>Il existe de nombreuses solutions utilisant <a href="https://github.com/nodejitsu/forever">forever</a>, <a href="http://upstart.ubuntu.com/">upstart</a>, <a href="http://mmonit.com/monit/">monit</a> ou le script shell <a href="http://fr.wikipedia.org/wiki/Linux_Standard_Base">LSB</a> personnalisé.<br />
+Aucune de ces solutions ne m&#8217;a convaincu; du coup la solution que je vous propose est la mise en place d&#8217;un script LSB fait en <strong>Javascript</strong>.</p>
+<h3>Pré-requit</h3>
+<p>Pour réaliser correctement ce petit tutoriel, il faut :</p>
+<ul>
+<li>Un utilisateur système &#8220;node&#8221; avec son répertoire personnel: <strong>adduser &#8211;shell /sbin/nologin node</strong></li>
+<li><a href="http://www.armetiz.info/install-nodejs-on-centos/">NodeJS installé</a></li>
+<li>Installer <strong><a href="http://blog.nodejs.org/2011/03/23/npm-1-0-global-vs-local-installation/">globalement</a></strong> le module <a href="https://npmjs.org/package/simple-daemon">simple-daemon</a> : <strong>npm install -g simple-daemon</strong>
+</ul>
+<h3>Exemple d&#8217;application</h3>
+<p>L&#8217;application que nous souhaitons lancer automatiquement au démarrage du serveur est un simple serveur HTTP.</p>
+<p><strong>/home/node/funky-server/funky-server.js</strong></p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #003366; font-weight: bold;">var</span> http <span style="color: #339933;">=</span> require<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'http'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+http.<span style="color: #660066;">createServer</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>req<span style="color: #339933;">,</span> res<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'New client'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; res.<span style="color: #660066;">writeHead</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">200</span><span style="color: #339933;">,</span> <span style="color: #009900;">&#123;</span><span style="color: #3366CC;">'Content-Type'</span><span style="color: #339933;">:</span> <span style="color: #3366CC;">'text/plain'</span><span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; res.<span style="color: #660066;">end</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Hello Funky World<span style="color: #000099; font-weight: bold;">\n</span>'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">listen</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">80</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Server running, listen on port 80'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Cette application a de particulier qu&#8217;elle écoute toujours sur le port 80 et donc qu&#8217;une seule instance ne peut-être exécutée.<br />
+De plus, pour ouvrir un socket sur un port inférieur à 1024, il faut les privileges root.<br />
+Une fois le serveur sur écoute, les privileges <strong>root</strong> ne sont plus nécessaires.</p>
+<h3>Déploiement</h3>
+<p>Vous remarquerez qu&#8217;au sein de l&#8217;application, il n&#8217;y a aucune gestion de l&#8217;utilisateur gérant le processus ou de vérification de l&#8217;unicité de l&#8217;execution.<br />
+Cela sera géré directement par notre <strong>Wrapper</strong> LSB dont voici le contenu.</p>
+<p><strong>/etc/init.d/funky-server.js</strong></p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">#<span style="color: #339933;">!/</span>usr<span style="color: #339933;">/</span>bin<span style="color: #339933;">/</span>env node<br />
+<span style="color: #003366; font-weight: bold;">var</span> daemon <span style="color: #339933;">=</span> require<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'/usr/local/lib/node_modules/simple-daemon'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <br />
+<span style="color: #006600; font-style: italic;">//En fonction de votre système, ce chemin peut-être different</span><br />
+<br />
+daemon.<span style="color: #660066;">simple</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; pidfile <span style="color: #339933;">:</span> <span style="color: #3366CC;">'/var/run/funky-server.pid'</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; logfile <span style="color: #339933;">:</span> <span style="color: #3366CC;">'/var/log/funky-server.log'</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; command <span style="color: #339933;">:</span> process.<span style="color: #660066;">argv</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">3</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; runSync &nbsp; &nbsp; <span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; require <span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;/home/node/funky-server/funky-server.js&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; process.<span style="color: #660066;">setuid</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;node&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Comme vous le remarquez, une fois le require fait, nous changeons l&#8217;utilisateur du processus.</p>
+<p>Rendons le fichier executable.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js</div></td></tr></tbody></table></div>
+<p>Vous pouvez tester</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js start<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js status<br />
+<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #000000; font-weight: bold;">/</span>dev<span style="color: #000000; font-weight: bold;">/</span>null http:<span style="color: #000000; font-weight: bold;">//</span>localhost<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">tail</span> <span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>log<span style="color: #000000; font-weight: bold;">/</span>funky-server.log<br />
+<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js stop<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js status</div></td></tr></tbody></table></div>
+<p>Pour ajouter le Wrapper ci-dessus aux scripts de demarrage système, il est préférable de le rendre compatible à votre distribution.</p>
+<p>Sous Linux, il faut rajouter des headers pour être conforme <a href="http://fedoraproject.org/wiki/Packaging:SysVInitScript">SysVInitScript</a> / <a href="http://wiki.debian.org/LSBInitScripts">LSBinitScript Debian</a></p>
+<p>Voici le code complet du script de démarrage.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#!/usr/bin/env node</span><br />
+<span style="color: #666666; font-style: italic;">### BEGIN INIT INFO</span><br />
+<span style="color: #666666; font-style: italic;"># Provides: funky-server</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Start: $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Stop: $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Start: 2 3 4 5</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Stop: 0 1 6</span><br />
+<span style="color: #666666; font-style: italic;"># Short-Description: Start daemon at boot time</span><br />
+<span style="color: #666666; font-style: italic;"># Description: Enable service provided by funky-server.</span><br />
+<span style="color: #666666; font-style: italic;">### END INIT INFO</span><br />
+<br />
+var daemon = require<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">'/usr/local/lib/node_modules/simple-daemon'</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>; <br />
+<span style="color: #000000; font-weight: bold;">//</span>En fonction de votre système, ce chemin peut-être different<br />
+<br />
+daemon.simple<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #7a0874; font-weight: bold;">&#123;</span><br />
+&nbsp; &nbsp; pidfile : <span style="color: #ff0000;">'/var/run/funky-server.pid'</span>,<br />
+&nbsp; &nbsp; logfile : <span style="color: #ff0000;">'/var/log/funky-server.log'</span>,<br />
+&nbsp; &nbsp; <span style="color: #7a0874; font-weight: bold;">command</span> : process.argv<span style="color: #7a0874; font-weight: bold;">&#91;</span><span style="color: #000000;">3</span><span style="color: #7a0874; font-weight: bold;">&#93;</span>,<br />
+&nbsp; &nbsp; runSync &nbsp; &nbsp; : <span style="color: #000000; font-weight: bold;">function</span> <span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span> <span style="color: #7a0874; font-weight: bold;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; require <span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">&quot;/home/node/funky-server/funky-server.js&quot;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; process.setuid<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">&quot;node&quot;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;<br />
+&nbsp; &nbsp; <span style="color: #7a0874; font-weight: bold;">&#125;</span><br />
+<span style="color: #7a0874; font-weight: bold;">&#125;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;</div></td></tr></tbody></table></div>
+<p>Sous Debian &#038; Ubuntu, rajouter les headers suivant pour etre conforme :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#!/usr/bin/env node</span><br />
+<span style="color: #666666; font-style: italic;">### BEGIN INIT INFO</span><br />
+<span style="color: #666666; font-style: italic;"># Provides: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;funky-server</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Start: &nbsp; &nbsp;$local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Stop: &nbsp; &nbsp; $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Start: &nbsp; &nbsp; 2 3 4 5</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Stop: &nbsp; &nbsp; &nbsp;0 1 6</span><br />
+<span style="color: #666666; font-style: italic;"># Short-Description: Start daemon at boot time</span><br />
+<span style="color: #666666; font-style: italic;"># Description: &nbsp; &nbsp; &nbsp; Enable service provided by funky-server.</span><br />
+<span style="color: #666666; font-style: italic;">### END INIT INFO</span></div></td></tr></tbody></table></div>
+<p>On ajoute notre module au système de démarrage.<br />
+Sous RedHat &#038; CentOS</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">chkconfig <span style="color: #660033;">--add</span> funky-server.js</div></td></tr></tbody></table></div>
+<p>Sous Debian &#038; Ubuntu</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">updaterc.d default funky-server.js</div></td></tr></tbody></table></div>
+<h3>Pour aller plus loin</h3>
+<p><img src="http://www.armetiz.info/files/2012/09/logo-developer-github.png" alt="" title="logo-developer-github" width="128" height="128" class="alignleft size-full wp-image-2781" /></a><a href="https://github.com/armetiz/node-simple-daemon">Simple-daemon</a> est un module NodeJS qui est le fork de <a href="https://github.com/frodwith/node-init">node-init</a>. A ce module il manquait une fonction synchrone pour lancer le processus et être parfaitement fonctionnel.<br />
+En effet, basé sur <a href="https://github.com/indexzero/daemon.node">daemon.node</a> qui est un <strong>add-on C</strong> avec une restriction importante : &#8220;all daemonization should happen on the first <a href="http://howtonode.org/understanding-process-next-tick">tick</a> and not as part of an asynchronous action&#8221;.</p>
+<p>Vous pouvez coupler cette solution à <a href="https://github.com/nodejitsu/forever">forever</a> pour que l&#8217;application survive à un crash impromptu.</p>
+<p>Aussi,<br />
+L&#8217;ouverture du serveur HTTP est une <strong>opération asynchrone</strong>, le changement d&#8217;utilisateur apparait après la demande d&#8217;écoute du serveur mais pas forcement après que le serveur soit sur écoute.<br />
+Après lecture du <a href="https://github.com/joyent/node">code NodeJS</a> et de la <a href="https://github.com/joyent/libuv">libuv</a> concernant l&#8217;écoute d&#8217;un serveur HTTP, il me semble que la reservation du socket soit fait dans le même <a href="http://howtonode.org/understanding-process-next-tick">tick</a> que la fonction JS <strong>http.Server::listen()</strong>. Du moins, pour les systèmes Unix.<br />
+Si quelqu&#8217;un est apte à me le confirmer, les commentaires sont là pour.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/node-js-mise-production-simple/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>CentOS 6 &#8211; Varnish &amp; MaxMind GeoIP</title>
+		<link>http://www.armetiz.info/centos-6-varnish-geoip/</link>
+		<comments>http://www.armetiz.info/centos-6-varnish-geoip/#comments</comments>
+		<pubDate>Tue, 06 Mar 2012 10:10:27 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[GeoIP]]></category>
+		<category><![CDATA[Header]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[HTTPS]]></category>
+		<category><![CDATA[Infrastructure]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[MaxMind]]></category>
+		<category><![CDATA[Module]]></category>
+		<category><![CDATA[Pays]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Système]]></category>
+		<category><![CDATA[Varnish]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2202</guid>
+		<description><![CDATA[Nous allons voir comment déporter le système de géo-localisation IP sur Varnish. L&#8217;objectif final est de permettre à vos backends de récupérer le Pays de l&#8217;utilisateur au sein de la.. <a href="http://www.armetiz.info/centos-6-varnish-geoip/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/12/centos1.png"><img src="http://www.armetiz.info/files/2011/12/centos1.png" alt="centos" width="128" height="128" class="alignright size-full wp-image-2188" /></a>Nous allons voir comment déporter le système de <strong>géo-localisation IP</strong> sur Varnish.<br />
+L&#8217;objectif final est de permettre à vos backends de récupérer le Pays de l&#8217;utilisateur au sein de la requête HTTP.</p>
+<p>Par défault, Varnish n&#8217;intègre pas de système de géo-localisation par IP, en revanche il existe quelques plugins qui permettent l&#8217;utilisation de <a href="http://www.maxmind.com/app/c">GeoIP de MaxMind</a>.</p>
+<p>Voici les parties de l&#8217;article :</p>
+<ul>
+<li>Installation de Varnish</li>
+<li>Installation de GeoIP pour Varnish</li>
+<li>Configuration du Varnish Module</li>
+<li>Configuration de SELinux</li>
+</ul>
+<p>A noter que nous avons opter pour le <a href="https://www.varnish-cache.org/docs/3.0/reference/vmod.html">VMOD</a> <a href="https://github.com/leed25d/geoip-vmod">Geoip-vmod par leed25d</a>. Contrairement aux autres plugins, celui-ci ne travail pas le header HTTP de manière autonome. Ce sera à vous de le faire, et grâce à cela vous allez pouvoir choisir comment&#8230;</p>
+<h3>Varnish</h3>
+<p>Pour compiler le VMOD, il vous faudra récupérer les sources de Varnish et les compiler même si vous choisissez l&#8217;installation par YUM.<br />
+De mon coté, je n&#8217;utilise pas en production la version que je compile mais la version provenant du dépot <a href="https://www.varnish-cache.org/">varnish-cache.org</a>. A vous de voir.</p>
+<p>Commençons par l&#8217;installation de Varnish via YUM (cf. <a href="https://www.varnish-cache.org/installation/redhat">Doc officielle</a>):</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">rpm <span style="color: #660033;">--nosignature</span> <span style="color: #660033;">-i</span> http:<span style="color: #000000; font-weight: bold;">//</span>repo.varnish-cache.org<span style="color: #000000; font-weight: bold;">/</span>redhat<span style="color: #000000; font-weight: bold;">/</span>varnish-<span style="color: #000000;">3.0</span><span style="color: #000000; font-weight: bold;">/</span>el5<span style="color: #000000; font-weight: bold;">/</span>noarch<span style="color: #000000; font-weight: bold;">/</span>varnish-release-<span style="color: #000000;">3.0</span>-<span style="color: #000000;">1</span>.noarch.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum install</span> varnish</div></td></tr></tbody></table></div>
+<p>Pour compiler Varnish nous allons avoir besoin de quelques outils et des sources.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> pcre-devel <span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> curl <span style="color: #660033;">-o</span> varnish-source.tar.gz http:<span style="color: #000000; font-weight: bold;">//</span>repo.varnish-cache.org<span style="color: #000000; font-weight: bold;">/</span>source<span style="color: #000000; font-weight: bold;">/</span>varnish-3.0.2.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xvzf</span> varnish-source.tar.gz</div></td></tr></tbody></table></div>
+<p>On lance la compilation de Varnish.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> varnish-3.0.2<span style="color: #000000; font-weight: bold;">/</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span></div></td></tr></tbody></table></div>
+<p>Normalement, Varnish a été compilé dans votre repertoire <strong>$HOME/varnish-3.0.2/</strong>.</p>
+<h3>GeoIP VMOD</h3>
+<p>On récupère les sources sur <a href="https://github.com/leed25d/geoip-vmod">github</a>.</p>
+<p>Après l&#8217;installation de quelques outils dont GeoIP, on lance la compilation du VMOD.<br />
+Attention, pour les version 32Bits utiliser <strong>VMODDIR=/usr/lib/varnish/vmods/</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> <span style="color: #c20cb9; font-weight: bold;">unzip</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> autoinstall libtool geoip geoip-devel<br />
+<span style="color: #c20cb9; font-weight: bold;">unzip</span> leed25d-geoip-vmod-<span style="color: #7a0874; font-weight: bold;">&#91;</span>REVISION<span style="color: #7a0874; font-weight: bold;">&#93;</span>.zip<br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> leed25d-geoip-vmod-<span style="color: #7a0874; font-weight: bold;">&#91;</span>REVISION<span style="color: #7a0874; font-weight: bold;">&#93;</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>autogen.sh<br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #007800;">VARNISHSRC</span>=<span style="color: #007800;">$HOME</span><span style="color: #000000; font-weight: bold;">/</span>varnish-3.0.2<span style="color: #000000; font-weight: bold;">/</span> <span style="color: #007800;">VMODDIR</span>=<span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>lib64<span style="color: #000000; font-weight: bold;">/</span>varnish<span style="color: #000000; font-weight: bold;">/</span>vmods<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>Suite à l&#8217;installation Varnish, penser à ouvrir votre firewall.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/sysconfig/iptables</span><br />
+<span style="color: #660033;">-A</span> INPUT <span style="color: #660033;">-m</span> tcp <span style="color: #660033;">-p</span> tcp <span style="color: #660033;">--dport</span> <span style="color: #000000;">80</span> <span style="color: #660033;">-j</span> ACCEPT</div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">service iptables restart</div></td></tr></tbody></table></div>
+<p>De même, il faut configurer Varnish pour écouter sur le <strong>port 80</strong> à la place du <strong>6081</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/sysconfig/varnish&lt;/strong&gt;</span><br />
+<span style="color: #007800;">VARNISH_LISTEN_PORT</span>=<span style="color: #000000;">80</span></div></td></tr></tbody></table></div>
+<p>Ensuite, on va vérifier que l&#8217;on peut lancer Varnish en chargeant le plugin GeoIP.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/varnish/default.vcl</span><br />
+<span style="color: #666666; font-style: italic;">#Top of file.</span><br />
+import geoip;</div></td></tr></tbody></table></div>
+<p>On va lancer le processus en debug pour voir si tout se passe bien :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">varnishd <span style="color: #660033;">-d</span> <span style="color: #660033;">-f</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>varnish<span style="color: #000000; font-weight: bold;">/</span>default.vcl<br />
+start</div></td></tr></tbody></table></div>
+<p>Si vous n&#8217;avez pas d&#8217;erreur, c&#8217;est une bonne chose. Sinon, vérifier les étapes ci-dessus.</p>
+<p>On va donc pouvoir inclure le pays de l&#8217;utilisateur dans le Header HTTP en suivant l&#8217;exemple de l&#8217;auteur du VMOD</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #339933;">#/etc/varnish/default.vcl</span><br />
+import geoip<span style="color: #339933;">;</span><br />
+<br />
+sub vcl_recv <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP <span style="color: #339933;">=</span> geoip.<span style="color: #202020;">country</span><span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For<span style="color: #009900;">&#41;</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>Maintenant on va pouvoir mettre Varnish en démarrage automatique.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">chkconfig varnish on<br />
+service varnish start</div></td></tr></tbody></table></div>
+<p><strong>Attention:</strong><br />
+Sachant que vous êtes sous CentOS, SELinux est surement activé et bloquera l&#8217;access au fichier de données <strong>/usr/share/GeoIP/GeoIP.dat</strong>. Vous pouvez le désactiver ou aller voir à la fin de l&#8217;article comment le configurer aux petits oignons.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">setenforce <span style="color: #000000;">0</span></div></td></tr></tbody></table></div>
+<p>Et pour finir, un peu de ménage.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-Rf</span> varnish-<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-Rf</span> leed25d-<span style="color: #000000; font-weight: bold;">*</span><br />
+<span style="color: #c20cb9; font-weight: bold;">yum remove</span> pcre-devel <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">unzip</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> autoinstall geoip-devel</div></td></tr></tbody></table></div>
+<h3>Pour aller plus loin</h3>
+<p>Avec la configuration ci-dessus,<br />
+Si un client de France se connecte directement à Varnish, lorsqu&#8217;une requête sera générée pour atteindre vos backends elle contiendra : <strong>X-GeoIP: FR</strong></p>
+<p>Vous pourrez donc récupérer le pays de l&#8217;utilisateur en analysant le contenu de la requête HTTP.<br />
+Il est à noter que GeoIP retourne le code pays &#8220;<strong>AA</strong>&#8221; lorsqu&#8217;il ne parvient pas à faire la détection.</p>
+<p>Voici comment vous pouvez exploiter le contenu du header en PHP :</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000088;">$headers</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/apache_request_headers"><span style="color: #990000;">apache_request_headers</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$headers</span> <span style="color: #339933;">&amp;&amp;</span> <a href="http://www.php.net/is_array"><span style="color: #990000;">is_array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$headers</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <a href="http://www.php.net/array_key_exists"><span style="color: #990000;">array_key_exists</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;X-GeoIP&quot;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$headers</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$headers</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">&quot;X-GeoIP&quot;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><br />
+<br />
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">==</span> <span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">||</span> <span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;AA&quot;</span> <span style="color: #339933;">==</span> <span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getDefaultCountry</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><br />
+<br />
+<span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/strtoupper"><span style="color: #990000;">strtoupper</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Retournons du coté de Varnish.<br />
+Comment les choses vont se passer si vous ajoutez un <strong>Proxy en amont de Varnish</strong>. Par exemple, <a href="http://www.apsis.ch/pound">Pound</a> pour gérer le protocole HTTPS.</p>
+<p>La detection du pays ne fonctionnera plus normalement car la valeur contenu dans le script VCL &#8216;<strong>client.ip</strong>&#8216; correspondra à l&#8217;IP de votre serveur Pound.</p>
+<p>Nous allons donc devoir travailler avec un autre Header HTTP: <a href="http://en.wikipedia.org/wiki/X-Forwarded-For">X-Forwarded-For</a>. Celui-ci permet de conserver l&#8217;historique des différents point de passage d&#8217;une requête HTTP et contient l&#8217;IP du client qui a initié la connection HTTP.</p>
+<p>Lorsque les différents Proxy implementent correctement ce standard, le champs <strong>X-Forwarded-For</strong> contient l&#8217;IP du client, le proxy A, le proxy B, etc.. le tout séparé avec des virgules.</p>
+<p>Voici comment en tenir compte au sein de votre configuration VCL :</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sub vcl_recv <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">restarts</span> <span style="color: #339933;">==</span> <span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">x</span><span style="color: #339933;">-</span>forwarded<span style="color: #339933;">-</span><span style="color: #b1b100;">for</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">+</span> <span style="color: #ff0000;">&quot;, &quot;</span> <span style="color: #339933;">+</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+<br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP <span style="color: #339933;">=</span> geoip.<span style="color: #202020;">country</span><span style="color: #009900;">&#40;</span>regsub <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For<span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;(,.*)&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>Maintenant parlons un peu du <strong>système de cache de Varnish</strong>.<br />
+Si vous avez besoin de connaitre le pays de l&#8217;utilisateur, il y a donc fort à parier que le contenu retourné à l&#8217;utilisateur sera different en fonction de son Pays.</p>
+<p>En résumé, pour une URL : <strong>/mon-url</strong>, en fonction du Pays utilisateur le contenu sera different.<br />
+Si on conserve la spécification par défaut de Varnish qui consiste à mettre en cache les données provenant d&#8217;une même URL, vous allez avoir quelques mauvaises surprises.</p>
+<p>Voici comment tenir compte du pays de l&#8217;utilisateur pour gérer les données qui sont mises en cache.</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sub vcl_hash <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; hash_data<span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">url</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; hash_data<span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span>hash<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<h3>SELinux</h3>
+<p>Sous Centos, il y a SELinux.<br />
+Si vous n&#8217;êtes pas un expert en <strong>sécurité Linux</strong>. Voici comment faire fonctionner <strong>Varnish &amp; GeoIP</strong> sans désactiver SELinux.<br />
+Le processus Varnish fait parti d&#8217;un contexte SELinux different du fichier GetIP.dat qui est installé avec GeoIP.<br />
+Du coup, nous allons faire un module pour SELinux afin d&#8217;autoriser varnish_t à lire les contextes de type usr_t.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">mkdir</span> ~<span style="color: #000000; font-weight: bold;">/</span>myvarnish; <span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>myvarnish;<br />
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;policy_module(myvarnish, 1.0.0) optional_policy(<span style="color: #780078;">` gen_require(`</span> type varnishd_t; ') files_read_usr_files(varnishd_t) ')&quot;</span> <span style="color: #000000; font-weight: bold;">&gt;</span> myvarnish.te<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #660033;">-f</span> <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>share<span style="color: #000000; font-weight: bold;">/</span>selinux<span style="color: #000000; font-weight: bold;">/</span>devel<span style="color: #000000; font-weight: bold;">/</span>Makefile myvarnish.pp<br />
+semodule <span style="color: #660033;">-i</span> myvarnish.pp</div></td></tr></tbody></table></div>
+<p>Pour le coup, cette partie provient d&#8217;une discussion avec une personne sur #SELinux on <em>freenode</em>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-6-varnish-geoip/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Doctrine 2 &amp; i18n</title>
+		<link>http://www.armetiz.info/doctrine-2-internationalization/</link>
+		<comments>http://www.armetiz.info/doctrine-2-internationalization/#comments</comments>
+		<pubDate>Fri, 14 Oct 2011 08:57:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Doctrine]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[i18n]]></category>
+		<category><![CDATA[Information]]></category>
+		<category><![CDATA[Internationalisation]]></category>
+		<category><![CDATA[Langue]]></category>
+		<category><![CDATA[Monde]]></category>
+		<category><![CDATA[Système]]></category>
+		<category><![CDATA[Traduction]]></category>
+		<category><![CDATA[Translation]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2154</guid>
+		<description><![CDATA[Doctrine 2 est dépourvu &#8211; en natif &#8211; de système de traduction. Grâce au système d&#8217;extension, des contributeurs dont certains membres de l&#8217;équipe de développement Doctrine ont développés Gedmo, un.. <a href="http://www.armetiz.info/doctrine-2-internationalization/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/10/dbal_icon1.png"><img src="http://www.armetiz.info/files/2011/10/dbal_icon1.png" alt="" width="75" height="75" class="alignright size-full wp-image-2162" /></a><strong>Doctrine 2</strong> est dépourvu &#8211; en natif &#8211; de système de traduction.<br />
+Grâce au système d&#8217;extension, des contributeurs dont certains membres de l&#8217;équipe de développement Doctrine ont développés <a href="https://github.com/l3pp4rd/DoctrineExtensions">Gedmo</a>, un pack d&#8217;extension pour Doctrine.</p>
+<p>Cette extension inclue :
+<ul>
+<li>Tree</li>
+<li><strong>Translatable</strong></li>
+<li>Sluggable</li>
+<li>Timestampable</li>
+<li>Loggable</li>
+<li>Sortable</li>
+</ul>
+<p>Nous nous intéresserons à <strong>Translatable</strong> qui nous permettra de traduire nos données.</p>
+<p>Travaillant avec le <strong>Framework Zend</strong>, les exemples seront orientés pour cette architecture, il est à noter que cela n&#8217;est pas un pré-requit et que cela fonctionnera avec ou sans Zend Framework.</p>
+<h3>Fonctionnement</h3>
+<p>Le module <strong>i18n</strong> de Gedmo fonctionne grâce à l&#8217;utilisation d&#8217;un table annexe contenant la traduction de certaines propriétés de vos Entités.<br />
+La table de traduction contient donc <strong>le nom du champs traduite</strong>, <strong>la langue</strong>, <strong>la valeur</strong>, <strong>le type d&#8217;objet</strong> ainsi qu&#8217;une <strong>reference vers cet objet</strong>.</p>
+<p>Par défaut, l&#8217;extension aura besoin de la table : <strong>ext_translations</strong><br />
+Les champs suivant seront ainsi necessaire :</p>
+<ul>
+<li>id</li>
+<li>content</li>
+<li>field</li>
+<li>locale</li>
+<li>foreign_key</li>
+<li>object_class</li>
+</ul>
+<p>Voici un jeu de donnée qui vous permettra de mieux comprendre l&#8217;utilisation de ce type de structure :</p>
+<blockquote>
+<ul>
+<li>content : Un día me voy a comprar el mundo</li>
+<li>field : title</li>
+<li>locale : es_es</li>
+<li>foreign_key : 3</li>
+<li>object_class : EntityArticle</li>
+</ul>
+<ul>
+<li>content : Un jour j&#8217;achèterai le monde</li>
+<li>field : title</li>
+<li>locale : fr_fr</li>
+<li>foreign_key : 3</li>
+<li>object_class : EntityArticle</li>
+</ul>
+<ul>
+<li>content : Le monde semble être à l&#8217;agonie, que pouvons nous faire pour le sauver.</li>
+<li>field : description</li>
+<li>locale : fr_fr</li>
+<li>foreign_key : 3</li>
+<li>object_class : EntityArticle</li>
+</ul>
+</blockquote>
+<p>A noter, que les données relatives à la langue par défaut de votre application sont stockés au sein de la table gerant directement votre entité.<br />
+Par défaut, nous utilisons la langue &#8220;<strong>en_US</strong>&#8220;, ce qui signifie que la table <strong>ext_translations</strong> ne contiendra pas de traduction pour &#8220;en_US&#8221;.<br />
+Dans mon exemple, ces données seront stockés dans la table &#8220;<strong>articles</strong>&#8221; de l&#8217;entité <strong>EntityArticle</strong></p>
+<p>Ainsi, l&#8217;extension stockera l&#8217;ensemble des traductions de votre application au sein d&#8217;une même table.<br />
+Attention, le champs &#8220;<strong>forien_key</strong>&#8221; ne correspond pas à une clé étrangère pour votre base de donnée relationnelle.<br />
+Une des possibilités de l&#8217;extension consiste à pouvoir définir une table spécifique à la traduction d&#8217;une Entités, ainsi vous pourrez définir une vrai <strong>clé étrangère</strong> au sein de votre <strong>RDBMS</strong>.</p>
+<h3>Exploitation</h3>
+<p>Au niveau de l&#8217;exploitation des données,<br />
+Vous définirez la langue utilisée au sein de votre application lors de l&#8217;execution, cela correspondra normalement à la langue de l&#8217;utilisateur.<br />
+Il ne restera plus qu&#8217;a utiliser votre application comme vous en avez l&#8217;habitude.</p>
+<p>Nous partons du principe que votre environnement Doctrine est correctement configuré et fonctionnel.</p>
+<p>Voici la configuration minimum a définir :</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000088;">$classLoader</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineCommonClassLoader<span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">'Gedmo'</span><span style="color: #339933;">,</span> APPLICATION_PATH <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/../library/'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$classLoader</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">register</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$config</span> &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineORMConfiguration<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$driverChain</span>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineORMMappingDriverDriverChain<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$entityDriver</span> &nbsp; &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineORMMappingDriverXmlDriver <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$translatableDriver</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$config</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">newDefaultAnnotationDriver</span><span style="color: #009900;">&#40;</span> APPLICATION_PATH <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/../library/DoctrineExtensions/Gedmo/Translatable/Entity'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$driverChain</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addDriver</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$entityDriver</span><span style="color: #339933;">,</span> &nbsp; &nbsp; <span style="color: #0000ff;">'EntityArticle'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$driverChain</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addDriver</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$translatableDriver</span><span style="color: #339933;">,</span> &nbsp; <span style="color: #0000ff;">'GedmoTranslatable'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$config</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setMetadataDriverImpl</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$driverChain</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$eventManager</span> &nbsp; &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineCommonEventManager<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$translatableListener</span> &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> GedmoTranslatableTranslationListener<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+<span style="color: #000088;">$translatableListener</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setTranslationFallback</span><span style="color: #009900;">&#40;</span> <span style="color: #009900; font-weight: bold;">true</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$eventManager</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addEventSubscriber</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$translatableListener</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$entityManager</span> <span style="color: #339933;">=</span> DoctrineORMEntityManager<span style="color: #339933;">::</span><span style="color: #004000;">create</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$conn</span><span style="color: #339933;">,</span> <span style="color: #000088;">$config</span><span style="color: #339933;">,</span> <span style="color: #000088;">$eventManager</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Ensuite, il faut configurer vos entités.<br />
+J&#8217;utilise le XML Mapping, vous trouverez facilement l&#8217;équivalence pour YAML / Annotation.</p>
+<div class="codecolorer-container xml blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="xml codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Nous avons simplement ajouté le noeud XML <strong>gedmo:translatable</strong> à notre champs afin de spécifier que celui-ci peut-être traduit.<br />
+A noter qu&#8217;il faut inclure l&#8217;espace de nom <strong>xmlns:gedmo</strong>.</p>
+<p>Voici un exemple d&#8217;utilisation avec Doctrine</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">//En utilisant la langue par défaut qui est l'anglais,</span><br />
+<span style="color: #000088;">$article</span> &nbsp; &nbsp;<span style="color: #339933;">=</span> <span style="color: #000088;">$entityManager</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'EntityArticle'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$article</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getTitle</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <br />
+<span style="color: #666666; font-style: italic;">//One day I'll buy the world</span><br />
+<br />
+<span style="color: #666666; font-style: italic;">//En spécifiant la langue espagnole,</span><br />
+<span style="color: #000088;">$translatableListener</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setTranslatableLocale</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;es_es&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$article</span> &nbsp; &nbsp;<span style="color: #339933;">=</span> <span style="color: #000088;">$entityManager</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'EntityArticle'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$article</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getTitle</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <br />
+<span style="color: #666666; font-style: italic;">//Un día me voy a comprar el mundo</span></div></td></tr></tbody></table></div>
+<h3>Entity de traduction</h3>
+<p>Nous avons vu précédemment que les traductions sont par défaut stockées dans la table <strong>ext_translations</strong>.<br />
+Voyons comment utiliser une table dédiée à la traduction d&#8217;une entité. Cela permettra en plus d&#8217;avoir une structure de base de donnée plus propre, et d&#8217;avoir des clés étrangère au sein de votre RDBMS.</p>
+<div class="codecolorer-container xml blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="xml codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp; &nbsp; &nbsp; &nbsp; ..</div></td></tr></tbody></table></div>
+<p>Créons la class ArticleTranslation qui n&#8217;a rien de bien extraordinaire, sauf qu&#8217;elle doit étendre AbstractTranslation qui va définir les differentes propriétés de votre table de traduction.</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000000; font-weight: bold;">namespace</span> Entity<br />
+<br />
+<span style="color: #000000; font-weight: bold;">use</span> GedmoTranslatableEntityAbstractTranslation<span style="color: #339933;">;</span><br />
+<span style="color: #000000; font-weight: bold;">use</span> DoctrineORMMapping <span style="color: #b1b100;">as</span> ORM<span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000000; font-weight: bold;">class</span> ArticleTranslation <span style="color: #000000; font-weight: bold;">extends</span> AbstractTranslation<br />
+<span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>A cela, ajoutons le fichier de mapping.</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Il ne vous reste plus qu&#8217;a créer la table article_translation avec les champs énuméré en début d&#8217;article.</p>
+<h3>Conclusion</h3>
+<p>Comparer à Doctrine 1, la mise en place de l&#8217;internationalisation pour votre application peut sembler plus difficile. Par contre, l&#8217;exploitation de cette implementation est tout simplement <strong>user-friendly</strong>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/doctrine-2-internationalization/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>Linux &#8211; Générer des fichiers binaires</title>
+		<link>http://www.armetiz.info/linux-generer-des-fichiers-binaires/</link>
+		<comments>http://www.armetiz.info/linux-generer-des-fichiers-binaires/#comments</comments>
+		<pubDate>Mon, 11 Jul 2011 12:39:49 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Administration]]></category>
+		<category><![CDATA[Création]]></category>
+		<category><![CDATA[Debug]]></category>
+		<category><![CDATA[Diagnostic]]></category>
+		<category><![CDATA[Fichier]]></category>
+		<category><![CDATA[Monitoring]]></category>
+		<category><![CDATA[Système]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2111</guid>
+		<description><![CDATA[Dans la série des articles post-it, voici comment créer des fichiers binaires de tailles spécifiques. Un fichier de 100MBytes. 1dd if=/dev/zero of=100MB bs=100M count=1 Un fichier de 500MBytes. 1dd if=/dev/zero.. <a href="http://www.armetiz.info/linux-generer-des-fichiers-binaires/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Dans la série des articles post-it, voici comment créer des fichiers binaires de tailles spécifiques.</p>
+<p>Un fichier de <strong>100MBytes</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">dd if=/dev/zero of=100MB bs=100M count=1</div></td></tr></tbody></table></div>
+<p>Un fichier de <strong>500MBytes</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">dd if=/dev/zero of=500MB bs=500M count=1</div></td></tr></tbody></table></div>
+<p>Un fichier de <strong>1GBytes</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">dd if=/dev/zero of=1GB bs=1G count=1</div></td></tr></tbody></table></div>
+<p>Et j&#8217;ai envie de dire, ainsi de suite&#8230;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/linux-generer-des-fichiers-binaires/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Faire un &#8220;svn revert&#8221; sur l&#8217;ensemble de vos fichiers</title>
+		<link>http://www.armetiz.info/svn-revert-working-copy/</link>
+		<comments>http://www.armetiz.info/svn-revert-working-copy/#comments</comments>
+		<pubDate>Thu, 07 Jul 2011 09:49:26 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[awk]]></category>
+		<category><![CDATA[Commande]]></category>
+		<category><![CDATA[Revert]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[SVN]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2106</guid>
+		<description><![CDATA[Petit article mémo, J&#8217;avais besoin de faire un revert sur l&#8217;ensemble des mes fichiers locaux. Or, &#8220;svn revert *&#8221; ne fonctionne pas. Voici la petite commande magique 1svn st &#124;.. <a href="http://www.armetiz.info/svn-revert-working-copy/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Petit article mémo,<br />
+J&#8217;avais besoin de faire un revert sur l&#8217;ensemble des mes fichiers locaux. Or, &#8220;svn revert *&#8221; ne fonctionne pas.</p>
+<p>Voici la petite commande magique</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">svn st | grep -e '^M' | awk '{print $2}' | xargs svn revert</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/svn-revert-working-copy/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Système d&#8217;exploitation Google: Chrome OS</title>
+		<link>http://www.armetiz.info/systeme-dexploitation-google-chrome-os/</link>
+		<comments>http://www.armetiz.info/systeme-dexploitation-google-chrome-os/#comments</comments>
+		<pubDate>Wed, 08 Jul 2009 12:35:17 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[OS]]></category>
+		<category><![CDATA[Seven]]></category>
+		<category><![CDATA[Windows]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1158</guid>
+		<description><![CDATA[Depuis ce matin cela fait le tour de la toile, Google va sortir son système d&#8217;exploitation. On s&#8217;y attendait fortement, mais jusqu&#8217;à ce matin nous n&#8217;avions aucune confirmation de Google... <a href="http://www.armetiz.info/systeme-dexploitation-google-chrome-os/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Depuis ce matin cela fait le tour de la toile, <strong>Google va sortir son système d&#8217;exploitation</strong>.</p>
+<p>On s&#8217;y attendait fortement, mais jusqu&#8217;à ce matin nous n&#8217;avions aucune confirmation de Google.<br />
+En effet, il existe déjà un système d&#8217;exploitation made in Google: <strong>Android</strong> pour les unités mobiles. </p>
+<p>Si vous voulez plus d&#8217;information: <a href="http://googleblog.blogspot.com/2009/07/introducing-google-chrome-os.html">Blog Google</a>, <a href="http://fr.techcrunch.com/2009/07/08/google-lache-une-bombe-atomique-sur-microsoft-chrome-os/">Techcrunch</a>, <a href="http://www.clubic.com/actualite-286930-chrome-os-google-systeme-exploitation.html">Clubic</a>, &#8230;<br />
+A la suite de ces lectures, on en retiendra que le système sera basé sur Linux, pensé avant tout pour fonctionner sur des Notebook, sera supporté par des processeurs x86 / <a href="http://fr.wikipedia.org/wiki/Processeur_ARM">ARM</a>  et disponible milieu de l&#8217;année 2010 (ce qui arrivera assez vite).</p>
+<p>Maintenant, quelles en sont les retombées:<br />
+&#8211; Google est le centre d&#8217;internet pour une très grande majorité des Internautes du monde. Comparé a Microsoft, Apple et d&#8217;autres distributions Linux, Google dispose d&#8217;un support publicitaire gigantesque. Sachant que Windows 7 doit sortir aussi milieu 2010, je vous laisse imaginer le combat qu&#8217;il y aura dans nos magasins.<br />
+&#8211; Pour les aficionados de Linux, ce n&#8217;est pas une mauvaise chose car cela permettra de valoriser un peu plus le monde Libre.<br />
+&#8211; Déjà que Google <a href="http://www.armetiz.info/google-a-tue-bambi/">tue des Bambis</a>, sait <a href="http://www.armetiz.info/google-sait-qui-est-malade/">qui est malade</a>, connait nos <a href="https://www.google.com/health">problèmes médicaux</a>, et qu&#8217;il est présent partout autours de nous, il sera aussi <strong>le support de nos données</strong>.<br />
+Le monopole Google est de plus en plus proche !</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/systeme-dexploitation-google-chrome-os/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>L&#8217;arrêt du système interrompu : la faute à Msn</title>
+		<link>http://www.armetiz.info/arret-system-interrompu/</link>
+		<comments>http://www.armetiz.info/arret-system-interrompu/#comments</comments>
+		<pubDate>Tue, 06 Jan 2009 07:59:04 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Windows]]></category>
+		<category><![CDATA[Faille]]></category>
+		<category><![CDATA[Système]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=646</guid>
+		<description><![CDATA[Ce matin en arrivant sur mon lieu de travail, je pensais allumer mon Pc, mais non, il était déjà allumé. On appuie sur un touche pour sortir de la mise.. <a href="http://www.armetiz.info/arret-system-interrompu/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Ce matin en arrivant sur mon lieu de travail, je pensais allumer mon Pc, mais non, il était déjà allumé.<br />
+<img alt="" src="http://img240.imageshack.us/img240/7494/sanstitrebs3.png" class="alignright" width="141" height="100" /><br />
+On appuie sur un touche pour sortir de la mise en veille, et l&#8217;ordinateur que l&#8217;on pensait avoir éteint la veille est resté allumé toute la nuit, <em>session ouverte</em>.</p>
+<p>La faute à quoi ? A un programme qui n&#8217;a pas réussi à se tuer correctement&#8230;</p>
+<p>Que <strong>j&#8217;aime Windows</strong> de bon matin.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/arret-system-interrompu/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/15 queries in 0.033 seconds using apc
+Object Caching 2013/2018 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:13:46 by W3 Total Cache -->

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; WAMP</title>
+	<atom:link href="http://www.armetiz.info/tag/wamp/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Installer PHPDocumentor avec WAMP</title>
+		<link>http://www.armetiz.info/installation-phpdocumentor-avec-wamp/</link>
+		<comments>http://www.armetiz.info/installation-phpdocumentor-avec-wamp/#comments</comments>
+		<pubDate>Tue, 19 Jan 2010 14:53:42 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Formation]]></category>
+		<category><![CDATA[Installation]]></category>
+		<category><![CDATA[PEAR]]></category>
+		<category><![CDATA[Tutoriel]]></category>
+		<category><![CDATA[WAMP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1587</guid>
+		<description><![CDATA[Wikipédia : phpDocumentor est un outil de documentation écrit en PHP. Il est semblable à l&#8217;outil de javadoc. Il est sous licence LGPL. Il permet d&#8217;aider les développeurs à la.. <a href="http://www.armetiz.info/installation-phpdocumentor-avec-wamp/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img alt="Logo php" src="http://www.mariosamson.com/wp-content/uploads/2009/11/php-logo.jpg" class="alignleft" width="150" height="150" /><a href="http://fr.wikipedia.org/wiki/Phpdocumentor">Wikipédia</a> : phpDocumentor est un outil de documentation écrit en PHP. Il est semblable à l&#8217;outil de <strong>javadoc</strong>. Il est sous licence LGPL. Il permet d&#8217;aider les développeurs à la <strong>documentation</strong> de leur code. Il analyse les commentaires de leurs codes.</p>
+<p>Pour pouvoir s&#8217;en servir, il faut installer PEAR avant tout.<br />
+J&#8217;utilise <strong>WAMP 2.0i</strong> avec <strong>PHP 5.3</strong> et <strong>Apache 2.2</strong>.</p>
+<h3>Installation PEAR avec WAMP</h3>
+<p>Utiliser l&#8217;invite de commande et exécuter go-pear.bat du répertoire d&#8217;installation de WAMP.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">cd C:wampbinphpphp5.3.0<br />
+go-pear.bat</div></td></tr></tbody></table></div>
+<p>Si comme moi vous avez un jolie Warning, pas de panique, on va faire autrement</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">cd C:wampbinphpphp5.3.0<br />
+php.exe -d phar.require_hash=0 PEARgo-pear.phar</div></td></tr></tbody></table></div>
+<p>Ensuite, suivez le tutoriel de <a href="http://www.6ma.fr/tuto/installer+pear+avec+wamp-455">6ma.fr</a> à la lettre et tout se passera bien.</p>
+<h3>Installer phpDocumentor avec PEAR</h3>
+<p>PEAR est un <strong>gestionnaire de librairie</strong>, c&#8217;est lui qui va se charger de l&#8217;installation de <strong>PHPDocumentor</strong><br />
+Pour cela, exécuter les commandes suivantes</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">cd C:wampbinphpphp5.3.0<br />
+php PEAR/pearcmd.php install phpdocumentor</div></td></tr></tbody></table></div>
+<p>Pour utiliser ce petit outil, je vous laissez avec la documentation officiel de <a href="http://www.phpdoc.org/">PHPDocumentor</a> ainsi qu&#8217;un tutoriel pour son <a href="http://blog.bsoftco.com/2009/04/24/tutoriel-sur-comment-generer-une-phpdoc-avec-eclipse/">utilisation avec Eclipse</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/installation-phpdocumentor-avec-wamp/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>EasyPHP is not dead</title>
+		<link>http://www.armetiz.info/easyphp-is-not-dead/</link>
+		<comments>http://www.armetiz.info/easyphp-is-not-dead/#comments</comments>
+		<pubDate>Wed, 21 Jan 2009 12:25:57 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Windows]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[EasyPHP]]></category>
+		<category><![CDATA[LAMP]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[WAMP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=706</guid>
+		<description><![CDATA[EasyPHP n'est pas mort, une nouvelle version a vu le jours le 9 Janvier 2009.
+Venez découvrir le logiciel qui fut le premier serveur PHP sous Windows.]]></description>
+				<content:encoded><![CDATA[<p>Depuis le 9 Janvier, <a href="http://www.easyphp.org" target="_blank">EasyPHP</a> est disponible en version 3.<br />
+Cela faisait très longtemps que l&#8217;équipe avait laissée le développement à la dérive, et nous étions bloqué sur une <a href="http://sourceforge.net/project/showfiles.php?group_id=14045&amp;package_id=103438">version 2.0beta</a>.</p>
+<p><a href="http://www.easyphp.org" target="_blank"><img src="http://www.armetiz.info/wp-content/uploads/2009/01/top_title.gif" alt="EasyPHP " width="226" height="40" class="size-full aligncenter" /></a></p>
+<p>Les informations sur cette nouvelle version sont inexistantes, on peut penser qu&#8217;il s&#8217;agit surtout d&#8217;un <strong>nouveau package</strong> de version.</p>
+<ul>
+<li><strong>Apache</strong> : 2.2.1</li>
+<li><strong>PHP</strong> : 5.2.8</li>
+<li><strong>MySQL</strong> : 5.1.30</li>
+<li>PhpMyAdmin : 3.1.1</li>
+<li>SQLiteManager : 1.2.0</li>
+</ul>
+<p><a href="http://www.easyphp.org" target="_blank">EasyPHP</a> n&#8217;étant plus maintenu à jours, beaucoup d&#8217;utilisateur sont passés à <a href="http://www.wampserver.com" target="_blank">Wamp</a> qui était et est toujours régulièrement mis à jours.</p>
+<p>Étant un ancien aficionados EasyPHP, je suis bien contant de le savoir à nouveau dans la course.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/easyphp-is-not-dead/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.010 seconds using apc
+Object Caching 463/464 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:22 by W3 Total Cache -->

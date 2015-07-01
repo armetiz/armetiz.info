@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Compilation</title>
+	<atom:link href="http://www.armetiz.info/tag/compilation/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Install NodeJS on CentOS</title>
+		<link>http://www.armetiz.info/install-nodejs-on-centos/</link>
+		<comments>http://www.armetiz.info/install-nodejs-on-centos/#comments</comments>
+		<pubDate>Fri, 27 Jul 2012 09:58:22 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[English]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Real-Time]]></category>
+		<category><![CDATA[Server]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=2594</guid>
+		<description><![CDATA[NodeJS isn&#8217;t available neither on centos base repositories nor on EPEL. To install NodeJS, you can do it from a specific repository or you can compile it. From repository To.. <a href="http://www.armetiz.info/install-nodejs-on-centos/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://nodejs.org/">NodeJS</a> isn&#8217;t available neither on centos <a href="http://wiki.centos.org/AdditionalResources/Repositories/">base repositories</a> nor on <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a>.<br />
+To install NodeJS, you can do it from a <a href="http://nodejs.tchol.org/">specific repository</a> or you can compile it.</p>
+<h3>From repository</h3>
+<p>To install NodeJS from repository on a RHEL based distribution, including our CentOS, just do :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;nodejs.rpm&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>nodejs.tchol.org<span style="color: #000000; font-weight: bold;">/</span>repocfg<span style="color: #000000; font-weight: bold;">/</span>el<span style="color: #000000; font-weight: bold;">/</span>nodejs-stable-release.noarch.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum localinstall</span> <span style="color: #660033;">--nogpgcheck</span> nodejs.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum install</span> nodejs-compat-symlinks npm<br />
+<span style="color: #c20cb9; font-weight: bold;">rm</span> nodejs.rpm</div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-v</span><br />
+<span style="color: #666666; font-style: italic;">#v0.6.18</span></div></td></tr></tbody></table></div>
+<h3>From source</h3>
+<p>To compile NodeJS from source on your CentOS, you have to install <strong>missing dependancies</strong> : <strong>gcc-c++, python and libssl-dev</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> gcc-c++ python libssl-dev<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;node.tar.gz&quot;</span> <span style="color: #ff0000;">&quot;http://nodejs.org/dist/node-latest.tar.gz&quot;</span><br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> node.tar.gz <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> node-v<span style="color: #000000; font-weight: bold;">*</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-v</span><br />
+<span style="color: #666666; font-style: italic;">#v0.8.4</span></div></td></tr></tbody></table></div>
+<h3>Play with a simple &#8220;Hello world&#8221;</h3>
+<p>Just launch node in <strong>interactive mode</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-i</span></div></td></tr></tbody></table></div>
+<p>Type a Javascript command.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #339933;">&gt;</span> console.<span style="color: #660066;">log</span> <span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Hello World&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+Hello world<br />
+undefined<br />
+<span style="color: #339933;">&gt;</span></div></td></tr></tbody></table></div>
+<h3>About version</h3>
+<p>As you can see, the repository provides an old version of NodeJS (0.6.14) compared to the latest released (0.8.4).</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/install-nodejs-on-centos/feed/</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		</item>
+		<item>
+		<title>CentOS – Installer le module h264 streaming pour Lighttpd</title>
+		<link>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/</link>
+		<comments>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/#comments</comments>
+		<pubDate>Tue, 12 Jun 2012 10:20:48 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[h264]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Installation]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Lighttpd]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Streaming]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2505</guid>
+		<description><![CDATA[Nous allons commencer avec l&#8217;installation de lighttpd. Personnellement, j&#8217;utilise les repository EPEL pour le faire. 1yum install lighttpd Installation des outils et des headers. 1yum install automake autoconf libtool bzip2-devel.. <a href="http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Nous allons commencer avec l&#8217;installation de lighttpd. Personnellement, j&#8217;utilise les repository EPEL pour le faire.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> lighttpd</div></td></tr></tbody></table></div>
+<p>Installation des outils et des headers.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> <span style="color: #c20cb9; font-weight: bold;">autoconf</span> libtool bzip2-devel zlib-devel <span style="color: #c20cb9; font-weight: bold;">gcc</span> <span style="color: #c20cb9; font-weight: bold;">make</span> pcre-devel</div></td></tr></tbody></table></div>
+<p><strong>Note</strong>: Avant de commencer, il est à noter que le lien donné par <a href="http://h264.code-shop.com/trac/wiki/Mod-H264-Streaming-Lighttpd-Version2">code-shop</a> pour la compilation du module h264 avec Lighttpd 1.4.x ne contient pas les fichiers nécessaires à la compilation du module.<br />
+Voici donc la version que j&#8217;avais utilisé pour la compilation sous <a href="http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/">Debian avec Lighttpd 1.4.19</a>. Cela fonctionne parfaitement sous <strong>CentOS6</strong> avec <strong>Lighttpd 1.4.28</strong>. </p>
+<p>Download de <a href="http://armetiz.info/wp-content/uploads/2012/06/lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar1.gz">lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz</a></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>armetiz.info<span style="color: #000000; font-weight: bold;">/</span>wp-content<span style="color: #000000; font-weight: bold;">/</span>uploads<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">2012</span><span style="color: #000000; font-weight: bold;">/</span>06<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar1.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz</div></td></tr></tbody></table></div>
+<p>Ensuite, nous allons telecharger les sources correspondant à la version précedement installé de Lighttpd.<br />
+Actuellement, sous CentOS 6 avec EPEL, il s&#8217;agit de Lighttp 1.4.28</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;lighttpd-1.4.28.tar.gz&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>download.lighttpd.net<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span>releases-<span style="color: #000000;">1.4</span>.x<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> lighttpd-1.4.28.tar.gz</div></td></tr></tbody></table></div>
+<p>Copie des modules h264 dans les sources de la 1.4.28</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.c mod_streaming_export.h moov.<span style="color: #000000; font-weight: bold;">*</span> mp4_io.<span style="color: #000000; font-weight: bold;">*</span> mp4_process.<span style="color: #000000; font-weight: bold;">*</span> mp4_reader.<span style="color: #000000; font-weight: bold;">*</span> mp4_writer.<span style="color: #000000; font-weight: bold;">*</span> output_bucket.<span style="color: #000000; font-weight: bold;">*</span> output_mp4.<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">vim</span> Makefile.am</div></td></tr></tbody></table></div>
+<p>Vous pouvez rajouter les lignes suivantes après la définition du module <strong>mod_flv_streaming</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">lib_LTLIBRARIES += mod_h264_streaming.la<br />
+mod_h264_streaming_la_SOURCES = mod_h264_streaming.c \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mod_streaming_export.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; moov.c moov.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_io.c mp4_io.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_reader.c mp4_reader.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_writer.c mp4_writer.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_process.c mp4_process.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_bucket.c output_bucket.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_mp4.c output_mp4.h<br />
+mod_h264_streaming_la_CFLAGS = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>AM_CFLAGS<span style="color: #7a0874; font-weight: bold;">&#41;</span> -DBUILDING_H264_STREAMING<br />
+mod_h264_streaming_la_LDFLAGS = <span style="color: #660033;">-module</span> <span style="color: #660033;">-export-dynamic</span> <span style="color: #660033;">-avoid-version</span> <span style="color: #660033;">-no-undefined</span><br />
+mod_h264_streaming_la_LIBADD = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>common_libadd<span style="color: #7a0874; font-weight: bold;">&#41;</span></div></td></tr></tbody></table></div>
+<p>On va s&#8217;occuper de la compilation</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28<span style="color: #000000; font-weight: bold;">/</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>autogen.sh<br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #660033;">--prefix</span>=<span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>On va maintenant récupérer le .so que l&#8217;on vient de compiler et correspondant au module h264.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span>lib<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.so <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>lib64<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<p>Alors que les étapes spécifiques aux binaires sont terminés,<br />
+Voici la partie configuration : <strong>/etc/lighttpd/conf.d/h264.conf</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">## /etc/lighttpd/conf.d/h264.conf</span><br />
+<span style="color: #666666; font-style: italic;">#######################################################################</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## &nbsp;H264 Module </span><br />
+<span style="color: #666666; font-style: italic;">## --------------- </span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## see http://h264.code-shop.com/trac/wiki/Mod-H264-Streaming-Lighttpd-Version2</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<br />
+server.modules += <span style="color: #7a0874; font-weight: bold;">&#40;</span> <span style="color: #ff0000;">&quot;mod_h264_streaming&quot;</span> <span style="color: #7a0874; font-weight: bold;">&#41;</span><br />
+<br />
+h264-streaming.extensions = <span style="color: #7a0874; font-weight: bold;">&#40;</span> <span style="color: #ff0000;">&quot;.mp4&quot;</span> <span style="color: #7a0874; font-weight: bold;">&#41;</span><br />
+<span style="color: #666666; font-style: italic;">#######################################################################</span></div></td></tr></tbody></table></div>
+<p>Dans le fichier <strong>/etc/lighttpd/modules.conf</strong>, nous allons ajouter le chargement du fichier de configuration précédemment créé.</p>
+<p>Apres le scope concernant <strong>server.modules</strong>, nous ajoutons</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">## /etc/lighttpd/modules.conf</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## mod_h264_streaming</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+include <span style="color: #ff0000;">&quot;conf.d/h264.conf&quot;</span></div></td></tr></tbody></table></div>
+<h3>Mise à jour</h3>
+<p>Attention, lorsque vous allez mettre à jour vos paquets via &#8220;<strong>yum update</strong>&#8220;, il est fort probable d&#8217;obtenir l&#8217;erreur suivante lors du démarrage de lighttpd.</p>
+<blockquote><p>
+(plugin.c.421) plugin-version doesn&#8217;t match lighttpd-version for h264_streaming<br />
+(server.c.926) Initialization of plugins failed. Going down.
+</p></blockquote>
+<p>En gros, le <strong>module h264</strong> que vous avez compiler n&#8217;est plus valide pour la nouvelle version de <strong>lighttpd</strong> que vous avez récupéré suite à une mise à jour.</p>
+<p>Dans un premier temps, désactiver le module h264 afin de pouvoir lancer lighttpd correctement :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">## /etc/lighttpd/modules.conf</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## mod_h264_streaming</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">#include &quot;conf.d/h264.conf&quot;</span></div></td></tr></tbody></table></div>
+<p>Une fois fait, vous pouvez démarrer <strong>lighttpd</strong> tranquillement et recommencer la compilation du <strong>module h264</strong>.<br />
+Pour cela, rien de plus simple: reprenez le tutoriel à son début en prenant soin de récuperer les sources de lighttpd correspondant à la version installée.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Livre &#8211; Programming in Objective-C</title>
+		<link>http://www.armetiz.info/livre-programming-in-objective-c/</link>
+		<comments>http://www.armetiz.info/livre-programming-in-objective-c/#comments</comments>
+		<pubDate>Tue, 05 Jun 2012 06:45:35 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Livres]]></category>
+		<category><![CDATA[AppKi]]></category>
+		<category><![CDATA[Apple]]></category>
+		<category><![CDATA[Apprendre]]></category>
+		<category><![CDATA[C]]></category>
+		<category><![CDATA[Cocoa]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[Livre]]></category>
+		<category><![CDATA[Mac]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[UIKit]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2491</guid>
+		<description><![CDATA[Programming in Objective-C, Fourth Edition. Ce livre est écrit par Stephen G. Kochan et son objectif est de vous faire découvrir le développement sous Objective-C. Le Framework Cocoa n&#8217;est abordé.. <a href="http://www.armetiz.info/livre-programming-in-objective-c/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2012/06/programming_objective_c1.png"><img src="http://www.armetiz.info/files/2012/06/programming_objective_c1-233x300.png" alt="programming_objective_c" width="233" height="300" class="alignright size-medium wp-image-2495" /></a><a href="http://www.amazon.fr/Programming-Objective-C-Stephen-G-Kochan/dp/0321811909">Programming in <strong>Objective-C</strong>, Fourth Edition</a>.<br />
+Ce livre est écrit par <strong>Stephen G. Kochan</strong> et son objectif est de vous faire découvrir le développement sous <strong>Objective-C</strong>.</p>
+<p>Le <strong>Framework Cocoa</strong> n&#8217;est abordé que sur le dernier chapitre, en effet ce livre souhaite mettre l&#8217;accent sur l&#8217;utilisation d&#8217;Objective-C avant de parler de tout autre type de fonctionnalité.</p>
+<p>Ce livre me semble être une réussite et je vous le recommande si vous souhaitez vous mettre à développer pour Apple.<br />
+L&#8217;auteur n&#8217;hésite pas à aborder les notions propres au <strong>C</strong> mais uniquement si cela est nécessaire. Cela sera le cas pour les <strong>C-types</strong> ou la gestion des <strong>pointeurs</strong> et des <strong>références</strong>.</p>
+<p>Voici les chapitres présents au sein du livre :</p>
+<ul>
+<li>Introduction</li>
+<li>Programming in Objective-C</li>
+<li><strong>Classes, Objects, and Methods</strong></li>
+<li>Data Type and Expressions</li>
+<li>Program Looping</li>
+<li>Making Decisions</li>
+<li>More on Classes</li>
+<li><strong>Inheritance</strong></li>
+<li><strong>Polymorphism, Dynamic Typing, and Dynamic Binding</strong></li>
+<li>More on Variables and Data Types</li>
+<li><strong>Categories and Protocols</strong></li>
+<li>The Preprocessor</li>
+<li><strong>Underlying C Language Features</strong></li>
+<li>Introduction to the Foundation Framework</li>
+<li>Numbers, Strings, and Collections</li>
+<li>Working with Files</li>
+<li><strong>Memory Management and Automatic Reference Counting</strong></li>
+<li>Copying Objectis</li>
+<li>Archiving</li>
+<li>Introduction to Cocoa and Cocoa Touch</li>
+<li>Writing iOS Applications</li>
+<li>Glossary</li>
+<li>Address Book Example Source Code</li>
+</ul>
+<p>A mon avis, l&#8217;ouvrage est bien fait et l&#8217;auteur ne demande aucun pré-requis au niveau développement.<br />
+Ce livre s&#8217;adresse donc aussi aux personnes n&#8217;ayant jamais programmés. Mais d&#8217;apres moi, si vous n&#8217;avez jamais développé il va falloir vous accrochez assez fort pour finir le livre en ayant compris l&#8217;essentiel.<br />
+Cela a aussi un double effet kiss-cool, pour les <strong>développeurs hardeur</strong>, ne vous attendez pas à comprendre le fonctionnement interne d&#8217;Objective-C. </p>
+<p><strong>PS</strong> : En tant que <a href="http://www.tourlourat.com/cv/english.html">développeur PHP, AS3 et Java</a>, ce livre m&#8217;a donné envie de reprendre le <strong>développement en C</strong> afin de rencontrer à nouveau les problématiques d&#8217;un langage bas niveau.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/livre-programming-in-objective-c/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>CentOS 6 &#8211; Varnish &amp; MaxMind GeoIP</title>
+		<link>http://www.armetiz.info/centos-6-varnish-geoip/</link>
+		<comments>http://www.armetiz.info/centos-6-varnish-geoip/#comments</comments>
+		<pubDate>Tue, 06 Mar 2012 10:10:27 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[GeoIP]]></category>
+		<category><![CDATA[Header]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[HTTPS]]></category>
+		<category><![CDATA[Infrastructure]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[MaxMind]]></category>
+		<category><![CDATA[Module]]></category>
+		<category><![CDATA[Pays]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Système]]></category>
+		<category><![CDATA[Varnish]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2202</guid>
+		<description><![CDATA[Nous allons voir comment déporter le système de géo-localisation IP sur Varnish. L&#8217;objectif final est de permettre à vos backends de récupérer le Pays de l&#8217;utilisateur au sein de la.. <a href="http://www.armetiz.info/centos-6-varnish-geoip/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/12/centos1.png"><img src="http://www.armetiz.info/files/2011/12/centos1.png" alt="centos" width="128" height="128" class="alignright size-full wp-image-2188" /></a>Nous allons voir comment déporter le système de <strong>géo-localisation IP</strong> sur Varnish.<br />
+L&#8217;objectif final est de permettre à vos backends de récupérer le Pays de l&#8217;utilisateur au sein de la requête HTTP.</p>
+<p>Par défault, Varnish n&#8217;intègre pas de système de géo-localisation par IP, en revanche il existe quelques plugins qui permettent l&#8217;utilisation de <a href="http://www.maxmind.com/app/c">GeoIP de MaxMind</a>.</p>
+<p>Voici les parties de l&#8217;article :</p>
+<ul>
+<li>Installation de Varnish</li>
+<li>Installation de GeoIP pour Varnish</li>
+<li>Configuration du Varnish Module</li>
+<li>Configuration de SELinux</li>
+</ul>
+<p>A noter que nous avons opter pour le <a href="https://www.varnish-cache.org/docs/3.0/reference/vmod.html">VMOD</a> <a href="https://github.com/leed25d/geoip-vmod">Geoip-vmod par leed25d</a>. Contrairement aux autres plugins, celui-ci ne travail pas le header HTTP de manière autonome. Ce sera à vous de le faire, et grâce à cela vous allez pouvoir choisir comment&#8230;</p>
+<h3>Varnish</h3>
+<p>Pour compiler le VMOD, il vous faudra récupérer les sources de Varnish et les compiler même si vous choisissez l&#8217;installation par YUM.<br />
+De mon coté, je n&#8217;utilise pas en production la version que je compile mais la version provenant du dépot <a href="https://www.varnish-cache.org/">varnish-cache.org</a>. A vous de voir.</p>
+<p>Commençons par l&#8217;installation de Varnish via YUM (cf. <a href="https://www.varnish-cache.org/installation/redhat">Doc officielle</a>):</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">rpm <span style="color: #660033;">--nosignature</span> <span style="color: #660033;">-i</span> http:<span style="color: #000000; font-weight: bold;">//</span>repo.varnish-cache.org<span style="color: #000000; font-weight: bold;">/</span>redhat<span style="color: #000000; font-weight: bold;">/</span>varnish-<span style="color: #000000;">3.0</span><span style="color: #000000; font-weight: bold;">/</span>el5<span style="color: #000000; font-weight: bold;">/</span>noarch<span style="color: #000000; font-weight: bold;">/</span>varnish-release-<span style="color: #000000;">3.0</span>-<span style="color: #000000;">1</span>.noarch.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum install</span> varnish</div></td></tr></tbody></table></div>
+<p>Pour compiler Varnish nous allons avoir besoin de quelques outils et des sources.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> pcre-devel <span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> curl <span style="color: #660033;">-o</span> varnish-source.tar.gz http:<span style="color: #000000; font-weight: bold;">//</span>repo.varnish-cache.org<span style="color: #000000; font-weight: bold;">/</span>source<span style="color: #000000; font-weight: bold;">/</span>varnish-3.0.2.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xvzf</span> varnish-source.tar.gz</div></td></tr></tbody></table></div>
+<p>On lance la compilation de Varnish.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> varnish-3.0.2<span style="color: #000000; font-weight: bold;">/</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span></div></td></tr></tbody></table></div>
+<p>Normalement, Varnish a été compilé dans votre repertoire <strong>$HOME/varnish-3.0.2/</strong>.</p>
+<h3>GeoIP VMOD</h3>
+<p>On récupère les sources sur <a href="https://github.com/leed25d/geoip-vmod">github</a>.</p>
+<p>Après l&#8217;installation de quelques outils dont GeoIP, on lance la compilation du VMOD.<br />
+Attention, pour les version 32Bits utiliser <strong>VMODDIR=/usr/lib/varnish/vmods/</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> <span style="color: #c20cb9; font-weight: bold;">unzip</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> autoinstall libtool geoip geoip-devel<br />
+<span style="color: #c20cb9; font-weight: bold;">unzip</span> leed25d-geoip-vmod-<span style="color: #7a0874; font-weight: bold;">&#91;</span>REVISION<span style="color: #7a0874; font-weight: bold;">&#93;</span>.zip<br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> leed25d-geoip-vmod-<span style="color: #7a0874; font-weight: bold;">&#91;</span>REVISION<span style="color: #7a0874; font-weight: bold;">&#93;</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>autogen.sh<br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #007800;">VARNISHSRC</span>=<span style="color: #007800;">$HOME</span><span style="color: #000000; font-weight: bold;">/</span>varnish-3.0.2<span style="color: #000000; font-weight: bold;">/</span> <span style="color: #007800;">VMODDIR</span>=<span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>lib64<span style="color: #000000; font-weight: bold;">/</span>varnish<span style="color: #000000; font-weight: bold;">/</span>vmods<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>Suite à l&#8217;installation Varnish, penser à ouvrir votre firewall.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/sysconfig/iptables</span><br />
+<span style="color: #660033;">-A</span> INPUT <span style="color: #660033;">-m</span> tcp <span style="color: #660033;">-p</span> tcp <span style="color: #660033;">--dport</span> <span style="color: #000000;">80</span> <span style="color: #660033;">-j</span> ACCEPT</div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">service iptables restart</div></td></tr></tbody></table></div>
+<p>De même, il faut configurer Varnish pour écouter sur le <strong>port 80</strong> à la place du <strong>6081</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/sysconfig/varnish&lt;/strong&gt;</span><br />
+<span style="color: #007800;">VARNISH_LISTEN_PORT</span>=<span style="color: #000000;">80</span></div></td></tr></tbody></table></div>
+<p>Ensuite, on va vérifier que l&#8217;on peut lancer Varnish en chargeant le plugin GeoIP.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/varnish/default.vcl</span><br />
+<span style="color: #666666; font-style: italic;">#Top of file.</span><br />
+import geoip;</div></td></tr></tbody></table></div>
+<p>On va lancer le processus en debug pour voir si tout se passe bien :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">varnishd <span style="color: #660033;">-d</span> <span style="color: #660033;">-f</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>varnish<span style="color: #000000; font-weight: bold;">/</span>default.vcl<br />
+start</div></td></tr></tbody></table></div>
+<p>Si vous n&#8217;avez pas d&#8217;erreur, c&#8217;est une bonne chose. Sinon, vérifier les étapes ci-dessus.</p>
+<p>On va donc pouvoir inclure le pays de l&#8217;utilisateur dans le Header HTTP en suivant l&#8217;exemple de l&#8217;auteur du VMOD</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #339933;">#/etc/varnish/default.vcl</span><br />
+import geoip<span style="color: #339933;">;</span><br />
+<br />
+sub vcl_recv <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP <span style="color: #339933;">=</span> geoip.<span style="color: #202020;">country</span><span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For<span style="color: #009900;">&#41;</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>Maintenant on va pouvoir mettre Varnish en démarrage automatique.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">chkconfig varnish on<br />
+service varnish start</div></td></tr></tbody></table></div>
+<p><strong>Attention:</strong><br />
+Sachant que vous êtes sous CentOS, SELinux est surement activé et bloquera l&#8217;access au fichier de données <strong>/usr/share/GeoIP/GeoIP.dat</strong>. Vous pouvez le désactiver ou aller voir à la fin de l&#8217;article comment le configurer aux petits oignons.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">setenforce <span style="color: #000000;">0</span></div></td></tr></tbody></table></div>
+<p>Et pour finir, un peu de ménage.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-Rf</span> varnish-<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-Rf</span> leed25d-<span style="color: #000000; font-weight: bold;">*</span><br />
+<span style="color: #c20cb9; font-weight: bold;">yum remove</span> pcre-devel <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">unzip</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> autoinstall geoip-devel</div></td></tr></tbody></table></div>
+<h3>Pour aller plus loin</h3>
+<p>Avec la configuration ci-dessus,<br />
+Si un client de France se connecte directement à Varnish, lorsqu&#8217;une requête sera générée pour atteindre vos backends elle contiendra : <strong>X-GeoIP: FR</strong></p>
+<p>Vous pourrez donc récupérer le pays de l&#8217;utilisateur en analysant le contenu de la requête HTTP.<br />
+Il est à noter que GeoIP retourne le code pays &#8220;<strong>AA</strong>&#8221; lorsqu&#8217;il ne parvient pas à faire la détection.</p>
+<p>Voici comment vous pouvez exploiter le contenu du header en PHP :</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000088;">$headers</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/apache_request_headers"><span style="color: #990000;">apache_request_headers</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$headers</span> <span style="color: #339933;">&amp;&amp;</span> <a href="http://www.php.net/is_array"><span style="color: #990000;">is_array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$headers</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <a href="http://www.php.net/array_key_exists"><span style="color: #990000;">array_key_exists</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;X-GeoIP&quot;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$headers</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$headers</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">&quot;X-GeoIP&quot;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><br />
+<br />
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">==</span> <span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">||</span> <span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;AA&quot;</span> <span style="color: #339933;">==</span> <span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getDefaultCountry</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><br />
+<br />
+<span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/strtoupper"><span style="color: #990000;">strtoupper</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Retournons du coté de Varnish.<br />
+Comment les choses vont se passer si vous ajoutez un <strong>Proxy en amont de Varnish</strong>. Par exemple, <a href="http://www.apsis.ch/pound">Pound</a> pour gérer le protocole HTTPS.</p>
+<p>La detection du pays ne fonctionnera plus normalement car la valeur contenu dans le script VCL &#8216;<strong>client.ip</strong>&#8216; correspondra à l&#8217;IP de votre serveur Pound.</p>
+<p>Nous allons donc devoir travailler avec un autre Header HTTP: <a href="http://en.wikipedia.org/wiki/X-Forwarded-For">X-Forwarded-For</a>. Celui-ci permet de conserver l&#8217;historique des différents point de passage d&#8217;une requête HTTP et contient l&#8217;IP du client qui a initié la connection HTTP.</p>
+<p>Lorsque les différents Proxy implementent correctement ce standard, le champs <strong>X-Forwarded-For</strong> contient l&#8217;IP du client, le proxy A, le proxy B, etc.. le tout séparé avec des virgules.</p>
+<p>Voici comment en tenir compte au sein de votre configuration VCL :</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sub vcl_recv <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">restarts</span> <span style="color: #339933;">==</span> <span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">x</span><span style="color: #339933;">-</span>forwarded<span style="color: #339933;">-</span><span style="color: #b1b100;">for</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">+</span> <span style="color: #ff0000;">&quot;, &quot;</span> <span style="color: #339933;">+</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+<br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP <span style="color: #339933;">=</span> geoip.<span style="color: #202020;">country</span><span style="color: #009900;">&#40;</span>regsub <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For<span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;(,.*)&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>Maintenant parlons un peu du <strong>système de cache de Varnish</strong>.<br />
+Si vous avez besoin de connaitre le pays de l&#8217;utilisateur, il y a donc fort à parier que le contenu retourné à l&#8217;utilisateur sera different en fonction de son Pays.</p>
+<p>En résumé, pour une URL : <strong>/mon-url</strong>, en fonction du Pays utilisateur le contenu sera different.<br />
+Si on conserve la spécification par défaut de Varnish qui consiste à mettre en cache les données provenant d&#8217;une même URL, vous allez avoir quelques mauvaises surprises.</p>
+<p>Voici comment tenir compte du pays de l&#8217;utilisateur pour gérer les données qui sont mises en cache.</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sub vcl_hash <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; hash_data<span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">url</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; hash_data<span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span>hash<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<h3>SELinux</h3>
+<p>Sous Centos, il y a SELinux.<br />
+Si vous n&#8217;êtes pas un expert en <strong>sécurité Linux</strong>. Voici comment faire fonctionner <strong>Varnish &amp; GeoIP</strong> sans désactiver SELinux.<br />
+Le processus Varnish fait parti d&#8217;un contexte SELinux different du fichier GetIP.dat qui est installé avec GeoIP.<br />
+Du coup, nous allons faire un module pour SELinux afin d&#8217;autoriser varnish_t à lire les contextes de type usr_t.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">mkdir</span> ~<span style="color: #000000; font-weight: bold;">/</span>myvarnish; <span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>myvarnish;<br />
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;policy_module(myvarnish, 1.0.0) optional_policy(<span style="color: #780078;">` gen_require(`</span> type varnishd_t; ') files_read_usr_files(varnishd_t) ')&quot;</span> <span style="color: #000000; font-weight: bold;">&gt;</span> myvarnish.te<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #660033;">-f</span> <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>share<span style="color: #000000; font-weight: bold;">/</span>selinux<span style="color: #000000; font-weight: bold;">/</span>devel<span style="color: #000000; font-weight: bold;">/</span>Makefile myvarnish.pp<br />
+semodule <span style="color: #660033;">-i</span> myvarnish.pp</div></td></tr></tbody></table></div>
+<p>Pour le coup, cette partie provient d&#8217;une discussion avec une personne sur #SELinux on <em>freenode</em>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-6-varnish-geoip/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>CentOS 6 &#8211; Installer APC</title>
+		<link>http://www.armetiz.info/centos-6-installer-apc/</link>
+		<comments>http://www.armetiz.info/centos-6-installer-apc/#comments</comments>
+		<pubDate>Wed, 28 Dec 2011 13:32:31 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[APC]]></category>
+		<category><![CDATA[Cache]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Optimisation]]></category>
+		<category><![CDATA[PHP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2185</guid>
+		<description><![CDATA[Apres avoir installé et configuré correctement votre environnement LAMP sous CentOS 6 vous souhaitez installer APC. Ce dont vous avez besoin avant de commencer : &#8211; PEAR, &#8211; les interfaces.. <a href="http://www.armetiz.info/centos-6-installer-apc/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/12/centos1.png"><img src="http://www.armetiz.info/files/2011/12/centos1.png" alt="centos" width="128" height="128" class="alignright size-full wp-image-2188" /></a>Apres avoir installé et configuré correctement votre environnement LAMP sous CentOS 6 vous souhaitez <strong>installer APC</strong>.</p>
+<p>Ce dont vous avez besoin avant de commencer :<br />
+&#8211; <strong>PEAR</strong>,<br />
+&#8211; les interfaces de développement de PHP, Apache &amp; PCRE,<br />
+&#8211; un <strong>compilateur C</strong> &amp; l&#8217;outil <strong>Make</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">yum install php-pear php-devel httpd-devel pcre-devel gcc make</div></td></tr></tbody></table></div>
+<p>Ensuite, on lance la compilation de l&#8217;extension APC.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">pecl install apc</div></td></tr></tbody></table></div>
+<p>Voici les questions qui vous seront posées, personnellement j&#8217;ai utilisé les valeurs par défaut.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">Enable internal debugging in APC [no] : <br />
+Enable per request file info about files used from the APC cache [no] : <br />
+Enable spin locks (EXPERIMENTAL) [no] : <br />
+Enable memory protection (EXPERIMENTAL) [no] : <br />
+Enable pthread mutexes (default) [yes] : <br />
+Enable pthread read/write locks (EXPERIMENTAL) [no] :</div></td></tr></tbody></table></div>
+<p>On active l&#8217;<strong>extension PHP</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">echo &quot;extension=apc.so&quot; &amp;gt; /etc/php.d/apc.ini</div></td></tr></tbody></table></div>
+<p>Et on redémarre Apache.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">service httpd restart</div></td></tr></tbody></table></div>
+<p>Vous pouvez vérifier que vous avez correctement installé APC via <strong>phpinfo</strong>().</p>
+<p>Aussi, n&#8217;hésiter pas à utiliser le script PHP d&#8217;administration de APC.<br />
+Ici, nous le copions dans notre répertoire HTTP.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">cp /usr/share/pear/apc.php /var/www/apc.php</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-6-installer-apc/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Actionscript &#8211; NetStream &amp; P2P</title>
+		<link>http://www.armetiz.info/actionscript-netstream-p2p/</link>
+		<comments>http://www.armetiz.info/actionscript-netstream-p2p/#comments</comments>
+		<pubDate>Fri, 17 Jun 2011 12:48:08 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[Application]]></category>
+		<category><![CDATA[Audio]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Flux]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iPad]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[Microphone]]></category>
+		<category><![CDATA[Multicast]]></category>
+		<category><![CDATA[NetStream]]></category>
+		<category><![CDATA[P2P]]></category>
+		<category><![CDATA[Peer-to-peer]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2058</guid>
+		<description><![CDATA[Ce petit programme permet d&#8217;afficher la camera d&#8217;une personne qui se connecte. Cela est fait grâce à l&#8217;utilisation d&#8217;un flux NetStream lui même utilisant une connexion P2P sans serveur. A.. <a href="http://www.armetiz.info/actionscript-netstream-p2p/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Ce petit programme permet d&#8217;afficher la camera d&#8217;une personne qui se connecte. Cela est fait grâce à l&#8217;utilisation d&#8217;un flux <strong>NetStream</strong> lui même utilisant une connexion <strong>P2P sans serveur</strong>.</p>
+<p>A noter que cela n&#8217;est absolument pas optimisé. Si vous avez des conseils à donner sur la configuration du NetStream, NetConnection, NetGroup ou encore du GroupSpecifier pour améliorer les performances, n&#8217;hésitez pas..</p>
+<div class="codecolorer-container actionscript3 blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br />50<br />51<br />52<br />53<br />54<br />55<br />56<br />57<br />58<br />59<br />60<br />61<br />62<br />63<br />64<br />65<br />66<br />67<br />68<br />69<br />70<br /></div></td><td><div class="actionscript3 codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> nc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netconnection%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netconnection.html"><span style="color: #004993;">NetConnection</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> group &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> NetGroup<span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> <span style="color: #004993;">connected</span> &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=boolean%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:boolean.html"><span style="color: #004993;">Boolean</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> sendStream&nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> listenStreams &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=object%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:object.html"><span style="color: #004993;">Object</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> groupspec &nbsp; <span style="color: #000066; font-weight: bold;">:</span> GroupSpecifier<span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> listenStream&nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> id &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=string%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:string.html"><span style="color: #004993;">String</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+<span style="color: #0033ff; font-weight: bold;">public</span> <span style="color: #339966; font-weight: bold;">function</span> WebcamP2P<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><br />
+<span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">super</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: #004993;">stage</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">align</span> &nbsp; &nbsp; &nbsp; &nbsp; = <a href="http://www.google.com/search?q=stagealign%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:stagealign.html"><span style="color: #004993;">StageAlign</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">TOP_LEFT</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <span style="color: #004993;">stage</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">scaleMode</span> &nbsp; &nbsp; = <a href="http://www.google.com/search?q=stagescalemode%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:stagescalemode.html"><span style="color: #004993;">StageScaleMode</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NO_SCALE</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; id&nbsp; = <a href="http://www.google.com/search?q=string%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:string.html"><span style="color: #004993;">String</span></a> <span style="color: #000000;">&#40;</span> <span style="color: #000000;">&#40;</span> <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=date%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:date.html"><span style="color: #004993;">Date</span></a> <span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">time</span> <span style="color: #000066; font-weight: bold;">*</span> <a href="http://www.google.com/search?q=int%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:int.html"><span style="color: #004993;">int</span></a> <span style="color: #000000;">&#40;</span> <a href="http://www.google.com/search?q=math%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:math.html"><span style="color: #004993;">Math</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">random</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000066; font-weight: bold;">*</span> <span style="color: #000000; font-weight:bold;">1000</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; nc = <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=netconnection%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netconnection.html"><span style="color: #004993;">NetConnection</span></a> <span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; nc<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">addEventListener</span><span style="color: #000000;">&#40;</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NET_STATUS</span><span style="color: #000066; font-weight: bold;">,</span> <span style="color: #004993;">netStatus</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; nc<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">connect</span><span style="color: #000000;">&#40;</span><span style="color: #990000;">&quot;rtmfp:&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #000000;">&#125;</span><br />
+<br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #339966; font-weight: bold;">function</span> <span style="color: #004993;">netStatus</span> <span style="color: #000000;">&#40;</span>event<span style="color: #000066; font-weight: bold;">:</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">:</span><span style="color: #0033ff; font-weight: bold;">void</span><br />
+<span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">switch</span><span style="color: #000000;">&#40;</span>event<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">info</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">code</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">case</span> <span style="color: #990000;">&quot;NetConnection.Connect.Success&quot;</span><span style="color: #000066; font-weight: bold;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setupGroup<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">break</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">case</span> <span style="color: #990000;">&quot;NetGroup.Connect.Success&quot;</span><span style="color: #000066; font-weight: bold;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #004993;">connected</span> = <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">break</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">case</span> <span style="color: #990000;">&quot;NetGroup.MulticastStream.PublishNotify&quot;</span><span style="color: #000066; font-weight: bold;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #004993;">trace</span> <span style="color: #000000;">&#40;</span> <span style="color: #990000;">&quot;name of the detected stream : &quot;</span> <span style="color: #000066; font-weight: bold;">+</span> event<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">info</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">name</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #6699cc; font-weight: bold;">var</span> _video&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=video%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:video.html"><span style="color: #004993;">Video</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #6699cc; font-weight: bold;">var</span> _listenStream &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _video &nbsp;= <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=video%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:video.html"><span style="color: #004993;">Video</span></a> <span style="color: #000000;">&#40;</span> <span style="color: #000000; font-weight:bold;">320</span><span style="color: #000066; font-weight: bold;">,</span> <span style="color: #000000; font-weight:bold;">240</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _listenStream &nbsp; = <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a> <span style="color: #000000;">&#40;</span> nc<span style="color: #000066; font-weight: bold;">,</span> groupspec<span style="color: #000066; font-weight: bold;">.</span>groupspecWithoutAuthorizations<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _listenStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">play</span> <span style="color: #000000;">&#40;</span> event<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">info</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">name</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _video<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">attachNetStream</span> <span style="color: #000000;">&#40;</span> _listenStream <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #004993;">addChild</span> <span style="color: #000000;">&#40;</span> _video <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">break</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <span style="color: #000000;">&#125;</span><br />
+<span style="color: #000000;">&#125;</span><br />
+<br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #339966; font-weight: bold;">function</span> setupGroup<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">:</span><span style="color: #0033ff; font-weight: bold;">void</span><br />
+<span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; groupspec = <span style="color: #0033ff; font-weight: bold;">new</span> GroupSpecifier<span style="color: #000000;">&#40;</span><span style="color: #990000;">&quot;myGroup/groupOne&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>postingEnabled &nbsp; &nbsp;= <span style="color: #0033ff; font-weight: bold;">false</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>multicastEnabled &nbsp;= <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>ipMulticastMemberUpdatesEnabled = <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>routingEnabled&nbsp; &nbsp; = <span style="color: #0033ff; font-weight: bold;">false</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>addIPMulticastAddress<span style="color: #000000;">&#40;</span><span style="color: #990000;">&quot;225.225.0.1:30303&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; group = <span style="color: #0033ff; font-weight: bold;">new</span> NetGroup<span style="color: #000000;">&#40;</span>nc<span style="color: #000066; font-weight: bold;">,</span>groupspec<span style="color: #000066; font-weight: bold;">.</span>groupspecWithoutAuthorizations<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; group<span style="color: #000066; font-weight: bold;">.</span>receiveMode &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = NetGroupReceiveMode<span style="color: #000066; font-weight: bold;">.</span>NEAREST<span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; group<span style="color: #000066; font-weight: bold;">.</span>replicationStrategy &nbsp; &nbsp; &nbsp; = NetGroupReplicationStrategy<span style="color: #000066; font-weight: bold;">.</span>RAREST_FIRST<span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; group<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">addEventListener</span><span style="color: #000000;">&#40;</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NET_STATUS</span><span style="color: #000066; font-weight: bold;">,</span><span style="color: #004993;">netStatus</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; sendStream = <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a> <span style="color: #000000;">&#40;</span>nc<span style="color: #000066; font-weight: bold;">,</span> groupspec<span style="color: #000066; font-weight: bold;">.</span>groupspecWithoutAuthorizations<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">addEventListener</span><span style="color: #000000;">&#40;</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NET_STATUS</span><span style="color: #000066; font-weight: bold;">,</span> netStreamHandler<span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span>multicastAvailabilitySendToAll &nbsp; = <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">attachAudio</span> <span style="color: #000000;">&#40;</span> <a href="http://www.google.com/search?q=microphone%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:microphone.html"><span style="color: #004993;">Microphone</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">getMicrophone</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">attachCamera</span> <span style="color: #000000;">&#40;</span> <a href="http://www.google.com/search?q=camera%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:camera.html"><span style="color: #004993;">Camera</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">getCamera</span> <span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">publish</span> <span style="color: #000000;">&#40;</span> id <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #000000;">&#125;</span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/actionscript-netstream-p2p/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Debian &#8211; Installer le module h264 streaming pour Lighttpd</title>
+		<link>http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/</link>
+		<comments>http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/#comments</comments>
+		<pubDate>Thu, 17 Mar 2011 10:44:08 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[h264]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Installation]]></category>
+		<category><![CDATA[Lighttpd]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Streaming]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1970</guid>
+		<description><![CDATA[Ce tutoriel est un condensé de mes recherches sur Internet pour l&#8217;installation du module h264 streaming pour Lighttpd. Voici les deux principales ressources : h264.code-shop.com &#38; Debian root ( allemand.. <a href="http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Ce tutoriel est un condensé de mes recherches sur Internet pour l&#8217;installation du module <a href="http://h264.code-shop.com">h264 streaming</a> pour <strong>Lighttpd</strong>.</p>
+<p>Voici les deux principales ressources : <a href="http://h264.code-shop.com/trac/wiki/Mod-H264-Streaming-Lighttpd-Version2">h264.code-shop.com</a> &amp; <a href="http://www.debianroot.de/server/lighttpd-mp4h264-video-streaming-mod_h264_streaming-1168.html">Debian root ( allemand )</a>.</p>
+<p>L&#8217;objectif des prochaines commandes est de recompiler Lighttpd pour récupérer les modules h264-streaming et les copier dans le Lighttpd qui est géré par votre gestionnaire de paquet.</p>
+<p>Installation des paquets utiles à la compilation de Lighttpd.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get install</span> build-essential <span style="color: #c20cb9; font-weight: bold;">automake</span> <span style="color: #c20cb9; font-weight: bold;">autoconf</span> libtool pkg-config libpcre3-dev zlib1g-dev libbz2-dev libfam-dev</div></td></tr></tbody></table></div>
+<p>Les paquets : <strong>libpcre3-dev zlib1g-dev libbz2-dev libfam-dev</strong> ne sont pas nécessaires. Si vous ne souhaitez pas les installés, penser à invoquer la commande <strong>./configure</strong> avec les options <strong>&#8211;without-pcre &#8211;without-zlib &#8211;without-bzip2 &#8211;without-fam</strong></p>
+<p>S&#8217;il n&#8217;est pas déjà présent sur votre Debian, installons Lighttpd.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get install</span> lighttpd</div></td></tr></tbody></table></div>
+<p>Téléchargeons les sources de <strong>Lighttpd 1.4.18</strong> contenant le module <strong>h264 streaming</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+<span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>h264.code-shop.com<span style="color: #000000; font-weight: bold;">/</span>download<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-zxvf</span> lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz</div></td></tr></tbody></table></div>
+<p>Téléchargeons les sources de Lighttpd géré par votre gestionnaire de paquet. Lors de la rédaction de l&#8217;article, Debian Lenny utilise Lighttpd version 1.4.19.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get <span style="color: #7a0874; font-weight: bold;">source</span></span> lighttpd</div></td></tr></tbody></table></div>
+<p>Copions les quelques fichiers sources utiles à la compilation du module h264 streaming.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.c mod_streaming_export.h moov.<span style="color: #000000; font-weight: bold;">*</span> mp4_io.<span style="color: #000000; font-weight: bold;">*</span> mp4_process.<span style="color: #000000; font-weight: bold;">*</span> <br />
+mp4_reader.<span style="color: #000000; font-weight: bold;">*</span> mp4_writer.<span style="color: #000000; font-weight: bold;">*</span> output_bucket.<span style="color: #000000; font-weight: bold;">*</span> output_mp4.<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.19<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<p>Nous allons modifier le fichier <strong>Makefile</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.19<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">vim</span> Makefile.am</div></td></tr></tbody></table></div>
+<p>Vous pouvez rajouter les lignes suivantes après la définition du module <strong>mod_flv_streaming</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">lib_LTLIBRARIES += mod_h264_streaming.la<br />
+mod_h264_streaming_la_SOURCES = mod_h264_streaming.c <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mod_streaming_export.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; moov.c moov.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_io.c mp4_io.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_reader.c mp4_reader.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_writer.c mp4_writer.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_process.c mp4_process.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_bucket.c output_bucket.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_mp4.c output_mp4.h<br />
+mod_h264_streaming_la_CFLAGS = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>AM_CFLAGS<span style="color: #7a0874; font-weight: bold;">&#41;</span> -DBUILDING_H264_STREAMING<br />
+mod_h264_streaming_la_LDFLAGS = <span style="color: #660033;">-module</span> <span style="color: #660033;">-export-dynamic</span> <span style="color: #660033;">-avoid-version</span> <span style="color: #660033;">-no-undefined</span><br />
+mod_h264_streaming_la_LIBADD = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>common_libadd<span style="color: #7a0874; font-weight: bold;">&#41;</span></div></td></tr></tbody></table></div>
+<p>On lance la compilation. Le résultat sera enregistré dans <strong>/opt/lighttpd.</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.19<br />
+.<span style="color: #000000; font-weight: bold;">/</span>autogen.sh<br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #660033;">--enable-maintainer-mode</span> <span style="color: #660033;">--prefix</span>=<span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>Copions les binaires du module h264 dans l&#8217;installation de Lighttpd géré par votre gestionnaire de paquet.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span>lib<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.so mod_expire.so mod_secdownload.so <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>lib<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<p>Éditer le fichier /etc/lighttpd/lighttpd.conf et rajouter :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">server.modules = <span style="color: #7a0874; font-weight: bold;">&#40;</span> <br />
+&nbsp; ...,<br />
+&nbsp; <span style="color: #ff0000;">&quot;mod_h264_streaming&quot;</span>,<br />
+&nbsp; ...<br />
+<span style="color: #7a0874; font-weight: bold;">&#41;</span><br />
+h264-streaming.extensions = <span style="color: #7a0874; font-weight: bold;">&#40;</span> <span style="color: #ff0000;">&quot;.mp4&quot;</span> <span style="color: #7a0874; font-weight: bold;">&#41;</span></div></td></tr></tbody></table></div>
+<p>Maintenant que tout est fini, vous pouvez relancer votre serveur HTTP et profiter.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>Linux &#8211; Monitoring network via SNMP</title>
+		<link>http://www.armetiz.info/monitoring-network-snmp-debian/</link>
+		<comments>http://www.armetiz.info/monitoring-network-snmp-debian/#comments</comments>
+		<pubDate>Mon, 14 Feb 2011 06:00:07 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Kernel]]></category>
+		<category><![CDATA[Patch]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[SNMP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1943</guid>
+		<description><![CDATA[Les distributions Debian utilisant un Kernel inférieur à la version 2.36 sont touchées par ce problème. Parce que SNMPD n&#8217;est pas lancé avec l&#8217;utilisateur Root, celui-ci n&#8217;est pas capable de.. <a href="http://www.armetiz.info/monitoring-network-snmp-debian/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img src="http://www.armetiz.info/files/2011/02/debian1.png" alt="debian" width="128" height="128" class="alignleft size-full wp-image-1955" />Les distributions Debian utilisant un <strong>Kernel inférieur à la version 2.36</strong> sont touchées par ce problème.</p>
+<p>Parce que <strong>SNMPD</strong> n&#8217;est pas lancé avec l&#8217;utilisateur Root, celui-ci n&#8217;est pas capable de connaitre la vitesse réelle des interfaces réseaux.<br />
+Voici le résultat que l&#8217;on obtient après une requête <a href="http://fr.wikipedia.org/wiki/Simple_network_management_protocol">SNMP</a>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">IF-MIB::ifSpeed.1 = Gauge32: 10000000<br />
+IF-MIB::ifSpeed.2 = Gauge32: 10000000</div></td></tr></tbody></table></div>
+<p>D&#8217;après SNMP, nous avons donc affaire à des cartes 10Mbps, or il s&#8217;agit de carte 100Mbps.</p>
+<p><strong>Ce bug</strong> est identifié <a href="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=609226">#609226</a> chez Debian.</p>
+<p>Afin d&#8217;obtenir la bonne vitesse de vos cartes réseaux, soit vous attendez que le Kernel 2.36 soit intégré à Debian soit vous appliquez le patch et <a href="http://pyfourmond.free.fr/Compilation-Noyau-Linux.htm">re-compiler un noyaux</a>.</p>
+<p>Voici le fichier <strong>diff</strong> contenant le patch :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">Signed-off-by: Stephen Hemminger <br />
+Signed-off-by: David S. Miller <br />
+<br />
+<br />
+diff --git a/net/core/ethtool.c b/net/core/ethtool.c<br />
+index d2c4da5..970eb98 100644<br />
+--- a/net/core/ethtool.c<br />
++++ b/net/core/ethtool.c<br />
+@@ -1423,6 +1423,7 @@ int dev_ethtool(struct net *net, struct ifreq *ifr)<br />
+&nbsp;<br />
+&nbsp; &nbsp; /* Allow some commands to be done by anyone */<br />
+&nbsp; &nbsp; switch (ethcmd) {<br />
++ &nbsp; case ETHTOOL_GSET:<br />
+&nbsp; &nbsp; case ETHTOOL_GDRVINFO:<br />
+&nbsp; &nbsp; case ETHTOOL_GMSGLVL:<br />
+&nbsp; &nbsp; case ETHTOOL_GCOALESCE:</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/monitoring-network-snmp-debian/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Un compilateur Php ?</title>
+		<link>http://www.armetiz.info/un-compilateur-php/</link>
+		<comments>http://www.armetiz.info/un-compilateur-php/#comments</comments>
+		<pubDate>Thu, 03 Jan 2008 08:57:22 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Idée]]></category>
+		<category><![CDATA[Optimisation]]></category>
+		<category><![CDATA[PHP]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=36</guid>
+		<description><![CDATA[Ceux qui me traite de geek ne peuvent pas comprendre.. Ce matin, sous la douche m&#8217;est venu une idée, pourquoi ne pas compiler le code php ? En effet, j&#8217;utilise.. <a href="http://www.armetiz.info/un-compilateur-php/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Ceux qui me traite de geek ne peuvent pas comprendre.. Ce matin, sous la douche m&#8217;est venu une idée, pourquoi ne pas compiler le code php ?</p>
+<p>En effet, j&#8217;utilise Drupal depuis quelques semaines maintenant, et je m&#8217;appercois qu&#8217;il nécessite plus de temps à l&#8217;affichage que pour des sites plus simples. En effet, quand on connai un peu le code du CMS, on comprend vite qu&#8217;il fait appel à de nombreux traitements, que se soit des inclusions, ou de simple vérification de condition.. au final, on obtient quelques choses de plus lent qu&#8217;un site classique.</p>
+<p>J&#8217;ai donc été faire un tours du coté de google, et j&#8217;ai découvert <a href="http://eaccelerator.net" title="eAccelerator">eAccelerator</a>, et <a href="http://www.zend.com/en/products/guard/optimizer/" title="Zned Optimizer">Zend Optimizer.</a></p>
+<p>Le principe étant que le code php est interprété par votre serveur à chaque demande de visiteur. Durant cette interprétation, le code est analysé (syntaxe, grammaire..) puis compiler pour être exécuter (on parle quand même d&#8217;interprétation, même si on est bien loin de l&#8217;interprétation HTML de votre navigateur). </p>
+<p>Le petit <a href="http://eaccelerator.net" title="eAccelerator">eAccelerator</a> se propose de conserver en mémoire vive le code compiler pour le réutiliser si un utilisateur souhaite consulter à nouveau la page.</p>
+<p>Quand à <a href="http://www.zend.com/en/products/guard/optimizer/" title="Zend Optimizer">Zend Optimizer</a>; il me semble qu&#8217;il compile le code et ensuite une machine Zend permet de &#8216;exécuter.<br />
+Deux avantages à cette solution, optimisation dans certain cas de la vitesse d&#8217;exécution, et chiffrement du code source vu qu&#8217;il est transformé en byte code.</p>
+<p>Article connexe : <a href="http://www.wikigento.com/optimisation-lampzendmagento/javascript-php-performances/">Javascript et PHP sont-ils des sources de ralentissements ? </a></p>
+<p><strong>Edit 11 Janvier 2010</strong> : <a href="http://www.roadsend.com/home/index.php?pageID=compiler">Roadsend</a> à développer un compilateur PHP qui fournit du Bytecode exécutable directement par votre système d&#8217;exploitation.<br />
+Il existe une version <a href="http://www.roadsend.com/p/rePackage/reDownload.php?pageID=pccTrial&amp;lp=2">Unix, FreeBSD et Windows</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/un-compilateur-php/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/20 queries in 0.018 seconds using apc
+Object Caching 2923/2964 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:07:33 by W3 Total Cache -->

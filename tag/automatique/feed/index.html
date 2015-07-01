@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; automatique</title>
+	<atom:link href="http://www.armetiz.info/tag/automatique/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Linux &#8211; Trouver les fichiers contenant une chaine de caractere</title>
+		<link>http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/</link>
+		<comments>http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/#comments</comments>
+		<pubDate>Thu, 01 Mar 2012 10:43:15 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[automatique]]></category>
+		<category><![CDATA[Fichier]]></category>
+		<category><![CDATA[find]]></category>
+		<category><![CDATA[gnu]]></category>
+		<category><![CDATA[memo]]></category>
+		<category><![CDATA[Post-it]]></category>
+		<category><![CDATA[Recherche]]></category>
+		<category><![CDATA[unix]]></category>
+		<category><![CDATA[xargs]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2221</guid>
+		<description><![CDATA[Voici une commande Linux qui affichera les fichiers contenant The Big Brains Company Recherche au sein du répertoire /var/www/ avec un chemin absolu 123$ grep -lR &#34;The Big Brains Company&#34;.. <a href="http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Voici une commande Linux qui affichera les fichiers contenant <strong><a href="http://thebigbrainscompany.com">The Big Brains Company</a></strong></p>
+<p>Recherche au sein du répertoire <strong>/var/www/</strong> avec un chemin absolu</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #660033;">-lR</span> <span style="color: #ff0000;">&quot;The Big Brains Company&quot;</span> <span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span>com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>shared<span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml<br />
+<span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span>com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>releases<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">20140718184541</span><span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml</div></td></tr></tbody></table></div>
+<p>Recherche au sein du répertoire <strong>/var/www/</strong> avec un chemin relatif</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ <span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span><br />
+$ <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #660033;">-lR</span> <span style="color: #ff0000;">&quot;The Big Brains Company&quot;</span> <span style="color: #000000; font-weight: bold;">*</span><br />
+com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>shared<span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml<br />
+com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>releases<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">20140718184541</span><span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml</div></td></tr></tbody></table></div>
+<p>Pour finir,<br />
+Une alternative qui fera de vous un vrai barbu.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">find</span> . <span style="color: #000000; font-weight: bold;">|</span> <span style="color: #c20cb9; font-weight: bold;">xargs</span> <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #ff0000;">'The Big Brains Company'</span> <span style="color: #660033;">-sl</span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.002 seconds using apc
+Object Caching 427/428 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:17:00 by W3 Total Cache -->

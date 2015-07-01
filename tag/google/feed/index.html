@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; google</title>
+	<atom:link href="http://www.armetiz.info/tag/google/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Google Analytics &#8211; Callback on JS TrackEvent</title>
+		<link>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/</link>
+		<comments>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/#comments</comments>
+		<pubDate>Wed, 16 Jan 2013 10:44:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Analytics]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Web]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2890</guid>
+		<description><![CDATA[En utilisant le système Tracking Event de Google Analytics. Parfois, vous avez besoin de vous assurer qu&#8217;un évenement est correctement enregistré par Google avant de réaliser une action. L&#8217;exemple le.. <a href="http://www.armetiz.info/google-analytics-callback-on-js-trackevent/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>En utilisant le système <a href="https://developers.google.com/analytics/devguides/collection/gajs/">Tracking Event</a> de Google Analytics.<br />
+Parfois, vous avez besoin de vous assurer qu&#8217;un évenement est correctement enregistré par Google avant de réaliser une action.<br />
+L&#8217;exemple le plus concret, c&#8217;est le changement de page juste après avoir enregistré un clic sur un lien.</p>
+<p>L&#8217;ensemble des tracking de l&#8217;API Google Analytics sont asynchrones, comment s&#8217;assurer que l&#8217;évenement a bien été enregistré ?</p>
+<p>Voici <strong>deux manières de faire</strong>, l&#8217;une étant plus officielle que l&#8217;autre.</p>
+<p>La premiere méthode utilise la possibilité de mettre des &#8220;<strong>Callback</strong>&#8221; au sein de la Queue (<strong>GAQ : Google Analytics Queue</strong>).<br />
+La documentation <a href="https://developers.google.com/analytics/devguides/collection/gajs/#PushingFunctions">Google Analytics</a> est assez explicite : &#8220;<em>The functions can contain any arbitrary JavaScript and like command arrays, they are executed in the order in which they are pushed onto _gaq</em>&#8220;.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #3366CC;">'_trackEvent'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Test'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Clicked'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;event tracked&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Pour la deuxième méthode &#8211; récupérée sur Stack Overflow &#8211; je n&#8217;ai pas trouvé de validation au sein de la documentation. Mais après quelques tests, elle semble fonctionner.<br />
+On part du principe que la méthode &#8220;push&#8221; de l&#8217;objet &#8220;_gaq&#8221; prends en 2° paramètres une fonction &#8220;callback&#8221; exécutée lorsque la commande a été traité.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #3366CC;">'_trackEvent'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Test'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Clicked'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;event tracked&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Bien sûr,<br />
+La deuxième méthode n&#8217;étant pas officielle, bien que plus élégante elle n&#8217;est pas recommandée.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Que faire à montréal &#8211; Application RIA</title>
+		<link>http://www.armetiz.info/que-faire-a-montreal-application-ria/</link>
+		<comments>http://www.armetiz.info/que-faire-a-montreal-application-ria/#comments</comments>
+		<pubDate>Thu, 19 Apr 2012 11:14:47 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Application]]></category>
+		<category><![CDATA[Deezer]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Montreal]]></category>
+		<category><![CDATA[Référencement]]></category>
+		<category><![CDATA[RIA]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=231</guid>
+		<description><![CDATA[Made in Montréal Outil d&#8217;exploration basé sur une application RIA utilisant la technologie Flash d&#8217;Adobe. MadeinMTL.com regorge d&#8217;informations sur les bons coins de Montréal. Le site n&#8217;est pas tout jeune,.. <a href="http://www.armetiz.info/que-faire-a-montreal-application-ria/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.madeinmtl.com"><img src="http://www.armetiz.info/wp-content/uploads/2008/09/capture.png" alt="" width="77" height="77" class="alignright size-medium wp-image-259" /></a></p>
+<h3>Made in Montréal</h3>
+<p>Outil d&#8217;exploration basé sur une application RIA utilisant la technologie Flash d&#8217;Adobe.<br />
+<a href="http://www.madeinmtl.com">MadeinMTL.com</a> regorge d&#8217;informations sur les bons coins de Montréal.</p>
+<p>Le site n&#8217;est pas tout jeune, il a été ouvert en 2003, et une nouvelle version de leur application à vu le jour récemment.<br />
+Quand on regarde la partie &#8220;<em>A propos</em>&#8220;, nous observons :</p>
+<blockquote><p>MadeinMTL permet l&#8217;exploration virtuelle de Montréal, â travers plus de <strong>15 000 photos</strong>, <strong>400 textes</strong>, <strong>50 heures</strong> de vidéo, <strong>40 capsules sonores</strong> et <strong>25 courts-métrages</strong>, intégrés dans un <em>environnement organique</em>, qui traduit l&#8217;expérience véritable que nous avons d&#8217;une ville en y habitant ou en la visitant. </p></blockquote>
+<p><strong>PS : L&#8217;article était en brouillon sur mon blog depuis 2008.</strong></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/que-faire-a-montreal-application-ria/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Google I/O : Vidéo, Android et Adobe</title>
+		<link>http://www.armetiz.info/google-io-video-android-adobe/</link>
+		<comments>http://www.armetiz.info/google-io-video-android-adobe/#comments</comments>
+		<pubDate>Fri, 21 May 2010 08:42:25 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Android]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Beta]]></category>
+		<category><![CDATA[Conférence]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[google]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1695</guid>
+		<description><![CDATA[Pour ceux qui ne suivent pas l&#8217;actualité, Google tient en ce moment des conférences appelées Google Input/Ouput. Format vidéo Internet Pour le premier jour de conférence, nous avons eu droit.. <a href="http://www.armetiz.info/google-io-video-android-adobe/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pour ceux qui ne suivent pas l&#8217;actualité, Google tient en ce moment des conférences appelées <a href="http://code.google.com/intl/fr/events/io/2010/">Google Input/Ouput</a>.</p>
+<h3>Format vidéo Internet</h3>
+<p>Pour le premier jour de conférence, nous avons eu droit &#8211; entre autre &#8211; à l&#8217;annonce du format vidéo <a href="http://www.webmproject.org/">WebM</a> qui &#8211; normalement &#8211; devrai devenir le standard vidéo libre du net.<br />
+La raison de ce nouveau format, c&#8217;est que l&#8217;utilisation du H.264 est soumise à une licence payante. A cause de cela Firefox ne pouvait pas lire les vidéos H.264&#8230;<br />
+<a href="http://www.armetiz.info/files/2010/05/froyo1.png"><img src="http://www.armetiz.info/files/2010/05/froyo1.png" alt="" width="200" height="168" class="alignright size-full wp-image-1696" /></a></p>
+<h3>Android 2.2</h3>
+<p>Autre nouveauté, concernant <strong>Android</strong>.<br />
+Nous avons eu la confirmation de la nouvelle version Android 2.2 nommé Froyo, qui apporte son lot d&#8217;amélioration :
+<ul>
+<li>Support complet de <strong>Flash Player 10.1</strong> et <strong>Adobe AIR 2.5</strong></li>
+<li>2 à 5 fois plus rapide que les anciennes version grâce à un nouveau compilateur <strong>Dalvik JIT</strong></li>
+<li>Navigation internet 2 à 3 fois plus rapide grâce à un nouveau moteur Javascript</li>
+<li>Installation des applications sur la carte SD possible en natif</li>
+<li>Mise à jour automatique des applications installées à partir du Market</li>
+</ul>
+<p>Pour ceux qui développent pour Android, la <a href="http://developer.android.com/sdk/android-2.2.html">version 2.2 du SDK</a> est disponible.</p>
+<h3>Google TV</h3>
+<p>Pour le coups, je ne vais pas m&#8217;étendre dessus, je préfère rediriger vers de l&#8217;information bien plus précise.<br />
+Vous pouvez donc aller faire un tour sur le 20minutes : <a href="http://www.20minutes.fr/article/405920/High-Tech-Laborieusement-presente-Google-TV-va-t-il-revolutionner-la-tele.php">HIGH-TECH &#8211; Via Android et un processeur Intel, Google veut marier la télé et le Web. Tout le Web&#8230;</a></p>
+<h3>Adobe</h3>
+<p>A cette occasion, Adobe en a profité pour ouvrir l&#8217;accès à la Bêta du <a href="http://labs.adobe.com/technologies/flashplayer10/">Player Flash 10.1 pour Android</a> et à la prerelease de <a href="http://blogs.adobe.com/air/2010/05/air_android_prerelease.html">Adobe AIR pour Android</a>.</p>
+<p>Alors que Adobe AIR peut s&#8217;installer sur Android 2.1, <strong>FP 10.1 doit être installé sur Android 2.2</strong>.<br />
+C&#8217;est dommage car très &#8211; très &#8211; peu de gens disposent de la nouvelle version Android Froyo, mais cela annonce aussi que Google ne devrai pas tarder à mettre à jour les terminaux <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/google-io-video-android-adobe/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>DNS Google &#8211; IP Facile à retenir.</title>
+		<link>http://www.armetiz.info/dns-google-ip-facile-a-retenir/</link>
+		<comments>http://www.armetiz.info/dns-google-ip-facile-a-retenir/#comments</comments>
+		<pubDate>Mon, 21 Dec 2009 09:18:32 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[Administration]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Ping]]></category>
+		<category><![CDATA[Réseaux]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1485</guid>
+		<description><![CDATA[Parmi ceux qui font de l&#8217;administration système. Ne vous est-il jamais arrivé de vous dire : &#8220;Mince, je crois que mon service DNS ne fonctionne pas&#8230; Si j&#8217;avais une IP.. <a href="http://www.armetiz.info/dns-google-ip-facile-a-retenir/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Parmi ceux qui font de l&#8217;administration système. Ne vous est-il jamais arrivé de vous dire : &#8220;<em>Mince, je crois que mon service DNS ne fonctionne pas&#8230; Si j&#8217;avais une IP publique en tête je pourrai quand même tester la connexion à Internet&#8230;</em>&#8220;.</p>
+<p>Google à sortie depuis quelques temps un <a href="http://www.zorgloob.com/2009-12/allez-plus-vite-avec-google/">service DNS</a>.<br />
+Nous n&#8217;allons pas décrire le service DNS en lui même. En effet je vois encore ici le moyen ultime d&#8217;analyser et de contrôler l&#8217;utilisateur H24 !<strong> Google c&#8217;est bien, mais c&#8217;est dangereux</strong> !!</p>
+<p>Bref&#8230; Tout ca pour dire que les IP des serveurs DNS Google sont supers simples à retenir :</p>
+<ul>
+<li>8.8.8.8</li>
+<li>8.8.4.4</li>
+</ul>
+<p>Voila donc un nouvel automatisme à avoir lorsque votre résolution de nom ne fonctionne pas :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">nslookup google.fr<br />
+ping 8.8.8.8</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/dns-google-ip-facile-a-retenir/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Quand Google choc</title>
+		<link>http://www.armetiz.info/google-police-augmente/</link>
+		<comments>http://www.armetiz.info/google-police-augmente/#comments</comments>
+		<pubDate>Fri, 11 Sep 2009 10:21:47 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Augmentation]]></category>
+		<category><![CDATA[Changement]]></category>
+		<category><![CDATA[Choc]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Police]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1297</guid>
+		<description><![CDATA[Depuis ce matin, on remarque tous un comportement étrange sur le visage des gens lorsqu&#8217;ils vont sur Google. Qui n&#8217;a pas été frappé par l&#8217;étonnement, mais aussi le doute&#8230; &#8220;Tient,.. <a href="http://www.armetiz.info/google-police-augmente/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img alt="Google" src="http://www.google.fr/intl/fr_fr/images/logo.gif" width="276" height="110" class="alignleft" />Depuis ce matin, on remarque tous un comportement étrange sur le visage des gens lorsqu&#8217;ils vont sur Google.</p>
+<p>Qui n&#8217;a pas été frappé par <strong>l&#8217;étonnement</strong>, mais aussi le <strong>doute</strong>&#8230; &#8220;<em>Tient, on dirai qu&#8217;un truc à changer&#8230; Qui a bidouillé mon pc?</em>&#8220;.</p>
+<p>En fait, la <strong>taille</strong> de la <strong>police d&#8217;écriture</strong> de la barre de recherches Google et des boutons situés en dessous a été <strong>augmentée</strong>.<br />
+Explication technique par <a href="http://www.zorgloob.com/2009/09/google-plus-grand-plus-gras.asp">Zorgloob</a></p>
+<blockquote><p>Auparavant, la taille de ces caractères dépendait exclusivement de votre navigateur, autrement dit la taille par défaut sélectionnée dans vos préférences utilisateur. Désormais, la taille est fixée à 17 pixels pour le champ texte et 15 pixels pour les boutons. Les aficionados du code HTML/CSS propre, déjà habitués avec Google à l&#8217;un des codes les plus immondes du web, regretteront une fois de plus l&#8217;utilisation des pixels à la place de l&#8217;unité de mesure &#8220;em&#8221; ou &#8220;%&#8221;.</p></blockquote>
+<p><img src="http://www.zorgloob.com/images2/Capture-google-en-gros.jpg" alt="null" /></p>
+<p>En fait, tout le monde est surpris (Si si, tout le monde !).<br />
+Mais le plus étrange, c&#8217;est qu&#8217;avant de remettre en cause le site, on <strong>remet en question</strong> notre configuration.<br />
+Cela est intéressant à analyser, car dans l&#8217;esprit de tous Google est une référence et n&#8217;a pas changé depuis plusieurs années.</p>
+<p>Les internautes que nous sommes prennent très rapidement des habitudes visuelles, autrement dit des repères.<br />
+Et puis, voir les mêmes pixels chaque matin, depuis 10 ans; Quand on rajoute un pixel ça choc ! (beurk)</p>
+<p>Quand on voit comment Patricia Gallot-Lavallé vit sa <a href="http://www.strategy-interactive.com/blog/index.php/2009/08/26/343-ma-semaine-sans-google-arrive-et">semaine annuelle sans Google</a>, et notre comportement face à un changement mineur&#8230; On peut se dire que l&#8217;on est quand même Google addict.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/google-police-augmente/feed/</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+		<item>
+		<title>Système d&#8217;exploitation Google: Chrome OS</title>
+		<link>http://www.armetiz.info/systeme-dexploitation-google-chrome-os/</link>
+		<comments>http://www.armetiz.info/systeme-dexploitation-google-chrome-os/#comments</comments>
+		<pubDate>Wed, 08 Jul 2009 12:35:17 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[OS]]></category>
+		<category><![CDATA[Seven]]></category>
+		<category><![CDATA[Windows]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1158</guid>
+		<description><![CDATA[Depuis ce matin cela fait le tour de la toile, Google va sortir son système d&#8217;exploitation. On s&#8217;y attendait fortement, mais jusqu&#8217;à ce matin nous n&#8217;avions aucune confirmation de Google... <a href="http://www.armetiz.info/systeme-dexploitation-google-chrome-os/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Depuis ce matin cela fait le tour de la toile, <strong>Google va sortir son système d&#8217;exploitation</strong>.</p>
+<p>On s&#8217;y attendait fortement, mais jusqu&#8217;à ce matin nous n&#8217;avions aucune confirmation de Google.<br />
+En effet, il existe déjà un système d&#8217;exploitation made in Google: <strong>Android</strong> pour les unités mobiles. </p>
+<p>Si vous voulez plus d&#8217;information: <a href="http://googleblog.blogspot.com/2009/07/introducing-google-chrome-os.html">Blog Google</a>, <a href="http://fr.techcrunch.com/2009/07/08/google-lache-une-bombe-atomique-sur-microsoft-chrome-os/">Techcrunch</a>, <a href="http://www.clubic.com/actualite-286930-chrome-os-google-systeme-exploitation.html">Clubic</a>, &#8230;<br />
+A la suite de ces lectures, on en retiendra que le système sera basé sur Linux, pensé avant tout pour fonctionner sur des Notebook, sera supporté par des processeurs x86 / <a href="http://fr.wikipedia.org/wiki/Processeur_ARM">ARM</a>  et disponible milieu de l&#8217;année 2010 (ce qui arrivera assez vite).</p>
+<p>Maintenant, quelles en sont les retombées:<br />
+&#8211; Google est le centre d&#8217;internet pour une très grande majorité des Internautes du monde. Comparé a Microsoft, Apple et d&#8217;autres distributions Linux, Google dispose d&#8217;un support publicitaire gigantesque. Sachant que Windows 7 doit sortir aussi milieu 2010, je vous laisse imaginer le combat qu&#8217;il y aura dans nos magasins.<br />
+&#8211; Pour les aficionados de Linux, ce n&#8217;est pas une mauvaise chose car cela permettra de valoriser un peu plus le monde Libre.<br />
+&#8211; Déjà que Google <a href="http://www.armetiz.info/google-a-tue-bambi/">tue des Bambis</a>, sait <a href="http://www.armetiz.info/google-sait-qui-est-malade/">qui est malade</a>, connait nos <a href="https://www.google.com/health">problèmes médicaux</a>, et qu&#8217;il est présent partout autours de nous, il sera aussi <strong>le support de nos données</strong>.<br />
+Le monopole Google est de plus en plus proche !</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/systeme-dexploitation-google-chrome-os/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Google sait qui est malade</title>
+		<link>http://www.armetiz.info/google-sait-qui-est-malade/</link>
+		<comments>http://www.armetiz.info/google-sait-qui-est-malade/#comments</comments>
+		<pubDate>Fri, 01 May 2009 11:08:56 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Analyse]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Grippe]]></category>
+		<category><![CDATA[H1N1]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1052</guid>
+		<description><![CDATA[Google Flu Trends est un outil d&#8217;analyse statistique qui permet de connaitre l&#8217;évolution d&#8217;une maladie en fonction des recherches internautes. Pour le coup, il s&#8217;agit bien évidement de la grippe.. <a href="http://www.armetiz.info/google-sait-qui-est-malade/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.google.org/flutrends/">Google Flu Trends</a> est un outil d&#8217;analyse statistique qui permet de connaitre l&#8217;évolution d&#8217;une maladie en fonction des recherches internautes.<br />
+Pour le coup, il s&#8217;agit bien évidement de la grippe porcine, que l&#8217;on doit maintenant <a href="http://www.lefigaro.fr/sante/2009/04/30/01004-20090430ARTFIG00582-ne-l-appelez-plus-grippe-porcine-mais-a-h1n1-.php">appeler Grippe A H1N1</a>.</p>
+<p>Comment Google fait ? Ils font simplement ressortir les requêtes portant &#8211; par exemple &#8211; sur &#8220;<strong>symptôme grippe porcine</strong>&#8221; et le lieu géographique de la demande.<br />
+Cela peut paraitre complément dingue, mais depuis quelques années ce système est en test et les analyses de Google Flu Trends sont vérifiées par <a href="http://www.cdc.gov/">CDC</a> qui est un Centre de contrôle des maladies.</p>
+<p><em>En bleu les données Google flu Trends, en Orange celle du CDC.</em><br />
+<a href="http://www.google.org/images/flutrends/annual_cdc_comparison.png"><img src="http://www.google.org/images/flutrends/annual_cdc_comparison.png" alt="Google Flu Trends" /></a></p>
+<p>Les données ne sont disponibles que pour les <a href="http://www.google.org/flutrends">États Unis</a> et le <a href="http://www.google.org/flutrends/intl/en_mx/">Mexique</a> depuis peu, mais rien pour les autres pays. Bien évidement, Google n&#8217;affirme pas que les données soient fiables, ils redirigent justement vers le CDC pour consulter <a href="http://www.cdc.gov/swineflu">les informations officielles</a>.</p>
+<p>C&#8217;est en tout cas très perturbant, et encore, Google n&#8217;a pas croisé les données de Gmail, GDocs, et Android&#8230; Qui a dit qu&#8217;il fallait avoir peur de Google ?</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/google-sait-qui-est-malade/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Google Analytics API disponible</title>
+		<link>http://www.armetiz.info/google-analytics-api/</link>
+		<comments>http://www.armetiz.info/google-analytics-api/#comments</comments>
+		<pubDate>Wed, 22 Apr 2009 08:11:57 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Analytics]]></category>
+		<category><![CDATA[API]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Plugin]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1011</guid>
+		<description><![CDATA[Sur le blog Analytics on peut voir que l&#8217;API de Google Analytics est disponible. The Data Export API is easy to use and provides read-only access to all your Analytics.. <a href="http://www.armetiz.info/google-analytics-api/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Sur le blog <a href="http://analytics.blogspot.com/2009/04/attention-developers-google-analytics.html">Analytics</a> on peut voir que l&#8217;<a href="http://code.google.com/intl/fr/apis/analytics/docs/">API de Google Analytics</a> est disponible.<br />
+<blockquote>
+The Data Export API is easy to use and provides read-only access to all your Analytics data.  Any data that&#8217;s available through the standard Analytics web interface is available through the API. The Analytics API is a Google Data API. This is the same API protocol for Google Calendar, Finance and Webmaster Tools.  If you&#8217;ve used any of these APIs, the Google Analytics Data Export API will look very familiar to you. </p></blockquote>
+<p><img class="aligncenter" alt="Google Analytics" src="http://analytics.blogspot.com/logo_analytics_blog.gif" width="277" height="65" /><br />
+<strong>Traduction</strong> par moi même (donc ne pas utiliser dans des documents officiels :p)<br />
+<blockquote>L&#8217;API d&#8217;exportation de données est facile à utiliser et fournit un accès en lecture seule à toutes vos données de Google Analytics. Toutes les données disponibles à travers l&#8217;interface Web standard sont disponibles grâce à l&#8217;API. L&#8217;API Analytics est une API Google Data. C&#8217;est le même protocole d&#8217;API pour Google Calendar, Finance et Webmaster Tools. Si vous avez déjà utilisé une de ces API, celle de Google Analytics vous sera très familière.</p></blockquote>
+<p>Alors, qui est-ce qui veux développer un <strong>module WordPress</strong> pour afficher directement les statistiques dans le BackOffice ? <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/google-analytics-api/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Google Chrome veut sauver sa peau</title>
+		<link>http://www.armetiz.info/google-chrome-veut-sauver-sa-peau/</link>
+		<comments>http://www.armetiz.info/google-chrome-veut-sauver-sa-peau/#comments</comments>
+		<pubDate>Thu, 05 Feb 2009 13:09:25 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Windows]]></category>
+		<category><![CDATA[Chrome]]></category>
+		<category><![CDATA[Désinstallation]]></category>
+		<category><![CDATA[google]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=823</guid>
+		<description><![CDATA[Comme vous pouvez le voir sur le screenshot ci-dessus, lorsque vous voulez supprimer Google Chrome de votre poste, on vous pose une question ultime &#8220;Avons-nous dit quelque chose qui vous.. <a href="http://www.armetiz.info/google-chrome-veut-sauver-sa-peau/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/wp-content/uploads/2009/02/chrome.png"><img src="http://www.armetiz.info/wp-content/uploads/2009/02/chrome.png" alt="Chrome prend soin de vous" width="479" height="148" class="size-full wp-image-824" /></a></p>
+<p>Comme vous pouvez le voir sur le screenshot ci-dessus, lorsque vous voulez supprimer Google Chrome de votre poste, on vous pose une question ultime &#8220;<strong>Avons-nous dit quelque chose qui vous a déplu ?</strong>&#8221;</p>
+<p>Comme quoi, même si <a href="http://www.armetiz.info/google-a-tue-bambi/">Google a tué Bambi</a> et qu&#8217;il <a href="http://www.armetiz.info/comment-les-concurrents-de-google-sont-geres/">discrimine ses concurrents </a>, on ne peut pas dire qu&#8217;il ne prend pas soin de nous.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/google-chrome-veut-sauver-sa-peau/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Google a tué Bambi</title>
+		<link>http://www.armetiz.info/google-a-tue-bambi/</link>
+		<comments>http://www.armetiz.info/google-a-tue-bambi/#comments</comments>
+		<pubDate>Fri, 30 Jan 2009 11:12:20 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Bambi]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Meurtre]]></category>
+		<category><![CDATA[StreetView]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=788</guid>
+		<description><![CDATA[Vu sur Zorgloob, une voiture StreetView de Google a tué une biche. Les photos ont bien sur été retirée très rapidement par Google, et le parcours StreetView affiche des pages.. <a href="http://www.armetiz.info/google-a-tue-bambi/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Vu sur <a href="http://www.zorgloob.com">Zorgloob</a>, une voiture StreetView de Google a tué une biche.<br />
+<a href="http://robsell.com/rs/Google_Van_Deer/"><img alt="Bambi par google" src="http://robsell.com/rs/Google_Van_Deer/googledeer3.JPG" width="50%" height="50%" class="aligncenter" /></a><br />
+Les photos ont bien sur été retirée très rapidement par Google, et <a href="http://maps.google.com/?ie=UTF8&amp;layer=c&amp;cbll=42.953557,-77.663247&amp;panoid=6vAkor2kYZz3m5_1iSkMrw&amp;cbp=12,181.53727377395012,,0,21.75107339062427&amp;ll=42.953463,-77.663242&amp;spn=0.027766,0.22316&amp;t=h&amp;z=13">le parcours StreetView</a> affiche des pages noires.</p>
+<p>Les photos ont bien sur été copiées et vous pouvez les voir sur <a href="http://robsell.com/rs/Google_Van_Deer/">Robsell</a>.<br />
+Ce qui choque, c&#8217;est que la voiture ne s&#8217;est pas arrêtée, et à continuer son petit bonhomme de chemin sans remord. Mais des excuses ont été fait sur <a href="http://google-latlong.blogspot.com/2009/01/oh-deer-street-view-and-road-safety.html">un des blogs de Google</a>.</p>
+<p>Une autre raison de pas aimer Google ? :p</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/google-a-tue-bambi/feed/</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 8/14 queries in 0.006 seconds using apc
+Object Caching 842/926 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:08:04 by W3 Total Cache -->

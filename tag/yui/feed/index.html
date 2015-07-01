@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; YUI</title>
+	<atom:link href="http://www.armetiz.info/tag/yui/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Configurer YUI en phase de développement</title>
+		<link>http://www.armetiz.info/configurer-yui-phase-developpement/</link>
+		<comments>http://www.armetiz.info/configurer-yui-phase-developpement/#comments</comments>
+		<pubDate>Wed, 13 Mar 2013 09:00:30 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Mojito]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[V8]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[Yahoo]]></category>
+		<category><![CDATA[YUI]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2956</guid>
+		<description><![CDATA[Actuellement je suis en pleine découverte du framework Yahoo YUI 3 que je vous recommande vivement ! Comme tout bon novice, je fais des erreurs. Javascript étant un language peu.. <a href="http://www.armetiz.info/configurer-yui-phase-developpement/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Actuellement je suis en pleine découverte du framework <strong>Yahoo YUI 3</strong> que je vous recommande vivement !<br />
+Comme tout bon novice, je fais des erreurs. Javascript étant un language peu bavard les erreurs sont parfois difficiles à diagnostiquer.</p>
+<p><img src="http://www.armetiz.info/files/2013/03/yui-logo.png" alt="yui-logo" width="117" height="52" class="alignright size-full wp-image-2963" />Par défaut,<br />
+Le <a href="http://yuilibrary.com/yui/docs/yui/#loading-modules">chargement des modules YUI</a> est optimisé pour la production, soit <strong>un seul fichier minifié</strong>.</p>
+<p><a href="https://github.com/yui/yui3/issues/513">Dernièrement</a> j&#8217;ai eu une mauvaise utilisation du YUI, et l&#8217;erreur impactait le Framework lui meme sans message explicite&#8230; Du coups, difficile de savoir ce que j&#8217;avais fait de mal car tout le code source de YUI était illisible.</p>
+<p>Bref,<br />
+Voici la configuration YUI à utiliser pour récupérer des modules dont la source est lisible :</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">YUI<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; debug<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; combine<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">false</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; filter<span style="color: #339933;">:</span> <span style="color: #3366CC;">&quot;raw&quot;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>.<span style="color: #003366; font-weight: bold;">use</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;app&quot;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>Y<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #006600; font-style: italic;">//here your Y code</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/configurer-yui-phase-developpement/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.059 seconds using apc
+Object Caching 345/346 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:14:21 by W3 Total Cache -->

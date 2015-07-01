@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; DTO</title>
+	<atom:link href="http://www.armetiz.info/tag/dto/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Transfer Object Assembler avec Doctrine 1</title>
+		<link>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/</link>
+		<comments>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/#comments</comments>
+		<pubDate>Mon, 31 May 2010 10:06:12 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Doctrine]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[DBAL]]></category>
+		<category><![CDATA[DTO]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Konbini]]></category>
+		<category><![CDATA[ORM]]></category>
+		<category><![CDATA[Pattern]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1693</guid>
+		<description><![CDATA[Le pattern Transfert Object TO, Data Transfert Object DTO, ou encore Value Object VO permet d&#8217;échanger des données entre deux applications. Wikipédia : Son but est de simplifier les transferts.. <a href="http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/05/doctrine1.gif"><img src="http://www.armetiz.info/files/2010/05/doctrine1.gif" alt="doctrine" width="191" height="53" class="alignright size-full wp-image-1710" /></a>Le <a href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/TransferObject.html">pattern Transfert Object</a> <strong>TO</strong>, <strong>Data Transfert Object DTO</strong>, ou encore <strong>Value Object VO</strong> permet d&#8217;échanger des données entre deux applications.</p>
+<p>Wikipédia : <em>Son but est de simplifier les transferts de données entre les sous-systèmes d&#8217;une application logiciel. Les objets de transfert de données sont souvent utilisés en conjonction des objets d&#8217;accès aux données.</em></p>
+<p>Qui dit <strong>Transfert Object</strong>, veux aussi dire <a href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/TransferObjectAssembler.html">Transfert Object Assembler</a>. </p>
+<h3>Conversion d&#8217;object</h3>
+<p>Le pattern <strong>Transfert Object Assembler</strong> permet de passer d&#8217;un DTO à un Objet d&#8217;accès au données, et inversement.<br />
+C&#8217;est le moyen le plus simple pour travailler avec le pattern Data Transert Object et un <strong>ORM</strong>.</p>
+<h3>Domain Object Model -&gt; Data Transfert Object</h3>
+<p>Avec l&#8217;<a href="http://www.doctrine-project.org/">ORM Doctrine</a>, le transfert d&#8217;un &#8220;<strong>Domain Object Model DOM</strong>&#8221; ou ici <strong>Doctrine_Record</strong> vers un <strong>DTO</strong> est très simple.<br />
+Il suffit de réaliser un parser qui analyse l&#8217;objet issu de Doctrine, et qui remplit les données du DTO.</p>
+<h3>Data Transfert Object -&gt; Domain Object Model</h3>
+<p>Convertir un DTO vers un DOM peut s&#8217;avère plus complexe.<br />
+En effet, Doctrine utilise des collections d&#8217;objet qui lui sont propres, mais a aussi besoin de connaitre les clés primaires et leurs contenus pour pouvoir créer un objet. Car un objet issu de Doctrine_Record n&#8217;a pas les même propriétés quand il est existant en base de donnée, ou qu&#8217;il est en phase d&#8217;être sauvegardé.</p>
+<h3>Implémentation de Transfer Object Assembler</h3>
+<p>Une implémentation du pattern <strong>Transfert Object Assembler</strong> vient de voir le jour après moult et moult péripéties.</p>
+<p>Cette implémentation permet donc le transférer de DTOs à partir de DOMs et inversement.<br />
+Associer au pattern Service Layer, cela peut s&#8217;avérer être très pratique.</p>
+<p>Voici un exemple simple d&#8217;utilisation :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$oProgram = new ProgramDTO ();<br />
+$oProgram-&amp;gt;title = &quot;Dorothe&quot;;<br />
+<br />
+$oVideoDTO = new VideoDTO ();<br />
+$oVideoDTO-&amp;gt;idVideo = 30;<br />
+$oVideoDTO-&amp;gt;program = $oProgram;<br />
+<br />
+$oAssembler = $new Assembler ();<br />
+$oVideo = $oAssembler-&amp;gt;createDomainObject ($oVideoDTO);<br />
+$oVideo-&amp;gt;save ();</div></td></tr></tbody></table></div>
+<p>Nous avons ici créé une nouvelle entrée dans la table programs, et réalisé une liaison entre ce nouvel objet et la vidéo existante d&#8217;identifiant 30.<br />
+Le tout one-shot !</p>
+<p>L&#8217;intérêt de cette implémentation, c&#8217;est d&#8217;être fonctionnel avec :</p>
+<ul>
+<li>Les objets persistant</li>
+<li>Les objets non-persistant</li>
+<li>Les compositions d&#8217;objets sur N niveau</li>
+</ul>
+<h3>Utilisation avec le pattern Service Layer</h3>
+<p>Nous allons voir l&#8217;exemple le plus simple, soit l&#8217;implémentation des méthodes CRUD pour un objet générique.<br />
+L&#8217;utilisation du nommage des classes provient de l&#8217;utilisation de Zend Framework.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br />50<br />51<br />52<br />53<br />54<br />55<br />56<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function create (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; &nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler &nbsp; &nbsp; = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; &nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, true);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;save ();<br />
+&nbsp; &nbsp; $poVideoDTO-&amp;gt;idShow&nbsp; = $oModelVideo-&amp;gt;idShow;<br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function read (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $query&nbsp; = Doctrine_Query::create ()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;select (&quot;video.*&quot;)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;from (&quot;Model_Video video&quot;)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;where (&quot;video.id_show = ?&quot;, $piIdVideo);<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $query-&amp;gt;fetchOne ();<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; return $oAssembler-&amp;gt;createTransfertObject ($oModelVideo);<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function update (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, true);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;save ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function delete (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, false);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;delete ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}</div></td></tr></tbody></table></div>
+<h3>Téléchargement</h3>
+<p>Contenu de l&#8217;archive :</p>
+<ul>
+<li>Implémentation du pattern Transfer Object Assembler</li>
+<li>Interface du pattern Transfer Object Assembler</li>
+<li>Classe de définition d&#8217;un DTO</li>
+</ul>
+<p>Pour faire fonctionner l&#8217;assembler. Vous devez définir une classe qui hérite de Assembler, et ainsi surchargez la propriété $_relationships avec vos liaisons entre DTO et DOM.</p>
+<p><strong>Dernière mise à jour : 20 Septembre 2010</strong><br />
+<a href='http://www.armetiz.info/wp-content/uploads/2010/09/Transfert_Object_Assembler_Doctrine_1.2.zip'>Transfert_Object_Assembler_Doctrine_1.2.zip</a> &#8211; 6 Ko.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/feed/</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.001 seconds using apc
+Object Caching 385/386 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:55 by W3 Total Cache -->

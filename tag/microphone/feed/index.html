@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Microphone</title>
+	<atom:link href="http://www.armetiz.info/tag/microphone/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Actionscript &#8211; NetStream &amp; P2P</title>
+		<link>http://www.armetiz.info/actionscript-netstream-p2p/</link>
+		<comments>http://www.armetiz.info/actionscript-netstream-p2p/#comments</comments>
+		<pubDate>Fri, 17 Jun 2011 12:48:08 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[Application]]></category>
+		<category><![CDATA[Audio]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Flux]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iPad]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[Microphone]]></category>
+		<category><![CDATA[Multicast]]></category>
+		<category><![CDATA[NetStream]]></category>
+		<category><![CDATA[P2P]]></category>
+		<category><![CDATA[Peer-to-peer]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2058</guid>
+		<description><![CDATA[Ce petit programme permet d&#8217;afficher la camera d&#8217;une personne qui se connecte. Cela est fait grâce à l&#8217;utilisation d&#8217;un flux NetStream lui même utilisant une connexion P2P sans serveur. A.. <a href="http://www.armetiz.info/actionscript-netstream-p2p/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Ce petit programme permet d&#8217;afficher la camera d&#8217;une personne qui se connecte. Cela est fait grâce à l&#8217;utilisation d&#8217;un flux <strong>NetStream</strong> lui même utilisant une connexion <strong>P2P sans serveur</strong>.</p>
+<p>A noter que cela n&#8217;est absolument pas optimisé. Si vous avez des conseils à donner sur la configuration du NetStream, NetConnection, NetGroup ou encore du GroupSpecifier pour améliorer les performances, n&#8217;hésitez pas..</p>
+<div class="codecolorer-container actionscript3 blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br />50<br />51<br />52<br />53<br />54<br />55<br />56<br />57<br />58<br />59<br />60<br />61<br />62<br />63<br />64<br />65<br />66<br />67<br />68<br />69<br />70<br /></div></td><td><div class="actionscript3 codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> nc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netconnection%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netconnection.html"><span style="color: #004993;">NetConnection</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> group &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> NetGroup<span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> <span style="color: #004993;">connected</span> &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=boolean%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:boolean.html"><span style="color: #004993;">Boolean</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> sendStream&nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> listenStreams &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=object%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:object.html"><span style="color: #004993;">Object</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> groupspec &nbsp; <span style="color: #000066; font-weight: bold;">:</span> GroupSpecifier<span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> listenStream&nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> id &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=string%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:string.html"><span style="color: #004993;">String</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+<span style="color: #0033ff; font-weight: bold;">public</span> <span style="color: #339966; font-weight: bold;">function</span> WebcamP2P<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><br />
+<span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">super</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: #004993;">stage</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">align</span> &nbsp; &nbsp; &nbsp; &nbsp; = <a href="http://www.google.com/search?q=stagealign%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:stagealign.html"><span style="color: #004993;">StageAlign</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">TOP_LEFT</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <span style="color: #004993;">stage</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">scaleMode</span> &nbsp; &nbsp; = <a href="http://www.google.com/search?q=stagescalemode%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:stagescalemode.html"><span style="color: #004993;">StageScaleMode</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NO_SCALE</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; id&nbsp; = <a href="http://www.google.com/search?q=string%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:string.html"><span style="color: #004993;">String</span></a> <span style="color: #000000;">&#40;</span> <span style="color: #000000;">&#40;</span> <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=date%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:date.html"><span style="color: #004993;">Date</span></a> <span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">time</span> <span style="color: #000066; font-weight: bold;">*</span> <a href="http://www.google.com/search?q=int%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:int.html"><span style="color: #004993;">int</span></a> <span style="color: #000000;">&#40;</span> <a href="http://www.google.com/search?q=math%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:math.html"><span style="color: #004993;">Math</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">random</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000066; font-weight: bold;">*</span> <span style="color: #000000; font-weight:bold;">1000</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; nc = <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=netconnection%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netconnection.html"><span style="color: #004993;">NetConnection</span></a> <span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; nc<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">addEventListener</span><span style="color: #000000;">&#40;</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NET_STATUS</span><span style="color: #000066; font-weight: bold;">,</span> <span style="color: #004993;">netStatus</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; nc<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">connect</span><span style="color: #000000;">&#40;</span><span style="color: #990000;">&quot;rtmfp:&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #000000;">&#125;</span><br />
+<br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #339966; font-weight: bold;">function</span> <span style="color: #004993;">netStatus</span> <span style="color: #000000;">&#40;</span>event<span style="color: #000066; font-weight: bold;">:</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">:</span><span style="color: #0033ff; font-weight: bold;">void</span><br />
+<span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">switch</span><span style="color: #000000;">&#40;</span>event<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">info</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">code</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">case</span> <span style="color: #990000;">&quot;NetConnection.Connect.Success&quot;</span><span style="color: #000066; font-weight: bold;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setupGroup<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">break</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">case</span> <span style="color: #990000;">&quot;NetGroup.Connect.Success&quot;</span><span style="color: #000066; font-weight: bold;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #004993;">connected</span> = <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">break</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">case</span> <span style="color: #990000;">&quot;NetGroup.MulticastStream.PublishNotify&quot;</span><span style="color: #000066; font-weight: bold;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #004993;">trace</span> <span style="color: #000000;">&#40;</span> <span style="color: #990000;">&quot;name of the detected stream : &quot;</span> <span style="color: #000066; font-weight: bold;">+</span> event<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">info</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">name</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #6699cc; font-weight: bold;">var</span> _video&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=video%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:video.html"><span style="color: #004993;">Video</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #6699cc; font-weight: bold;">var</span> _listenStream &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _video &nbsp;= <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=video%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:video.html"><span style="color: #004993;">Video</span></a> <span style="color: #000000;">&#40;</span> <span style="color: #000000; font-weight:bold;">320</span><span style="color: #000066; font-weight: bold;">,</span> <span style="color: #000000; font-weight:bold;">240</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _listenStream &nbsp; = <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a> <span style="color: #000000;">&#40;</span> nc<span style="color: #000066; font-weight: bold;">,</span> groupspec<span style="color: #000066; font-weight: bold;">.</span>groupspecWithoutAuthorizations<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _listenStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">play</span> <span style="color: #000000;">&#40;</span> event<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">info</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">name</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _video<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">attachNetStream</span> <span style="color: #000000;">&#40;</span> _listenStream <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #004993;">addChild</span> <span style="color: #000000;">&#40;</span> _video <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">break</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <span style="color: #000000;">&#125;</span><br />
+<span style="color: #000000;">&#125;</span><br />
+<br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #339966; font-weight: bold;">function</span> setupGroup<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">:</span><span style="color: #0033ff; font-weight: bold;">void</span><br />
+<span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; groupspec = <span style="color: #0033ff; font-weight: bold;">new</span> GroupSpecifier<span style="color: #000000;">&#40;</span><span style="color: #990000;">&quot;myGroup/groupOne&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>postingEnabled &nbsp; &nbsp;= <span style="color: #0033ff; font-weight: bold;">false</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>multicastEnabled &nbsp;= <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>ipMulticastMemberUpdatesEnabled = <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>routingEnabled&nbsp; &nbsp; = <span style="color: #0033ff; font-weight: bold;">false</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>addIPMulticastAddress<span style="color: #000000;">&#40;</span><span style="color: #990000;">&quot;225.225.0.1:30303&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; group = <span style="color: #0033ff; font-weight: bold;">new</span> NetGroup<span style="color: #000000;">&#40;</span>nc<span style="color: #000066; font-weight: bold;">,</span>groupspec<span style="color: #000066; font-weight: bold;">.</span>groupspecWithoutAuthorizations<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; group<span style="color: #000066; font-weight: bold;">.</span>receiveMode &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = NetGroupReceiveMode<span style="color: #000066; font-weight: bold;">.</span>NEAREST<span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; group<span style="color: #000066; font-weight: bold;">.</span>replicationStrategy &nbsp; &nbsp; &nbsp; = NetGroupReplicationStrategy<span style="color: #000066; font-weight: bold;">.</span>RAREST_FIRST<span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; group<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">addEventListener</span><span style="color: #000000;">&#40;</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NET_STATUS</span><span style="color: #000066; font-weight: bold;">,</span><span style="color: #004993;">netStatus</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; sendStream = <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a> <span style="color: #000000;">&#40;</span>nc<span style="color: #000066; font-weight: bold;">,</span> groupspec<span style="color: #000066; font-weight: bold;">.</span>groupspecWithoutAuthorizations<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">addEventListener</span><span style="color: #000000;">&#40;</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NET_STATUS</span><span style="color: #000066; font-weight: bold;">,</span> netStreamHandler<span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span>multicastAvailabilitySendToAll &nbsp; = <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">attachAudio</span> <span style="color: #000000;">&#40;</span> <a href="http://www.google.com/search?q=microphone%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:microphone.html"><span style="color: #004993;">Microphone</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">getMicrophone</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">attachCamera</span> <span style="color: #000000;">&#40;</span> <a href="http://www.google.com/search?q=camera%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:camera.html"><span style="color: #004993;">Camera</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">getCamera</span> <span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">publish</span> <span style="color: #000000;">&#40;</span> id <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #000000;">&#125;</span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/actionscript-netstream-p2p/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.003 seconds using apc
+Object Caching 359/360 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:23 by W3 Total Cache -->

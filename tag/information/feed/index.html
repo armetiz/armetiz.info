@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Information</title>
+	<atom:link href="http://www.armetiz.info/tag/information/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Doctrine 2 &amp; i18n</title>
+		<link>http://www.armetiz.info/doctrine-2-internationalization/</link>
+		<comments>http://www.armetiz.info/doctrine-2-internationalization/#comments</comments>
+		<pubDate>Fri, 14 Oct 2011 08:57:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Doctrine]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[i18n]]></category>
+		<category><![CDATA[Information]]></category>
+		<category><![CDATA[Internationalisation]]></category>
+		<category><![CDATA[Langue]]></category>
+		<category><![CDATA[Monde]]></category>
+		<category><![CDATA[Système]]></category>
+		<category><![CDATA[Traduction]]></category>
+		<category><![CDATA[Translation]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2154</guid>
+		<description><![CDATA[Doctrine 2 est dépourvu &#8211; en natif &#8211; de système de traduction. Grâce au système d&#8217;extension, des contributeurs dont certains membres de l&#8217;équipe de développement Doctrine ont développés Gedmo, un.. <a href="http://www.armetiz.info/doctrine-2-internationalization/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/10/dbal_icon1.png"><img src="http://www.armetiz.info/files/2011/10/dbal_icon1.png" alt="" width="75" height="75" class="alignright size-full wp-image-2162" /></a><strong>Doctrine 2</strong> est dépourvu &#8211; en natif &#8211; de système de traduction.<br />
+Grâce au système d&#8217;extension, des contributeurs dont certains membres de l&#8217;équipe de développement Doctrine ont développés <a href="https://github.com/l3pp4rd/DoctrineExtensions">Gedmo</a>, un pack d&#8217;extension pour Doctrine.</p>
+<p>Cette extension inclue :
+<ul>
+<li>Tree</li>
+<li><strong>Translatable</strong></li>
+<li>Sluggable</li>
+<li>Timestampable</li>
+<li>Loggable</li>
+<li>Sortable</li>
+</ul>
+<p>Nous nous intéresserons à <strong>Translatable</strong> qui nous permettra de traduire nos données.</p>
+<p>Travaillant avec le <strong>Framework Zend</strong>, les exemples seront orientés pour cette architecture, il est à noter que cela n&#8217;est pas un pré-requit et que cela fonctionnera avec ou sans Zend Framework.</p>
+<h3>Fonctionnement</h3>
+<p>Le module <strong>i18n</strong> de Gedmo fonctionne grâce à l&#8217;utilisation d&#8217;un table annexe contenant la traduction de certaines propriétés de vos Entités.<br />
+La table de traduction contient donc <strong>le nom du champs traduite</strong>, <strong>la langue</strong>, <strong>la valeur</strong>, <strong>le type d&#8217;objet</strong> ainsi qu&#8217;une <strong>reference vers cet objet</strong>.</p>
+<p>Par défaut, l&#8217;extension aura besoin de la table : <strong>ext_translations</strong><br />
+Les champs suivant seront ainsi necessaire :</p>
+<ul>
+<li>id</li>
+<li>content</li>
+<li>field</li>
+<li>locale</li>
+<li>foreign_key</li>
+<li>object_class</li>
+</ul>
+<p>Voici un jeu de donnée qui vous permettra de mieux comprendre l&#8217;utilisation de ce type de structure :</p>
+<blockquote>
+<ul>
+<li>content : Un día me voy a comprar el mundo</li>
+<li>field : title</li>
+<li>locale : es_es</li>
+<li>foreign_key : 3</li>
+<li>object_class : EntityArticle</li>
+</ul>
+<ul>
+<li>content : Un jour j&#8217;achèterai le monde</li>
+<li>field : title</li>
+<li>locale : fr_fr</li>
+<li>foreign_key : 3</li>
+<li>object_class : EntityArticle</li>
+</ul>
+<ul>
+<li>content : Le monde semble être à l&#8217;agonie, que pouvons nous faire pour le sauver.</li>
+<li>field : description</li>
+<li>locale : fr_fr</li>
+<li>foreign_key : 3</li>
+<li>object_class : EntityArticle</li>
+</ul>
+</blockquote>
+<p>A noter, que les données relatives à la langue par défaut de votre application sont stockés au sein de la table gerant directement votre entité.<br />
+Par défaut, nous utilisons la langue &#8220;<strong>en_US</strong>&#8220;, ce qui signifie que la table <strong>ext_translations</strong> ne contiendra pas de traduction pour &#8220;en_US&#8221;.<br />
+Dans mon exemple, ces données seront stockés dans la table &#8220;<strong>articles</strong>&#8221; de l&#8217;entité <strong>EntityArticle</strong></p>
+<p>Ainsi, l&#8217;extension stockera l&#8217;ensemble des traductions de votre application au sein d&#8217;une même table.<br />
+Attention, le champs &#8220;<strong>forien_key</strong>&#8221; ne correspond pas à une clé étrangère pour votre base de donnée relationnelle.<br />
+Une des possibilités de l&#8217;extension consiste à pouvoir définir une table spécifique à la traduction d&#8217;une Entités, ainsi vous pourrez définir une vrai <strong>clé étrangère</strong> au sein de votre <strong>RDBMS</strong>.</p>
+<h3>Exploitation</h3>
+<p>Au niveau de l&#8217;exploitation des données,<br />
+Vous définirez la langue utilisée au sein de votre application lors de l&#8217;execution, cela correspondra normalement à la langue de l&#8217;utilisateur.<br />
+Il ne restera plus qu&#8217;a utiliser votre application comme vous en avez l&#8217;habitude.</p>
+<p>Nous partons du principe que votre environnement Doctrine est correctement configuré et fonctionnel.</p>
+<p>Voici la configuration minimum a définir :</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000088;">$classLoader</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineCommonClassLoader<span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">'Gedmo'</span><span style="color: #339933;">,</span> APPLICATION_PATH <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/../library/'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$classLoader</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">register</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$config</span> &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineORMConfiguration<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$driverChain</span>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineORMMappingDriverDriverChain<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$entityDriver</span> &nbsp; &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineORMMappingDriverXmlDriver <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$translatableDriver</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$config</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">newDefaultAnnotationDriver</span><span style="color: #009900;">&#40;</span> APPLICATION_PATH <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/../library/DoctrineExtensions/Gedmo/Translatable/Entity'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$driverChain</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addDriver</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$entityDriver</span><span style="color: #339933;">,</span> &nbsp; &nbsp; <span style="color: #0000ff;">'EntityArticle'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$driverChain</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addDriver</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$translatableDriver</span><span style="color: #339933;">,</span> &nbsp; <span style="color: #0000ff;">'GedmoTranslatable'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$config</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setMetadataDriverImpl</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$driverChain</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$eventManager</span> &nbsp; &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineCommonEventManager<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$translatableListener</span> &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> GedmoTranslatableTranslationListener<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+<span style="color: #000088;">$translatableListener</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setTranslationFallback</span><span style="color: #009900;">&#40;</span> <span style="color: #009900; font-weight: bold;">true</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$eventManager</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addEventSubscriber</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$translatableListener</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$entityManager</span> <span style="color: #339933;">=</span> DoctrineORMEntityManager<span style="color: #339933;">::</span><span style="color: #004000;">create</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$conn</span><span style="color: #339933;">,</span> <span style="color: #000088;">$config</span><span style="color: #339933;">,</span> <span style="color: #000088;">$eventManager</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Ensuite, il faut configurer vos entités.<br />
+J&#8217;utilise le XML Mapping, vous trouverez facilement l&#8217;équivalence pour YAML / Annotation.</p>
+<div class="codecolorer-container xml blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="xml codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Nous avons simplement ajouté le noeud XML <strong>gedmo:translatable</strong> à notre champs afin de spécifier que celui-ci peut-être traduit.<br />
+A noter qu&#8217;il faut inclure l&#8217;espace de nom <strong>xmlns:gedmo</strong>.</p>
+<p>Voici un exemple d&#8217;utilisation avec Doctrine</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">//En utilisant la langue par défaut qui est l'anglais,</span><br />
+<span style="color: #000088;">$article</span> &nbsp; &nbsp;<span style="color: #339933;">=</span> <span style="color: #000088;">$entityManager</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'EntityArticle'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$article</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getTitle</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <br />
+<span style="color: #666666; font-style: italic;">//One day I'll buy the world</span><br />
+<br />
+<span style="color: #666666; font-style: italic;">//En spécifiant la langue espagnole,</span><br />
+<span style="color: #000088;">$translatableListener</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setTranslatableLocale</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;es_es&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$article</span> &nbsp; &nbsp;<span style="color: #339933;">=</span> <span style="color: #000088;">$entityManager</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'EntityArticle'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$article</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getTitle</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <br />
+<span style="color: #666666; font-style: italic;">//Un día me voy a comprar el mundo</span></div></td></tr></tbody></table></div>
+<h3>Entity de traduction</h3>
+<p>Nous avons vu précédemment que les traductions sont par défaut stockées dans la table <strong>ext_translations</strong>.<br />
+Voyons comment utiliser une table dédiée à la traduction d&#8217;une entité. Cela permettra en plus d&#8217;avoir une structure de base de donnée plus propre, et d&#8217;avoir des clés étrangère au sein de votre RDBMS.</p>
+<div class="codecolorer-container xml blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="xml codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp; &nbsp; &nbsp; &nbsp; ..</div></td></tr></tbody></table></div>
+<p>Créons la class ArticleTranslation qui n&#8217;a rien de bien extraordinaire, sauf qu&#8217;elle doit étendre AbstractTranslation qui va définir les differentes propriétés de votre table de traduction.</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000000; font-weight: bold;">namespace</span> Entity<br />
+<br />
+<span style="color: #000000; font-weight: bold;">use</span> GedmoTranslatableEntityAbstractTranslation<span style="color: #339933;">;</span><br />
+<span style="color: #000000; font-weight: bold;">use</span> DoctrineORMMapping <span style="color: #b1b100;">as</span> ORM<span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000000; font-weight: bold;">class</span> ArticleTranslation <span style="color: #000000; font-weight: bold;">extends</span> AbstractTranslation<br />
+<span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>A cela, ajoutons le fichier de mapping.</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Il ne vous reste plus qu&#8217;a créer la table article_translation avec les champs énuméré en début d&#8217;article.</p>
+<h3>Conclusion</h3>
+<p>Comparer à Doctrine 1, la mise en place de l&#8217;internationalisation pour votre application peut sembler plus difficile. Par contre, l&#8217;exploitation de cette implementation est tout simplement <strong>user-friendly</strong>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/doctrine-2-internationalization/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>Fin d&#8217;année 2009 &#8211; Récapitulatif, Analyse personnel</title>
+		<link>http://www.armetiz.info/fin-dannee-2009-recapitulatif-analyse-personnel/</link>
+		<comments>http://www.armetiz.info/fin-dannee-2009-recapitulatif-analyse-personnel/#comments</comments>
+		<pubDate>Wed, 31 Dec 2008 13:13:34 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Armetiz]]></category>
+		<category><![CDATA[Information]]></category>
+		<category><![CDATA[Vie du site]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=634</guid>
+		<description><![CDATA[Voila environ un an que Armetiz.info a vu le jour, le premier article datant du 21 Décembre 2007. Au début orienté vers Drupal qui était ma principale source d&#8217;occupation, j&#8217;ai.. <a href="http://www.armetiz.info/fin-dannee-2009-recapitulatif-analyse-personnel/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Voila environ un an que Armetiz.info a vu le jour, le <a href="http://www.armetiz.info/cacher-le-titre-dun-noeud-drupal/">premier article</a> datant du 21 Décembre 2007.<br />
+Au début orienté vers Drupal qui était ma principale source d&#8217;occupation, j&#8217;ai petit à petit changé d&#8217;orientation vers des sujets majoritairement Adobien, cela est dû à mon expérience professionnelle qui aussi a changée. En effet, je suis passé de développeur Web à développeur Flash, d&#8217;administrateur CMS à concepteur d&#8217;application eLearning.</p>
+<p>Le lancement du blog fût parsemé de grandes pauses, sûrement car je n&#8217;avais pas réellement envie d&#8217;avoir un blog, mais l&#8217;approche de l&#8217;été 2008 m&#8217;a donné envie de m&#8217;investir, et c&#8217;est à ce moment que je me suis pris au jeu. C&#8217;est aussi à ce moment que je me suis rendu compte qu&#8217;il est difficile d&#8217;avoir une écriture régulière, et qu&#8217;une ligne éditoriale n&#8217;est pas si évidente à construire.<br />
+Quand on se lance dans l&#8217;aventure, il est important d&#8217;avoir des repères, d&#8217;où l&#8217;utilisation de Google Analytics qui est très attractif, car depuis plusieurs mois, chaque matin j&#8217;aime regarder combien de visiteurs j&#8217;ai eu la veille, voir quels sont les sujets les plus attractifs, et aussi la provenance des visiteurs.</p>
+<p>Concernant les visiteurs, j&#8217;ai toujours été agréablement surpris de l&#8217;évolution. Car quand on commence et que l&#8217;on voit 10 visiteurs jours, c&#8217;est super bien, et puis, on écrit et chaque jours on a quelques visiteurs en plus, on passe la barre des 50 avec le sourire aux lèvres. En allant presque à 100 Visiteurs c&#8217;est le jackpot <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br />
+Les mois de Novembre et Décembre n&#8217;ont pas été très intéressant pour moi, moins d&#8217;article, donc un taux de visiteur en baisse, normale : Action -&gt; Réaction.</p>
+<p>Mais pas de soucis, l&#8217;année 2009 sent bon, on va pouvoir l&#8217;attaquer comme il se doit avec quelques projets.</p>
+<p>Sur ces quelques mots, je vous souhaite un bon passage vers la nouvelle année, et <strong>pleins de bonnes choses</strong> pour 2009.</p>
+<p>Et comme dirai l&#8217;autre, on se voit l&#8217;année prochaine <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p><img alt="" src="http://www.it-france.info/images/stories/news/bonne_annee_2006.jpg" class="aligncenter" width="402" height="291" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/fin-dannee-2009-recapitulatif-analyse-personnel/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.003 seconds using apc
+Object Caching 588/589 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:15:50 by W3 Total Cache -->

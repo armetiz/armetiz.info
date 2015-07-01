@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Mutualisé</title>
+	<atom:link href="http://www.armetiz.info/tag/mutualise/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Mise en production de Zend Framework sur un serveur mutualisé</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/</link>
+		<comments>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comments</comments>
+		<pubDate>Fri, 04 Jun 2010 08:06:56 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Zend]]></category>
+		<category><![CDATA[Astuces]]></category>
+		<category><![CDATA[Conseils]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[htaccess]]></category>
+		<category><![CDATA[Mutualisé]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[RewriteRule]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724</guid>
+		<description><![CDATA[Lorsque l&#8217;on dispose d&#8217;un serveur dédié, la mise en production d&#8217;une application Zend Framework est assez simple; il suffit de modifier le DocumentRoot du VirtualHost. Si l&#8217;on dispose d&#8217;un hébergement.. <a href="http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/06/zend-framework1.png"><img src="http://www.armetiz.info/files/2010/06/zend-framework1.png" alt="Zend Framework Logo" width="185" height="187" class="alignright size-full wp-image-1727" /></a>Lorsque l&#8217;on dispose d&#8217;un serveur dédié, la mise en production d&#8217;une application Zend Framework est assez simple; il suffit de modifier le <strong>DocumentRoot</strong> du <strong>VirtualHost</strong>.</p>
+<p>Si l&#8217;on dispose d&#8217;un hébergement mutualisé, il faut aussi pouvoir proposer à nos visiteurs un accès au site via <strong>www.domain.tld</strong> et non pas www.domain.tld/public/</p>
+<h3>Première solution</h3>
+<p>La première solution, consiste à déplacer le fichier /public/index.php à la racine du domaine et de modifier la définition de la constante <strong>APPLICATION_PATH</strong> de ce même fichier.<br />
+Le seul soucis de cette solution, c&#8217;est que les appels aux ressources de type <strong>CSS</strong> ou <strong>JS</strong> devront être modifiés pour pointer vers www.domain.tld/public/<br />
+Personnellement, je trouve cela complètement nul&#8230;</p>
+<h3>Deuxième solution</h3>
+<p>La deuxième solution &#8211; bien plus élégante &#8211; passe par l&#8217;ajout d&#8217;un .htaccess à la racine du domaine.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">RewriteEngine On<br />
+# Only apply to URLs on this domain<br />
+RewriteCond %{HTTP_HOST} ^(www.)?domain.tld$<br />
+<br />
+# Only apply to URLs that aren't already under folder.<br />
+RewriteCond %{REQUEST_URI} !^/public/<br />
+<br />
+# Don't apply to URLs that go to existing files or folders.<br />
+RewriteCond %{REQUEST_FILENAME} !-f<br />
+RewriteCond %{REQUEST_FILENAME} !-d<br />
+<br />
+# Rewrite all those to insert /folder.<br />
+RewriteRule ^(.*)$ /public/$1<br />
+<br />
+# Also redirect the root folder.<br />
+RewriteCond %{HTTP_HOST} ^(www.)?domain.tld$<br />
+RewriteRule ^(/)?$ public/index.php [L]</div></td></tr></tbody></table></div>
+<p>Là, tout est magique et fonctionne sans <strong>aucune autre modification</strong> de l&#8217;application.<br />
+Pour protéger l&#8217;accès à vos autres répertoires, et principalement <strong>/application</strong> qui contient surement vos <strong>mots de passe BDD</strong> non chiffrés. Rajouter un fichier .htaccess contenant</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">deny from all</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/feed/</wfw:commentRss>
+		<slash:comments>19</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.003 seconds using apc
+Object Caching 385/386 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:29 by W3 Total Cache -->

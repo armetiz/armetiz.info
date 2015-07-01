@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Shell</title>
+	<atom:link href="http://www.armetiz.info/tag/shell/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Faire un &#8220;svn revert&#8221; sur l&#8217;ensemble de vos fichiers</title>
+		<link>http://www.armetiz.info/svn-revert-working-copy/</link>
+		<comments>http://www.armetiz.info/svn-revert-working-copy/#comments</comments>
+		<pubDate>Thu, 07 Jul 2011 09:49:26 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[awk]]></category>
+		<category><![CDATA[Commande]]></category>
+		<category><![CDATA[Revert]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[SVN]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2106</guid>
+		<description><![CDATA[Petit article mémo, J&#8217;avais besoin de faire un revert sur l&#8217;ensemble des mes fichiers locaux. Or, &#8220;svn revert *&#8221; ne fonctionne pas. Voici la petite commande magique 1svn st &#124;.. <a href="http://www.armetiz.info/svn-revert-working-copy/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Petit article mémo,<br />
+J&#8217;avais besoin de faire un revert sur l&#8217;ensemble des mes fichiers locaux. Or, &#8220;svn revert *&#8221; ne fonctionne pas.</p>
+<p>Voici la petite commande magique</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">svn st | grep -e '^M' | awk '{print $2}' | xargs svn revert</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/svn-revert-working-copy/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.002 seconds using apc
+Object Caching 339/340 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:17:27 by W3 Total Cache -->

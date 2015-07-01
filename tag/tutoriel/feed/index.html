@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Tutoriel</title>
+	<atom:link href="http://www.armetiz.info/tag/tutoriel/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>NodeJS &#8211; Mise en production</title>
+		<link>http://www.armetiz.info/node-js-mise-production-simple/</link>
+		<comments>http://www.armetiz.info/node-js-mise-production-simple/#comments</comments>
+		<pubDate>Tue, 11 Sep 2012 10:07:39 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Déploiement]]></category>
+		<category><![CDATA[Didacticiel]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[MEP]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[Tutoriel]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2748</guid>
+		<description><![CDATA[La mise en production d&#8217;une application NodeJS est une étape importante dans la vie de votre application. Il existe de nombreuses solutions utilisant forever, upstart, monit ou le script shell.. <a href="http://www.armetiz.info/node-js-mise-production-simple/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>La mise en production d&#8217;une application <a href="http://nodejs.org/">NodeJS</a> est une étape importante dans la vie de votre application.</p>
+<p>Il existe de nombreuses solutions utilisant <a href="https://github.com/nodejitsu/forever">forever</a>, <a href="http://upstart.ubuntu.com/">upstart</a>, <a href="http://mmonit.com/monit/">monit</a> ou le script shell <a href="http://fr.wikipedia.org/wiki/Linux_Standard_Base">LSB</a> personnalisé.<br />
+Aucune de ces solutions ne m&#8217;a convaincu; du coup la solution que je vous propose est la mise en place d&#8217;un script LSB fait en <strong>Javascript</strong>.</p>
+<h3>Pré-requit</h3>
+<p>Pour réaliser correctement ce petit tutoriel, il faut :</p>
+<ul>
+<li>Un utilisateur système &#8220;node&#8221; avec son répertoire personnel: <strong>adduser &#8211;shell /sbin/nologin node</strong></li>
+<li><a href="http://www.armetiz.info/install-nodejs-on-centos/">NodeJS installé</a></li>
+<li>Installer <strong><a href="http://blog.nodejs.org/2011/03/23/npm-1-0-global-vs-local-installation/">globalement</a></strong> le module <a href="https://npmjs.org/package/simple-daemon">simple-daemon</a> : <strong>npm install -g simple-daemon</strong>
+</ul>
+<h3>Exemple d&#8217;application</h3>
+<p>L&#8217;application que nous souhaitons lancer automatiquement au démarrage du serveur est un simple serveur HTTP.</p>
+<p><strong>/home/node/funky-server/funky-server.js</strong></p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #003366; font-weight: bold;">var</span> http <span style="color: #339933;">=</span> require<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'http'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+http.<span style="color: #660066;">createServer</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>req<span style="color: #339933;">,</span> res<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'New client'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; res.<span style="color: #660066;">writeHead</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">200</span><span style="color: #339933;">,</span> <span style="color: #009900;">&#123;</span><span style="color: #3366CC;">'Content-Type'</span><span style="color: #339933;">:</span> <span style="color: #3366CC;">'text/plain'</span><span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; res.<span style="color: #660066;">end</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Hello Funky World<span style="color: #000099; font-weight: bold;">\n</span>'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">listen</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">80</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Server running, listen on port 80'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Cette application a de particulier qu&#8217;elle écoute toujours sur le port 80 et donc qu&#8217;une seule instance ne peut-être exécutée.<br />
+De plus, pour ouvrir un socket sur un port inférieur à 1024, il faut les privileges root.<br />
+Une fois le serveur sur écoute, les privileges <strong>root</strong> ne sont plus nécessaires.</p>
+<h3>Déploiement</h3>
+<p>Vous remarquerez qu&#8217;au sein de l&#8217;application, il n&#8217;y a aucune gestion de l&#8217;utilisateur gérant le processus ou de vérification de l&#8217;unicité de l&#8217;execution.<br />
+Cela sera géré directement par notre <strong>Wrapper</strong> LSB dont voici le contenu.</p>
+<p><strong>/etc/init.d/funky-server.js</strong></p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">#<span style="color: #339933;">!/</span>usr<span style="color: #339933;">/</span>bin<span style="color: #339933;">/</span>env node<br />
+<span style="color: #003366; font-weight: bold;">var</span> daemon <span style="color: #339933;">=</span> require<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'/usr/local/lib/node_modules/simple-daemon'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <br />
+<span style="color: #006600; font-style: italic;">//En fonction de votre système, ce chemin peut-être different</span><br />
+<br />
+daemon.<span style="color: #660066;">simple</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; pidfile <span style="color: #339933;">:</span> <span style="color: #3366CC;">'/var/run/funky-server.pid'</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; logfile <span style="color: #339933;">:</span> <span style="color: #3366CC;">'/var/log/funky-server.log'</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; command <span style="color: #339933;">:</span> process.<span style="color: #660066;">argv</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">3</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; runSync &nbsp; &nbsp; <span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; require <span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;/home/node/funky-server/funky-server.js&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; process.<span style="color: #660066;">setuid</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;node&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Comme vous le remarquez, une fois le require fait, nous changeons l&#8217;utilisateur du processus.</p>
+<p>Rendons le fichier executable.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js</div></td></tr></tbody></table></div>
+<p>Vous pouvez tester</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js start<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js status<br />
+<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #000000; font-weight: bold;">/</span>dev<span style="color: #000000; font-weight: bold;">/</span>null http:<span style="color: #000000; font-weight: bold;">//</span>localhost<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">tail</span> <span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>log<span style="color: #000000; font-weight: bold;">/</span>funky-server.log<br />
+<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js stop<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js status</div></td></tr></tbody></table></div>
+<p>Pour ajouter le Wrapper ci-dessus aux scripts de demarrage système, il est préférable de le rendre compatible à votre distribution.</p>
+<p>Sous Linux, il faut rajouter des headers pour être conforme <a href="http://fedoraproject.org/wiki/Packaging:SysVInitScript">SysVInitScript</a> / <a href="http://wiki.debian.org/LSBInitScripts">LSBinitScript Debian</a></p>
+<p>Voici le code complet du script de démarrage.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#!/usr/bin/env node</span><br />
+<span style="color: #666666; font-style: italic;">### BEGIN INIT INFO</span><br />
+<span style="color: #666666; font-style: italic;"># Provides: funky-server</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Start: $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Stop: $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Start: 2 3 4 5</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Stop: 0 1 6</span><br />
+<span style="color: #666666; font-style: italic;"># Short-Description: Start daemon at boot time</span><br />
+<span style="color: #666666; font-style: italic;"># Description: Enable service provided by funky-server.</span><br />
+<span style="color: #666666; font-style: italic;">### END INIT INFO</span><br />
+<br />
+var daemon = require<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">'/usr/local/lib/node_modules/simple-daemon'</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>; <br />
+<span style="color: #000000; font-weight: bold;">//</span>En fonction de votre système, ce chemin peut-être different<br />
+<br />
+daemon.simple<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #7a0874; font-weight: bold;">&#123;</span><br />
+&nbsp; &nbsp; pidfile : <span style="color: #ff0000;">'/var/run/funky-server.pid'</span>,<br />
+&nbsp; &nbsp; logfile : <span style="color: #ff0000;">'/var/log/funky-server.log'</span>,<br />
+&nbsp; &nbsp; <span style="color: #7a0874; font-weight: bold;">command</span> : process.argv<span style="color: #7a0874; font-weight: bold;">&#91;</span><span style="color: #000000;">3</span><span style="color: #7a0874; font-weight: bold;">&#93;</span>,<br />
+&nbsp; &nbsp; runSync &nbsp; &nbsp; : <span style="color: #000000; font-weight: bold;">function</span> <span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span> <span style="color: #7a0874; font-weight: bold;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; require <span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">&quot;/home/node/funky-server/funky-server.js&quot;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; process.setuid<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">&quot;node&quot;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;<br />
+&nbsp; &nbsp; <span style="color: #7a0874; font-weight: bold;">&#125;</span><br />
+<span style="color: #7a0874; font-weight: bold;">&#125;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;</div></td></tr></tbody></table></div>
+<p>Sous Debian &#038; Ubuntu, rajouter les headers suivant pour etre conforme :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#!/usr/bin/env node</span><br />
+<span style="color: #666666; font-style: italic;">### BEGIN INIT INFO</span><br />
+<span style="color: #666666; font-style: italic;"># Provides: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;funky-server</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Start: &nbsp; &nbsp;$local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Stop: &nbsp; &nbsp; $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Start: &nbsp; &nbsp; 2 3 4 5</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Stop: &nbsp; &nbsp; &nbsp;0 1 6</span><br />
+<span style="color: #666666; font-style: italic;"># Short-Description: Start daemon at boot time</span><br />
+<span style="color: #666666; font-style: italic;"># Description: &nbsp; &nbsp; &nbsp; Enable service provided by funky-server.</span><br />
+<span style="color: #666666; font-style: italic;">### END INIT INFO</span></div></td></tr></tbody></table></div>
+<p>On ajoute notre module au système de démarrage.<br />
+Sous RedHat &#038; CentOS</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">chkconfig <span style="color: #660033;">--add</span> funky-server.js</div></td></tr></tbody></table></div>
+<p>Sous Debian &#038; Ubuntu</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">updaterc.d default funky-server.js</div></td></tr></tbody></table></div>
+<h3>Pour aller plus loin</h3>
+<p><img src="http://www.armetiz.info/files/2012/09/logo-developer-github.png" alt="" title="logo-developer-github" width="128" height="128" class="alignleft size-full wp-image-2781" /></a><a href="https://github.com/armetiz/node-simple-daemon">Simple-daemon</a> est un module NodeJS qui est le fork de <a href="https://github.com/frodwith/node-init">node-init</a>. A ce module il manquait une fonction synchrone pour lancer le processus et être parfaitement fonctionnel.<br />
+En effet, basé sur <a href="https://github.com/indexzero/daemon.node">daemon.node</a> qui est un <strong>add-on C</strong> avec une restriction importante : &#8220;all daemonization should happen on the first <a href="http://howtonode.org/understanding-process-next-tick">tick</a> and not as part of an asynchronous action&#8221;.</p>
+<p>Vous pouvez coupler cette solution à <a href="https://github.com/nodejitsu/forever">forever</a> pour que l&#8217;application survive à un crash impromptu.</p>
+<p>Aussi,<br />
+L&#8217;ouverture du serveur HTTP est une <strong>opération asynchrone</strong>, le changement d&#8217;utilisateur apparait après la demande d&#8217;écoute du serveur mais pas forcement après que le serveur soit sur écoute.<br />
+Après lecture du <a href="https://github.com/joyent/node">code NodeJS</a> et de la <a href="https://github.com/joyent/libuv">libuv</a> concernant l&#8217;écoute d&#8217;un serveur HTTP, il me semble que la reservation du socket soit fait dans le même <a href="http://howtonode.org/understanding-process-next-tick">tick</a> que la fonction JS <strong>http.Server::listen()</strong>. Du moins, pour les systèmes Unix.<br />
+Si quelqu&#8217;un est apte à me le confirmer, les commentaires sont là pour.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/node-js-mise-production-simple/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Installer FMS 4 sur Debian 5.0</title>
+		<link>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/</link>
+		<comments>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/#comments</comments>
+		<pubDate>Thu, 09 Sep 2010 13:31:46 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Didacticiel]]></category>
+		<category><![CDATA[P2P]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Tutoriel]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1820</guid>
+		<description><![CDATA[Pour annoncer la sortie de Flash Media Server 4. Voici un petit tutoriel présentant l&#8217;installation de FMS 4 sur Debian Lenny. Cette version sera disponible pour un plus grand nombre.. <a href="http://www.armetiz.info/installer-fms-4-sur-debian-5-0/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img alt="" src="http://www.adobe.com/ubi/globalnav/include/adobe-lq.png" class="alignleft" width="43" height="72" />Pour annoncer la sortie de Flash Media Server 4. Voici un petit tutoriel présentant l&#8217;installation de <strong>FMS 4</strong> sur <strong>Debian Lenny</strong>.</p>
+<p>Cette version sera disponible pour un plus grand nombre de machine avec le <strong>support du 64Bits</strong>. Elle permettra de <strong>réduire considérablement les coûts</strong> de bande passante pour la <strong>VoD grâce au P2P</strong> mais aussi pour le live grâce au <strong>Multicast</strong>.</p>
+<h3>Installation</h3>
+<p>L&#8217;installation se déroule sur une <a href="http://www.debian.org/distrib/">Debian 5.0</a> où il n&#8217;y a que le système de base.</p>
+<p>FMS 4 nécessite la librairie <a href="http://packages.debian.org/fr/lenny/libnspr4-dev">libnspr4</a>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">apt-get install libnspr4-dev</div></td></tr></tbody></table></div>
+<p>Ensuite, <a href="http://www.adobe.com/go/tryflashmediaserver_fr">récupérer FMS 4</a> pour Linux.<br />
+Dé-zipper le fichier : <strong>FlashMediaServer_4_all.zip</strong> fraichement téléchargé.<br />
+Il existe deux versions pour Linux, la <strong>32bits</strong> et la <strong>64bits</strong>. A vous de choisir celle qui convient à votre architecture.</p>
+<p>Pour décompresser et extraire l&#8217;archive.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">tar -xzvf FlashMediaServer4.tar.gz</div></td></tr></tbody></table></div>
+<p>Lancer le script d&#8217;installation FMS qui se trouve dans le répertoire où vous avez extrait l&#8217;archive du dessus.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">./installFMS</div></td></tr></tbody></table></div>
+<p>A un moment, on vous demandera un licence. Nous souhaitons utiliser la version de développement, donc nous passons cette étape en appuyant sur <strong>ENTREE</strong> et en répondant non à la question :<br />
+<blockquote><em>You have not entered a serial number.  Falling back to<br />
+the Adobe Flash Media Development Server!<br />
+Would you like to try again?</em></p></blockquote>
+<h3>Options par défaut</h3>
+<ul>
+<li>Répertoire d&#8217;installation : /opt/adobe/fms</li>
+<li>Adobe FMS Server port : 1935 &amp; 80</li>
+<li>Adobe FMS Admin Server port : 1111</li>
+</ul>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/feed/</wfw:commentRss>
+		<slash:comments>8</slash:comments>
+		</item>
+		<item>
+		<title>Installer PHPDocumentor avec WAMP</title>
+		<link>http://www.armetiz.info/installation-phpdocumentor-avec-wamp/</link>
+		<comments>http://www.armetiz.info/installation-phpdocumentor-avec-wamp/#comments</comments>
+		<pubDate>Tue, 19 Jan 2010 14:53:42 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Formation]]></category>
+		<category><![CDATA[Installation]]></category>
+		<category><![CDATA[PEAR]]></category>
+		<category><![CDATA[Tutoriel]]></category>
+		<category><![CDATA[WAMP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1587</guid>
+		<description><![CDATA[Wikipédia : phpDocumentor est un outil de documentation écrit en PHP. Il est semblable à l&#8217;outil de javadoc. Il est sous licence LGPL. Il permet d&#8217;aider les développeurs à la.. <a href="http://www.armetiz.info/installation-phpdocumentor-avec-wamp/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img alt="Logo php" src="http://www.mariosamson.com/wp-content/uploads/2009/11/php-logo.jpg" class="alignleft" width="150" height="150" /><a href="http://fr.wikipedia.org/wiki/Phpdocumentor">Wikipédia</a> : phpDocumentor est un outil de documentation écrit en PHP. Il est semblable à l&#8217;outil de <strong>javadoc</strong>. Il est sous licence LGPL. Il permet d&#8217;aider les développeurs à la <strong>documentation</strong> de leur code. Il analyse les commentaires de leurs codes.</p>
+<p>Pour pouvoir s&#8217;en servir, il faut installer PEAR avant tout.<br />
+J&#8217;utilise <strong>WAMP 2.0i</strong> avec <strong>PHP 5.3</strong> et <strong>Apache 2.2</strong>.</p>
+<h3>Installation PEAR avec WAMP</h3>
+<p>Utiliser l&#8217;invite de commande et exécuter go-pear.bat du répertoire d&#8217;installation de WAMP.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">cd C:wampbinphpphp5.3.0<br />
+go-pear.bat</div></td></tr></tbody></table></div>
+<p>Si comme moi vous avez un jolie Warning, pas de panique, on va faire autrement</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">cd C:wampbinphpphp5.3.0<br />
+php.exe -d phar.require_hash=0 PEARgo-pear.phar</div></td></tr></tbody></table></div>
+<p>Ensuite, suivez le tutoriel de <a href="http://www.6ma.fr/tuto/installer+pear+avec+wamp-455">6ma.fr</a> à la lettre et tout se passera bien.</p>
+<h3>Installer phpDocumentor avec PEAR</h3>
+<p>PEAR est un <strong>gestionnaire de librairie</strong>, c&#8217;est lui qui va se charger de l&#8217;installation de <strong>PHPDocumentor</strong><br />
+Pour cela, exécuter les commandes suivantes</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">cd C:wampbinphpphp5.3.0<br />
+php PEAR/pearcmd.php install phpdocumentor</div></td></tr></tbody></table></div>
+<p>Pour utiliser ce petit outil, je vous laissez avec la documentation officiel de <a href="http://www.phpdoc.org/">PHPDocumentor</a> ainsi qu&#8217;un tutoriel pour son <a href="http://blog.bsoftco.com/2009/04/24/tutoriel-sur-comment-generer-une-phpdoc-avec-eclipse/">utilisation avec Eclipse</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/installation-phpdocumentor-avec-wamp/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Découvrir la POO avec Flash</title>
+		<link>http://www.armetiz.info/decouvrir-la-poo-avec-flash/</link>
+		<comments>http://www.armetiz.info/decouvrir-la-poo-avec-flash/#comments</comments>
+		<pubDate>Fri, 10 Oct 2008 13:58:49 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Découverte]]></category>
+		<category><![CDATA[Initiation]]></category>
+		<category><![CDATA[Tutoriel]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=419</guid>
+		<description><![CDATA[Certains graphistes n&#8217;ayant pas une formation de développeur ont quelques difficultés à utiliser la Programmation Orientée Objet sous Flash. Non pas que l&#8217;implémentation de la POO soit spécifique avec Flash,.. <a href="http://www.armetiz.info/decouvrir-la-poo-avec-flash/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Certains graphistes n&#8217;ayant pas une formation de développeur ont quelques difficultés à utiliser la <a href="http://fr.wikipedia.org/wiki/Orient%C3%A9_objet">Programmation Orientée Objet</a> sous Flash.</p>
+<p>Non pas que l&#8217;implémentation de la POO soit spécifique avec Flash, mais un graphiste n&#8217;a surement aucun intérêt à apprendre la POO sous Java, donc autant lire un tutoriel de programmation sous Flash.<br />
+De plus, le passage &#8211; certes vieux &#8211; de AS2 vers AS3 à laissé sur le carreau de nombreuses personnes.</p>
+<p>Voici un tutoriel d&#8217;initiation à la <a href="http://www.bases-as3.fr/index.php/2008/10/10/as-programmation-objet">programmation objet sous Flash</a>. Pour ceux qui n&#8217;ont jamais développer, prenez votre temps et appréhendez cet article tranquillement; pour ceux qui effectuent encore leur migration AS2 vers AS3, oubliez l&#8217;espace de votre lecture vos anciennes habitudes, et n&#8217;essayez pas de faire de comparaison.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/decouvrir-la-poo-avec-flash/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.010 seconds using apc
+Object Caching 1019/1041 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:14:01 by W3 Total Cache -->

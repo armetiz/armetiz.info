@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Javascript</title>
+	<atom:link href="http://www.armetiz.info/tag/javascript/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Meteor &#8211; NPM Integration</title>
+		<link>http://www.armetiz.info/meteor-npm-integration/</link>
+		<comments>http://www.armetiz.info/meteor-npm-integration/#comments</comments>
+		<pubDate>Tue, 09 Apr 2013 10:03:32 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Anglais]]></category>
+		<category><![CDATA[Asynchronous]]></category>
+		<category><![CDATA[Cloud]]></category>
+		<category><![CDATA[Fibers]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Future]]></category>
+		<category><![CDATA[Meteor]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[R&D]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3075</guid>
+		<description><![CDATA[Since a few weeks, I&#8217;m testing MeteorJS and I really like it ! The 0.6 version has been released with NPM Integration. Which means that you can use any Node.. <a href="http://www.armetiz.info/meteor-npm-integration/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Since a few weeks, I&#8217;m testing <a href="http://meteor.com/">MeteorJS</a> and I really like it !</p>
+<p>The 0.6 version has been released with <strong>NPM Integration</strong>. Which means that you can use any Node package without the need to tweak your Meteor Application.</p>
+<p>At the time of writing, there is no official documentation about this point, only a <a href="https://github.com/avital/meteor-xml2js-npm-demo">github demo with xml2js</a>.<br />
+This article is a short <strong>how-to</strong> about :</p>
+<ul>
+<li><strong>NPM Integration</strong></li>
+<li>Invoke functions <strong>from client to server</strong></li>
+<li>Use asynchronous methods on server with <strong><a href="https://github.com/laverdet/node-fibers">Fibers</a> &#038; Future</strong></li>
+</ul>
+<p>Let&#8217;s try to use <a href="https://github.com/armetiz/node-freebox-sdk">freebox-sdk</a> with a newly created Meteor Application.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ meteor update <span style="color: #666666; font-style: italic;">#update meteor</span><br />
+$ meteor create freebox <span style="color: #666666; font-style: italic;">#create a new project</span><br />
+$ <span style="color: #7a0874; font-weight: bold;">cd</span> freebox<br />
+$ meteor <span style="color: #666666; font-style: italic;">#run your application</span><br />
+=<span style="color: #000000; font-weight: bold;">&gt;</span> Meteor server running on: http:<span style="color: #000000; font-weight: bold;">//</span>localhost:<span style="color: #000000;">3000</span><span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<p>Meteor should run your newly created Application. Check that you get the <strong>Running</strong> message without any error. If you got some, just try to fix them <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Create the <strong>packages</strong> directory structure.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ <span style="color: #c20cb9; font-weight: bold;">mkdir</span> packages <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> packages<br />
+$ <span style="color: #c20cb9; font-weight: bold;">mkdir</span> freebox-sdk <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> freebox-sdk<br />
+$ <span style="color: #c20cb9; font-weight: bold;">touch</span> package.js freebox-sdk.js</div></td></tr></tbody></table></div>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #006600; font-style: italic;">// file: package.js</span><br />
+Npm.<span style="color: #660066;">depends</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #3366CC;">'freebox-sdk'</span><span style="color: #339933;">:</span> <span style="color: #3366CC;">'0.3.0'</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #003366; font-weight: bold;">Package</span>.<span style="color: #660066;">on_use</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>api<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; api.<span style="color: #660066;">add_files</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'freebox-sdk.js'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'server'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>The <em>package.js</em> contains the dependency definition.<br />
+When the package will be available, the <em>freebox-sdk.js</em> file will be added to the server scope.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #006600; font-style: italic;">// file: freebox-sdk.js</span><br />
+Freebox <span style="color: #339933;">=</span> Npm.<span style="color: #660066;">require</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;freebox-sdk&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+freeboxFacade <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; get<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>options<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #003366; font-weight: bold;">new</span> Freebox<span style="color: #009900;">&#40;</span>options<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; <span style="color: #009900;">&#125;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p><em>Freebox</em> &#038; <em>freeboxFacade</em> are new global variables and are available on your Meteor Application.<br />
+For this <strong>use case</strong>, I have defined a useless <strong>Facade for the freebox-sdk package</strong>.<br />
+Use the <strong>var</strong> keyword to define variable only attached to this file.</p>
+<p>At this point, <strong>freebox-sdk</strong> is automatically downloaded &#038; attached to Meteor through <em>Freebox</em> &#038; <em>freeboxFacade</em> variables.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #006600; font-style: italic;">// file: freebox.js</span><br />
+<span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>Meteor.<span style="color: #660066;">isClient</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; Template.<span style="color: #660066;">hello</span>.<span style="color: #660066;">events</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #3366CC;">'click input[name=&quot;status&quot;]'</span> <span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Meteor.<span style="color: #660066;">call</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'getStatus'</span><span style="color: #339933;">,</span> jQuery<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'input[name=&quot;password&quot;]'</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">val</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>error<span style="color: #339933;">,</span> result<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>_.<span style="color: #660066;">isString</span><span style="color: #009900;">&#40;</span>result<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'message: '</span> <span style="color: #339933;">+</span> result<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'wifi active: '</span> <span style="color: #339933;">+</span> result.<span style="color: #660066;">active</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><br />
+<br />
+<span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>Meteor.<span style="color: #660066;">isServer</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; Meteor.<span style="color: #660066;">startup</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #003366; font-weight: bold;">var</span> Future <span style="color: #339933;">=</span> Npm.<span style="color: #660066;">require</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'fibers/future'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; Meteor.<span style="color: #660066;">methods</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; getStatus<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>password<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">unblock</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #003366; font-weight: bold;">var</span> future <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">new</span> Future<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #003366; font-weight: bold;">var</span> freebox <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">new</span> Freebox<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span>password<span style="color: #339933;">:</span> password<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">on</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'connect'</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">wifiStatus</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #000066;">status</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; future.<span style="color: #660066;">ret</span><span style="color: #009900;">&#40;</span><span style="color: #000066;">status</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">on</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'error'</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>message<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; future.<span style="color: #660066;">ret</span><span style="color: #009900;">&#40;</span>message<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">connect</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #006600; font-style: italic;">// Wait for async to finish before returning</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #006600; font-style: italic;">// the result</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">return</span> future.<span style="color: #660066;">wait</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>The <strong>freebox-sdk</strong> is composed of asynchronous methods, calls have to be done on server-side. I&#8217;m using <a href="https://github.com/laverdet/node-fibers">Fibers</a> to &#8216;wait&#8217; for async (wifiStatus) to finish before returning the result to the client. </p>
+<p>For this example I&#8217;m using some <a href="http://docs.meteor.com/#packages">Meteor packages</a> : jquery &#038; underscore.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ meteor add jquery<br />
+$ meteor add underscore</div></td></tr></tbody></table></div>
+<p>The HTML part is really simple. Just add a new button</p>
+<div class="codecolorer-container html4strict blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="html4strict codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #808080; font-style: italic;">&lt;!-- file: freebox.html --&gt;</span><br />
+<span style="color: #009900;">&lt;<a href="http://december.com/html/4/element/head.html"><span style="color: #000000; font-weight: bold;">head</span></a>&gt;</span><br />
+&nbsp; <span style="color: #009900;">&lt;<a href="http://december.com/html/4/element/title.html"><span style="color: #000000; font-weight: bold;">title</span></a>&gt;</span>test<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><a href="http://december.com/html/4/element/title.html"><span style="color: #000000; font-weight: bold;">title</span></a>&gt;</span><br />
+<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><a href="http://december.com/html/4/element/head.html"><span style="color: #000000; font-weight: bold;">head</span></a>&gt;</span><br />
+<br />
+<span style="color: #009900;">&lt;<a href="http://december.com/html/4/element/body.html"><span style="color: #000000; font-weight: bold;">body</span></a>&gt;</span><br />
+&nbsp; {{&gt; hello}}<br />
+<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><a href="http://december.com/html/4/element/body.html"><span style="color: #000000; font-weight: bold;">body</span></a>&gt;</span><br />
+<br />
+<span style="color: #009900;">&lt;template <span style="color: #000066;">name</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;hello&quot;</span>&gt;</span><br />
+&nbsp; <span style="color: #009900;">&lt;<a href="http://december.com/html/4/element/h1.html"><span style="color: #000000; font-weight: bold;">h1</span></a>&gt;</span>Hello World!<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><a href="http://december.com/html/4/element/h1.html"><span style="color: #000000; font-weight: bold;">h1</span></a>&gt;</span><br />
+&nbsp; <span style="color: #009900;">&lt;<a href="http://december.com/html/4/element/input.html"><span style="color: #000000; font-weight: bold;">input</span></a> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;button&quot;</span> <span style="color: #000066;">value</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;get status&quot;</span> <span style="color: #000066;">name</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;status&quot;</span> <span style="color: #66cc66;">/</span>&gt;</span><br />
+<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span>template&gt;</span></div></td></tr></tbody></table></div>
+<p>Now,<br />
+Run your meteor application, go to <strong>http://localhost:3000/</strong> and open a JS Console. Click on the &#8220;Click button&#8221; and see if your wifi is enable!</p>
+<div class="alert-message warning"><a class="close" href="#">×</a><span>If the NPM module has <strong>architecture-specific</strong> binary components</span></div>
+<p>If the NPM module has <strong>architecture-specific</strong> binary components, bundles built with <strong>meteor bundle</strong> or <strong>meteor deploy</strong> will contain the components as built for the developer&#8217;s platform and <strong>may not run on other platforms</strong>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/meteor-npm-integration/feed/</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+		<item>
+		<title>Configurer YUI en phase de développement</title>
+		<link>http://www.armetiz.info/configurer-yui-phase-developpement/</link>
+		<comments>http://www.armetiz.info/configurer-yui-phase-developpement/#comments</comments>
+		<pubDate>Wed, 13 Mar 2013 09:00:30 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Mojito]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[V8]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[Yahoo]]></category>
+		<category><![CDATA[YUI]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2956</guid>
+		<description><![CDATA[Actuellement je suis en pleine découverte du framework Yahoo YUI 3 que je vous recommande vivement ! Comme tout bon novice, je fais des erreurs. Javascript étant un language peu.. <a href="http://www.armetiz.info/configurer-yui-phase-developpement/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Actuellement je suis en pleine découverte du framework <strong>Yahoo YUI 3</strong> que je vous recommande vivement !<br />
+Comme tout bon novice, je fais des erreurs. Javascript étant un language peu bavard les erreurs sont parfois difficiles à diagnostiquer.</p>
+<p><img src="http://www.armetiz.info/files/2013/03/yui-logo.png" alt="yui-logo" width="117" height="52" class="alignright size-full wp-image-2963" />Par défaut,<br />
+Le <a href="http://yuilibrary.com/yui/docs/yui/#loading-modules">chargement des modules YUI</a> est optimisé pour la production, soit <strong>un seul fichier minifié</strong>.</p>
+<p><a href="https://github.com/yui/yui3/issues/513">Dernièrement</a> j&#8217;ai eu une mauvaise utilisation du YUI, et l&#8217;erreur impactait le Framework lui meme sans message explicite&#8230; Du coups, difficile de savoir ce que j&#8217;avais fait de mal car tout le code source de YUI était illisible.</p>
+<p>Bref,<br />
+Voici la configuration YUI à utiliser pour récupérer des modules dont la source est lisible :</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">YUI<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; debug<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; combine<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">false</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; filter<span style="color: #339933;">:</span> <span style="color: #3366CC;">&quot;raw&quot;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>.<span style="color: #003366; font-weight: bold;">use</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;app&quot;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>Y<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #006600; font-style: italic;">//here your Y code</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/configurer-yui-phase-developpement/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Google Analytics &#8211; Callback on JS TrackEvent</title>
+		<link>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/</link>
+		<comments>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/#comments</comments>
+		<pubDate>Wed, 16 Jan 2013 10:44:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Analytics]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Web]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2890</guid>
+		<description><![CDATA[En utilisant le système Tracking Event de Google Analytics. Parfois, vous avez besoin de vous assurer qu&#8217;un évenement est correctement enregistré par Google avant de réaliser une action. L&#8217;exemple le.. <a href="http://www.armetiz.info/google-analytics-callback-on-js-trackevent/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>En utilisant le système <a href="https://developers.google.com/analytics/devguides/collection/gajs/">Tracking Event</a> de Google Analytics.<br />
+Parfois, vous avez besoin de vous assurer qu&#8217;un évenement est correctement enregistré par Google avant de réaliser une action.<br />
+L&#8217;exemple le plus concret, c&#8217;est le changement de page juste après avoir enregistré un clic sur un lien.</p>
+<p>L&#8217;ensemble des tracking de l&#8217;API Google Analytics sont asynchrones, comment s&#8217;assurer que l&#8217;évenement a bien été enregistré ?</p>
+<p>Voici <strong>deux manières de faire</strong>, l&#8217;une étant plus officielle que l&#8217;autre.</p>
+<p>La premiere méthode utilise la possibilité de mettre des &#8220;<strong>Callback</strong>&#8221; au sein de la Queue (<strong>GAQ : Google Analytics Queue</strong>).<br />
+La documentation <a href="https://developers.google.com/analytics/devguides/collection/gajs/#PushingFunctions">Google Analytics</a> est assez explicite : &#8220;<em>The functions can contain any arbitrary JavaScript and like command arrays, they are executed in the order in which they are pushed onto _gaq</em>&#8220;.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #3366CC;">'_trackEvent'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Test'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Clicked'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;event tracked&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Pour la deuxième méthode &#8211; récupérée sur Stack Overflow &#8211; je n&#8217;ai pas trouvé de validation au sein de la documentation. Mais après quelques tests, elle semble fonctionner.<br />
+On part du principe que la méthode &#8220;push&#8221; de l&#8217;objet &#8220;_gaq&#8221; prends en 2° paramètres une fonction &#8220;callback&#8221; exécutée lorsque la commande a été traité.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #3366CC;">'_trackEvent'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Test'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Clicked'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;event tracked&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Bien sûr,<br />
+La deuxième méthode n&#8217;étant pas officielle, bien que plus élégante elle n&#8217;est pas recommandée.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>NodeJS &#8211; Mise en production</title>
+		<link>http://www.armetiz.info/node-js-mise-production-simple/</link>
+		<comments>http://www.armetiz.info/node-js-mise-production-simple/#comments</comments>
+		<pubDate>Tue, 11 Sep 2012 10:07:39 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Déploiement]]></category>
+		<category><![CDATA[Didacticiel]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[MEP]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[Tutoriel]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2748</guid>
+		<description><![CDATA[La mise en production d&#8217;une application NodeJS est une étape importante dans la vie de votre application. Il existe de nombreuses solutions utilisant forever, upstart, monit ou le script shell.. <a href="http://www.armetiz.info/node-js-mise-production-simple/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>La mise en production d&#8217;une application <a href="http://nodejs.org/">NodeJS</a> est une étape importante dans la vie de votre application.</p>
+<p>Il existe de nombreuses solutions utilisant <a href="https://github.com/nodejitsu/forever">forever</a>, <a href="http://upstart.ubuntu.com/">upstart</a>, <a href="http://mmonit.com/monit/">monit</a> ou le script shell <a href="http://fr.wikipedia.org/wiki/Linux_Standard_Base">LSB</a> personnalisé.<br />
+Aucune de ces solutions ne m&#8217;a convaincu; du coup la solution que je vous propose est la mise en place d&#8217;un script LSB fait en <strong>Javascript</strong>.</p>
+<h3>Pré-requit</h3>
+<p>Pour réaliser correctement ce petit tutoriel, il faut :</p>
+<ul>
+<li>Un utilisateur système &#8220;node&#8221; avec son répertoire personnel: <strong>adduser &#8211;shell /sbin/nologin node</strong></li>
+<li><a href="http://www.armetiz.info/install-nodejs-on-centos/">NodeJS installé</a></li>
+<li>Installer <strong><a href="http://blog.nodejs.org/2011/03/23/npm-1-0-global-vs-local-installation/">globalement</a></strong> le module <a href="https://npmjs.org/package/simple-daemon">simple-daemon</a> : <strong>npm install -g simple-daemon</strong>
+</ul>
+<h3>Exemple d&#8217;application</h3>
+<p>L&#8217;application que nous souhaitons lancer automatiquement au démarrage du serveur est un simple serveur HTTP.</p>
+<p><strong>/home/node/funky-server/funky-server.js</strong></p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #003366; font-weight: bold;">var</span> http <span style="color: #339933;">=</span> require<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'http'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+http.<span style="color: #660066;">createServer</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>req<span style="color: #339933;">,</span> res<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'New client'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; res.<span style="color: #660066;">writeHead</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">200</span><span style="color: #339933;">,</span> <span style="color: #009900;">&#123;</span><span style="color: #3366CC;">'Content-Type'</span><span style="color: #339933;">:</span> <span style="color: #3366CC;">'text/plain'</span><span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; res.<span style="color: #660066;">end</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Hello Funky World<span style="color: #000099; font-weight: bold;">\n</span>'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">listen</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">80</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Server running, listen on port 80'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Cette application a de particulier qu&#8217;elle écoute toujours sur le port 80 et donc qu&#8217;une seule instance ne peut-être exécutée.<br />
+De plus, pour ouvrir un socket sur un port inférieur à 1024, il faut les privileges root.<br />
+Une fois le serveur sur écoute, les privileges <strong>root</strong> ne sont plus nécessaires.</p>
+<h3>Déploiement</h3>
+<p>Vous remarquerez qu&#8217;au sein de l&#8217;application, il n&#8217;y a aucune gestion de l&#8217;utilisateur gérant le processus ou de vérification de l&#8217;unicité de l&#8217;execution.<br />
+Cela sera géré directement par notre <strong>Wrapper</strong> LSB dont voici le contenu.</p>
+<p><strong>/etc/init.d/funky-server.js</strong></p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">#<span style="color: #339933;">!/</span>usr<span style="color: #339933;">/</span>bin<span style="color: #339933;">/</span>env node<br />
+<span style="color: #003366; font-weight: bold;">var</span> daemon <span style="color: #339933;">=</span> require<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'/usr/local/lib/node_modules/simple-daemon'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <br />
+<span style="color: #006600; font-style: italic;">//En fonction de votre système, ce chemin peut-être different</span><br />
+<br />
+daemon.<span style="color: #660066;">simple</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; pidfile <span style="color: #339933;">:</span> <span style="color: #3366CC;">'/var/run/funky-server.pid'</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; logfile <span style="color: #339933;">:</span> <span style="color: #3366CC;">'/var/log/funky-server.log'</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; command <span style="color: #339933;">:</span> process.<span style="color: #660066;">argv</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">3</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; runSync &nbsp; &nbsp; <span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; require <span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;/home/node/funky-server/funky-server.js&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; process.<span style="color: #660066;">setuid</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;node&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Comme vous le remarquez, une fois le require fait, nous changeons l&#8217;utilisateur du processus.</p>
+<p>Rendons le fichier executable.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js</div></td></tr></tbody></table></div>
+<p>Vous pouvez tester</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js start<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js status<br />
+<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #000000; font-weight: bold;">/</span>dev<span style="color: #000000; font-weight: bold;">/</span>null http:<span style="color: #000000; font-weight: bold;">//</span>localhost<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">tail</span> <span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>log<span style="color: #000000; font-weight: bold;">/</span>funky-server.log<br />
+<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js stop<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js status</div></td></tr></tbody></table></div>
+<p>Pour ajouter le Wrapper ci-dessus aux scripts de demarrage système, il est préférable de le rendre compatible à votre distribution.</p>
+<p>Sous Linux, il faut rajouter des headers pour être conforme <a href="http://fedoraproject.org/wiki/Packaging:SysVInitScript">SysVInitScript</a> / <a href="http://wiki.debian.org/LSBInitScripts">LSBinitScript Debian</a></p>
+<p>Voici le code complet du script de démarrage.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#!/usr/bin/env node</span><br />
+<span style="color: #666666; font-style: italic;">### BEGIN INIT INFO</span><br />
+<span style="color: #666666; font-style: italic;"># Provides: funky-server</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Start: $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Stop: $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Start: 2 3 4 5</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Stop: 0 1 6</span><br />
+<span style="color: #666666; font-style: italic;"># Short-Description: Start daemon at boot time</span><br />
+<span style="color: #666666; font-style: italic;"># Description: Enable service provided by funky-server.</span><br />
+<span style="color: #666666; font-style: italic;">### END INIT INFO</span><br />
+<br />
+var daemon = require<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">'/usr/local/lib/node_modules/simple-daemon'</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>; <br />
+<span style="color: #000000; font-weight: bold;">//</span>En fonction de votre système, ce chemin peut-être different<br />
+<br />
+daemon.simple<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #7a0874; font-weight: bold;">&#123;</span><br />
+&nbsp; &nbsp; pidfile : <span style="color: #ff0000;">'/var/run/funky-server.pid'</span>,<br />
+&nbsp; &nbsp; logfile : <span style="color: #ff0000;">'/var/log/funky-server.log'</span>,<br />
+&nbsp; &nbsp; <span style="color: #7a0874; font-weight: bold;">command</span> : process.argv<span style="color: #7a0874; font-weight: bold;">&#91;</span><span style="color: #000000;">3</span><span style="color: #7a0874; font-weight: bold;">&#93;</span>,<br />
+&nbsp; &nbsp; runSync &nbsp; &nbsp; : <span style="color: #000000; font-weight: bold;">function</span> <span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span> <span style="color: #7a0874; font-weight: bold;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; require <span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">&quot;/home/node/funky-server/funky-server.js&quot;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; process.setuid<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">&quot;node&quot;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;<br />
+&nbsp; &nbsp; <span style="color: #7a0874; font-weight: bold;">&#125;</span><br />
+<span style="color: #7a0874; font-weight: bold;">&#125;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;</div></td></tr></tbody></table></div>
+<p>Sous Debian &#038; Ubuntu, rajouter les headers suivant pour etre conforme :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#!/usr/bin/env node</span><br />
+<span style="color: #666666; font-style: italic;">### BEGIN INIT INFO</span><br />
+<span style="color: #666666; font-style: italic;"># Provides: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;funky-server</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Start: &nbsp; &nbsp;$local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Stop: &nbsp; &nbsp; $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Start: &nbsp; &nbsp; 2 3 4 5</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Stop: &nbsp; &nbsp; &nbsp;0 1 6</span><br />
+<span style="color: #666666; font-style: italic;"># Short-Description: Start daemon at boot time</span><br />
+<span style="color: #666666; font-style: italic;"># Description: &nbsp; &nbsp; &nbsp; Enable service provided by funky-server.</span><br />
+<span style="color: #666666; font-style: italic;">### END INIT INFO</span></div></td></tr></tbody></table></div>
+<p>On ajoute notre module au système de démarrage.<br />
+Sous RedHat &#038; CentOS</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">chkconfig <span style="color: #660033;">--add</span> funky-server.js</div></td></tr></tbody></table></div>
+<p>Sous Debian &#038; Ubuntu</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">updaterc.d default funky-server.js</div></td></tr></tbody></table></div>
+<h3>Pour aller plus loin</h3>
+<p><img src="http://www.armetiz.info/files/2012/09/logo-developer-github.png" alt="" title="logo-developer-github" width="128" height="128" class="alignleft size-full wp-image-2781" /></a><a href="https://github.com/armetiz/node-simple-daemon">Simple-daemon</a> est un module NodeJS qui est le fork de <a href="https://github.com/frodwith/node-init">node-init</a>. A ce module il manquait une fonction synchrone pour lancer le processus et être parfaitement fonctionnel.<br />
+En effet, basé sur <a href="https://github.com/indexzero/daemon.node">daemon.node</a> qui est un <strong>add-on C</strong> avec une restriction importante : &#8220;all daemonization should happen on the first <a href="http://howtonode.org/understanding-process-next-tick">tick</a> and not as part of an asynchronous action&#8221;.</p>
+<p>Vous pouvez coupler cette solution à <a href="https://github.com/nodejitsu/forever">forever</a> pour que l&#8217;application survive à un crash impromptu.</p>
+<p>Aussi,<br />
+L&#8217;ouverture du serveur HTTP est une <strong>opération asynchrone</strong>, le changement d&#8217;utilisateur apparait après la demande d&#8217;écoute du serveur mais pas forcement après que le serveur soit sur écoute.<br />
+Après lecture du <a href="https://github.com/joyent/node">code NodeJS</a> et de la <a href="https://github.com/joyent/libuv">libuv</a> concernant l&#8217;écoute d&#8217;un serveur HTTP, il me semble que la reservation du socket soit fait dans le même <a href="http://howtonode.org/understanding-process-next-tick">tick</a> que la fonction JS <strong>http.Server::listen()</strong>. Du moins, pour les systèmes Unix.<br />
+Si quelqu&#8217;un est apte à me le confirmer, les commentaires sont là pour.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/node-js-mise-production-simple/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Install NodeJS on CentOS</title>
+		<link>http://www.armetiz.info/install-nodejs-on-centos/</link>
+		<comments>http://www.armetiz.info/install-nodejs-on-centos/#comments</comments>
+		<pubDate>Fri, 27 Jul 2012 09:58:22 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[English]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Real-Time]]></category>
+		<category><![CDATA[Server]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=2594</guid>
+		<description><![CDATA[NodeJS isn&#8217;t available neither on centos base repositories nor on EPEL. To install NodeJS, you can do it from a specific repository or you can compile it. From repository To.. <a href="http://www.armetiz.info/install-nodejs-on-centos/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://nodejs.org/">NodeJS</a> isn&#8217;t available neither on centos <a href="http://wiki.centos.org/AdditionalResources/Repositories/">base repositories</a> nor on <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a>.<br />
+To install NodeJS, you can do it from a <a href="http://nodejs.tchol.org/">specific repository</a> or you can compile it.</p>
+<h3>From repository</h3>
+<p>To install NodeJS from repository on a RHEL based distribution, including our CentOS, just do :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;nodejs.rpm&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>nodejs.tchol.org<span style="color: #000000; font-weight: bold;">/</span>repocfg<span style="color: #000000; font-weight: bold;">/</span>el<span style="color: #000000; font-weight: bold;">/</span>nodejs-stable-release.noarch.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum localinstall</span> <span style="color: #660033;">--nogpgcheck</span> nodejs.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum install</span> nodejs-compat-symlinks npm<br />
+<span style="color: #c20cb9; font-weight: bold;">rm</span> nodejs.rpm</div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-v</span><br />
+<span style="color: #666666; font-style: italic;">#v0.6.18</span></div></td></tr></tbody></table></div>
+<h3>From source</h3>
+<p>To compile NodeJS from source on your CentOS, you have to install <strong>missing dependancies</strong> : <strong>gcc-c++, python and libssl-dev</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> gcc-c++ python libssl-dev<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;node.tar.gz&quot;</span> <span style="color: #ff0000;">&quot;http://nodejs.org/dist/node-latest.tar.gz&quot;</span><br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> node.tar.gz <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> node-v<span style="color: #000000; font-weight: bold;">*</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-v</span><br />
+<span style="color: #666666; font-style: italic;">#v0.8.4</span></div></td></tr></tbody></table></div>
+<h3>Play with a simple &#8220;Hello world&#8221;</h3>
+<p>Just launch node in <strong>interactive mode</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-i</span></div></td></tr></tbody></table></div>
+<p>Type a Javascript command.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #339933;">&gt;</span> console.<span style="color: #660066;">log</span> <span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Hello World&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+Hello world<br />
+undefined<br />
+<span style="color: #339933;">&gt;</span></div></td></tr></tbody></table></div>
+<h3>About version</h3>
+<p>As you can see, the repository provides an old version of NodeJS (0.6.14) compared to the latest released (0.8.4).</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/install-nodejs-on-centos/feed/</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		</item>
+		<item>
+		<title>Livre &#8211; Node Up and Running</title>
+		<link>http://www.armetiz.info/livre-node-up-and-running/</link>
+		<comments>http://www.armetiz.info/livre-node-up-and-running/#comments</comments>
+		<pubDate>Thu, 21 Jun 2012 06:16:13 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Livres]]></category>
+		<category><![CDATA[Asynchrone]]></category>
+		<category><![CDATA[Découverte]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Livre]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Server]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2525</guid>
+		<description><![CDATA[Node &#8211; Up and Running est un livre sur NodeJS écrit par Tom Hughes-Croucher &#38; Mike Wilson. Ecrit en Anglais, il vous permettra de mettre le pied à l&#8217;étrier de.. <a href="http://www.armetiz.info/livre-node-up-and-running/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://nodejs.org/"><img src="http://www.armetiz.info/files/2012/06/nodejs1.gif" alt="nodejs" width="180" height="236" class="alignleft size-full wp-image-2527" /></a><a href="http://www.amazon.fr/Node-Up-Running-Tom-Hughes-Croucher/dp/1449398588/">Node &#8211; Up and Running</a> est un livre sur <a href="http://nodejs.org/">NodeJS</a> écrit par <em>Tom Hughes-Croucher</em> &amp; <em>Mike Wilson</em>.</p>
+<p>Ecrit en Anglais, il vous permettra de mettre le pied à l&#8217;étrier de <strong>NodeJS avec facilité</strong>.<br />
+Les 170 pages sont consacrées à la découverte et à la prise en main de NodeJS, ainsi qu&#8217;aux problématiques qu&#8217;il tente de résoudre par son approche &#8220;Even-Driven&#8221;.</p>
+<p>
+Personnellement, j&#8217;ai vraiment apprécié cet ouvrage. J&#8217;avais déjà envie de travailler avec NodeJS, et bien cela est confirmé !</p>
+<p>Voici les chapitres du livre:</p>
+<ul>
+<li>A Very Brief Introduction to Node.js</li>
+<li>Doing Interesting Things</li>
+<li>Building Robust Node Applications</li>
+<li>Core APIs</li>
+<li>Helper APIs</li>
+<li>Data Access</li>
+<li>Important External Modules</li>
+<li>Extending Node</li>
+</ul>
+<p>Il est à noter que l&#8217;exploration de la <a href="http://nodejs.org/api/">documentation API</a> est quasiment obligatoire une fois que vous avez terminé le livre. Cela vous permettra d&#8217;aller plus loin dans votre découverte et d&#8217;avoir toutes les clés en main.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/livre-node-up-and-running/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Deux Slide show Javascript</title>
+		<link>http://www.armetiz.info/deux-slide-show-javascript/</link>
+		<comments>http://www.armetiz.info/deux-slide-show-javascript/#comments</comments>
+		<pubDate>Wed, 05 Aug 2009 11:58:57 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[contenu]]></category>
+		<category><![CDATA[défilement]]></category>
+		<category><![CDATA[div]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[html]]></category>
+		<category><![CDATA[jquery]]></category>
+		<category><![CDATA[slidshow]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1183</guid>
+		<description><![CDATA[Scrollable et Horinaja: deux scripts permettant de réaliser un slide show sur du contenu HTML en Javascript. Cela est pratique pour faire défiler des images, ou des blocs contenus dans.. <a href="http://www.armetiz.info/deux-slide-show-javascript/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://flowplayer.org/tools/scrollable.html">Scrollable</a> et <a href="http://www.davidmassiani.com/horinaja/">Horinaja</a>: deux scripts permettant de réaliser un slide show sur du contenu HTML en Javascript.<br />
+Cela est pratique pour faire défiler des images, ou des blocs contenus dans des <strong>div</strong>.</p>
+<h3>Scrollable</h3>
+<p><a href="http://flowplayer.org/tools/scrollable.html">Scrollable</a> est un tools de la suite <a href="http://flowplayer.org/">Flowplayer</a>. Il est <strong>rapide </strong>à mettre en place et utilise JQuery. La <strong>documentation </strong>est suffisamment fournit pour utiliser correctement le script.<br />
+Les options de configuration sont assez nombreuses.</p>
+<h3>Horinaja</h3>
+<p><a href="http://www.davidmassiani.com/horinaja/"><img class="alignright" alt="Horinaja" src="http://www.davidmassiani.com/horinaja/image/logo.png" width="127" height="20" /></a><a href="http://www.davidmassiani.com/horinaja/">Horinaja</a> utilise <strong>JQuery </strong>ou <strong>scriptaculous</strong>, ce sera à vous de choisir la version que vous souhaitez.<br />
+La documentation semble plus petite, mais est-ce un tord ?  A vous de jugez car je n&#8217;ai pas encore utilisé cette solution.</p>
+<p>PS: Entre <strong>Slide show</strong>, <strong>scroll </strong>et <strong>défilement</strong> j&#8217;ai eu beaucoup de mal à faire mon choix. Vous avez un mot plus adapté ?<br />
+PS2: Si vous avez d&#8217;autres solutions à proposées, n&#8217;hésiter pas à me le faire savoir.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/deux-slide-show-javascript/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/17 queries in 0.013 seconds using apc
+Object Caching 1589/1620 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:08:10 by W3 Total Cache -->

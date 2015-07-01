@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; iPhone</title>
+	<atom:link href="http://www.armetiz.info/tag/iphone/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Actionscript &#8211; NetStream &amp; P2P</title>
+		<link>http://www.armetiz.info/actionscript-netstream-p2p/</link>
+		<comments>http://www.armetiz.info/actionscript-netstream-p2p/#comments</comments>
+		<pubDate>Fri, 17 Jun 2011 12:48:08 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[Application]]></category>
+		<category><![CDATA[Audio]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Flux]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iPad]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[Microphone]]></category>
+		<category><![CDATA[Multicast]]></category>
+		<category><![CDATA[NetStream]]></category>
+		<category><![CDATA[P2P]]></category>
+		<category><![CDATA[Peer-to-peer]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2058</guid>
+		<description><![CDATA[Ce petit programme permet d&#8217;afficher la camera d&#8217;une personne qui se connecte. Cela est fait grâce à l&#8217;utilisation d&#8217;un flux NetStream lui même utilisant une connexion P2P sans serveur. A.. <a href="http://www.armetiz.info/actionscript-netstream-p2p/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Ce petit programme permet d&#8217;afficher la camera d&#8217;une personne qui se connecte. Cela est fait grâce à l&#8217;utilisation d&#8217;un flux <strong>NetStream</strong> lui même utilisant une connexion <strong>P2P sans serveur</strong>.</p>
+<p>A noter que cela n&#8217;est absolument pas optimisé. Si vous avez des conseils à donner sur la configuration du NetStream, NetConnection, NetGroup ou encore du GroupSpecifier pour améliorer les performances, n&#8217;hésitez pas..</p>
+<div class="codecolorer-container actionscript3 blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br />50<br />51<br />52<br />53<br />54<br />55<br />56<br />57<br />58<br />59<br />60<br />61<br />62<br />63<br />64<br />65<br />66<br />67<br />68<br />69<br />70<br /></div></td><td><div class="actionscript3 codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> nc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netconnection%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netconnection.html"><span style="color: #004993;">NetConnection</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> group &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> NetGroup<span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> <span style="color: #004993;">connected</span> &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=boolean%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:boolean.html"><span style="color: #004993;">Boolean</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> sendStream&nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> listenStreams &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=object%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:object.html"><span style="color: #004993;">Object</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> groupspec &nbsp; <span style="color: #000066; font-weight: bold;">:</span> GroupSpecifier<span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> listenStream&nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> id &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=string%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:string.html"><span style="color: #004993;">String</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+<span style="color: #0033ff; font-weight: bold;">public</span> <span style="color: #339966; font-weight: bold;">function</span> WebcamP2P<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><br />
+<span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">super</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: #004993;">stage</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">align</span> &nbsp; &nbsp; &nbsp; &nbsp; = <a href="http://www.google.com/search?q=stagealign%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:stagealign.html"><span style="color: #004993;">StageAlign</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">TOP_LEFT</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <span style="color: #004993;">stage</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">scaleMode</span> &nbsp; &nbsp; = <a href="http://www.google.com/search?q=stagescalemode%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:stagescalemode.html"><span style="color: #004993;">StageScaleMode</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NO_SCALE</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; id&nbsp; = <a href="http://www.google.com/search?q=string%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:string.html"><span style="color: #004993;">String</span></a> <span style="color: #000000;">&#40;</span> <span style="color: #000000;">&#40;</span> <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=date%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:date.html"><span style="color: #004993;">Date</span></a> <span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">time</span> <span style="color: #000066; font-weight: bold;">*</span> <a href="http://www.google.com/search?q=int%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:int.html"><span style="color: #004993;">int</span></a> <span style="color: #000000;">&#40;</span> <a href="http://www.google.com/search?q=math%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:math.html"><span style="color: #004993;">Math</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">random</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000066; font-weight: bold;">*</span> <span style="color: #000000; font-weight:bold;">1000</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; nc = <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=netconnection%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netconnection.html"><span style="color: #004993;">NetConnection</span></a> <span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; nc<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">addEventListener</span><span style="color: #000000;">&#40;</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NET_STATUS</span><span style="color: #000066; font-weight: bold;">,</span> <span style="color: #004993;">netStatus</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; nc<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">connect</span><span style="color: #000000;">&#40;</span><span style="color: #990000;">&quot;rtmfp:&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #000000;">&#125;</span><br />
+<br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #339966; font-weight: bold;">function</span> <span style="color: #004993;">netStatus</span> <span style="color: #000000;">&#40;</span>event<span style="color: #000066; font-weight: bold;">:</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">:</span><span style="color: #0033ff; font-weight: bold;">void</span><br />
+<span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">switch</span><span style="color: #000000;">&#40;</span>event<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">info</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">code</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">case</span> <span style="color: #990000;">&quot;NetConnection.Connect.Success&quot;</span><span style="color: #000066; font-weight: bold;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setupGroup<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">break</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">case</span> <span style="color: #990000;">&quot;NetGroup.Connect.Success&quot;</span><span style="color: #000066; font-weight: bold;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #004993;">connected</span> = <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">break</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">case</span> <span style="color: #990000;">&quot;NetGroup.MulticastStream.PublishNotify&quot;</span><span style="color: #000066; font-weight: bold;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #004993;">trace</span> <span style="color: #000000;">&#40;</span> <span style="color: #990000;">&quot;name of the detected stream : &quot;</span> <span style="color: #000066; font-weight: bold;">+</span> event<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">info</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">name</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #6699cc; font-weight: bold;">var</span> _video&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=video%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:video.html"><span style="color: #004993;">Video</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #6699cc; font-weight: bold;">var</span> _listenStream &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _video &nbsp;= <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=video%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:video.html"><span style="color: #004993;">Video</span></a> <span style="color: #000000;">&#40;</span> <span style="color: #000000; font-weight:bold;">320</span><span style="color: #000066; font-weight: bold;">,</span> <span style="color: #000000; font-weight:bold;">240</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _listenStream &nbsp; = <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a> <span style="color: #000000;">&#40;</span> nc<span style="color: #000066; font-weight: bold;">,</span> groupspec<span style="color: #000066; font-weight: bold;">.</span>groupspecWithoutAuthorizations<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _listenStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">play</span> <span style="color: #000000;">&#40;</span> event<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">info</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">name</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _video<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">attachNetStream</span> <span style="color: #000000;">&#40;</span> _listenStream <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #004993;">addChild</span> <span style="color: #000000;">&#40;</span> _video <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">break</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <span style="color: #000000;">&#125;</span><br />
+<span style="color: #000000;">&#125;</span><br />
+<br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #339966; font-weight: bold;">function</span> setupGroup<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">:</span><span style="color: #0033ff; font-weight: bold;">void</span><br />
+<span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; groupspec = <span style="color: #0033ff; font-weight: bold;">new</span> GroupSpecifier<span style="color: #000000;">&#40;</span><span style="color: #990000;">&quot;myGroup/groupOne&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>postingEnabled &nbsp; &nbsp;= <span style="color: #0033ff; font-weight: bold;">false</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>multicastEnabled &nbsp;= <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>ipMulticastMemberUpdatesEnabled = <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>routingEnabled&nbsp; &nbsp; = <span style="color: #0033ff; font-weight: bold;">false</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>addIPMulticastAddress<span style="color: #000000;">&#40;</span><span style="color: #990000;">&quot;225.225.0.1:30303&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; group = <span style="color: #0033ff; font-weight: bold;">new</span> NetGroup<span style="color: #000000;">&#40;</span>nc<span style="color: #000066; font-weight: bold;">,</span>groupspec<span style="color: #000066; font-weight: bold;">.</span>groupspecWithoutAuthorizations<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; group<span style="color: #000066; font-weight: bold;">.</span>receiveMode &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = NetGroupReceiveMode<span style="color: #000066; font-weight: bold;">.</span>NEAREST<span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; group<span style="color: #000066; font-weight: bold;">.</span>replicationStrategy &nbsp; &nbsp; &nbsp; = NetGroupReplicationStrategy<span style="color: #000066; font-weight: bold;">.</span>RAREST_FIRST<span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; group<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">addEventListener</span><span style="color: #000000;">&#40;</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NET_STATUS</span><span style="color: #000066; font-weight: bold;">,</span><span style="color: #004993;">netStatus</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; sendStream = <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a> <span style="color: #000000;">&#40;</span>nc<span style="color: #000066; font-weight: bold;">,</span> groupspec<span style="color: #000066; font-weight: bold;">.</span>groupspecWithoutAuthorizations<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">addEventListener</span><span style="color: #000000;">&#40;</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NET_STATUS</span><span style="color: #000066; font-weight: bold;">,</span> netStreamHandler<span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span>multicastAvailabilitySendToAll &nbsp; = <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">attachAudio</span> <span style="color: #000000;">&#40;</span> <a href="http://www.google.com/search?q=microphone%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:microphone.html"><span style="color: #004993;">Microphone</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">getMicrophone</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">attachCamera</span> <span style="color: #000000;">&#40;</span> <a href="http://www.google.com/search?q=camera%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:camera.html"><span style="color: #004993;">Camera</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">getCamera</span> <span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">publish</span> <span style="color: #000000;">&#40;</span> id <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #000000;">&#125;</span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/actionscript-netstream-p2p/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Filmer l&#8217;espace avec un iPhone et quelques ficelles</title>
+		<link>http://www.armetiz.info/iphone-camera-espace/</link>
+		<comments>http://www.armetiz.info/iphone-camera-espace/#comments</comments>
+		<pubDate>Mon, 11 Oct 2010 13:51:27 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[aéronautique]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[Mobile]]></category>
+		<category><![CDATA[Mobilité]]></category>
+		<category><![CDATA[Téléphone]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1834</guid>
+		<description><![CDATA[Voici l&#8217;histoire d&#8217;un papa qui a fait la promesse à son fils qu&#8217;il pourrait voir l&#8217;espace. A défaut d&#8217;avoir beaucoup d&#8217;argent pour prendre une navette spatiale, la petite famille est.. <a href="http://www.armetiz.info/iphone-camera-espace/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Voici l&#8217;histoire d&#8217;un papa qui a fait la promesse à son fils qu&#8217;il pourrait voir l&#8217;espace.<br />
+A défaut d&#8217;avoir beaucoup d&#8217;argent pour prendre une navette spatiale, la petite famille est équipée d&#8217;un <strong>iPhone</strong> !</p>
+<p>Sur la vidéo, vous pourrez voir que des tests ont été réalisés pendant<strong> plus de 8 mois</strong>.<br />
+L&#8217;objectif ici, c&#8217;est d&#8217;envoyer à l&#8217;aide d&#8217;une petite montgolfière :<strong> Camera et GPS sur ON</strong>.</p>
+<p>Alors que nos téléphones disposent de plein d&#8217;applications toutes plus inutiles les unes que les autres, nous découvrons enfin une utilisation intelligente de la technologie mobile.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/iphone-camera-espace/feed/</wfw:commentRss>
+		<slash:comments>10</slash:comments>
+		</item>
+		<item>
+		<title>Recherche développeur d&#8217;application Flash / iPhone</title>
+		<link>http://www.armetiz.info/recherche-developpeur-flash-iphone/</link>
+		<comments>http://www.armetiz.info/recherche-developpeur-flash-iphone/#comments</comments>
+		<pubDate>Tue, 23 Mar 2010 17:50:46 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Konbini]]></category>
+		<category><![CDATA[Application]]></category>
+		<category><![CDATA[Emplois]]></category>
+		<category><![CDATA[Entreprise]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[Jobs]]></category>
+		<category><![CDATA[RIA]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1649</guid>
+		<description><![CDATA[Nous recherchons un stagiaire ou un contrat d&#8217;apprentissage pour nous assister sur le développement des applications frontend. Voici le speach : Konbini recherche un(e) stagiaire développeur d&#8217;applications. Créée en 2008.. <a href="http://www.armetiz.info/recherche-developpeur-flash-iphone/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Nous recherchons un <strong>stagiaire</strong> ou un <strong>contrat d&#8217;apprentissage</strong> pour nous assister sur le développement des <strong>applications frontend</strong>.<br />
+Voici le speach :</p>
+<blockquote><p><em>Konbini recherche un(e) stagiaire développeur d&#8217;applications.<br />
+Créée en 2008 par Lucie Beudet et David Creuzot, entrepreneurs chevronnés du Web, la chaîne vidéo <a href="http://www.konbini.com">konbini.com</a> produit et diffuse en exclusivité des programmes de divertissement originaux.<br />
+<a href="http://www.konbini.com"><img src="http://www.armetiz.info/files/2010/03/konbini_logo1.jpg" alt="konbini logo" width="120" height="120" class="size-full wp-image-1650 alignright" /></a><br />
+<strong>Proposition</strong><br />
+1 contrat en tant que développeur d&#8217;application / architecte logiciel dans le secteur Internet / video streaming.<br />
+lieu de travail : Paris (France : Ile de France)<br />
+durée du stage : 6 mois ou plus<br />
+début du stage : au plus tôt<br />
+rémunération : selon convention</p>
+<p><strong>Votre mission</strong><br />
+Vous serez chargé(e) du développement d&#8217;applications pour iPhone / iPad ainsi que de la réalisation de RIA et RDA en ActionScript3 / Flex.</p>
+<p>Idéalement en formation bac+4/5 vous connaissez ActionScript 3, Cocoa / CocoaTouch, JAVA/J2EE, PHP5, MySQL, JavaScript Ajax et vous êtes à l&#8217;aise avec les formats vidéo pour internet et la notion de streaming.<br />
+Une connaissance de l&#8217;interface de Flash ainsi que des notion élémentaires de design d&#8217;interface seront un plus.</p>
+<p>Les qualités recherchées sont la rigueur, l&#8217;autonomie et l&#8217;esprit d&#8217;équipe.</em></p></blockquote>
+<p>N&#8217;hésiter pas à nous contacter : <strong>thomas.tourlourat [at] konbini [dot] com</strong> ou <strong>thomas [at] tourlourat [dot] com</strong></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/recherche-developpeur-flash-iphone/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Adobe donne le ton aux utilisateurs iPhone / iPad</title>
+		<link>http://www.armetiz.info/adobe-donne-le-ton/</link>
+		<comments>http://www.armetiz.info/adobe-donne-le-ton/#comments</comments>
+		<pubDate>Thu, 11 Feb 2010 14:49:39 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Apple]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[iPad]]></category>
+		<category><![CDATA[iPhone]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1618</guid>
+		<description><![CDATA[Avec un simple message, Adobe donne le ton aux utilisateurs iPhone qui souhaitent installer le player Flash. Et montre que tout est de la faute à Apple si Flash n&#8217;est.. <a href="http://www.armetiz.info/adobe-donne-le-ton/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Avec un simple message, Adobe donne le ton aux utilisateurs <strong>iPhone </strong>qui souhaitent installer le player <strong>Flash</strong>. Et montre que tout est de la faute à <strong>Apple </strong>si Flash n&#8217;est pas présent.</p>
+<p>Voici une traduction :<br />
+<em>Apple restreint l&#8217;utilisation des technologies requises par les produits comme Flash Player. Tant que Apple ne supprimera pas ces restrictions, Adobe ne pourra pas fournir Flash Player pour l&#8217;iPhone ou l&#8217;iPod Touch.</em></p>
+<p><a href="http://www.armetiz.info/files/2010/02/iphone_flash1.png"><img src="http://www.armetiz.info/files/2010/02/iphone_flash1.png" alt="" width="316" height="240" class="size-full wp-image-1619" /></a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/adobe-donne-le-ton/feed/</wfw:commentRss>
+		<slash:comments>14</slash:comments>
+		</item>
+		<item>
+		<title>PureMVC et Objective-C : Mission iPhone</title>
+		<link>http://www.armetiz.info/puremvc-langage-iphone/</link>
+		<comments>http://www.armetiz.info/puremvc-langage-iphone/#comments</comments>
+		<pubDate>Mon, 19 Jan 2009 09:22:29 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[Portabilité]]></category>
+		<category><![CDATA[PureMVC]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=704</guid>
+		<description><![CDATA[Nous parlions de PureMVC dans le précédent article &#8211; Reflex : Architecture MVC &#8211; et bien le revoici pour vous annoncer que PureMVC à été porté pour Objective-C qui est.. <a href="http://www.armetiz.info/puremvc-langage-iphone/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Nous parlions de <a href="http://puremvc.org/">PureMVC</a> dans le précédent article &#8211; <a href="http://www.armetiz.info/reflex-architecture-mvc/">Reflex : Architecture MVC</a> &#8211; et bien le revoici pour vous annoncer que <a href="http://puremvc.org/content/view/121/1/">PureMVC à été porté</a> pour <a href="http://fr.wikipedia.org/wiki/Objective_C">Objective-C</a> qui est le langage de développement de l&#8217;iPhone.</p>
+<p>Cela nous amène à constater l&#8217;intérêt de PureMVC face à ces concurrents, car CairnGorm est une ligne de conduite utilisable avec Flex uniquement, car Reflex est une micro-architecture Flex facile à apprendre, car Vegas est un très gros et très riche framework ActionScript 1, 2 et 3.<br />
+Là où PureMVC sort son épingle du jeu, c&#8217;est sur sa portabilité, citons :</p>
+<ul>
+<li>AS 2 : Flex 1.5, Flash 8, FlashLite</li>
+<li>AS 3 : Flex 2, 3, Flash 9/CS3, AIR</li>
+<li>C# : .NET 1.0/2.0 Silverlight, Windows Mobile and Pocket PC</li>
+<li>ColdFusion</li>
+<li>haXe : JavaScript, Flash 8, Flash 9 and the Neko VM</li>
+<li>Java : Java Mobile, Standard and Enterprise Editions (ME, SE, EE), JavaFX, Servlets, Applets, GWT<br />
+JavaScript</li>
+<li>PHP : Version 5 &amp; 6</li>
+<li>Python : Python 2.5 for wxPython and Google App Engine</li>
+<li>Objective-C : iPhone</li>
+</ul>
+<p>N&#8217;ayant pas d&#8217;iPhone &#8211; et ne projetant pas d&#8217;en acheter un &#8211; je ne pourrai pas faire de teste, mais si cela intéresse quelqu&#8217;un, il pourra nous faire son feedback <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>A vos claviers <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/puremvc-langage-iphone/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>The link of the week &#8211; 02</title>
+		<link>http://www.armetiz.info/link-of-the-week-02/</link>
+		<comments>http://www.armetiz.info/link-of-the-week-02/#comments</comments>
+		<pubDate>Fri, 09 Jan 2009 15:43:50 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Armetiz]]></category>
+		<category><![CDATA[Ambiance]]></category>
+		<category><![CDATA[Analyse]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Geolocalisation]]></category>
+		<category><![CDATA[IHM]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[Jeux]]></category>
+		<category><![CDATA[PDF]]></category>
+		<category><![CDATA[Video]]></category>
+		<category><![CDATA[Word]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=678</guid>
+		<description><![CDATA[Autre édition du fameux link of the week. AdobeTV se dote d&#8217;une version Française Bien démarrer avec Flex BuddyPress est une suite de plugins pour WordPress MU, chacun d&#8217;entre eux.. <a href="http://www.armetiz.info/link-of-the-week-02/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Autre édition du fameux link of the week.</p>
+<ul>
+<li><a href="http://tv.adobe.com/">AdobeTV</a> se dote d&#8217;une <a href="http://tv.adobe.com/fr">version Française</a></li>
+<li><a href="http://www.adobe.com/devnet/flex/quickstart.html">Bien démarrer</a> avec <a href="http://www.adobe.com/devnet/flex/?navID=gettingstarted">Flex</a></li>
+<li><a href="http://www.buddypress-fr.net/">BuddyPress</a> est une suite de plugins pour WordPress MU, chacun d&#8217;entre eux gérant une fonction «sociale» distincte.</li>
+<li><a href="http://www.clever-age.com/veille/blog/un-peu-plus-loin-avec-la-geolocalisation.html">Clever-Age</a> à fait une petite description de l&#8217;avenir de la geolocalisation.</li>
+<li><a href="http://www.korben.info/transformer-un-iphone-en-telecommande-infrarouge.html">Transformer votre iPhone</a> en télécommande infrarouge (pour les flemmards).</li>
+<li>Univers full flash sympa avec <a href="http://mtl12.com/">Montréal en 12 lieu</a>.</li>
+<li>Convertir des <a href="http://www.convertpdftoword.net/">PDF en fichier Word</a>, online s&#8217;il vous plait.</li>
+<li>Tout le monde connait tout le monde : <a href="http://oseox.fr/blog/index.php/620-degre-six">La règle des 6 degrés</a>.</li>
+<li>La <a href="http://www.gobz.org/2008/07/25/la-place-de-lergonomie/">place de l&#8217;ergonomie</a> sur nos machines et une <a href="http://www.gobz.org/2008/03/06/jef-raskin-linterface-humaine/#more-445">analyse des IHM</a> avec présentation de <a href="http://www.songza.com/">Songza</a>, agrégateur musical qui a pour spécifié, une IHM intéressant.</li>
+<li><a href="http://www.jamlegend.com/">JamLegend</a> : Un petit jeu pour vous détendre.</li>
+<li>Lecteur musique en Javascript : <a href="http://www.thecloudplayer.com/">The cloud player</a></li>
+</ul>
+<p>Je vous souhaite à tous un bon weekend <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/link-of-the-week-02/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.010 seconds using apc
+Object Caching 604/620 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:08:08 by W3 Total Cache -->

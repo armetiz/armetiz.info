@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Astuce</title>
+	<atom:link href="http://www.armetiz.info/tag/astuce/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Google Analytics &#8211; Callback on JS TrackEvent</title>
+		<link>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/</link>
+		<comments>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/#comments</comments>
+		<pubDate>Wed, 16 Jan 2013 10:44:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Analytics]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Web]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2890</guid>
+		<description><![CDATA[En utilisant le système Tracking Event de Google Analytics. Parfois, vous avez besoin de vous assurer qu&#8217;un évenement est correctement enregistré par Google avant de réaliser une action. L&#8217;exemple le.. <a href="http://www.armetiz.info/google-analytics-callback-on-js-trackevent/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>En utilisant le système <a href="https://developers.google.com/analytics/devguides/collection/gajs/">Tracking Event</a> de Google Analytics.<br />
+Parfois, vous avez besoin de vous assurer qu&#8217;un évenement est correctement enregistré par Google avant de réaliser une action.<br />
+L&#8217;exemple le plus concret, c&#8217;est le changement de page juste après avoir enregistré un clic sur un lien.</p>
+<p>L&#8217;ensemble des tracking de l&#8217;API Google Analytics sont asynchrones, comment s&#8217;assurer que l&#8217;évenement a bien été enregistré ?</p>
+<p>Voici <strong>deux manières de faire</strong>, l&#8217;une étant plus officielle que l&#8217;autre.</p>
+<p>La premiere méthode utilise la possibilité de mettre des &#8220;<strong>Callback</strong>&#8221; au sein de la Queue (<strong>GAQ : Google Analytics Queue</strong>).<br />
+La documentation <a href="https://developers.google.com/analytics/devguides/collection/gajs/#PushingFunctions">Google Analytics</a> est assez explicite : &#8220;<em>The functions can contain any arbitrary JavaScript and like command arrays, they are executed in the order in which they are pushed onto _gaq</em>&#8220;.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #3366CC;">'_trackEvent'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Test'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Clicked'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;event tracked&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Pour la deuxième méthode &#8211; récupérée sur Stack Overflow &#8211; je n&#8217;ai pas trouvé de validation au sein de la documentation. Mais après quelques tests, elle semble fonctionner.<br />
+On part du principe que la méthode &#8220;push&#8221; de l&#8217;objet &#8220;_gaq&#8221; prends en 2° paramètres une fonction &#8220;callback&#8221; exécutée lorsque la commande a été traité.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #3366CC;">'_trackEvent'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Test'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Clicked'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;event tracked&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Bien sûr,<br />
+La deuxième méthode n&#8217;étant pas officielle, bien que plus élégante elle n&#8217;est pas recommandée.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>GIT &#8211; Ignorer les modifications chmod</title>
+		<link>http://www.armetiz.info/git-ignorer-modification-chmod/</link>
+		<comments>http://www.armetiz.info/git-ignorer-modification-chmod/#comments</comments>
+		<pubDate>Sat, 02 Jun 2012 07:42:18 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[777]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[chmod]]></category>
+		<category><![CDATA[chown]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Droit]]></category>
+		<category><![CDATA[GIT]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[memo]]></category>
+		<category><![CDATA[Projet]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2466</guid>
+		<description><![CDATA[Par défaut, lorsque vous modifiez la valeur chmod d&#8217;un fichier, GIT considere que le fichier a été modifié. Pour désactiver cette fonctionnalité, il faut modifier la configuration core.filemode : 1git.. <a href="http://www.armetiz.info/git-ignorer-modification-chmod/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Par défaut, lorsque vous modifiez la valeur <strong>chmod</strong> d&#8217;un fichier, <strong>GIT</strong> considere que le fichier a été modifié.</p>
+<p>Pour désactiver cette fonctionnalité, il faut modifier la configuration <strong>core.filemode</strong> :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">git config core.filemode false</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/git-ignorer-modification-chmod/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>CentOS 6 &#8211; Varnish &amp; MaxMind GeoIP</title>
+		<link>http://www.armetiz.info/centos-6-varnish-geoip/</link>
+		<comments>http://www.armetiz.info/centos-6-varnish-geoip/#comments</comments>
+		<pubDate>Tue, 06 Mar 2012 10:10:27 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[GeoIP]]></category>
+		<category><![CDATA[Header]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[HTTPS]]></category>
+		<category><![CDATA[Infrastructure]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[MaxMind]]></category>
+		<category><![CDATA[Module]]></category>
+		<category><![CDATA[Pays]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Système]]></category>
+		<category><![CDATA[Varnish]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2202</guid>
+		<description><![CDATA[Nous allons voir comment déporter le système de géo-localisation IP sur Varnish. L&#8217;objectif final est de permettre à vos backends de récupérer le Pays de l&#8217;utilisateur au sein de la.. <a href="http://www.armetiz.info/centos-6-varnish-geoip/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/12/centos1.png"><img src="http://www.armetiz.info/files/2011/12/centos1.png" alt="centos" width="128" height="128" class="alignright size-full wp-image-2188" /></a>Nous allons voir comment déporter le système de <strong>géo-localisation IP</strong> sur Varnish.<br />
+L&#8217;objectif final est de permettre à vos backends de récupérer le Pays de l&#8217;utilisateur au sein de la requête HTTP.</p>
+<p>Par défault, Varnish n&#8217;intègre pas de système de géo-localisation par IP, en revanche il existe quelques plugins qui permettent l&#8217;utilisation de <a href="http://www.maxmind.com/app/c">GeoIP de MaxMind</a>.</p>
+<p>Voici les parties de l&#8217;article :</p>
+<ul>
+<li>Installation de Varnish</li>
+<li>Installation de GeoIP pour Varnish</li>
+<li>Configuration du Varnish Module</li>
+<li>Configuration de SELinux</li>
+</ul>
+<p>A noter que nous avons opter pour le <a href="https://www.varnish-cache.org/docs/3.0/reference/vmod.html">VMOD</a> <a href="https://github.com/leed25d/geoip-vmod">Geoip-vmod par leed25d</a>. Contrairement aux autres plugins, celui-ci ne travail pas le header HTTP de manière autonome. Ce sera à vous de le faire, et grâce à cela vous allez pouvoir choisir comment&#8230;</p>
+<h3>Varnish</h3>
+<p>Pour compiler le VMOD, il vous faudra récupérer les sources de Varnish et les compiler même si vous choisissez l&#8217;installation par YUM.<br />
+De mon coté, je n&#8217;utilise pas en production la version que je compile mais la version provenant du dépot <a href="https://www.varnish-cache.org/">varnish-cache.org</a>. A vous de voir.</p>
+<p>Commençons par l&#8217;installation de Varnish via YUM (cf. <a href="https://www.varnish-cache.org/installation/redhat">Doc officielle</a>):</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">rpm <span style="color: #660033;">--nosignature</span> <span style="color: #660033;">-i</span> http:<span style="color: #000000; font-weight: bold;">//</span>repo.varnish-cache.org<span style="color: #000000; font-weight: bold;">/</span>redhat<span style="color: #000000; font-weight: bold;">/</span>varnish-<span style="color: #000000;">3.0</span><span style="color: #000000; font-weight: bold;">/</span>el5<span style="color: #000000; font-weight: bold;">/</span>noarch<span style="color: #000000; font-weight: bold;">/</span>varnish-release-<span style="color: #000000;">3.0</span>-<span style="color: #000000;">1</span>.noarch.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum install</span> varnish</div></td></tr></tbody></table></div>
+<p>Pour compiler Varnish nous allons avoir besoin de quelques outils et des sources.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> pcre-devel <span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> curl <span style="color: #660033;">-o</span> varnish-source.tar.gz http:<span style="color: #000000; font-weight: bold;">//</span>repo.varnish-cache.org<span style="color: #000000; font-weight: bold;">/</span>source<span style="color: #000000; font-weight: bold;">/</span>varnish-3.0.2.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xvzf</span> varnish-source.tar.gz</div></td></tr></tbody></table></div>
+<p>On lance la compilation de Varnish.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> varnish-3.0.2<span style="color: #000000; font-weight: bold;">/</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span></div></td></tr></tbody></table></div>
+<p>Normalement, Varnish a été compilé dans votre repertoire <strong>$HOME/varnish-3.0.2/</strong>.</p>
+<h3>GeoIP VMOD</h3>
+<p>On récupère les sources sur <a href="https://github.com/leed25d/geoip-vmod">github</a>.</p>
+<p>Après l&#8217;installation de quelques outils dont GeoIP, on lance la compilation du VMOD.<br />
+Attention, pour les version 32Bits utiliser <strong>VMODDIR=/usr/lib/varnish/vmods/</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> <span style="color: #c20cb9; font-weight: bold;">unzip</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> autoinstall libtool geoip geoip-devel<br />
+<span style="color: #c20cb9; font-weight: bold;">unzip</span> leed25d-geoip-vmod-<span style="color: #7a0874; font-weight: bold;">&#91;</span>REVISION<span style="color: #7a0874; font-weight: bold;">&#93;</span>.zip<br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> leed25d-geoip-vmod-<span style="color: #7a0874; font-weight: bold;">&#91;</span>REVISION<span style="color: #7a0874; font-weight: bold;">&#93;</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>autogen.sh<br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #007800;">VARNISHSRC</span>=<span style="color: #007800;">$HOME</span><span style="color: #000000; font-weight: bold;">/</span>varnish-3.0.2<span style="color: #000000; font-weight: bold;">/</span> <span style="color: #007800;">VMODDIR</span>=<span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>lib64<span style="color: #000000; font-weight: bold;">/</span>varnish<span style="color: #000000; font-weight: bold;">/</span>vmods<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>Suite à l&#8217;installation Varnish, penser à ouvrir votre firewall.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/sysconfig/iptables</span><br />
+<span style="color: #660033;">-A</span> INPUT <span style="color: #660033;">-m</span> tcp <span style="color: #660033;">-p</span> tcp <span style="color: #660033;">--dport</span> <span style="color: #000000;">80</span> <span style="color: #660033;">-j</span> ACCEPT</div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">service iptables restart</div></td></tr></tbody></table></div>
+<p>De même, il faut configurer Varnish pour écouter sur le <strong>port 80</strong> à la place du <strong>6081</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/sysconfig/varnish&lt;/strong&gt;</span><br />
+<span style="color: #007800;">VARNISH_LISTEN_PORT</span>=<span style="color: #000000;">80</span></div></td></tr></tbody></table></div>
+<p>Ensuite, on va vérifier que l&#8217;on peut lancer Varnish en chargeant le plugin GeoIP.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/varnish/default.vcl</span><br />
+<span style="color: #666666; font-style: italic;">#Top of file.</span><br />
+import geoip;</div></td></tr></tbody></table></div>
+<p>On va lancer le processus en debug pour voir si tout se passe bien :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">varnishd <span style="color: #660033;">-d</span> <span style="color: #660033;">-f</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>varnish<span style="color: #000000; font-weight: bold;">/</span>default.vcl<br />
+start</div></td></tr></tbody></table></div>
+<p>Si vous n&#8217;avez pas d&#8217;erreur, c&#8217;est une bonne chose. Sinon, vérifier les étapes ci-dessus.</p>
+<p>On va donc pouvoir inclure le pays de l&#8217;utilisateur dans le Header HTTP en suivant l&#8217;exemple de l&#8217;auteur du VMOD</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #339933;">#/etc/varnish/default.vcl</span><br />
+import geoip<span style="color: #339933;">;</span><br />
+<br />
+sub vcl_recv <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP <span style="color: #339933;">=</span> geoip.<span style="color: #202020;">country</span><span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For<span style="color: #009900;">&#41;</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>Maintenant on va pouvoir mettre Varnish en démarrage automatique.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">chkconfig varnish on<br />
+service varnish start</div></td></tr></tbody></table></div>
+<p><strong>Attention:</strong><br />
+Sachant que vous êtes sous CentOS, SELinux est surement activé et bloquera l&#8217;access au fichier de données <strong>/usr/share/GeoIP/GeoIP.dat</strong>. Vous pouvez le désactiver ou aller voir à la fin de l&#8217;article comment le configurer aux petits oignons.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">setenforce <span style="color: #000000;">0</span></div></td></tr></tbody></table></div>
+<p>Et pour finir, un peu de ménage.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-Rf</span> varnish-<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-Rf</span> leed25d-<span style="color: #000000; font-weight: bold;">*</span><br />
+<span style="color: #c20cb9; font-weight: bold;">yum remove</span> pcre-devel <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">unzip</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> autoinstall geoip-devel</div></td></tr></tbody></table></div>
+<h3>Pour aller plus loin</h3>
+<p>Avec la configuration ci-dessus,<br />
+Si un client de France se connecte directement à Varnish, lorsqu&#8217;une requête sera générée pour atteindre vos backends elle contiendra : <strong>X-GeoIP: FR</strong></p>
+<p>Vous pourrez donc récupérer le pays de l&#8217;utilisateur en analysant le contenu de la requête HTTP.<br />
+Il est à noter que GeoIP retourne le code pays &#8220;<strong>AA</strong>&#8221; lorsqu&#8217;il ne parvient pas à faire la détection.</p>
+<p>Voici comment vous pouvez exploiter le contenu du header en PHP :</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000088;">$headers</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/apache_request_headers"><span style="color: #990000;">apache_request_headers</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$headers</span> <span style="color: #339933;">&amp;&amp;</span> <a href="http://www.php.net/is_array"><span style="color: #990000;">is_array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$headers</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <a href="http://www.php.net/array_key_exists"><span style="color: #990000;">array_key_exists</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;X-GeoIP&quot;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$headers</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$headers</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">&quot;X-GeoIP&quot;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><br />
+<br />
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">==</span> <span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">||</span> <span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;AA&quot;</span> <span style="color: #339933;">==</span> <span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getDefaultCountry</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><br />
+<br />
+<span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/strtoupper"><span style="color: #990000;">strtoupper</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Retournons du coté de Varnish.<br />
+Comment les choses vont se passer si vous ajoutez un <strong>Proxy en amont de Varnish</strong>. Par exemple, <a href="http://www.apsis.ch/pound">Pound</a> pour gérer le protocole HTTPS.</p>
+<p>La detection du pays ne fonctionnera plus normalement car la valeur contenu dans le script VCL &#8216;<strong>client.ip</strong>&#8216; correspondra à l&#8217;IP de votre serveur Pound.</p>
+<p>Nous allons donc devoir travailler avec un autre Header HTTP: <a href="http://en.wikipedia.org/wiki/X-Forwarded-For">X-Forwarded-For</a>. Celui-ci permet de conserver l&#8217;historique des différents point de passage d&#8217;une requête HTTP et contient l&#8217;IP du client qui a initié la connection HTTP.</p>
+<p>Lorsque les différents Proxy implementent correctement ce standard, le champs <strong>X-Forwarded-For</strong> contient l&#8217;IP du client, le proxy A, le proxy B, etc.. le tout séparé avec des virgules.</p>
+<p>Voici comment en tenir compte au sein de votre configuration VCL :</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sub vcl_recv <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">restarts</span> <span style="color: #339933;">==</span> <span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">x</span><span style="color: #339933;">-</span>forwarded<span style="color: #339933;">-</span><span style="color: #b1b100;">for</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">+</span> <span style="color: #ff0000;">&quot;, &quot;</span> <span style="color: #339933;">+</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+<br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP <span style="color: #339933;">=</span> geoip.<span style="color: #202020;">country</span><span style="color: #009900;">&#40;</span>regsub <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For<span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;(,.*)&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>Maintenant parlons un peu du <strong>système de cache de Varnish</strong>.<br />
+Si vous avez besoin de connaitre le pays de l&#8217;utilisateur, il y a donc fort à parier que le contenu retourné à l&#8217;utilisateur sera different en fonction de son Pays.</p>
+<p>En résumé, pour une URL : <strong>/mon-url</strong>, en fonction du Pays utilisateur le contenu sera different.<br />
+Si on conserve la spécification par défaut de Varnish qui consiste à mettre en cache les données provenant d&#8217;une même URL, vous allez avoir quelques mauvaises surprises.</p>
+<p>Voici comment tenir compte du pays de l&#8217;utilisateur pour gérer les données qui sont mises en cache.</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sub vcl_hash <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; hash_data<span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">url</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; hash_data<span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span>hash<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<h3>SELinux</h3>
+<p>Sous Centos, il y a SELinux.<br />
+Si vous n&#8217;êtes pas un expert en <strong>sécurité Linux</strong>. Voici comment faire fonctionner <strong>Varnish &amp; GeoIP</strong> sans désactiver SELinux.<br />
+Le processus Varnish fait parti d&#8217;un contexte SELinux different du fichier GetIP.dat qui est installé avec GeoIP.<br />
+Du coup, nous allons faire un module pour SELinux afin d&#8217;autoriser varnish_t à lire les contextes de type usr_t.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">mkdir</span> ~<span style="color: #000000; font-weight: bold;">/</span>myvarnish; <span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>myvarnish;<br />
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;policy_module(myvarnish, 1.0.0) optional_policy(<span style="color: #780078;">` gen_require(`</span> type varnishd_t; ') files_read_usr_files(varnishd_t) ')&quot;</span> <span style="color: #000000; font-weight: bold;">&gt;</span> myvarnish.te<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #660033;">-f</span> <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>share<span style="color: #000000; font-weight: bold;">/</span>selinux<span style="color: #000000; font-weight: bold;">/</span>devel<span style="color: #000000; font-weight: bold;">/</span>Makefile myvarnish.pp<br />
+semodule <span style="color: #660033;">-i</span> myvarnish.pp</div></td></tr></tbody></table></div>
+<p>Pour le coup, cette partie provient d&#8217;une discussion avec une personne sur #SELinux on <em>freenode</em>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-6-varnish-geoip/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Actionscript &#8211; Les Flashvars &amp; les preloaders</title>
+		<link>http://www.armetiz.info/flashvar-preloader-parameters/</link>
+		<comments>http://www.armetiz.info/flashvar-preloader-parameters/#comments</comments>
+		<pubDate>Mon, 20 Jun 2011 05:05:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Application]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[Flashvar]]></category>
+		<category><![CDATA[Paramètre]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2067</guid>
+		<description><![CDATA[Mise en situation : Application_A.swf est une application autonome qui utilise les Flashvar. Application_Preloader.swf est un preloader qui va charger Application_A.swf. L&#8217;objectif c&#8217;est de pouvoir utiliser les Flashvar avec Application_Preloader.swf.. <a href="http://www.armetiz.info/flashvar-preloader-parameters/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><strong>Mise en situation</strong> :</p>
+<ul>
+<li>Application_A.swf est une application autonome qui utilise les Flashvar. </li>
+<li>Application_Preloader.swf est un preloader qui va charger Application_A.swf.</li>
+</ul>
+<p>L&#8217;objectif c&#8217;est de pouvoir utiliser les Flashvar avec Application_Preloader.swf pour qu&#8217;elles soient transmises à Application_A.swf.</p>
+<p>Pour cela, nous allons utiliser une instance de <a href="http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/net/URLVariables.html">URLVariables</a> que l&#8217;on passera à <a href="http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/net/URLRequest.html">URLRequest</a>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">var _urlRequest &nbsp; &nbsp; : URLRequest&nbsp; &nbsp; = new URLRequest ( &quot;http://www.domain.tld/Application_A.swf&quot; );<br />
+var _urlVariables &nbsp; : URLVariables&nbsp; = new URLVariables ();<br />
+var _loader &nbsp; &nbsp; : Loader&nbsp; &nbsp; = new Loader ();<br />
+<br />
+for (var property : String in loaderInfo.parameters ) <br />
+{<br />
+&nbsp; &nbsp; _urlVariables[property] = loaderInfo.parameters[property];<br />
+}<br />
+<br />
+_urlRequest.method&nbsp; = URLRequestMethod.GET;<br />
+_urlRequest.data&nbsp; &nbsp; = _urlVariables;<br />
+<br />
+_loader &nbsp; &nbsp; = new Loader ();<br />
+_loader.load ( _urlRequest );</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/flashvar-preloader-parameters/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Ordonner les resultats Doctrine avec une table de composition</title>
+		<link>http://www.armetiz.info/ordonner-resultats-doctrine-table-liaison/</link>
+		<comments>http://www.armetiz.info/ordonner-resultats-doctrine-table-liaison/#comments</comments>
+		<pubDate>Tue, 01 Jun 2010 06:00:59 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Doctrine]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[DOM]]></category>
+		<category><![CDATA[DQL]]></category>
+		<category><![CDATA[Ordre]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1716</guid>
+		<description><![CDATA[Prenons le schéma ci-dessus. Au niveau de la définition, nous avons deux entités : Bureau ( rooms ) et Utilisateur ( users ). Ces deux entités sont liées par une.. <a href="http://www.armetiz.info/ordonner-resultats-doctrine-table-liaison/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/05/composition1.png"><img src="http://www.armetiz.info/files/2010/05/composition1.png" alt="" width="333" height="69" class="aligncenter size-full wp-image-1717" /></a></p>
+<p>Prenons le schéma ci-dessus.<br />
+Au niveau de la définition, nous avons deux entités : <strong>Bureau </strong>( rooms ) et <strong>Utilisateur </strong>( users ). Ces deux entités sont liées par une relation <strong>manyToMany </strong>car un utilisateur peut avoir plusieurs bureaux, et un bureau peut avoir plusieurs utilisateurs.<br />
+Pour pouvoir intégrer l&#8217;ordonnancement des utilisateurs au sein d&#8217;une pièce, nous avons ajouté le champs &#8220;<strong>index</strong>&#8221; sur la table de liaison.</p>
+<p>Grâce à cette définition, nous pouvons avoir les cas suivants :<br />
+&#8211; Robert est à la place #2 dans le bureau d&#8217;accueil<br />
+&#8211; Robert est à la place #1 dans le bureau du président<br />
+&#8211; Annie est à la place #1 dans le bureau du président</p>
+<h3>Définition des Domain Model Object</h3>
+<p><a href="http://www.armetiz.info/files/2010/05/doctrine1.gif"><img src="http://www.armetiz.info/files/2010/05/doctrine1.gif" alt="doctrine" width="191" height="53" class="alignright size-full wp-image-1710" /></a><br />
+Nous allons maintenant définir les liaisons Doctrine entre ces objets.<br />
+Je n&#8217;utiliserai pas la définition YAML.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br />50<br />51<br />52<br />53<br />54<br />55<br />56<br />57<br />58<br />59<br />60<br />61<br />62<br />63<br />64<br />65<br />66<br />67<br />68<br />69<br />70<br />71<br />72<br />73<br />74<br />75<br />76<br />77<br />78<br />79<br />80<br />81<br />82<br />83<br />84<br />85<br />86<br />87<br />88<br />89<br />90<br />91<br />92<br />93<br />94<br />95<br />96<br />97<br />98<br />99<br />100<br />101<br />102<br />103<br />104<br />105<br />106<br />107<br />108<br />109<br />110<br />111<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">abstract class Model_Base_Room extends Model_Base<br />
+{<br />
+&nbsp; &nbsp; public function setTableDefinition()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;setTableName('rooms');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('id_room as idRoom', 'integer', 4, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'integer',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '4',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('title', 'string', 80, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'string',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'notnull' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '80',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public function setUp()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; parent::setUp();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasMany('Model_User as users', array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'refClass' =&amp;gt; 'Model_CompoRoomsUsers',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'local' =&amp;gt; 'id_room',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'foreign' =&amp;gt; 'id_user'));<br />
+&nbsp; &nbsp; }<br />
+}<br />
+<br />
+abstract class Model_Base_User extends Model_Base<br />
+{<br />
+&nbsp; &nbsp; public function setTableDefinition()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;setTableName('users');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('id_user as idUser', 'integer', 4, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'integer',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '4',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('firstname', 'string', 80, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'string',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'notnull' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '80',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public function setUp()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; parent::setUp();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasMany('Model_Room as rooms', array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'refClass' =&amp;gt; 'Model_CompoRoomsUsers',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'local' =&amp;gt; 'id_user',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'foreign' =&amp;gt; 'id_room'));<br />
+&nbsp; &nbsp; }<br />
+}<br />
+<br />
+abstract class Model_Base_CompoRoomsUsers extends Model_Base<br />
+{<br />
+&nbsp; &nbsp; public function setTableDefinition()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;setTableName('compo_rooms_users');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('id_room as idRoom', 'integer', 4, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'integer',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '4',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('id_user as idUser', 'integer', 4, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'integer',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '4',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('index', 'integer', 4, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'integer',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'notnull' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '4',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function setUp()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasOne('Model_User as user', array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'local' =&amp;gt; 'id_user',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'foreign' =&amp;gt; 'id_user'));<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasOne('Model_Room as room', array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'local' =&amp;gt; 'id_room',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'foreign' =&amp;gt; 'id_room'));<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<h3>Ordonner avec DQL</h3>
+<p>Après cette longue définition, nous pouvons passer au code DQL qui permettra d&#8217;ordonner les résultats en fonction de l&#8217;index de notre table de liaison.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$query&nbsp; = Doctrine_Query::create ()<br />
+&nbsp; &nbsp; -&amp;gt;select (&quot;room.*, users.*&quot;)<br />
+&nbsp; &nbsp; -&amp;gt;from (&quot;Model_Room room&quot;)<br />
+&nbsp; &nbsp; -&amp;gt;leftJoin (&quot;room.users users&quot;)<br />
+&nbsp; &nbsp; -&amp;gt;orderBy (&quot;room.id_room, users.Model_CompoRoomsUsers.index ASC&quot;);</div></td></tr></tbody></table></div>
+<p>Prenez note du fait que nous trions dans un premier temps par identifiant de bureau et ensuite par index. Si nous n&#8217;utilisions qu&#8217;un tri par index, l&#8217;ordre des bureaux serai incohérent.</p>
+<h3>Pour aller plus loin</h3>
+<p>Nous avons décrit le fonctionnement pour ordonner des résultats à partir d&#8217;une table de liaison.<br />
+Mais vous pouvez aussi utiliser cette méthode pour conditionner le résultat.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/ordonner-resultats-doctrine-table-liaison/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>iFrame hauteur et largeur à 100%</title>
+		<link>http://www.armetiz.info/iframe-hauteur-largeur-100/</link>
+		<comments>http://www.armetiz.info/iframe-hauteur-largeur-100/#comments</comments>
+		<pubDate>Thu, 18 Mar 2010 12:55:11 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[CSS]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[CV]]></category>
+		<category><![CDATA[html]]></category>
+		<category><![CDATA[iFrame]]></category>
+		<category><![CDATA[Ingénieur Informatique]]></category>
+		<category><![CDATA[PDF]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1642</guid>
+		<description><![CDATA[Toujours has been, la balise iframe peut se révéler pratique dans certains cas. L&#8217;exemple d&#8217;utilisation qui me vient à l&#8217;esprit, c&#8217;est l&#8217;affichage d&#8217;un fichier PDF. Personnellement, cela me sert pour.. <a href="http://www.armetiz.info/iframe-hauteur-largeur-100/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Toujours has been, la balise iframe peut se révéler pratique dans certains cas.<br />
+L&#8217;exemple d&#8217;utilisation qui me vient à l&#8217;esprit, c&#8217;est l&#8217;affichage d&#8217;un fichier PDF.</p>
+<p>Personnellement, cela me sert pour afficher mon CV sur <a href="http://thomas.tourlourat.com/" title="CV Ingenieur Informatique Lyon">thomas.tourlourat.com</a></p>
+<p>Pour que le PDF utilise toute la zone du navigateur, il faut utiliser la petite astuce CSS suivante :</p>
+<div class="codecolorer-container css blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="css codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">html<span style="color: #00AA00;">,</span>body<br />
+<span style="color: #00AA00;">&#123;</span><br />
+&nbsp; &nbsp;<span style="color: #000000; font-weight: bold;">width</span><span style="color: #00AA00;">:</span><span style="color: #933;">100%</span><span style="color: #00AA00;">;</span><br />
+&nbsp; &nbsp;<span style="color: #000000; font-weight: bold;">height</span><span style="color: #00AA00;">:</span><span style="color: #933;">100%</span><span style="color: #00AA00;">;</span><br />
+&nbsp; &nbsp;<span style="color: #000000; font-weight: bold;">margin</span><span style="color: #00AA00;">:</span><span style="color: #933;">0px</span><span style="color: #00AA00;">;</span><br />
+&nbsp; &nbsp;<span style="color: #000000; font-weight: bold;">padding</span><span style="color: #00AA00;">:</span><span style="color: #933;">0px</span><span style="color: #00AA00;">;</span><br />
+<span style="color: #00AA00;">&#125;</span></div></td></tr></tbody></table></div>
+<p>Afficher ensuite votre iFrame</p>
+<div class="codecolorer-container xml blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="xml codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;iframe</span> </span><br />
+<span style="color: #009900;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066;">src</span>=<span style="color: #ff0000;">&quot;http://tourlourat.com/documents/cv_tourlourat_thomas.pdf&quot;</span> </span><br />
+<span style="color: #009900;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066;">id</span>=<span style="color: #ff0000;">&quot;cv&quot;</span></span><br />
+<span style="color: #009900;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066;">width</span>=<span style="color: #ff0000;">&quot;100%&quot;</span></span><br />
+<span style="color: #009900;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066;">height</span>=<span style="color: #ff0000;">&quot;100%&quot;</span></span><br />
+<span style="color: #009900;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066;">scrolling</span>=<span style="color: #ff0000;">&quot;auto&quot;</span></span><br />
+<span style="color: #009900;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066;">frameborder</span>=<span style="color: #ff0000;">&quot;0&quot;</span> <span style="color: #000000; font-weight: bold;">&gt;</span></span><br />
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/iframe<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/iframe-hauteur-largeur-100/feed/</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+		<item>
+		<title>Pattern Singleton en Flash</title>
+		<link>http://www.armetiz.info/pattern-singleton-en-flash/</link>
+		<comments>http://www.armetiz.info/pattern-singleton-en-flash/#comments</comments>
+		<pubDate>Tue, 17 Nov 2009 09:49:41 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[Code]]></category>
+		<category><![CDATA[Pattern]]></category>
+		<category><![CDATA[Singleton]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1419</guid>
+		<description><![CDATA[Suite au commentaire de webstorming sur l&#8217;article : Flash – Restreindre l’instanciation d’une classe par un seul objet. Voici l&#8217;implémentation du pattern singleton en Flash. 1234567891011121314151617181920212223public class PatternSingleton { &#160;.. <a href="http://www.armetiz.info/pattern-singleton-en-flash/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Suite au commentaire de <a href="http://www.armetiz.info/flash-restreindre-instanciation-class-objet/#comment-333">webstorming</a> sur l&#8217;article : <a href="http://www.armetiz.info/flash-restreindre-instanciation-class-objet/">Flash – Restreindre l’instanciation d’une classe par un seul objet</a>.</p>
+<p>Voici l&#8217;implémentation du <a href="http://fr.wikipedia.org/wiki/Singleton_(patron_de_conception)">pattern singleton</a> en Flash.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">public class PatternSingleton<br />
+{<br />
+&nbsp; &nbsp; private static var _instance : Object;<br />
+<br />
+&nbsp; &nbsp; public function PatternSingleton () : void<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (_instance)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new Error (&quot;Pattern Singleton : only one instance is permit&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; _instance = this;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function sayHello () : String<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return &quot;Hello World&quot;;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public static function get instance () : PatternSingleton<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (!_instance)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; new PatternSingleton ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return PatternSingleton (_instance);<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Nous avons donc une class ne pouvant être instanciée qu&#8217;une seule fois, et accessible de n&#8217;importe où au sein de notre application.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">trace (PatternSingleton.instance.sayHello ());</div></td></tr></tbody></table></div>
+<h3>Wikipédia</h3>
+<p><a href="http://wiki.flexx.fr/doku.php?id=tutoriaux:flex:pattern_singleton_as3">L&#8217;implémentation</a> que l&#8217;on trouve sur <a href="http://fr.wikipedia.org/wiki/Singleton_%28patron_de_conception%29#Actionscript_3">Wikipédia</a> est différente de celle ci-dessus.<br />
+En effet, elle utilise la définition d&#8217;une constante globale sans modification du constructeur.<br />
+Le problème induit, c&#8217;est que l&#8217;instanciation multiple n&#8217;est pas interdite au sein de l&#8217;application. Et la compréhension par un débutant est moins aisée.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/pattern-singleton-en-flash/feed/</wfw:commentRss>
+		<slash:comments>11</slash:comments>
+		</item>
+		<item>
+		<title>Gérer son référencement : Quelques règles</title>
+		<link>http://www.armetiz.info/gestion-regle-referencement/</link>
+		<comments>http://www.armetiz.info/gestion-regle-referencement/#comments</comments>
+		<pubDate>Wed, 12 Nov 2008 21:20:16 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Référencement]]></category>
+		<category><![CDATA[Wordpress]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[CMS]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Yahoo]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=516</guid>
+		<description><![CDATA[Pourquoi a t-on un site où l&#8217;on s&#8217;investit ? Il existe autant de raison que de webmestre, mais tout le monde à la même pré-occupation : être visible, et se.. <a href="http://www.armetiz.info/gestion-regle-referencement/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pourquoi a t-on un site où l&#8217;on s&#8217;investit ? Il existe autant de raison que de webmestre, mais tout le monde à la même pré-occupation : être visible, et se démarquer.</p>
+<p>Ici, nous ne ferons aucune analyse technique, nous verrons par contre quels sont les points qu&#8217;il ne faut pas négliger et ceux que vous pouvez approfondir pour aller un peu plus loin.<br />
+Malgré une volonté de généricité, WordPress sera le support de cet article, mais les conseils restent de mises pour tout type de CMS. De même que Google servira de référence.</p>
+<h3>Les balises meta : title, keyword, description</h3>
+<p>Elles sont souvent mises de coté, et beaucoup de professionnels ne les considèrent pas comme &#8220;importante&#8221;.<br />
+Il faut en fait savoir deux choses avant de dire qu&#8217;elles ne sont pas nécessaire.</p>
+<ul>
+<li>Les balises <strong>Title</strong> et <strong>Description</strong> seront les représentant de votre site lorsque les utilisateurs utiliseront un moteur de recherche. A noter aussi, que si la <strong>description</strong> n&#8217;est pas définit explicitement, Google prendra un extrait de la page qu&#8217;il analyse. A vous de faire des introductions pertinentes <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></li>
+<li>Concernant <strong>keyword</strong>, personne n&#8217;est en mesure de dire si elle est encore utilisée, en effet les algorithmes qui analysent vos pages sont de plus en plus évolués et permettent de ressortir les idées importantes.</li>
+</ul>
+<p><u>Deux constats, un point important :</u><br />
+Premièrement, Title et Description sont des balises très importantes pour l&#8217;accroche du visiteur à partir des moteurs de recherche.<br />
+Le titre d&#8217;une page est aussi utilisé pour connaitre le contenu d&#8217;une page, penser donc à y mettre des mots &#8220;clés&#8221; et à faire ressortir une idée. Sur <a href="http://www.annuaire-info.com/referencement/meta-description-google/">annuaire-info</a> vous trouverez une page plus exhaustive contenant des conseils d&#8217;utilisation.</p>
+<p>Deuxièmement, même si l&#8217;on est pas sur de l&#8217;intérêt de <strong>title</strong>, <strong>description</strong> et <strong>keyword</strong> sur le positionnement de votre page par rapport à vos concurrents: <u>dans le doute</u>&#8230; Il vaux mieux les remplir avec qualité.</p>
+<p>Sous WordPress, les titres sont formatés par défaut : &#8220;Nom du blog &gt; Date &gt; Titre&#8221;. Si vous pensez que le nom de votre site, et la date sont importants pour votre référencement, passer directement à la partie suivante&#8230;<br />
+Pour modifier cette aspect, vous pouvez modifier le fichier header.php de votre theme, ou mieux, utiliser un plugin : <a href="http://www.netconcepts.com/seo-title-tag-plugin/">SEO Title Tag</a></p>
+<h3>Le plan du site : sitemap.xml ?</h3>
+<p>Le <a href="http://fr.wikipedia.org/wiki/Sitemap">sitemap</a> est utilisé par une grande partie des moteurs de recherche.<br />
+Son utilité est simple, permettre de donner des informations relatives à une page: date de modification, importance par rapport aux autres pages.<br />
+La priorité permet de &#8220;forcer&#8221; un peu la main à Google concernant la pertinence d&#8217;une page par rapport à une autre.</p>
+<p>Ce fichier est généré automatiquement grâce à des plugins si vous utilisez un CMS. Mais par défaut, il n&#8217;est pas installé sur le plupart de ces systèmes.<br />
+Vous trouverez le plugin pour WordPress <a href="http://wordpress.org/extend/plugins/google-sitemap-generator/">ici</a>.</p>
+<h3>Un autre meta / attribut : nofollow</h3>
+<p>Dans un <a href="http://www.armetiz.info/cms/wordpress/wordpress-theme-nofollow-commentaire/">précédent article</a>, j&#8217;expliquais &#8211; succinctement &#8211; le <strong>nofollow</strong>.<br />
+Cette balise peut-être utilisée dans le header de votre page, ou en simple attribut pour un lien spécifique.<br />
+Il est utilisé pour empêcher les moteurs de recherche de suivre vos liens.<br />
+C&#8217;est un point important à vérifier lorsque vous venez de terminer l&#8217;installation de votre site.</p>
+<p>Sous WordPress, le nofollow est activé par défaut pour l&#8217;ensemble de votre site. Ce qui est dommage car cela signifie que le moteur de recherche s&#8217;arrêtera à votre page d&#8217;accueil.<br />
+Pour autoriser le parcours de votre site : Aller dans la partie d&#8217;administration -&gt; Réglage -&gt; Vie privée, et cocher : &#8220;Je souhaite que mon blog soit visible pour tous&#8230;&#8221;</p>
+<h3>URL de votre page</h3>
+<p>Étroitement lié à votre titre de page, l&#8217;URL permet aux moteurs de recherche d&#8217;en savoir un peu plus sur le contenu de votre page.<br />
+Comme pour le titre et la description, il faut donc le traiter avec soin.<br />
+Personnellement, j&#8217;essaie de reprendre les mots constituants mon titre de page en supprimant les articles indéfinis et autre conjonction.<br />
+Si vous avez construit un titre pertinent, votre URL contiendra des mots qui définissent de très près votre page.</p>
+<p>Sous WordPress, lorsque vous tapez votre titre, l&#8217;url se construit dynamiquement lorsque vous changez de case. Vous pouvez le modifier très facilement grâce à un lien se situant juste en dessous.<br />
+D&#8217;ailleurs, lorsque vous travaillez avec des brouillons, si vous changez le titre, il faudra modifier l&#8217;URL à la main. Sinon, vous pouvez vous retrouver avec un titre &#8220;Toto à la plage&#8221; et une url &#8220;mes_vacances_sur_un_bateau&#8221;.<br />
+Penser aussi à utiliser des liens simplifiés, en série sur la majorité des CMS, sous WordPress, vous trouverez la configuration dans l&#8217;administration -&gt; réglage -&gt; permaliens.<br />
+J&#8217;utilise en structure personnalisé</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">/%category%/%postname%/</div></td></tr></tbody></table></div>
+<p><strong>Edit 21/11/08 :</strong><br />
+Modification de la structure personnalisée.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">/%postname%/</div></td></tr></tbody></table></div>
+<p>Afficher la catégorie de l&#8217;article alors que les titres intègrent des titres explicites me semble un peu inutile vis-à-vis du référencement.<br />
+Par contre, il va y avoir un impact sur l&#8217;ensemble de mes backlinks&#8230; Mais comme il y a une <a href="http://www.armetiz.info/wordpress-erreur-404/">page 404</a> de la mort, il n&#8217;y a aucune d&#8217;avoir peur des répercutions :p</p>
+<h3>Les outils à votre disposition</h3>
+<p>Voici une liste qui est loin &#8211; très loin &#8211; d&#8217;être exhaustive des outils que vous pouvez &#8211; devez ? &#8211; utiliser.</p>
+<ul>
+<li><a href="http://www.google.com/analytics/">Google Analytics</a></li>
+<li><a href="http://web.analytics.yahoo.com/">Yahoo! Analytics</a> : Inscription longue, mais gratuite</li>
+<li><a href="https://www.google.com/webmasters/tools/dashboard">Google Webmater Tools</a></li>
+</ul>
+<p>De même, inscrivez-vous sur un maximum d&#8217;annuaire, et penser à enregistrer vos flux RSS.</p>
+<h3>Pour aller plus loin</h3>
+<p>Nous avons vu les principes de bases à mettre en place pour l&#8217;optimisation de votre référencement.<br />
+Ensuite, c&#8217;est à vous de faire un travail de fond, par exemple, n&#8217;hésiter pas à réagir sur d&#8217;autres sites, et même à intervenir pour la création d&#8217;article.<br />
+Penser à faire des échanges de lien, car si un visiteur se plait sur un site qui correspond au votre, il aimera surement découvrir vos articles.</p>
+<p>Noter que nous n&#8217;avons nullement parler du PageRank et d&#8217;autres données inutiles. En effet, si vous arrivez à plaire à vos visiteurs, vous n&#8217;aurez pas besoin d&#8217;avoir un PR de 5 pour qu&#8217;ils reviennent, car ils le feront d&#8217;eux même; alors que l&#8217;inverse n&#8217;est pas vrai.</p>
+<p>Vous trouverez énormément d&#8217;information sur le net concernant <a href="http://www.media-awareness.ca/francais/ressources/educatif/documents_accompagnement/redaction_article_nouvelles.cfm">l&#8217;écritures d&#8217;un article </a>et le <a href="http://www.mickaelgros.fr/post/2008/02/15/Conseils-pour-la-redaction-dun-blog"> maintient d&#8217;un blog</a> qui feront de vos visiteurs des gens heureux.</p>
+<p>Mais rendre la visite plaisante n&#8217;est pas le sujet de l&#8217;article, juste une suite logique que vous devez avoir aborder.</p>
+<p>PS : Cette article est trop long, manque d&#8217;image et de pause. Heureusement qu&#8217;il n&#8217;est pas la pour rendre accro :p</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/gestion-regle-referencement/feed/</wfw:commentRss>
+		<slash:comments>8</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.018 seconds using apc
+Object Caching 1831/1907 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:07:23 by W3 Total Cache -->

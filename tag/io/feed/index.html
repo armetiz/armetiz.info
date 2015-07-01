@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; IO</title>
+	<atom:link href="http://www.armetiz.info/tag/io/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Beanstalkd &#8211; Job Queuing</title>
+		<link>http://www.armetiz.info/beanstalkd-service-job-queuing/</link>
+		<comments>http://www.armetiz.info/beanstalkd-service-job-queuing/#comments</comments>
+		<pubDate>Wed, 10 Jul 2013 06:00:05 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Asynchrone]]></category>
+		<category><![CDATA[Beanstalkd]]></category>
+		<category><![CDATA[IO]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Message]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[RabbitMQ]]></category>
+		<category><![CDATA[ZeroMQ]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2716</guid>
+		<description><![CDATA[Beanstalkd est un service de Job Queuing efficace et surtout simple que je souhaite vous présentez depuis un long moment. Pour rappel, les systèmes de Job Queuing sont utilisés sur.. <a href="http://www.armetiz.info/beanstalkd-service-job-queuing/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://kr.github.io/beanstalkd/">Beanstalkd</a> est un service de <a href="http://en.wikipedia.org/wiki/Job_queue">Job Queuing</a> <strong>efficace et surtout simple</strong> que je souhaite vous présentez depuis un long moment.</p>
+<p>Pour rappel, les systèmes de Job Queuing sont utilisés sur des traitements type <strong>Producteur-Consommateur asynchrone</strong>, ils permettent une évolution horizontale de vos projets.</p>
+<p>Des services réseaux comme <a href="http://kr.github.io/beanstalkd/">Beanstalkd</a>, <a href="http://www.rabbitmq.com/">RabbitMQ</a> ou <a href="http://www.zeromq.org/">ZeroMQ</a> simplifient le transfert de message entre différents serveurs, d&#8217;où l&#8217;évolution horizontale.</p>
+<p>On différencie <strong>Beanstalkd</strong> de ses concurrents par la simplicité d&#8217;utilisation et d&#8217;administration.<br />
+Par exemple, <a href="http://www.rabbitmq.com/">RabbitMQ</a> est un outil de <strong>Message Queuing</strong> très complet mais dont la mise en place, l&#8217;utilisation et l&#8217;administration sont plus difficiles. <a href="http://www.zeromq.org/">ZeroMQ</a> est un protocole Socket à faible latence, il s&#8217;agit d&#8217;un Framework plus que d&#8217;un <strong>service d&#8217;entreprise</strong>.</p>
+<p><strong>Beanstalkd</strong> en plus de sa simplicité, dispose d&#8217;autres avantages :</p>
+<ul>
+<li>Des clients dans de <a href="https://github.com/kr/beanstalkd/wiki/Client-Libraries">nombreux languages</a></li>
+<li>Système de Tubes</li>
+<li>Rapide et peu consommateur de cycle CPU</li>
+<li>Persistance des messages</li>
+<li>Et bien d&#8217;autres&#8230;</li>
+</ul>
+<p>Pour les utilisateurs PHP,<br />
+Vous pouvez utiliser directement la librairie <a href="https://github.com/pda/pheanstalk/">pda/peanstalk</a>.<br />
+Si vous êtes développeur <strong>Symfony 2</strong>, <a href="https://github.com/armetiz/LeezyPheanstalkBundle">LeezyPheanstalkBundle</a> fournit une intégration de la librairie ainsi que differentes fonctions liées à Symfony :</p>
+<ul>
+<li>Interface Ligne de Commande &#8211; CLI &#8211; pour gérer les Tubes &#038; Messages.</li>
+<li>Une intégration au <a href="http://symfony.com/doc/current/components/event_dispatcher/introduction.html">système d&#8217;évenement Symfony</a>.</li>
+<li>Une intégration au <a href="http://symfony.com/doc/current/book/internals.html#profiler">Profiler de Symfony</a> pour analyser vos serveurs Beanstalkd.</li>
+<li>Une intégration au système de <a href="http://symfony.com/doc/master/cookbook/logging/monolog.html">Journalisation monolog de Symfony.</a></li>
+</ul>
+<p>Si vous voulez poursuivre un peu vos lectures sur Beanstalk, voici quelques liens en Anglais : <a href="http://www.quora.com/Beanstalk-work-queue/What-are-the-advantages-and-disadvantages-of-Beanstalkd-as-a-work-queue">Les avantages et désavantages de Beanstalkd</a>, <a href="http://dev.af83.com/2013/03/13/why-you-should-consider-beanstalkd.html">Pourquoi devez-vous étudier Beanstalkd</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/beanstalkd-service-job-queuing/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.003 seconds using apc
+Object Caching 307/308 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:10:53 by W3 Total Cache -->

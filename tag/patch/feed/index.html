@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Patch</title>
+	<atom:link href="http://www.armetiz.info/tag/patch/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Linux &#8211; Monitoring network via SNMP</title>
+		<link>http://www.armetiz.info/monitoring-network-snmp-debian/</link>
+		<comments>http://www.armetiz.info/monitoring-network-snmp-debian/#comments</comments>
+		<pubDate>Mon, 14 Feb 2011 06:00:07 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Kernel]]></category>
+		<category><![CDATA[Patch]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[SNMP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1943</guid>
+		<description><![CDATA[Les distributions Debian utilisant un Kernel inférieur à la version 2.36 sont touchées par ce problème. Parce que SNMPD n&#8217;est pas lancé avec l&#8217;utilisateur Root, celui-ci n&#8217;est pas capable de.. <a href="http://www.armetiz.info/monitoring-network-snmp-debian/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img src="http://www.armetiz.info/files/2011/02/debian1.png" alt="debian" width="128" height="128" class="alignleft size-full wp-image-1955" />Les distributions Debian utilisant un <strong>Kernel inférieur à la version 2.36</strong> sont touchées par ce problème.</p>
+<p>Parce que <strong>SNMPD</strong> n&#8217;est pas lancé avec l&#8217;utilisateur Root, celui-ci n&#8217;est pas capable de connaitre la vitesse réelle des interfaces réseaux.<br />
+Voici le résultat que l&#8217;on obtient après une requête <a href="http://fr.wikipedia.org/wiki/Simple_network_management_protocol">SNMP</a>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">IF-MIB::ifSpeed.1 = Gauge32: 10000000<br />
+IF-MIB::ifSpeed.2 = Gauge32: 10000000</div></td></tr></tbody></table></div>
+<p>D&#8217;après SNMP, nous avons donc affaire à des cartes 10Mbps, or il s&#8217;agit de carte 100Mbps.</p>
+<p><strong>Ce bug</strong> est identifié <a href="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=609226">#609226</a> chez Debian.</p>
+<p>Afin d&#8217;obtenir la bonne vitesse de vos cartes réseaux, soit vous attendez que le Kernel 2.36 soit intégré à Debian soit vous appliquez le patch et <a href="http://pyfourmond.free.fr/Compilation-Noyau-Linux.htm">re-compiler un noyaux</a>.</p>
+<p>Voici le fichier <strong>diff</strong> contenant le patch :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">Signed-off-by: Stephen Hemminger <br />
+Signed-off-by: David S. Miller <br />
+<br />
+<br />
+diff --git a/net/core/ethtool.c b/net/core/ethtool.c<br />
+index d2c4da5..970eb98 100644<br />
+--- a/net/core/ethtool.c<br />
++++ b/net/core/ethtool.c<br />
+@@ -1423,6 +1423,7 @@ int dev_ethtool(struct net *net, struct ifreq *ifr)<br />
+&nbsp;<br />
+&nbsp; &nbsp; /* Allow some commands to be done by anyone */<br />
+&nbsp; &nbsp; switch (ethcmd) {<br />
++ &nbsp; case ETHTOOL_GSET:<br />
+&nbsp; &nbsp; case ETHTOOL_GDRVINFO:<br />
+&nbsp; &nbsp; case ETHTOOL_GMSGLVL:<br />
+&nbsp; &nbsp; case ETHTOOL_GCOALESCE:</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/monitoring-network-snmp-debian/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.011 seconds using apc
+Object Caching 383/384 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:15:03 by W3 Total Cache -->

@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Projet</title>
+	<atom:link href="http://www.armetiz.info/tag/projet/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Désactiver le WiFi de la Freebox à certaines heures</title>
+		<link>http://www.armetiz.info/desactiver-wifi-freebox-sdk/</link>
+		<comments>http://www.armetiz.info/desactiver-wifi-freebox-sdk/#comments</comments>
+		<pubDate>Tue, 09 Oct 2012 06:53:12 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Cron]]></category>
+		<category><![CDATA[Domotique]]></category>
+		<category><![CDATA[Freebox]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[npm]]></category>
+		<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Projet]]></category>
+		<category><![CDATA[SDK]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2745</guid>
+		<description><![CDATA[Je viens de sortir un SDK &#8211; short edition &#8211; sous NodeJS pour la Freebox: node-freebox-sdk. Actuellement, il n&#8217;y a que la gestion du wifi de disponible. Mon objectif étant.. <a href="http://www.armetiz.info/desactiver-wifi-freebox-sdk/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Je viens de sortir un SDK &#8211; short edition &#8211; sous NodeJS pour la Freebox: <a href="https://github.com/armetiz/node-freebox-sdk">node-freebox-sdk</a>.</p>
+<p>Actuellement, il n&#8217;y a que la gestion du wifi de disponible.<br />
+Mon objectif étant de pouvoir <strong>activer / désactiver le WiFi</strong> de notre domicile à certaines heures.</p>
+<p>Sur <a href="http://linuxfr.org/forums/programmationshell/posts/activerd%C3%A9sactiver-le-wifi-dune-freebox-v6-depuis-le-r%C3%A9seau-local">linuxfr.org</a> &#8211; 404 : Copier sur Github : <a href="https://github.com/armetiz/bash-freebox-wifi-manager/blob/master/freebox_wifi.sh">bash-freebox-wifi-manager</a> &#8211; , quelqu&#8217;un a rendu disponible une solution pour faire cela en utilisant le shell &#038; curl.<br />
+Cette solution fonctionne très bien, mais je souhaitais développer un peu avec <a href="http://nodejs.org/">NodeJS</a>.</p>
+<p>Voyons comment mettre en place la solution NodeJS avec une <a href="http://fr.wikipedia.org/wiki/Crontab">tâche planifiée</a>.</p>
+<p>Nous allons commencer par installer le SDK Freebox via npm.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">npm <span style="color: #c20cb9; font-weight: bold;">install</span> freebox-sdk</div></td></tr></tbody></table></div>
+<p>Ensuite, nous allons créer l&#8217;application <strong>/home/john.doe/freebox-wifi-manager</strong></p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #003366; font-weight: bold;">var</span> Freebox <span style="color: #339933;">=</span> require<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;freebox-sdk&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #003366; font-weight: bold;">var</span> freebox <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">new</span> Freebox<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; password<span style="color: #339933;">:</span> <span style="color: #3366CC;">&quot;&quot;</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; wifiChannel<span style="color: #339933;">:</span> <span style="color: #CC0000;">11</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; wifiHtMode<span style="color: #339933;">:</span> <span style="color: #3366CC;">&quot;disabled&quot;</span> &nbsp;<span style="color: #006600; font-style: italic;">//disabled, 20, 40_lower, 40_upper</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #003366; font-weight: bold;">var</span> command <span style="color: #339933;">=</span> process.<span style="color: #660066;">argv</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">2</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span><br />
+<br />
+freebox.<span style="color: #660066;">on</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;connect&quot;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">switch</span> <span style="color: #009900;">&#40;</span>command<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">&quot;wifi:on&quot;</span> <span style="color: #339933;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">wifiOn</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;wifi is on&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">break</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">&quot;wifi:off&quot;</span> <span style="color: #339933;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">wifiOff</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;wifi is off&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">break</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">&quot;wifi:status&quot;</span> <span style="color: #339933;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">wifiStatus</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #000066;">status</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;wifi is &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span><span style="color: #000066;">status</span>.<span style="color: #660066;">active</span> <span style="color: #339933;">?</span> <span style="color: #3366CC;">&quot;on&quot;</span> <span style="color: #339933;">:</span> <span style="color: #3366CC;">&quot;off&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">break</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #003366; font-weight: bold;">default</span><span style="color: #339933;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;command unknown&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+freebox.<span style="color: #660066;">on</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;error&quot;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>message<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;error: &quot;</span> <span style="color: #339933;">+</span> message<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+freebox.<span style="color: #660066;">connect</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Vous pouvez tester si cela fonctionne</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager<br />
+node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager wifi:on<br />
+node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager wifi:status<br />
+node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager wifi:off<br />
+node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager wifi:status</div></td></tr></tbody></table></div>
+<p>Pour finir,<br />
+Mise en place du <a href="http://fr.wikipedia.org/wiki/Crontab">crontab</a> qui permet d&#8217;allumer le WiFi en semaine de 7h à 9h, de 17h à 00h et le weekend. Le reste du temps, le WiFi sera désactivé.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;"># m h &nbsp;dom mon dow &nbsp; command</span><br />
+<span style="color: #000000;">0</span> <span style="color: #000000;">7</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000;">1</span>-<span style="color: #000000;">6</span> node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager on<br />
+<span style="color: #000000;">0</span> <span style="color: #000000;">9</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000;">1</span>-<span style="color: #000000;">5</span> node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager off<br />
+<span style="color: #000000;">0</span> <span style="color: #000000;">17</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000;">1</span>-<span style="color: #000000;">5</span> node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager on<br />
+<span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000;">0</span>-<span style="color: #000000;">5</span> node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager off</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/desactiver-wifi-freebox-sdk/feed/</wfw:commentRss>
+		<slash:comments>28</slash:comments>
+		</item>
+		<item>
+		<title>GIT &#8211; Ignorer les modifications chmod</title>
+		<link>http://www.armetiz.info/git-ignorer-modification-chmod/</link>
+		<comments>http://www.armetiz.info/git-ignorer-modification-chmod/#comments</comments>
+		<pubDate>Sat, 02 Jun 2012 07:42:18 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[777]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[chmod]]></category>
+		<category><![CDATA[chown]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Droit]]></category>
+		<category><![CDATA[GIT]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[memo]]></category>
+		<category><![CDATA[Projet]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2466</guid>
+		<description><![CDATA[Par défaut, lorsque vous modifiez la valeur chmod d&#8217;un fichier, GIT considere que le fichier a été modifié. Pour désactiver cette fonctionnalité, il faut modifier la configuration core.filemode : 1git.. <a href="http://www.armetiz.info/git-ignorer-modification-chmod/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Par défaut, lorsque vous modifiez la valeur <strong>chmod</strong> d&#8217;un fichier, <strong>GIT</strong> considere que le fichier a été modifié.</p>
+<p>Pour désactiver cette fonctionnalité, il faut modifier la configuration <strong>core.filemode</strong> :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">git config core.filemode false</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/git-ignorer-modification-chmod/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Livre &#8211; Beginning PhoneGap</title>
+		<link>http://www.armetiz.info/livre-beginning-phonegap/</link>
+		<comments>http://www.armetiz.info/livre-beginning-phonegap/#comments</comments>
+		<pubDate>Thu, 19 Apr 2012 07:35:33 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Livres]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[jquery]]></category>
+		<category><![CDATA[Mobile]]></category>
+		<category><![CDATA[PhoneGap]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[Projet]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2302</guid>
+		<description><![CDATA[Beginning PhoneGap, Mobile Web Framework for JavaScript and HTML5 se propose de vous faire découvrir PhoneGap. Ce livre n&#8217;a pas été pour moi un coups de coeur. Vous trouverez une.. <a href="http://www.armetiz.info/livre-beginning-phonegap/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.amazon.fr/Beginning-PhoneGap-Mobile-Framework-JavaScript/dp/1430239034/"><img src="http://www.armetiz.info/files/2012/04/beginning_phonegap1.jpg" alt="beginning_phonegap" width="150" height="150" class="alignleft size-full wp-image-2303" /></a><a href="http://www.amazon.fr/gp/product/1430239034/">Beginning PhoneGap, Mobile Web Framework for JavaScript and HTML5</a> se propose de vous faire découvrir <a href="http://phonegap.com/">PhoneGap</a>.</p>
+<p>Ce livre n&#8217;a pas été pour moi un coups de coeur. Vous trouverez une centaine de pages sur PhoneGap, les autres 200 pages seront sur <a href="http://jquerymobile.com/">jQueryMobile</a>, <a href="http://www.sencha.com/">Sencha</a> ou autres frameworks.</p>
+<p>Du coups, <strong>je ne vous recommande pas</strong> la lecture de ce livre pour découvrir <strong>PhoneGap</strong>.<br />
+Afin d&#8217;aller plus loin, <a href="http://www.kitpages.fr/news">Kitpages</a> m&#8217;a conseillé la lecture de <a href="http://www.amazon.fr/Phonegap-Beginners-Guide-Andrew-Lunny/dp/1849515360/">Phonegap Beginner&#8217;s Guide</a> qui semble être un ouvrage portant sur l&#8217;utilisation de PhoneGap lui meme plus que sur les frameworks qui peuvent améliorer la production de projet via PhoneGap.<br />
+<a href="http://phonegap.com/"><img src="http://www.armetiz.info/files/2012/04/phonegap1.jpg" alt="phonegap" width="130" height="130" class="alignright size-full wp-image-2307" /></a></p>
+<h3>PhoneGap</h3>
+<p>D&#8217;après ce que j&#8217;en ai vu le produit semble très interessant pour de <strong>petit projet</strong>. </p>
+<p>L&#8217;interêt principal étant de pouvoir réaliser rapidement une WebAPP HTML/CSS/JS et compiler sans effort via <a href="https://build.phonegap.com/">PhoneGap Builder</a> pour les principaux acteurs mobiles.</p>
+<p>Les projets un peu <strong>touchy</strong> auront sans doute plus de difficulté à trouver un avantage à l&#8217;utilisation de PhoneGap. </p>
+<p><a href="http://wallbase.cc/wallpaper/903289">Illustration</a> </p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/livre-beginning-phonegap/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Apolline &amp; Léon, la sorcière des Tuileries</title>
+		<link>http://www.armetiz.info/apolline-leon-la-sorciere-des-tuileries/</link>
+		<comments>http://www.armetiz.info/apolline-leon-la-sorciere-des-tuileries/#comments</comments>
+		<pubDate>Mon, 27 Jun 2011 06:00:24 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Livres]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[Blackberry]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[Enfant]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Histoire]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[Livre]]></category>
+		<category><![CDATA[Numerique]]></category>
+		<category><![CDATA[Projet]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2086</guid>
+		<description><![CDATA[Apolline et Léon sont curieux, courageux, inventifs et attachants. Ils nous font vivre leurs aventures quotidiennes peu banales. Le premier épisode &#8220;La sorcière des Tuileries&#8221; se déroule aux Jardins des.. <a href="http://www.armetiz.info/apolline-leon-la-sorciere-des-tuileries/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/06/apollineetleon-11.jpg"><img src="http://www.armetiz.info/files/2011/06/apollineetleon-11.jpg" class="alignleft" alt="apollineetleon" width="180" height="161" /></a><strong><a href="http://www.apollineleon.com/fr.html">Apolline et Léon</a> sont curieux, courageux,<br />
+inventifs et attachants. Ils nous font vivre leurs<br />
+aventures quotidiennes peu banales.</strong></p>
+<p>Le premier épisode &#8220;La sorcière des Tuileries&#8221;<br />
+se déroule aux Jardins des Tuileries à Paris.<br />
+Les deux enfants sont intrigués par une vieille dame<br />
+aux allures de sorcière.<br />
+Ils décident de la suivre discrètement&#8230;<br />
+<br />
+Par <a href="http://www.avant-gout.com/">Avant Goût Studios</a> : <em><strong>Développé en Flash / Air</strong> et destiné aux tablettes tactiles et mobiles (<a href="http://www.apollineleon.com/qrcode/appstore.php">iOS</a>, <a href="http://www.apollineleon.com/qrcode/androidmarket.php">Android</a> et <a href="http://www.apollineleon.com/qrcode/blackberryappworld.php">Blackberry Playbook</a>), le livre s&#8217;adresse aux <strong>enfants de 3 à 8 ans</strong>.</p>
+<p>Dans chacune des pages du livre, le jeune lecteur est invité à lire, écouter et jouer.<br />
+Il peut ainsi faire bouger les nuages, jouer avec un ballon, donner du pain aux pigeons, jouer de la musique…</em></p>
+<p>L&#8217;idée est interessante, et le support tablette est à mon avis tres adapté aux enfants. Avant-Goùt a réalisé intelligemment cette BD Interactive, nous attendons maintenant la suite <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/apolline-leon-la-sorciere-des-tuileries/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>Livre &#8211; VMWare vSphere 4</title>
+		<link>http://www.armetiz.info/livre-vmware-vsphere-4/</link>
+		<comments>http://www.armetiz.info/livre-vmware-vsphere-4/#comments</comments>
+		<pubDate>Thu, 23 Jun 2011 06:00:03 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Livres]]></category>
+		<category><![CDATA[Configuration]]></category>
+		<category><![CDATA[Conseils]]></category>
+		<category><![CDATA[Consulting]]></category>
+		<category><![CDATA[ESX]]></category>
+		<category><![CDATA[ESXi]]></category>
+		<category><![CDATA[Expert]]></category>
+		<category><![CDATA[Installation]]></category>
+		<category><![CDATA[Livre]]></category>
+		<category><![CDATA[Projet]]></category>
+		<category><![CDATA[Virtualisation]]></category>
+		<category><![CDATA[VMWare]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2075</guid>
+		<description><![CDATA[VMWare vSphere 4 &#8211; Mise en place d&#8217;une infrastructure virtuelle par Eric MAILLE. Voyons les titres principaux du sommaire : Virtualisation de serveurs Préparation du projet Architecture de VMWare vSphere.. <a href="http://www.armetiz.info/livre-vmware-vsphere-4/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/06/51rf33bjSAL._BO2204203200_PIsitb-sticker-arrow-clickTopRight35-76_AA300_SH20_OU08_1.jpg"><img src="http://www.armetiz.info/files/2011/06/51rf33bjSAL._BO2204203200_PIsitb-sticker-arrow-clickTopRight35-76_AA300_SH20_OU08_1.jpg" alt="" class="alignright" width="150" height="150" /></a><strong><a href="http://amzn.to/kFupDG">VMWare vSphere 4 &#8211; Mise en place d&#8217;une infrastructure virtuelle</a></strong> par Eric MAILLE.</p>
+<p>Voyons les titres principaux du sommaire :</p>
+<ul>
+<li>Virtualisation de serveurs</li>
+<li>Préparation du projet</li>
+<li>Architecture de VMWare vSphere 4</li>
+<li>Fonctionnement et concepts</li>
+<li>Fonctionnalités de vSphere 4</li>
+<li>Installation</li>
+<li>Configuration</li>
+<li>Supervision et optimisation</li>
+<li>La sauvegarde et le PRA</li>
+<li>Etude de cas</li>
+<li>Annexes</li>
+</ul>
+<p>Ce livre s&#8217;adresse aux personnes qui souhaitent réaliser un projet <strong>VMWare vSphere 4</strong>. </p>
+<p><strong>A titre personnel</strong>, j&#8217;ai trouvé ce livre interessant et facile à lire.<br />
+Ne vous attendez pas à lire un livre techniquement complet. Il s&#8217;adresse à un large spectre de lecteur dont des utilisateurs non technique.</p>
+<p>Les aspects techniques propres à VMWare ne sont pas abordés suffisamment en profondeur, mais cela n&#8217;est pas l&#8217;objectif du livre.<br />
+Maintenant, en lisant ce livre vous serez capable de comprendre succinctement comment VMWare consolide l&#8217;utilisation des serveurs physiques ESX / ESXi via le <strong>Balloning</strong>, le <strong>TPS</strong> ou le <strong>Swap</strong>.</p>
+<p>Globalement, <strong>il s&#8217;agit d&#8217;un livre à lire</strong> si vous n&#8217;êtes pas déjà un expert VMWare. </p>
+<p>Voici la description officiel du livre : </p>
+<blockquote><p>Ce livre dédié à VMware vSphere 4 s&#8217;adresse à toute personne travaillant dans l&#8217;informatique désireuse de connaître la virtualisation ou d&#8217;approfondir ses connaissances dans ce domaine (DSI, Administrateur système, chef de projet, consultant, commercial spécialisé, technicien&#8230;). Il sert de fil conducteur pour <strong>la mise en place d&#8217;une infrastructure virtuelle à l&#8217;aide de la plate-forme vSphere 4</strong>.<br />
+Les premiers chapitres présentent les fondamentaux qui répondent à cette question : <strong>qu&#8217;est-ce que la virtualisation et qu&#8217;est-ce que VMware vSphere 4</strong> ? Définitions, avantages de la virtualisation, fonctionnement, architecture de vSphere 4 et des composants principaux tels qu&#8217;ESX et vCenter Server.<br />
+Les chapitres suivants sont consacrés à la <strong>mise en pratique</strong> : à leur lecture, le lecteur comprendra les finesses de <strong>configuration et d&#8217;optimisation de vSphere 4</strong> avec des exemples concrets et des bonnes pratiques. Il pourra les appliquer à un environnement de production.<br />
+Le dernier chapitre reprend les fonctionnalités décrites tout au long du livre au travers d&#8217;une <strong>étude de cas</strong> d&#8217;un client qui souhaite virtualiser son infrastructure : plusieurs architectures sont proposées avec également une analyse financière de chaque solution.<br />
+A la fin du livre le lecteur saura ce qu&#8217;est la virtualisation, connaîtra l&#8217;offre vSphere 4 et les principales différences avec son concurrent direct Hyper-V de Microsoft, pourra expliquer les avantages de la virtualisation, saura comment évaluer le budget et sera <strong>capable de se lancer dans un projet de virtualisation.</strong> A chaque étape du projet, l&#8217;auteur fournit des éléments concrets et factuels : les <strong>bonnes pratiques</strong> constatées chez les clients, les <strong>recommandations de VMware ainsi que son propre retour d&#8217;expérience</strong>.</p></blockquote>
+<p>Vous pouvez l&#8217;acheter sur <a href="http://amzn.to/kFupDG">Amazon</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/livre-vmware-vsphere-4/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Générateur de mot de passe</title>
+		<link>http://www.armetiz.info/generateur-password/</link>
+		<comments>http://www.armetiz.info/generateur-password/#comments</comments>
+		<pubDate>Fri, 14 Jan 2011 10:29:27 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Projets]]></category>
+		<category><![CDATA[Generateur]]></category>
+		<category><![CDATA[Installation]]></category>
+		<category><![CDATA[Password]]></category>
+		<category><![CDATA[Projet]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1903</guid>
+		<description><![CDATA[L&#8217;installation de serveur nécessite la saisie de mot de passe. Vous pouvez utiliser le même mot de passe sur l&#8217;ensemble de vos serveurs, mais cela n&#8217;est pas secure du tout... <a href="http://www.armetiz.info/generateur-password/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://password.armetiz.info/"><img src="http://www.armetiz.info/files/2011/01/Capture-d’écran-2011-01-14-à-11.11.031.png" alt="Générateur mot de passe" width="410" height="102" class="aligncenter size-full wp-image-1906" /></a></p>
+<p><strong>L&#8217;installation de serveur</strong> nécessite la saisie de mot de passe. Vous pouvez utiliser le même mot de passe sur l&#8217;ensemble de vos serveurs, mais cela n&#8217;est pas <strong>secure</strong> du tout.</p>
+<p>Afin de vous simplifier la <strong>création de mot de passe complexe</strong>, voici un <a href="http://password.armetiz.info">Générateur de mot de passe.</a><br />
+Celui-ci crée de manière aléatoire des mots de passe de 10 caractères, contenant lettre majuscule, minuscule ainsi que des chiffres. Les symboles ne sont pas utilisés.</p>
+<p>Il n&#8217;y a aucune option possible. L&#8217;intérêt étant d&#8217;avoir rapidement un mot de passe complexe. Les lettres portant à confusion ne sont pas utilisées : <strong>o, O, 0, i, I, l, L</strong>.</p>
+<p><a href="http://password.armetiz.info">Générateur de mot de passe.</a></p>
+<p><strong>Edit 28 Janvier 2011</strong> : En commentaires, <a href="http://www.armetiz.info/generateur-password/#comment-895">Armaury</a> parle du logiciel <strong>pwgen</strong> disponible dans les dépôts officiels des principales distributions.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/generateur-password/feed/</wfw:commentRss>
+		<slash:comments>13</slash:comments>
+		</item>
+		<item>
+		<title>Livre Drupal en mode projet</title>
+		<link>http://www.armetiz.info/drupal-mode-projet/</link>
+		<comments>http://www.armetiz.info/drupal-mode-projet/#comments</comments>
+		<pubDate>Mon, 07 Sep 2009 20:37:33 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Drupal]]></category>
+		<category><![CDATA[Livre]]></category>
+		<category><![CDATA[Projet]]></category>
+		<category><![CDATA[Technique]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1237</guid>
+		<description><![CDATA[Le livre sortira officiellement le 10 Septembre 2009. L&#8217;article sera mis à jours pour inclure un lien d&#8217;achat. Artisan numérique à écrit un livre sur la gestion de Drupal en.. <a href="http://www.armetiz.info/drupal-mode-projet/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://arnumeral.fr/mon-premier-et-dernier-livre-sur-drupal"><img alt="" src="http://arnumeral.fr/files/arnumeral/imagecache/illustration_100/108/9782212124651.jpg" class="alignleft" width="100" height="114" /></a><strong>Le livre sortira officiellement le 10 Septembre 2009</strong>. L&#8217;article sera mis à jours pour inclure un lien d&#8217;achat.<br />
+<a href="http://arnumeral.fr">Artisan numérique</a> à écrit un livre sur la gestion de <a href="http://arnumeral.fr/mon-premier-et-dernier-livre-sur-drupal">Drupal en mode projet</a>.</p>
+<p>Voici le thème du livre: <em>Cela passe par la compréhension de ce qu&#8217;est un CMS, la définition du besoin, la mise en place de la plate-forme de développement, l&#8217;installation et le paramétrage des modules correspondant à chaque fonctionnalités, la personnalisation fine de l&#8217;apparence, la mise en ligne et l&#8217;optimisation des performances</em></p>
+<p>On remarquera que le développement Drupal n&#8217;est pas abordé. Il ne s&#8217;agira donc pas d&#8217;un livre technique ce qui doit être une première.</p>
+<p>En tout cas, ce livre fera prochainement parti de ma collection, et je vous ferai &#8211; peut-être &#8211; rapidement un retour.</p>
+<p>Voici quelques liens pour commander le livre :</p>
+<ul>
+<li><a href="http://arnumeral.fr/files/arnumeral/108/Concevoir_et_deployer_ses_sites_web_avec_Drupal__-_table_des_matieres.pdf">Table des matières</a></li>
+<li><a href="http://www.eyrolles.com/Accueil/Livre/concevoir-et-deployer-ses-sites-web-avec-drupal-9782212124651">Achat Eyrolles.</a></li>
+<li><a href="http://www.amazon.fr/Drupal-Concevoir-d%C3%A9ployer-ses-sites/dp/2212124651/ref=sr_1_4?ie=UTF8&amp;s=books&amp;qid=1252567191&amp;sr=8-4">Achat Amazon.</a></li>
+</ul>
+<p>PS: Si vous cherchez un livre technique : <a href="http://www.amazon.fr/Pro-Drupal-Development-John-VanDyk/dp/1430209895/ref=sr_1_1?ie=UTF8&amp;s=english-books&amp;qid=1252355474&amp;sr=1-1">Drupal Pro Development</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/drupal-mode-projet/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Gestion de projet en ligne</title>
+		<link>http://www.armetiz.info/gestion-de-projet-en-ligne/</link>
+		<comments>http://www.armetiz.info/gestion-de-projet-en-ligne/#comments</comments>
+		<pubDate>Fri, 07 Aug 2009 08:07:53 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[ASP]]></category>
+		<category><![CDATA[CMS]]></category>
+		<category><![CDATA[Entrepreneur]]></category>
+		<category><![CDATA[Gestion]]></category>
+		<category><![CDATA[Management]]></category>
+		<category><![CDATA[Outils]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Projet]]></category>
+		<category><![CDATA[SaaS]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1192</guid>
+		<description><![CDATA[Cela fait plusieurs mois que l&#8217;on cherchait un gestionnaire de projets en ligne. Nos besoins Nous sommes des grands consommateurs des outils type CMS, nous souhaitions donc un outil :.. <a href="http://www.armetiz.info/gestion-de-projet-en-ligne/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://collabtive.o-dyn.de/"><img class="alignright" alt="Gestion de projet - Collabtive" src="http://collabtive.o-dyn.de/img/sitetitle.png" width="206" height="73" /></a>Cela fait plusieurs mois que l&#8217;on cherchait un gestionnaire de projets en ligne.</p>
+<h3>Nos besoins</h3>
+<p>Nous sommes des grands consommateurs des outils type CMS, nous souhaitions donc un outil :</p>
+<ul>
+<li>Accessible via Internet</li>
+<li>Gratuit</li>
+<li>Multi-utilisateurs</li>
+<li>Utilisant PHP / MySQL</li>
+</ul>
+<p>Sachant qu&#8217;il fallait gérer des projets, voici nos attentes vis-à-vis de la <strong>gestion d&#8217;un projet</strong> :</p>
+<ul>
+<li>Ajouter des tâches avec des dates limites</li>
+<li>Attribuer des tâches à des utilisateurs</li>
+<li>Supporter des documents</li>
+<li>Enregistrer des messages</li>
+</ul>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/gestion-de-projet-en-ligne/feed/</wfw:commentRss>
+		<slash:comments>8</slash:comments>
+		</item>
+		<item>
+		<title>Une belle excuse pour être en retard sur un projet</title>
+		<link>http://www.armetiz.info/excuse-retard-production-video/</link>
+		<comments>http://www.armetiz.info/excuse-retard-production-video/#comments</comments>
+		<pubDate>Wed, 08 Oct 2008 15:49:56 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Projets]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[Humour]]></category>
+		<category><![CDATA[Internet]]></category>
+		<category><![CDATA[Livrable]]></category>
+		<category><![CDATA[Projet]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=410</guid>
+		<description><![CDATA[Que ceux qui n&#8217;ont jamais été en retard pour la livraison d&#8217;un produit me jette la première pierre (Aie). En tout cas, ce n&#8217;est pas X-prime qui me jettera cette.. <a href="http://www.armetiz.info/excuse-retard-production-video/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Que ceux qui n&#8217;ont jamais été en retard pour la livraison d&#8217;un produit me jette la première pierre (Aie).</p>
+<p>En tout cas, ce n&#8217;est pas <a href="http://www.x-prime.com">X-prime</a> qui me jettera cette pierre au vu du &#8220;message&#8221; d&#8217;excuse sur leur site.</p>
+<p>L&#8217;idée est très original, tellement original que l&#8217;on pense plutôt à un buzz contrôlé pour annoncer la sortie de leur nouveau site.<br />
+En tout cas, cela vaut le <a href="http://www.x-prime.com">coups d&#8217;œil</a>.</p>
+<p><a href="http://www.x-prime.com"><img alt="" src="http://www.emilieogez.com/wp-content/uploads/2008/10/xprime1.jpg" class="aligncenter" width="485" height="336" /></a></p>
+<p>Source : <a href="http://www.emilieogez.com/?p=1354">Emilie Ogez</a> qui elle même s&#8217;est inspirée de <a href="http://www.superfiction.net/blog/index.php?2008/09/30/311-x-prime-fait-preuve-de-creativite-et-d-humour-avec-sa-page-dattente">SuperFiction</a>, qu&#8217;est-ce qu&#8217;elle tourne l&#8217;information de nos jours :p</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/excuse-retard-production-video/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.013 seconds using apc
+Object Caching 917/928 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:08:24 by W3 Total Cache -->

@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Flex</title>
+	<atom:link href="http://www.armetiz.info/tag/flex/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Authentification et Autorisation avec Zend AMF</title>
+		<link>http://www.armetiz.info/authentification-autorisation-zend-amf/</link>
+		<comments>http://www.armetiz.info/authentification-autorisation-zend-amf/#comments</comments>
+		<pubDate>Mon, 05 Jul 2010 08:23:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[AS3]]></category>
+		<category><![CDATA[CRUD]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Server]]></category>
+		<category><![CDATA[Service]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1786</guid>
+		<description><![CDATA[Nous allons voir comment mettre en place l&#8217;authentification et l&#8217;autorisation lorsque l&#8217;on souhaite travailler avec Zend et le protocole AMF. Au niveau des pré-requit, vous devez avoir une architecture Zend.. <a href="http://www.armetiz.info/authentification-autorisation-zend-amf/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Nous allons voir comment mettre en place <strong>l&#8217;authentification</strong> et <strong>l&#8217;autorisation</strong> lorsque l&#8217;on souhaite travailler avec Zend et le protocole AMF.</p>
+<p>Au niveau des pré-requit, vous devez avoir une architecture <strong>Zend et AMF opérationnelle</strong>.<br />
+Aussi, je vous conseils de lire la documentation sur <a href="http://framework.zend.com/manual/fr/zend.auth.introduction.html">Zend_Auth</a> et <a href="http://framework.zend.com/manual/fr/zend.acl.introduction.html">Zend_Acl</a>.<br />
+Vous devez avoir compris la notion de <strong>rôle</strong> et de <strong>ressource</strong>.</p>
+<h3>Objectifs</h3>
+<p>Si vous fournissez des services à travers le réseau, et qu&#8217;ils peuvent avoir un impact sur la cohérence des données, vous vous devez de sécuriser l&#8217;accès à ces services.</p>
+<p>Sécurisé l&#8217;accès signifie restreinte l&#8217;accès, mais aussi chiffrer les communications.<br />
+Nous ne traiterons pas la partie chiffrement des échanges, pour cela je vous laissez chercher de la documentation sur HTTPS.</p>
+<h3>Point de départ</h3>
+<p>Ci-dessous, un exemple de contrôleur Zend offrant des services AMF.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class ServiceController extends Zend_Controller_Action<br />
+{<br />
+&nbsp; &nbsp; public function init()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_helper-&amp;gt;viewRenderer-&amp;gt;setNoRender();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_helper-&amp;gt;layout-&amp;gt;disableLayout();<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public function amfAction()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; $server = new Zend_Amf_Server();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; //Liste des services<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;Service_User&quot; );<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;Service_Book&quot; );<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;ZendAmfServiceBrowser&quot; );<br />
+<br />
+&nbsp; &nbsp; //Mapping des objets PHP avec les objets ActionScript &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; $server-&amp;gt;setClassMap('UserDTO', 'Model_DTO_User');<br />
+&nbsp; &nbsp; $server-&amp;gt;setClassMap('BookDTO', 'Model_DTO_Book');<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; $server-&amp;gt;setProduction(false);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; ZendAmfServiceBrowser::$ZEND_AMF_SERVER = $server;<br />
+<br />
+&nbsp; &nbsp; echo ($server-&amp;gt;handle());<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Nous avons donc <u>deux services</u>, et <u>deux types d&#8217;objets</u> pouvant être utilisés.</p>
+<p>Vous remarquerez l&#8217;utilisation de <a href="http://www.zamfbrowser.org/">ZamfBrowser</a>, ce service couplé avec une application Adobe AIR permet de travailler facilement avec les services.</p>
+<p>Voici à quoi ressemble les prototypes d&#8217;un de mes services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Service_Book<br />
+{<br />
+&nbsp; &nbsp; public function createBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function readBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function updateBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function deleteBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function isRentBy (Model_DTO_User $oUser) {}<br />
+}</div></td></tr></tbody></table></div>
+<blockquote><p>L&#8217;autre service est composé lui aussi des méthodes <strong>CRUD</strong> (Create, Read, Update, Delete), ainsi que d&#8217;autres fonctions métiers.</p></blockquote>
+<p>Sachant que mon application cliente Flash utilise ces services, il est très facile à un utilisateur de découvrir <strong>l&#8217;URI de la passerelle AMF</strong>.<br />
+En l&#8217;état, une personne ayant l&#8217;accès à ma passerelle AMF pourrai utiliser toutes les fonctions de mes services. Ce qui implique qu&#8217;il puisse modifier ma base de données.</p>
+<p><em>Remarquer que si l&#8217;on supprime le service de ZamfBrowser, l&#8217;utilisateur n&#8217;aura pas accès à la liste exhaustive des services. Si vous êtes en production, je vous conseils donc de supprimer ce service pour des raisons de sécurité.</em></p>
+<h3>Mise en place de l&#8217;authentification</h3>
+<p>Nous allons commencer par mettre en place l&#8217;authentification,<br />
+Sachant que nous utilisons un client Flash, il est logique d&#8217;utiliser <strong>Zend_Amf_Adobe_Auth</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$authAdapter = new Zend_Amf_Adobe_Auth(APPLICATION_PATH . '/config/password.xml');<br />
+$server-&amp;gt;setAuth($authAdapter );</div></td></tr></tbody></table></div>
+<p>Avec ces deux lignes, nous avons mis en place l&#8217;authentification au niveau du serveur.<br />
+Il vous reste à définir le fichier password.xml</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Le fichier password.xml contient les identifiants et les mots de passe des utilisateurs.<br />
+C&#8217;est à ce niveau que vous définissez les affectations d&#8217;identifiants à un rôle.</p>
+<p>Si vous avez besoin de plus de souplesse au niveau de la gestion des identifiants, je vous conseils la lecture de <a href="http://framework.zend.com/manual/fr/zend.auth.adapter.dbtable.html">Authentification avec une table de base de données</a>.</p>
+<p><em>Il est à noter, que si vous ne spécifier aucun identifiant lors de votre connexion au serveur AMF vous serez considéré comme un invité : <strong>Zend_Amf_Constants::GUEST_ROLE</strong></em></p>
+<h3>Mise en place de l&#8217;autorisation</h3>
+<p>Maintenant que nous avons correctement définit l&#8217;authentification, passons à l&#8217;autorisation.<br />
+C&#8217;est maintenant que nous allons donner les autorisations ou refus d&#8217;accès aux services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Avec ces deux lignes, vous avez définit une <strong>Acces Control List</strong>.<br />
+Vous le constatez, aucune autorisation n&#8217;est définit; mais il est important de noter que maintenant, <strong>plus personne n&#8217;a accès à vos services</strong>.</p>
+<p>Pour donner l&#8217;accès à nos deux services à n&#8217;importe qui, nous allons procéder comme suit :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('Service_User') );<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('Service_Book') );<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('ZendAmfServiceBrowser') );<br />
+<br />
+$acl-&amp;gt;allow (null, 'Service_User');<br />
+$acl-&amp;gt;allow (null, 'Service_Book');<br />
+$acl-&amp;gt;allow (null, 'ZendAmfServiceBrowser);<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Ci-dessus, nous avons une liste explicite des autorisations.<br />
+Si nous avions voulu faire dans l&#8217;implicite, nous aurions procédé ainsi :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$acl-&amp;gt;allow ();<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Pour aller plus loin dans l&#8217;explication, nous allons maintenant définir l&#8217;ensemble de nos autorisations.</p>
+<blockquote><p>Nous souhaitons que le rôle administrateur est accès à tout, et nous souhaitons que les utilisateurs non authentifiés n&#8217;est pas accès aux fonctions de mise à jour.</p></blockquote>
+<p>Rappelez-vous, nous avons vu plus haut que vous étiez connecter avec le rôle invité lorsque vous ne spécifiez aucun identifiant.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+<br />
+//Définition les rôles.<br />
+$acl-&amp;gt;addRole ( new Zend_Acl_Role(Zend_Amf_Constants::GUEST_ROLE) );<br />
+<br />
+//Définition des autorisations<br />
+$acl-&amp;gt;allow ();<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;create&quot;);<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;update&quot;);<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;delete&quot;);<br />
+<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p><u>Premièrement,</u><br />
+Nous avons dû définir le rôle invité pour pouvoir travailler ses autorisations.</p>
+<p><u>Deuxièmement,</u><br />
+Nous avons utilisé le principe des listes noires. Si nous avions utilisez un système de liste blanche, nous aurions du définir l&#8217;ensemble des rôles, et l&#8217;ensemble des autorisations.<br />
+C&#8217;est donc en partant du principe que tout le monde a accès à tout, que nous avons fermé les portes aux anonymes.</p>
+<p><u><strong>Explication des fonctions Deny &amp; Allow :</strong></u><br />
+<strong>Zend_Acl::deny</strong> et <strong>Zend_Acl::allow</strong> utilisent les mêmes arguments.<br />
+Le premier paramètre correspond à un rôle, cela ne change pas des ACL Zend classique.<br />
+Le deuxième paramètre correspond à une ressource. Avec Zend AMF, une ressource correspond à un Service.<br />
+Le troisième paramètre correspond ici à la fonction d&#8217;un service AMF.</p>
+<p>Nous avons utiliser <strong>null</strong> au niveau du deuxième paramètre pour dire : <strong>tout les services</strong>.</p>
+<h3>initAcl</h3>
+<p>Ce dernier paragraphe pour vous parlez de mon opposition face aux spécifications de la documentation <a href="http://framework.zend.com/manual/1.10/en/zend.amf.server.html">Zend_AMF_Server</a> :</p>
+<blockquote><p><em>If the ACL object is set, and the class being called defines initAcl() method, this method will be called with the ACL object as an argument. The class then can create additional ACL rules and return TRUE, or return FALSE if no access control is required for this class.</em></p></blockquote>
+<p>En gros, il existe une autre manière de définir les autorisations,<br />
+Si vous avez définit un ACL au niveau de votre Serveur AMF. Ce dernier vérifiera l&#8217;existence d&#8217;une fonction <strong>initAcl</strong> sur les services lorsqu&#8217;ils seront appelés.</p>
+<p>Cette fonction est ce que l&#8217;on appel un <a href="http://fr.wikipedia.org/wiki/Hook_%28informatique%29">Hook</a>, et vous permets de définir les autorisations et refus au sein de la définition même de vos services.<br />
+Autant vous dire que <strong>niveau maintenance et centralisation de l&#8217;information c&#8217;est très moyen</strong>..<br />
+De plus, si l&#8217;on pend l&#8217;exemple de <strong>ZendAmfServiceBrowser</strong>, vous allez devoir modifier la définition de ce service, et cela à chaque fois qu&#8217;il y aura une nouvelle version ?</p>
+<p>Voici un exemple de fonctionnement</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Service_Book<br />
+{<br />
+&nbsp; &nbsp; public function initAcl ($acl)<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'create');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'update');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'delete');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return true;<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p><strong>Pour aller plus loin</strong> : Vous trouverez un article dédié à l&#8217;authentification pour Zend AMF Server avec une base de données : <a href="http://www.armetiz.info/zend-authentication-database/">AMF / Zend Authentication using Database</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/authentification-autorisation-zend-amf/feed/</wfw:commentRss>
+		<slash:comments>22</slash:comments>
+		</item>
+		<item>
+		<title>Flash &#8211; Restreindre l&#8217;instanciation d&#8217;une classe par un seul objet</title>
+		<link>http://www.armetiz.info/flash-restreindre-instanciation-class-objet/</link>
+		<comments>http://www.armetiz.info/flash-restreindre-instanciation-class-objet/#comments</comments>
+		<pubDate>Thu, 01 Oct 2009 15:08:47 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Conception]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[Factory]]></category>
+		<category><![CDATA[Pattern]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1365</guid>
+		<description><![CDATA[Comment restreindre l&#8217;instanciation d&#8217;une classe à une autre classe. Voici une idée complètement &#8220;crazy&#8221; au quelle je vais apporter une solution à travers ce billet. Nous allons utiliser un principe.. <a href="http://www.armetiz.info/flash-restreindre-instanciation-class-objet/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Comment <strong>restreindre l&#8217;instanciation d&#8217;une classe</strong> à une autre classe.</p>
+<p>Voici une idée complètement &#8220;crazy&#8221; au quelle je vais apporter une solution à travers ce billet.<br />
+Nous allons utiliser un principe connu par de nombreux framework Web qui permet d&#8217;assurer la validité d&#8217;un formulaire: <strong>Le jeton</strong> !</p>
+<p>L&#8217;intérêt étant de combiner cela avec le <a href="http://fr.wikipedia.org/wiki/Fabrique_%28patron_de_conception%29">pattern Factory</a>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">public class Master<br />
+{<br />
+&nbsp; &nbsp; private static var _jeton &nbsp; : Number&nbsp; &nbsp; = -1;<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public function Master()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public static function createSlave () : Slave<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; var _tmpSlave &nbsp; : Slave;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; _jeton&nbsp; &nbsp; &nbsp; = Math.random() * 500;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; _tmpSlave &nbsp; = new Slave (_jeton);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; _jeton&nbsp; &nbsp; &nbsp; = -1;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; return _tmpSlave; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public static function get jeton () : Number<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return _jeton;<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">public class Slave<br />
+{<br />
+&nbsp; &nbsp; public function Slave(_pJeton : Number = 0) : void<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (Master.jeton !== _pJeton &amp;amp;&amp;amp; Master.jeton !== -1)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new Error (&quot;Instanciation obligatoire par Master.createSlave&quot;);<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">new Slave (); //throw Error<br />
+Master.createSlave (); //Retourne un objet du type Slave</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/flash-restreindre-instanciation-class-objet/feed/</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+		<item>
+		<title>Configuration ASDoc FlexBuilder</title>
+		<link>http://www.armetiz.info/configuration-asdoc-flex-eclipse/</link>
+		<comments>http://www.armetiz.info/configuration-asdoc-flex-eclipse/#comments</comments>
+		<pubDate>Mon, 20 Jul 2009 12:37:39 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[AIR]]></category>
+		<category><![CDATA[ASDoc]]></category>
+		<category><![CDATA[Documentation]]></category>
+		<category><![CDATA[Eclipse]]></category>
+		<category><![CDATA[Flash]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1171</guid>
+		<description><![CDATA[Même si FlashBuilder pointe le bout de son nez, comme que je suis toujours en retard voici un petit mémo pour configurer ASDoc sous FlexBuilder. Sous Eclipse / FlexBuilder: Run.. <a href="http://www.armetiz.info/configuration-asdoc-flex-eclipse/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Même si FlashBuilder pointe le bout de son nez, comme que je suis toujours en retard voici un petit mémo pour configurer <strong>ASDoc sous FlexBuilder.</strong></p>
+<p>Sous Eclipse / FlexBuilder: <strong>Run &gt; External Tools &gt; Open External Tools Dialog&#8230;</strong></p>
+<ul>
+<li>Location: %programfiles%AdobeFlex Builder 3sdks3.3binasdoc.exe</li>
+<li>Working Directory: ${project_loc}</li>
+<li>Arguments: -source-path ./src/ -window-title &#8220;${project_name}&#8221; -main-title &#8220;${project_name}&#8221; -doc-sources &#8220;${project_loc}/src/&#8221;</li>
+</ul>
+<p>Par défaut, la documentation sera dans votre répertoire projet <strong>/asdoc-output</strong></p>
+<p>Aussi, si vous utilisez des librairies qui se croisent pour vos projets, il faudra indiquer à ASDoc où trouver les SWC correspondants. Pour cela <strong>-library-path</strong> fera l&#8217;affaire.<br />
+Pour conserver un lien vers les autres librairies dont Flex, utiliser l&#8217;argument comme suit : -library-path+=&#8221;${workspace_loc}/Project/bin/&#8221;</p>
+<p>PS: Pour le répertoire de ASDoc.exe pensez à utiliser votre version du SDK de Flex, car vous disposez peut-être d&#8217;une version différente de la mienne.<br />
+<img src="http://bp0.blogger.com/_uwXDfjmWSjM/R-P1LCWbh_I/AAAAAAAAAC8/TecO2ro05aY/s320/flex.png" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/configuration-asdoc-flex-eclipse/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Serious Drink Lyonnais</title>
+		<link>http://www.armetiz.info/serious-drink-lyon-05/</link>
+		<comments>http://www.armetiz.info/serious-drink-lyon-05/#comments</comments>
+		<pubDate>Tue, 21 Apr 2009 21:41:11 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sortie]]></category>
+		<category><![CDATA[Bières]]></category>
+		<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Lyon]]></category>
+		<category><![CDATA[Rencontre]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1002</guid>
+		<description><![CDATA[Si vous avez envie de passer une petite soirée à boire des bières et parler des technologies Flex ou Elearning n&#8217;hésiter pas à vous inscrire sur le site de la.. <a href="http://www.armetiz.info/serious-drink-lyon-05/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Si vous avez envie de passer une petite soirée à <strong>boire des bières</strong> et <strong>parler des technologies Flex ou Elearning</strong> n&#8217;hésiter pas à vous inscrire sur le site de la <a href="http://www.lafabrick.com/blog/2009/04/20/1120-prenez-vous-au-serious-serious-drink-party-vol-05/comment-page-1">Fabrick</a> en laissant un petit commentaire <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Rendez-vous Jeudi 23 Avril 2009, à partir de 19h30 au café Cousu.<br />
+Passage Thiaffait<br />
+19,rue René Leynaud<br />
+69001 Lyon<br />
+Tel: 04 72 98 83 38</p>
+<p>PS : Les bières ne sont pas obligatoires, on peut aussi boire un coca ou un lait fraise sans soucis <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p><a href="http://maps.google.fr/maps?f=q&amp;source=embed&amp;hl=fr&amp;geocode=&amp;q=passage+thiaffait+lyon&amp;sll=47.15984,2.988281&amp;sspn=24.227066,39.902344&amp;ie=UTF8&amp;t=h&amp;z=14&amp;iwloc=A&amp;ll=45.777222,4.837418">Agrandir le plan</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/serious-drink-lyon-05/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Adobe Captivate 4 Disponible</title>
+		<link>http://www.armetiz.info/adobe-captivate-4-disponible/</link>
+		<comments>http://www.armetiz.info/adobe-captivate-4-disponible/#comments</comments>
+		<pubDate>Thu, 29 Jan 2009 11:21:39 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[Captivate]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Version]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=779</guid>
+		<description><![CDATA[Légèrement médiatisé, Adobe a sorti une nouvelle version de son logiciel de rapide learning : Captivate 4. Vous créez rapidement du contenu e-learning professionnel [&#8230;] sans posséder de compétences particulières.. <a href="http://www.armetiz.info/adobe-captivate-4-disponible/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.adobe.com/fr/products/captivate/" target="_blank"><img class="alignleft" alt="Captivate" src="http://www.adobe.com/images/store/product_boxshots/112x112/box_captivate4_112x112.jpg" width="112" height="112" /></a>Légèrement médiatisé, Adobe a sorti une nouvelle version de son logiciel de <strong>rapide learning</strong> : <a href="http://www.adobe.com/fr/products/captivate/">Captivate 4</a>.</p>
+<blockquote><p><em>Vous créez rapidement du contenu e-learning professionnel [&#8230;] sans posséder de compétences particulières en programmation ou en multimédia. [&#8230;] Vous pouvez diffuser massivement vos contenus via des systèmes LMS.</em></p></blockquote>
+<p><a href="http://www.adobe.com/fr/products/captivate/features/?view=topnew" target="_blank">Les nouveautés</a> au programme :</p>
+<ul>
+<li>Annotation de fichiers SWF</li>
+<li>Modèles de projet professionnels</li>
+<li>Widgets personnalisables</li>
+<li>Flux de production PowerPoint circulaire</li>
+<li>Table des matières et agrégateur</li>
+<li>Fonctions de synthèse vocale</li>
+<li>Variables et actions avancées</li>
+<li>Options de sortie étendues</li>
+<li>Prise en charge des calques Adobe Photoshop</li>
+<li>Flux de production simplifiés et ergonomie optimisée</li>
+</ul>
+<p>Et maintenant, l&#8217;exportation SWF se fait <strong>en AS3 avec l&#8217;AVM2</strong>.<br />
+Rappelez-vous lorsque vous vouliez importer votre animation Captivate dans une interface Flash développé en AS3, il fallait utiliser un <a href="http://www.jumpeyecomponents.com/Flash-Components/Various/ActionScript-Bridge-91/" target="_blank">bridge</a> pour faire communiquer les deux.</p>
+<p>Avec cette nouvelle exportation, il va être possible d&#8217;importer du Captivate dans des projets <strong>Flex</strong> pour enrichir vos présentations.</p>
+<p><strong>Avez-vous</strong> des retours d&#8217;expériences sur cette version 4 ?</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/adobe-captivate-4-disponible/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>The link of the week &#8211; 04</title>
+		<link>http://www.armetiz.info/the-link-of-the-week-04/</link>
+		<comments>http://www.armetiz.info/the-link-of-the-week-04/#comments</comments>
+		<pubDate>Fri, 23 Jan 2009 13:13:57 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Armetiz]]></category>
+		<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Builder]]></category>
+		<category><![CDATA[CairnGorm]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Generateur]]></category>
+		<category><![CDATA[Management]]></category>
+		<category><![CDATA[PureMVC]]></category>
+		<category><![CDATA[Social]]></category>
+		<category><![CDATA[SQLite]]></category>
+		<category><![CDATA[Web 2.0]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=741</guid>
+		<description><![CDATA[Voici le résumer des liens de ma semaine. Manager une communauté : &#8220;Comment créer une communauté, la développer, l’animer, la monétiser… Autant de thèmes, et bien d’autres, qui animeront ce.. <a href="http://www.armetiz.info/the-link-of-the-week-04/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Voici le résumer des liens de ma semaine.</p>
+<ul>
+<li><a href="http://www.managerunecommunaute.com/">Manager une communauté</a> : &#8220;<em>Comment créer une communauté, la développer, l’animer, la monétiser… Autant de thèmes, et bien d’autres, qui animeront ce blog qui s’adresse aux community managers, animateurs, modérateurs, gestionnaires de forums et à tous les spécialistes du web marketing.</em>&#8220;</li>
+<li><a href="http://sid.rstack.org/index.php/Jouer_avec_le_protocole_ARP">Jouer avec le protocole ARP</a> est un Wiki expliquant le protocole ARP, et se que l&#8217;on peut faire avec : Man In the Middle sur un réseau local.</li>
+<li><a href="http://oseox.fr/blog/index.php/637-plugin-wordpress">Introduction à l&#8217;écriture de plugin WordPress</a></li>
+<li>Externalisez vos commentaires avec <a href="http://disqus.com/">Disqus</a>.</li>
+<li><strong>Flex</strong> :</li>
+<ul>
+<li>Un très bon didacticiel sur l&#8217;<a href="http://www.actionscriptdeveloper.co.uk/puremvc-tutorial-flex-puremvc-jabber-and-xiff-3-introduction/">utilisation de PureMVC</a> accompagné tout du long par un cas pratique.</li>
+<li><a href="http://www.dehats.com/drupal/?q=node/7">FCG</a> : Générateur de code pour CairnGorm ou PureMVC.</li>
+<li>Utilisation de l&#8217;<a href="http://www.adobe.com/devnet/air/flex/articles/sqlite_db_api_in_air.html">API SQLite de AIR</a>, génération de donnée persistante sans requête SQL.</li>
+</ul>
+</ul>
+<p>Sur ce, je vous souhaites un bon weekend à tous, et une bonne fin de journée <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/the-link-of-the-week-04/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Attirer des visiteurs sur un site éditorial grâce à un jeu</title>
+		<link>http://www.armetiz.info/attirer-des-visiteurs-sur-un-site-editorial-grace-a-un-jeu/</link>
+		<comments>http://www.armetiz.info/attirer-des-visiteurs-sur-un-site-editorial-grace-a-un-jeu/#comments</comments>
+		<pubDate>Wed, 21 Jan 2009 13:36:18 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Jeu]]></category>
+		<category><![CDATA[Original]]></category>
+		<category><![CDATA[Publicité]]></category>
+		<category><![CDATA[RIA]]></category>
+		<category><![CDATA[Site]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=713</guid>
+		<description><![CDATA[Comment une entreprise éditorial peut-elle intégrer une interface original et donnant envie de revenir.]]></description>
+				<content:encoded><![CDATA[<p><img src="http://www.armetiz.info/wp-content/uploads/2009/01/circuit-300x202.jpg" alt="circuit électrique" width="300" height="202" class="alignleft size-medium wp-image-714" />Les membres de l&#8217;équipe de <a href="http://www.magicsocket.com/">MagicSocket</a> ont développés leur site éditorial en intégrant un jeu assez prenant.</p>
+<p>L&#8217;idée du jeu est simple : représentation d&#8217;un circuit de <strong>voiture électrique</strong>, avec une <strong>compétition</strong> possible entre fantôme.</p>
+<p>L&#8217;intégration du circuit par rapport au contenu éditorial n&#8217;a pas été faite de manière classique, le jeu n&#8217;est pas dans une cellule d&#8217;un coin de la page, mais <strong>tout autours du site et entre les différents articles</strong>.</p>
+<p>Je trouve que l&#8217;idée est très bonne pour générer du trafic.<br />
+Alors attention, le type de trafic sera surement composé majoritairement de joueur qui n&#8217;auront rien à faire du contenu éditorial.<br />
+Mais pour une agence de communication / développement, quoi de mieux d&#8217;avoir se type d&#8217;interface qui fera parler d&#8217;elle.</p>
+<p>Par contre, nous retrouvons les <strong>inconvénients</strong> d&#8217;un site full flash : lourdeur au niveau du chargement et de l&#8217;utilisation, et <a href="http://www.google.fr/search?hl=fr&amp;q=site%3Ahttp%3A%2F%2Fwww.magicsocket.com%2F&amp;btnG=Recherche+Google&amp;meta=&amp;aq=f&amp;oq=">référencement naturel inexistant</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/attirer-des-visiteurs-sur-un-site-editorial-grace-a-un-jeu/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Reflex : Architecture MVC</title>
+		<link>http://www.armetiz.info/reflex-architecture-mvc/</link>
+		<comments>http://www.armetiz.info/reflex-architecture-mvc/#comments</comments>
+		<pubDate>Thu, 15 Jan 2009 11:17:05 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[CairnGorm]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[IOC]]></category>
+		<category><![CDATA[MVC]]></category>
+		<category><![CDATA[Pattern]]></category>
+		<category><![CDATA[PureMVC]]></category>
+		<category><![CDATA[Reflex]]></category>
+		<category><![CDATA[Vegas]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=689</guid>
+		<description><![CDATA[Fabien de la Fabrick a publié une &#8220;micro-architecture&#8221; MVC pour Flex. Ces mots de présentation sont : Souvent dans le monde de Flex, les équipes ne sont pas forcement homogènes... <a href="http://www.armetiz.info/reflex-architecture-mvc/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Fabien de la <a href="http://www.lafabrick.com">Fabrick</a> a publié une &#8220;micro-architecture&#8221; MVC pour Flex.<br />
+Ces mots de présentation sont :</p>
+<blockquote><p>Souvent dans le monde de Flex, les équipes ne sont pas forcement homogènes. Certains sont habitués à la rigueur de Java, d’autres sont plus “devsigners freestyle” venant du monde Flash. Les premiers aiment les grosses mécaniques comme <a href="http://puremvc.org/">PureMVC</a>, ou <a href="http://www.pranaframework.org/">Prana Framework</a> “Spring like”. Les seconds connaissent au mieux <a href="http://opensource.adobe.com/wiki/display/cairngorm/Cairngorm">Cairngorm</a>, au pire confondent <a href="http://en.wikipedia.org/wiki/Model-view-controller">MVC</a> et <a href="http://fr.wikipedia.org/wiki/Ventilation_m%C3%A9canique_contr%C3%B4l%C3%A9e">VMC</a> &#8211; ce qui n’a rien a voir, sauf si vous faites une application riche sur le thème de la ventilation.</p></blockquote>
+<p>Pour l&#8217;instant deux didacticiels sont disponibles : <a href="http://www.lafabrick.com/blog/2009/01/13/786-reflex-1-une-micro-architecture-pour-flex-simple/">Introduction et Exemple</a> et <a href="http://www.lafabrick.com/blog/2009/01/15/819-reflex-2-vous-reprendez-bien-un-peu-de-ioc/">l&#8217;utilisation de l&#8217;IOC</a> où il faut comprendre &#8220;Injection Of Content&#8221; plutôt que &#8220;<a href="http://fr.wikipedia.org/wiki/Inversion_de_contr%C3%B4le">Inversion Of Control</a>&#8220;.</p>
+<p>Ceci est un article orienté publicité d&#8217;une part, mais aussi &#8220;déploiement&#8221;. Toute personne recherchant un <strong>framework MVC</strong> tombera sur <a href="http://puremvc.org/">PureMVC</a> ou <a href="http://opensource.adobe.com/wiki/display/cairngorm/Cairngorm">Cairngorm</a>, et bien maintenant, il y aura aussi <a href="http://www.lafabrick.com/blog/2009/01/13/786-reflex-1-une-micro-architecture-pour-flex-simple/">ReFlex</a> qui entrera dans la liste.</p>
+<p>Si vous utilisez ReFlex, n&#8217;hésitez pas à faire des retours à l&#8217;auteur.</p>
+<p><strong>Edit</strong> : Oubli de ma part, gros framework incluant le pattern MVC : <a href="http://code.google.com/p/vegas/">Vegas</a> développé par <a href="http://www.ekameleon.net/blog/">eKameleon</a>. D&#8217;ailleurs Vega n&#8217;inclue pas uniquement le pattern MVC, mais aussi beaucoup d&#8217;autres choses, il peut avoir l&#8217;air très difficile à appréhender. Mais comme toute nouvelle découverte, cela demande de l&#8217;investissement. Mais rassurez-vous, c&#8217;est un framework très riche en documentation.</p>
+<p>A vous de faire votre choix <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/reflex-architecture-mvc/feed/</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+		<item>
+		<title>The link of the week &#8211; 02</title>
+		<link>http://www.armetiz.info/link-of-the-week-02/</link>
+		<comments>http://www.armetiz.info/link-of-the-week-02/#comments</comments>
+		<pubDate>Fri, 09 Jan 2009 15:43:50 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Armetiz]]></category>
+		<category><![CDATA[Ambiance]]></category>
+		<category><![CDATA[Analyse]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Geolocalisation]]></category>
+		<category><![CDATA[IHM]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[Jeux]]></category>
+		<category><![CDATA[PDF]]></category>
+		<category><![CDATA[Video]]></category>
+		<category><![CDATA[Word]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=678</guid>
+		<description><![CDATA[Autre édition du fameux link of the week. AdobeTV se dote d&#8217;une version Française Bien démarrer avec Flex BuddyPress est une suite de plugins pour WordPress MU, chacun d&#8217;entre eux.. <a href="http://www.armetiz.info/link-of-the-week-02/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Autre édition du fameux link of the week.</p>
+<ul>
+<li><a href="http://tv.adobe.com/">AdobeTV</a> se dote d&#8217;une <a href="http://tv.adobe.com/fr">version Française</a></li>
+<li><a href="http://www.adobe.com/devnet/flex/quickstart.html">Bien démarrer</a> avec <a href="http://www.adobe.com/devnet/flex/?navID=gettingstarted">Flex</a></li>
+<li><a href="http://www.buddypress-fr.net/">BuddyPress</a> est une suite de plugins pour WordPress MU, chacun d&#8217;entre eux gérant une fonction «sociale» distincte.</li>
+<li><a href="http://www.clever-age.com/veille/blog/un-peu-plus-loin-avec-la-geolocalisation.html">Clever-Age</a> à fait une petite description de l&#8217;avenir de la geolocalisation.</li>
+<li><a href="http://www.korben.info/transformer-un-iphone-en-telecommande-infrarouge.html">Transformer votre iPhone</a> en télécommande infrarouge (pour les flemmards).</li>
+<li>Univers full flash sympa avec <a href="http://mtl12.com/">Montréal en 12 lieu</a>.</li>
+<li>Convertir des <a href="http://www.convertpdftoword.net/">PDF en fichier Word</a>, online s&#8217;il vous plait.</li>
+<li>Tout le monde connait tout le monde : <a href="http://oseox.fr/blog/index.php/620-degre-six">La règle des 6 degrés</a>.</li>
+<li>La <a href="http://www.gobz.org/2008/07/25/la-place-de-lergonomie/">place de l&#8217;ergonomie</a> sur nos machines et une <a href="http://www.gobz.org/2008/03/06/jef-raskin-linterface-humaine/#more-445">analyse des IHM</a> avec présentation de <a href="http://www.songza.com/">Songza</a>, agrégateur musical qui a pour spécifié, une IHM intéressant.</li>
+<li><a href="http://www.jamlegend.com/">JamLegend</a> : Un petit jeu pour vous détendre.</li>
+<li>Lecteur musique en Javascript : <a href="http://www.thecloudplayer.com/">The cloud player</a></li>
+</ul>
+<p>Je vous souhaite à tous un bon weekend <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/link-of-the-week-02/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Apprendre Flex &#8211; Vidéo de formation Adobe</title>
+		<link>http://www.armetiz.info/apprendre-flex-video-formation-adobe/</link>
+		<comments>http://www.armetiz.info/apprendre-flex-video-formation-adobe/#comments</comments>
+		<pubDate>Tue, 21 Oct 2008 10:13:54 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Apprendre]]></category>
+		<category><![CDATA[Cours]]></category>
+		<category><![CDATA[Formation]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=314</guid>
+		<description><![CDATA[Cela fait quelques semaines déjà que des vidéos de formation Flex sont proposées par Adobe, mais cela ne fait que quelques jours qu&#8217;elles sont toutes disponibles. 5 Jours pour être.. <a href="http://www.armetiz.info/apprendre-flex-video-formation-adobe/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cela fait quelques semaines déjà que des <a href="http://www.adobe.com/devnet/flex/videotraining/">vidéos de formation Flex</a> sont proposées par Adobe, mais cela ne fait que quelques jours qu&#8217;elles sont toutes disponibles.</p>
+<h3>5 Jours pour être autonome sur Flex</h3>
+<p>C&#8217;est le slogan utilisé par Adobe pour introduire ces tutoriels entrelacés d&#8217;exercices.<br />
+Voici le programme :</p>
+<ul>
+<li>Day 1: Flex basics &#8211; Les bases de Flex</li>
+<li>Day 2: Component development &#8211; Développement de composant</li>
+<li>Day 3: Putting it all together &#8211; Mixer l&#8217;ensemble</li>
+<li>Day 4: Adding visual appeal &#8211; Améliorer l&#8217;aspect graphique</li>
+<li>Day 5: Architecture and advanced topics &#8211; Architecture et sujet avancé</li>
+</ul>
+<p>Une journée est composée d&#8217;une petite dizaine de vidéo durant 8 min en moyenne.<br />
+Il faut donc prendre une heure de son temps pour faire un module.</p>
+<p>Les vidéos sont très bien réalisée, l&#8217;anglais y est <strong>parfaitement compréhensible</strong> avec les sous-titres inclus.</p>
+<p>Aussi, <strong>l&#8217;illustration</strong> de notion élémentaire comme la gestion des <strong>événements</strong> est très formatrice et permet d&#8217;avoir un autre point de vue que celui fournit par les livres.</p>
+<p>Dans le même principe que la <a href="http://www.armetiz.info/programmation/decouvrir-la-poo-avec-flash/">découverte de la POO avec Flash</a>, prenez votre temps pour découvrir les vidéos et n&#8217;hésitez pas à revenir en arrière lorsqu&#8217;une notion n&#8217;est pas comprise.<br />
+La vertu du Elearning, c&#8217;est de pouvoir recommencer autant de fois que l&#8217;on souhaite notre formation, abusez de cela.</p>
+<p>Adobe propose même la <em>visualisation hors-ligne</em> des vidéos.</p>
+<p>PS : Si quelqu&#8217;un souhaite modifier mes traductions, qu&#8217;il le fasse maintenant ou se taise à jamais <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p><strong>Liens utiles</strong> :</p>
+<ul>
+<li><a href="http://www.adobe.com/devnet/flex/videotraining/">Formation Adobe Flex en E-learning</a></li>
+<li><a href="http://www.armetiz.info/programmation/decouvrir-la-poo-avec-flash/">La programmation objet avec Flash AS3</a></li>
+<li><a href="http://www.flex-tutorial.fr/">Flex tutorial</a></li>
+</ul>
+<p><strong>Edit du 25 Novembre 08</strong> :<br />
+Pour faire le tour des composants et possibilités de Flex, vous pouvez installer <a href="http://flex.org/tour">Tour de Flex</a> qui est une application AIR regroupant une très grande quantité de composant avec les codes sources associés.<br />
+C&#8217;est vraiment un must have quand on apprend ou même utilise Flex, car vous avez la dedans une grosse bibliothèque d&#8217;exemple fonctionnel.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/apprendre-flex-video-formation-adobe/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/17 queries in 0.008 seconds using apc
+Object Caching 1248/1331 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:07:55 by W3 Total Cache -->

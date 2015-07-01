@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Linux</title>
+	<atom:link href="http://www.armetiz.info/tag/linux-systeme/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>NodeJS &#8211; Mise en production</title>
+		<link>http://www.armetiz.info/node-js-mise-production-simple/</link>
+		<comments>http://www.armetiz.info/node-js-mise-production-simple/#comments</comments>
+		<pubDate>Tue, 11 Sep 2012 10:07:39 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Déploiement]]></category>
+		<category><![CDATA[Didacticiel]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[MEP]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[Tutoriel]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2748</guid>
+		<description><![CDATA[La mise en production d&#8217;une application NodeJS est une étape importante dans la vie de votre application. Il existe de nombreuses solutions utilisant forever, upstart, monit ou le script shell.. <a href="http://www.armetiz.info/node-js-mise-production-simple/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>La mise en production d&#8217;une application <a href="http://nodejs.org/">NodeJS</a> est une étape importante dans la vie de votre application.</p>
+<p>Il existe de nombreuses solutions utilisant <a href="https://github.com/nodejitsu/forever">forever</a>, <a href="http://upstart.ubuntu.com/">upstart</a>, <a href="http://mmonit.com/monit/">monit</a> ou le script shell <a href="http://fr.wikipedia.org/wiki/Linux_Standard_Base">LSB</a> personnalisé.<br />
+Aucune de ces solutions ne m&#8217;a convaincu; du coup la solution que je vous propose est la mise en place d&#8217;un script LSB fait en <strong>Javascript</strong>.</p>
+<h3>Pré-requit</h3>
+<p>Pour réaliser correctement ce petit tutoriel, il faut :</p>
+<ul>
+<li>Un utilisateur système &#8220;node&#8221; avec son répertoire personnel: <strong>adduser &#8211;shell /sbin/nologin node</strong></li>
+<li><a href="http://www.armetiz.info/install-nodejs-on-centos/">NodeJS installé</a></li>
+<li>Installer <strong><a href="http://blog.nodejs.org/2011/03/23/npm-1-0-global-vs-local-installation/">globalement</a></strong> le module <a href="https://npmjs.org/package/simple-daemon">simple-daemon</a> : <strong>npm install -g simple-daemon</strong>
+</ul>
+<h3>Exemple d&#8217;application</h3>
+<p>L&#8217;application que nous souhaitons lancer automatiquement au démarrage du serveur est un simple serveur HTTP.</p>
+<p><strong>/home/node/funky-server/funky-server.js</strong></p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #003366; font-weight: bold;">var</span> http <span style="color: #339933;">=</span> require<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'http'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+http.<span style="color: #660066;">createServer</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>req<span style="color: #339933;">,</span> res<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'New client'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; res.<span style="color: #660066;">writeHead</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">200</span><span style="color: #339933;">,</span> <span style="color: #009900;">&#123;</span><span style="color: #3366CC;">'Content-Type'</span><span style="color: #339933;">:</span> <span style="color: #3366CC;">'text/plain'</span><span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; res.<span style="color: #660066;">end</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Hello Funky World<span style="color: #000099; font-weight: bold;">\n</span>'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">listen</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">80</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Server running, listen on port 80'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Cette application a de particulier qu&#8217;elle écoute toujours sur le port 80 et donc qu&#8217;une seule instance ne peut-être exécutée.<br />
+De plus, pour ouvrir un socket sur un port inférieur à 1024, il faut les privileges root.<br />
+Une fois le serveur sur écoute, les privileges <strong>root</strong> ne sont plus nécessaires.</p>
+<h3>Déploiement</h3>
+<p>Vous remarquerez qu&#8217;au sein de l&#8217;application, il n&#8217;y a aucune gestion de l&#8217;utilisateur gérant le processus ou de vérification de l&#8217;unicité de l&#8217;execution.<br />
+Cela sera géré directement par notre <strong>Wrapper</strong> LSB dont voici le contenu.</p>
+<p><strong>/etc/init.d/funky-server.js</strong></p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">#<span style="color: #339933;">!/</span>usr<span style="color: #339933;">/</span>bin<span style="color: #339933;">/</span>env node<br />
+<span style="color: #003366; font-weight: bold;">var</span> daemon <span style="color: #339933;">=</span> require<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'/usr/local/lib/node_modules/simple-daemon'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <br />
+<span style="color: #006600; font-style: italic;">//En fonction de votre système, ce chemin peut-être different</span><br />
+<br />
+daemon.<span style="color: #660066;">simple</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; pidfile <span style="color: #339933;">:</span> <span style="color: #3366CC;">'/var/run/funky-server.pid'</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; logfile <span style="color: #339933;">:</span> <span style="color: #3366CC;">'/var/log/funky-server.log'</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; command <span style="color: #339933;">:</span> process.<span style="color: #660066;">argv</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">3</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; runSync &nbsp; &nbsp; <span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; require <span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;/home/node/funky-server/funky-server.js&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; process.<span style="color: #660066;">setuid</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;node&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Comme vous le remarquez, une fois le require fait, nous changeons l&#8217;utilisateur du processus.</p>
+<p>Rendons le fichier executable.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js</div></td></tr></tbody></table></div>
+<p>Vous pouvez tester</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js start<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js status<br />
+<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #000000; font-weight: bold;">/</span>dev<span style="color: #000000; font-weight: bold;">/</span>null http:<span style="color: #000000; font-weight: bold;">//</span>localhost<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">tail</span> <span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>log<span style="color: #000000; font-weight: bold;">/</span>funky-server.log<br />
+<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js stop<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js status</div></td></tr></tbody></table></div>
+<p>Pour ajouter le Wrapper ci-dessus aux scripts de demarrage système, il est préférable de le rendre compatible à votre distribution.</p>
+<p>Sous Linux, il faut rajouter des headers pour être conforme <a href="http://fedoraproject.org/wiki/Packaging:SysVInitScript">SysVInitScript</a> / <a href="http://wiki.debian.org/LSBInitScripts">LSBinitScript Debian</a></p>
+<p>Voici le code complet du script de démarrage.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#!/usr/bin/env node</span><br />
+<span style="color: #666666; font-style: italic;">### BEGIN INIT INFO</span><br />
+<span style="color: #666666; font-style: italic;"># Provides: funky-server</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Start: $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Stop: $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Start: 2 3 4 5</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Stop: 0 1 6</span><br />
+<span style="color: #666666; font-style: italic;"># Short-Description: Start daemon at boot time</span><br />
+<span style="color: #666666; font-style: italic;"># Description: Enable service provided by funky-server.</span><br />
+<span style="color: #666666; font-style: italic;">### END INIT INFO</span><br />
+<br />
+var daemon = require<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">'/usr/local/lib/node_modules/simple-daemon'</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>; <br />
+<span style="color: #000000; font-weight: bold;">//</span>En fonction de votre système, ce chemin peut-être different<br />
+<br />
+daemon.simple<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #7a0874; font-weight: bold;">&#123;</span><br />
+&nbsp; &nbsp; pidfile : <span style="color: #ff0000;">'/var/run/funky-server.pid'</span>,<br />
+&nbsp; &nbsp; logfile : <span style="color: #ff0000;">'/var/log/funky-server.log'</span>,<br />
+&nbsp; &nbsp; <span style="color: #7a0874; font-weight: bold;">command</span> : process.argv<span style="color: #7a0874; font-weight: bold;">&#91;</span><span style="color: #000000;">3</span><span style="color: #7a0874; font-weight: bold;">&#93;</span>,<br />
+&nbsp; &nbsp; runSync &nbsp; &nbsp; : <span style="color: #000000; font-weight: bold;">function</span> <span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span> <span style="color: #7a0874; font-weight: bold;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; require <span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">&quot;/home/node/funky-server/funky-server.js&quot;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; process.setuid<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">&quot;node&quot;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;<br />
+&nbsp; &nbsp; <span style="color: #7a0874; font-weight: bold;">&#125;</span><br />
+<span style="color: #7a0874; font-weight: bold;">&#125;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;</div></td></tr></tbody></table></div>
+<p>Sous Debian &#038; Ubuntu, rajouter les headers suivant pour etre conforme :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#!/usr/bin/env node</span><br />
+<span style="color: #666666; font-style: italic;">### BEGIN INIT INFO</span><br />
+<span style="color: #666666; font-style: italic;"># Provides: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;funky-server</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Start: &nbsp; &nbsp;$local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Stop: &nbsp; &nbsp; $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Start: &nbsp; &nbsp; 2 3 4 5</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Stop: &nbsp; &nbsp; &nbsp;0 1 6</span><br />
+<span style="color: #666666; font-style: italic;"># Short-Description: Start daemon at boot time</span><br />
+<span style="color: #666666; font-style: italic;"># Description: &nbsp; &nbsp; &nbsp; Enable service provided by funky-server.</span><br />
+<span style="color: #666666; font-style: italic;">### END INIT INFO</span></div></td></tr></tbody></table></div>
+<p>On ajoute notre module au système de démarrage.<br />
+Sous RedHat &#038; CentOS</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">chkconfig <span style="color: #660033;">--add</span> funky-server.js</div></td></tr></tbody></table></div>
+<p>Sous Debian &#038; Ubuntu</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">updaterc.d default funky-server.js</div></td></tr></tbody></table></div>
+<h3>Pour aller plus loin</h3>
+<p><img src="http://www.armetiz.info/files/2012/09/logo-developer-github.png" alt="" title="logo-developer-github" width="128" height="128" class="alignleft size-full wp-image-2781" /></a><a href="https://github.com/armetiz/node-simple-daemon">Simple-daemon</a> est un module NodeJS qui est le fork de <a href="https://github.com/frodwith/node-init">node-init</a>. A ce module il manquait une fonction synchrone pour lancer le processus et être parfaitement fonctionnel.<br />
+En effet, basé sur <a href="https://github.com/indexzero/daemon.node">daemon.node</a> qui est un <strong>add-on C</strong> avec une restriction importante : &#8220;all daemonization should happen on the first <a href="http://howtonode.org/understanding-process-next-tick">tick</a> and not as part of an asynchronous action&#8221;.</p>
+<p>Vous pouvez coupler cette solution à <a href="https://github.com/nodejitsu/forever">forever</a> pour que l&#8217;application survive à un crash impromptu.</p>
+<p>Aussi,<br />
+L&#8217;ouverture du serveur HTTP est une <strong>opération asynchrone</strong>, le changement d&#8217;utilisateur apparait après la demande d&#8217;écoute du serveur mais pas forcement après que le serveur soit sur écoute.<br />
+Après lecture du <a href="https://github.com/joyent/node">code NodeJS</a> et de la <a href="https://github.com/joyent/libuv">libuv</a> concernant l&#8217;écoute d&#8217;un serveur HTTP, il me semble que la reservation du socket soit fait dans le même <a href="http://howtonode.org/understanding-process-next-tick">tick</a> que la fonction JS <strong>http.Server::listen()</strong>. Du moins, pour les systèmes Unix.<br />
+Si quelqu&#8217;un est apte à me le confirmer, les commentaires sont là pour.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/node-js-mise-production-simple/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Intégrité md5</title>
+		<link>http://www.armetiz.info/integrite-md5/</link>
+		<comments>http://www.armetiz.info/integrite-md5/#comments</comments>
+		<pubDate>Fri, 03 Aug 2012 08:22:43 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Hash]]></category>
+		<category><![CDATA[Intégrité]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[MD5]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2555</guid>
+		<description><![CDATA[Pour vérifier l&#8217;intégrité de vos fichiers, il faut enregistrer leur état à un instant T et vérifier cet été à un instant T+1. Pour cela, le plus simple est de.. <a href="http://www.armetiz.info/integrite-md5/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pour vérifier l&#8217;intégrité de vos fichiers, il faut enregistrer leur état à un <strong>instant T</strong> et vérifier cet été à un <strong>instant T+1</strong>.<br />
+Pour cela, le plus simple est de réaliser un hash de chacun des fichiers, et de vérifier ce hash régulièrement.</p>
+<p>Récupérer un <a href="http://fr.wikipedia.org/wiki/MD5">hash md5</a> de l&#8217;ensemble des fichiers d&#8217;un répertoire. Il s&#8217;agit ici de la prise de référence.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">find tld.domain.www/ -type f -print0 | xargs -0 md5sum &gt;&gt; tld.domain.www.md5</div></td></tr></tbody></table></div>
+<p>Pour vérifier l&#8217;intégrité de vos fichiers par rapport à votre référence.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">md5sum -c tld.domain.www.md5 | grep -v &quot;OK&quot;</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/integrite-md5/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Vérification de la configuration Varnish</title>
+		<link>http://www.armetiz.info/varnish-test-configuration/</link>
+		<comments>http://www.armetiz.info/varnish-test-configuration/#comments</comments>
+		<pubDate>Mon, 30 Jul 2012 13:30:51 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[cdn]]></category>
+		<category><![CDATA[Configuration]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[memo]]></category>
+		<category><![CDATA[unix]]></category>
+		<category><![CDATA[Varnish]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=2625</guid>
+		<description><![CDATA[Avant de redémarrer votre daemon Varnish pour prendre en compte la nouvelle configuration, vous pouvez tester le fichier de configuration. 1varnishd -C -f /etc/varnish/default.vcl L&#8217;option -C permet d&#8217;afficher le code.. <a href="http://www.armetiz.info/varnish-test-configuration/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Avant de redémarrer votre <a href="http://fr.wikipedia.org/wiki/Daemon_(informatique)">daemon</a> Varnish pour prendre en compte la nouvelle configuration, vous pouvez tester le fichier de configuration.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">varnishd -C -f /etc/varnish/default.vcl</div></td></tr></tbody></table></div>
+<p>L&#8217;option <strong>-C</strong> permet d&#8217;afficher le code <a href="https://www.varnish-cache.org/docs/3.0/reference/vcl.html">VCL</a> compilé en C. Et l&#8217;option <strong>-f</strong> permet de sélectionner le fichier de configuration VCL à compiler.<br />
+Avec cette commande, vous pourrez avoir la ligne contenant l&#8217;erreur.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/varnish-test-configuration/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Install NodeJS on CentOS</title>
+		<link>http://www.armetiz.info/install-nodejs-on-centos/</link>
+		<comments>http://www.armetiz.info/install-nodejs-on-centos/#comments</comments>
+		<pubDate>Fri, 27 Jul 2012 09:58:22 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[English]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Real-Time]]></category>
+		<category><![CDATA[Server]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=2594</guid>
+		<description><![CDATA[NodeJS isn&#8217;t available neither on centos base repositories nor on EPEL. To install NodeJS, you can do it from a specific repository or you can compile it. From repository To.. <a href="http://www.armetiz.info/install-nodejs-on-centos/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://nodejs.org/">NodeJS</a> isn&#8217;t available neither on centos <a href="http://wiki.centos.org/AdditionalResources/Repositories/">base repositories</a> nor on <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a>.<br />
+To install NodeJS, you can do it from a <a href="http://nodejs.tchol.org/">specific repository</a> or you can compile it.</p>
+<h3>From repository</h3>
+<p>To install NodeJS from repository on a RHEL based distribution, including our CentOS, just do :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;nodejs.rpm&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>nodejs.tchol.org<span style="color: #000000; font-weight: bold;">/</span>repocfg<span style="color: #000000; font-weight: bold;">/</span>el<span style="color: #000000; font-weight: bold;">/</span>nodejs-stable-release.noarch.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum localinstall</span> <span style="color: #660033;">--nogpgcheck</span> nodejs.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum install</span> nodejs-compat-symlinks npm<br />
+<span style="color: #c20cb9; font-weight: bold;">rm</span> nodejs.rpm</div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-v</span><br />
+<span style="color: #666666; font-style: italic;">#v0.6.18</span></div></td></tr></tbody></table></div>
+<h3>From source</h3>
+<p>To compile NodeJS from source on your CentOS, you have to install <strong>missing dependancies</strong> : <strong>gcc-c++, python and libssl-dev</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> gcc-c++ python libssl-dev<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;node.tar.gz&quot;</span> <span style="color: #ff0000;">&quot;http://nodejs.org/dist/node-latest.tar.gz&quot;</span><br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> node.tar.gz <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> node-v<span style="color: #000000; font-weight: bold;">*</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-v</span><br />
+<span style="color: #666666; font-style: italic;">#v0.8.4</span></div></td></tr></tbody></table></div>
+<h3>Play with a simple &#8220;Hello world&#8221;</h3>
+<p>Just launch node in <strong>interactive mode</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-i</span></div></td></tr></tbody></table></div>
+<p>Type a Javascript command.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #339933;">&gt;</span> console.<span style="color: #660066;">log</span> <span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Hello World&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+Hello world<br />
+undefined<br />
+<span style="color: #339933;">&gt;</span></div></td></tr></tbody></table></div>
+<h3>About version</h3>
+<p>As you can see, the repository provides an old version of NodeJS (0.6.14) compared to the latest released (0.8.4).</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/install-nodejs-on-centos/feed/</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		</item>
+		<item>
+		<title>GIT &#8211; Ignorer les modifications chmod</title>
+		<link>http://www.armetiz.info/git-ignorer-modification-chmod/</link>
+		<comments>http://www.armetiz.info/git-ignorer-modification-chmod/#comments</comments>
+		<pubDate>Sat, 02 Jun 2012 07:42:18 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[777]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[chmod]]></category>
+		<category><![CDATA[chown]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Droit]]></category>
+		<category><![CDATA[GIT]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[memo]]></category>
+		<category><![CDATA[Projet]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2466</guid>
+		<description><![CDATA[Par défaut, lorsque vous modifiez la valeur chmod d&#8217;un fichier, GIT considere que le fichier a été modifié. Pour désactiver cette fonctionnalité, il faut modifier la configuration core.filemode : 1git.. <a href="http://www.armetiz.info/git-ignorer-modification-chmod/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Par défaut, lorsque vous modifiez la valeur <strong>chmod</strong> d&#8217;un fichier, <strong>GIT</strong> considere que le fichier a été modifié.</p>
+<p>Pour désactiver cette fonctionnalité, il faut modifier la configuration <strong>core.filemode</strong> :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">git config core.filemode false</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/git-ignorer-modification-chmod/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Installer l&#8217;extension intl</title>
+		<link>http://www.armetiz.info/installer-lextension-intl/</link>
+		<comments>http://www.armetiz.info/installer-lextension-intl/#comments</comments>
+		<pubDate>Mon, 14 May 2012 12:17:58 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Symfony]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2429</guid>
+		<description><![CDATA[Pour travailler dans de bonne condition avec Symfony2, il vous faut l&#8217;extension intl. Voici la démarche à suivre pour l&#8217;installer avec pear. installer un compilateur C++ &#38; les libraries libicu-devel.. <a href="http://www.armetiz.info/installer-lextension-intl/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pour travailler dans de bonne condition avec Symfony2, il vous faut l&#8217;extension <strong>intl</strong>.</p>
+<p>Voici la démarche à suivre pour l&#8217;installer avec <strong>pear</strong>.</p>
+<p>installer un compilateur C++ &amp; les libraries libicu-devel libicu</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">yum install gcc-c++ libicu libicu-devel</div></td></tr></tbody></table></div>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">pear channel-update pear.php.net<br />
+pear upgrade PEAR<br />
+pecl channel-update pecl.php.net<br />
+pear install intl</div></td></tr></tbody></table></div>
+<p>Créer le fichier <strong>/etc/php.d/intl.ini</strong> et ajouter</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">extension=intl.so</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/installer-lextension-intl/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>CentOS 6 &#8211; Apache &amp; NFS</title>
+		<link>http://www.armetiz.info/centos-6-apache-nfs/</link>
+		<comments>http://www.armetiz.info/centos-6-apache-nfs/#comments</comments>
+		<pubDate>Thu, 19 Apr 2012 11:39:41 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Administration]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Configuration]]></category>
+		<category><![CDATA[NFS]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[SELinux]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2197</guid>
+		<description><![CDATA[SELinux est installé et activé par défaut sur les installations CentOS 6. Pour mettre en place une infrastructure Web éclatée, j&#8217;ai choisis de mettre en place un serveur NFS qui.. <a href="http://www.armetiz.info/centos-6-apache-nfs/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://wiki.centos.org/HowTos/SELinux">SELinux</a> est installé et activé par défaut sur les installations CentOS 6.</p>
+<p>Pour mettre en place une infrastructure Web éclatée, j&#8217;ai choisis de mettre en place un serveur NFS qui héberge les fichiers de mes applications PHP.<br />
+Les serveurs Apache sont donc configurés comme des clients NFS, et le DocumentRoot point vers le point de montage NFS.</p>
+<p>Au démarrage d&#8217;Apache :<br />
+<strong>Warning: DocumentRoot [/var/www/tld.domain/subdomains/foo/httpdocs] does not exist</strong></p>
+<p>Ce problème peut-être causé par un défault de configuration de SELinux,<br />
+Pour vérifier on désactive SELinux et on relance Apache.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">setenforce Permissive<br />
+service httpd restart</div></td></tr></tbody></table></div>
+<p>Si Apache démarre correctement, c&#8217;est donc bien une configuration SELinux qui bloque.<br />
+Il faut modifier un <a href="http://wiki.centos.org/TipsAndTricks/SelinuxBooleans">booléen SELinux</a> : <strong>httpd_use_nfs</strong> qui est à &#8220;off&#8221; par défaut.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">setsebool httpd_use_nfs on</div></td></tr></tbody></table></div>
+<p>Cela fonctionnera aussi apres un reboot de votre serveur.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-6-apache-nfs/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Linux &#8211; Trouver les fichiers contenant une chaine de caractere</title>
+		<link>http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/</link>
+		<comments>http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/#comments</comments>
+		<pubDate>Thu, 01 Mar 2012 10:43:15 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[automatique]]></category>
+		<category><![CDATA[Fichier]]></category>
+		<category><![CDATA[find]]></category>
+		<category><![CDATA[gnu]]></category>
+		<category><![CDATA[memo]]></category>
+		<category><![CDATA[Post-it]]></category>
+		<category><![CDATA[Recherche]]></category>
+		<category><![CDATA[unix]]></category>
+		<category><![CDATA[xargs]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2221</guid>
+		<description><![CDATA[Voici une commande Linux qui affichera les fichiers contenant The Big Brains Company Recherche au sein du répertoire /var/www/ avec un chemin absolu 123$ grep -lR &#34;The Big Brains Company&#34;.. <a href="http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Voici une commande Linux qui affichera les fichiers contenant <strong><a href="http://thebigbrainscompany.com">The Big Brains Company</a></strong></p>
+<p>Recherche au sein du répertoire <strong>/var/www/</strong> avec un chemin absolu</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #660033;">-lR</span> <span style="color: #ff0000;">&quot;The Big Brains Company&quot;</span> <span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span>com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>shared<span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml<br />
+<span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span>com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>releases<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">20140718184541</span><span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml</div></td></tr></tbody></table></div>
+<p>Recherche au sein du répertoire <strong>/var/www/</strong> avec un chemin relatif</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ <span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span><br />
+$ <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #660033;">-lR</span> <span style="color: #ff0000;">&quot;The Big Brains Company&quot;</span> <span style="color: #000000; font-weight: bold;">*</span><br />
+com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>shared<span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml<br />
+com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>releases<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">20140718184541</span><span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml</div></td></tr></tbody></table></div>
+<p>Pour finir,<br />
+Une alternative qui fera de vous un vrai barbu.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">find</span> . <span style="color: #000000; font-weight: bold;">|</span> <span style="color: #c20cb9; font-weight: bold;">xargs</span> <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #ff0000;">'The Big Brains Company'</span> <span style="color: #660033;">-sl</span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Linux &#8211; Générer des fichiers binaires</title>
+		<link>http://www.armetiz.info/linux-generer-des-fichiers-binaires/</link>
+		<comments>http://www.armetiz.info/linux-generer-des-fichiers-binaires/#comments</comments>
+		<pubDate>Mon, 11 Jul 2011 12:39:49 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Administration]]></category>
+		<category><![CDATA[Création]]></category>
+		<category><![CDATA[Debug]]></category>
+		<category><![CDATA[Diagnostic]]></category>
+		<category><![CDATA[Fichier]]></category>
+		<category><![CDATA[Monitoring]]></category>
+		<category><![CDATA[Système]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2111</guid>
+		<description><![CDATA[Dans la série des articles post-it, voici comment créer des fichiers binaires de tailles spécifiques. Un fichier de 100MBytes. 1dd if=/dev/zero of=100MB bs=100M count=1 Un fichier de 500MBytes. 1dd if=/dev/zero.. <a href="http://www.armetiz.info/linux-generer-des-fichiers-binaires/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Dans la série des articles post-it, voici comment créer des fichiers binaires de tailles spécifiques.</p>
+<p>Un fichier de <strong>100MBytes</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">dd if=/dev/zero of=100MB bs=100M count=1</div></td></tr></tbody></table></div>
+<p>Un fichier de <strong>500MBytes</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">dd if=/dev/zero of=500MB bs=500M count=1</div></td></tr></tbody></table></div>
+<p>Un fichier de <strong>1GBytes</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">dd if=/dev/zero of=1GB bs=1G count=1</div></td></tr></tbody></table></div>
+<p>Et j&#8217;ai envie de dire, ainsi de suite&#8230;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/linux-generer-des-fichiers-binaires/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Recherche développeur PHP5 / ZEND &#8211; Paris</title>
+		<link>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/</link>
+		<comments>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/#comments</comments>
+		<pubDate>Thu, 31 Mar 2011 12:29:38 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Konbini]]></category>
+		<category><![CDATA[Annonce]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[CDI]]></category>
+		<category><![CDATA[Embauche]]></category>
+		<category><![CDATA[Emplois]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[R&D]]></category>
+		<category><![CDATA[Recherche]]></category>
+		<category><![CDATA[Recrutement]]></category>
+		<category><![CDATA[Zend]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1993</guid>
+		<description><![CDATA[L&#8217;équipe de technique de Konbini recrute ! On recherche un développeur passionné avec des compétences avancées sur le Framework Zend &#38; des connaissances sur le Framework Doctrine 1.2 et/ou 2... <a href="http://www.armetiz.info/recherche-developpeur-php5-zend-paris/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.konbini.com"><img alt="logo konbini" src="http://static.konbini.com/images/logo_130_130.gif" class="alignleft" width="130" height="130" /></a>L&#8217;équipe de technique de <a href="https://remixjobs.com/emploi/Developpement/Developpeur-euse-PHP5-MySQL-ZEND-H-F/4698">Konbini recrute</a> !</p>
+<p>On recherche un développeur passionné avec des compétences avancées sur le <strong>Framework Zend</strong> &amp; des connaissances sur le <strong>Framework Doctrine</strong> 1.2 et/ou 2.</p>
+<p>En description de poste, voici l&#8217;annonce officielle : <i>vos principales missions seront le développement continu de l’application métier de Konbini ayant pour finalité de développer un écosystème cohérent autour de l’activité de production, diffusion et monétisation de contenus vidéos. Vous participerez également à l’ingénierie et à la mise en place des services des applications client de la plateforme publique de Konbini.</i>.</p>
+<p>Des connaissances en HTML, XML, CSS &amp; jQuery sont bien évidemment necessaires.</p>
+<p>Nous travaillons beaucoup avec les technologies Adobe sur des projets <strong>ActionScript 3</strong> pure ou <strong>Flex</strong>. Si vous avez des notions sur ces langages, vous serez moins perdu lors de nos discutions en pause café <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>A titre personnel, l&#8217;ambiance chez <a href="http://blog.konbini.com">Konbini</a> est tres agréable et vous changera complètement des <strong>SSII</strong><strong> ou <strong>WebAgency</strong>. Si vous recherchez une aventure qui sorte de l&#8217;ordinaire avec des <strong>projets ambitieux</strong>, contactez nous !</p>
+<p>Lien vers l&#8217;offre <a href="https://remixjobs.com/emploi/Developpement/Developpeur-euse-PHP5-MySQL-ZEND-H-F/4698">RemixJobs</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 8/14 queries in 0.020 seconds using apc
+Object Caching 1954/2003 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:08:12 by W3 Total Cache -->

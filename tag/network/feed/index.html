@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Network</title>
+	<atom:link href="http://www.armetiz.info/tag/network/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Raspberry Pi &#8211; Point d&#8217;accès Wifi</title>
+		<link>http://www.armetiz.info/raspberry-pi-point-dacces-wifi/</link>
+		<comments>http://www.armetiz.info/raspberry-pi-point-dacces-wifi/#comments</comments>
+		<pubDate>Sat, 29 Nov 2014 10:02:57 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[access]]></category>
+		<category><![CDATA[Network]]></category>
+		<category><![CDATA[point]]></category>
+		<category><![CDATA[raspberry]]></category>
+		<category><![CDATA[wifi]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3508</guid>
+		<description><![CDATA[A la maison la Freebox est un peu isolée par rapport au salon et la connexion Wifi est très mauvaise. Voyons comme utiliser le Raspberry Pi en tant que point.. <a href="http://www.armetiz.info/raspberry-pi-point-dacces-wifi/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>A la maison la Freebox est un peu isolée par rapport au salon et la connexion Wifi est très mauvaise.</p>
+<p>Voyons comme utiliser le <strong>Raspberry Pi</strong> en tant que <strong>point d&#8217;accès WiFi</strong>.</p>
+<p>Au niveau matériel,<br />
+Cela a été réalisé avec un Raspberry Pi B+, et un dongle <a href="http://www.amazon.fr/Edimax-EW-7811UN-Nano-Adaptateur-sans/dp/B003MTTJOY/">Wifi USB Edimax</a>.</p>
+<p>Au niveau logiciel,<br />
+<a href="http://doc.ubuntu-fr.org/hostapd">Hostapd</a> a été utilisé pour créer le point d&#8217;accès Wifi. Comme la version présente dans le repository de <strong>Raspbian</strong> ne supporte par le <strong>Chipset RTL8188</strong> du dongle Edimax, nous compilerons une version adaptée par <a href="https://github.com/jenssegers">Jenssegers</a> qui en a le support.</p>
+<p>Après avoir banché le dongle USB,<br />
+Voici les étapes d&#8217;installation <strong>hostapd</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get install</span> <span style="color: #c20cb9; font-weight: bold;">gcc</span> <span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+<span style="color: #c20cb9; font-weight: bold;">wget</span> https:<span style="color: #000000; font-weight: bold;">//</span>github.com<span style="color: #000000; font-weight: bold;">/</span>jenssegers<span style="color: #000000; font-weight: bold;">/</span>RTL8188-hostapd<span style="color: #000000; font-weight: bold;">/</span>archive<span style="color: #000000; font-weight: bold;">/</span>v1.1.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-zxvf</span> v1.1.tar.gz<br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> RTL8188-hostapd-<span style="color: #000000;">1.1</span><span style="color: #000000; font-weight: bold;">/</span>hostapd<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>Maintenant,<br />
+Editons la <strong>configuration réseau</strong> pour créer un bridge entre <strong>eth0 &#038; wlan0</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#FILE /etc/network/interfaces</span><br />
+<br />
+uto lo<br />
+<br />
+iface lo inet loopback<br />
+<br />
+auto br0<br />
+iface br0 inet dhcp<br />
+bridge_ports eth0 wlan0</div></td></tr></tbody></table></div>
+<p>Passons à la configuration du <strong>point d&#8217;accès Wifi</strong>.</p>
+<div class="codecolorer-container ini blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br /></div></td><td><div class="ini codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">#FILE /etc/hostapd/hostapd.conf<br />
+<br />
+# Basic configuration<br />
+<br />
+<span style="color: #000099;">ssid</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">Wozbe</span><br />
+<span style="color: #000099;">channel</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">1</span><br />
+<span style="color: #000099;">wpa_passphrase</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">TheBigBrainsCompany</span><br />
+<br />
+<span style="color: #000099;">interface</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">wlan0</span><br />
+<span style="color: #000099;">bridge</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">br0</span><br />
+<br />
+# WPA and WPA2 configuration<br />
+<span style="color: #000099;">wmm_enabled</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">0</span><br />
+<br />
+<span style="color: #000099;">macaddr_acl</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">0</span><br />
+<span style="color: #000099;">auth_algs</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">1</span><br />
+<span style="color: #000099;">ignore_broadcast_ssid</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">0</span><br />
+<span style="color: #000099;">wpa</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">3</span><br />
+<br />
+<span style="color: #000099;">wpa_key_mgmt</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">WPA-PSK</span><br />
+<span style="color: #000099;">wpa_pairwise</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">TKIP</span><br />
+<span style="color: #000099;">rsn_pairwise</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">CCMP</span><br />
+<br />
+# Hardware configuration<br />
+<br />
+<span style="color: #000099;">driver</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">rtl871xdrv</span><br />
+<span style="color: #000099;">ieee80211n</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">1</span><br />
+<span style="color: #000099;">hw_mode</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">g</span><br />
+<span style="color: #000099;">device_name</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">RTL8192CU</span><br />
+<span style="color: #000099;">manufacturer</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">Realtek</span></div></td></tr></tbody></table></div>
+<p>Je vous laisse adapter la configuration ci-dessus en fonction de votre réseau.</p>
+<p>Ajoutons une configuration permettant le <strong>forward du traffic IPv4</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#FILE /etc/sysctl.conf</span><br />
+<br />
+net.ipv4.ip_forward=<span style="color: #000000;">1</span></div></td></tr></tbody></table></div>
+<p>Une fois l&#8217;ensemble des configurations établies,<br />
+Appliquez les configurations et lancez votre point d&#8217;accès.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sysctl <span style="color: #660033;">--system</span><br />
+service networking restart<br />
+service hostapd restart</div></td></tr></tbody></table></div>
+<p>Modifier la configuration Wifi de votre périphérique réseau et profitez du Wifi.</p>
+<p>Vous trouverez plus d&#8217;information sur les sites suivants :</p>
+<ul>
+<li><a href="http://doc.ubuntu-fr.org/hostapd">Configuration hostapd</a></li>
+<li><a href="http://jenssegers.be/blog/43/realtek-rtl8188-based-access-point-on-raspberry-pi">Installation hostapd pour Realtek RTL8188</a></li>
+</ul>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/raspberry-pi-point-dacces-wifi/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Livre &#8211; IPv6 Essentials</title>
+		<link>http://www.armetiz.info/livre-ipv6-essentials/</link>
+		<comments>http://www.armetiz.info/livre-ipv6-essentials/#comments</comments>
+		<pubDate>Thu, 11 Aug 2011 09:22:52 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Livres]]></category>
+		<category><![CDATA[Anglais]]></category>
+		<category><![CDATA[Compétence]]></category>
+		<category><![CDATA[Conception]]></category>
+		<category><![CDATA[Déploiement]]></category>
+		<category><![CDATA[Infrastructure]]></category>
+		<category><![CDATA[IPv4]]></category>
+		<category><![CDATA[IPv6]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Livre]]></category>
+		<category><![CDATA[Network]]></category>
+		<category><![CDATA[Réseaux]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2118</guid>
+		<description><![CDATA[Les ouvrages sur IPv6 sont nombreux, ceux de qualité le sont moins. IPv6 Essentials de Silvia Hagen est un livre précis traitant des fondamentaux IPv6. Au sommaire : Why IPv6.. <a href="http://www.armetiz.info/livre-ipv6-essentials/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.amazon.fr/IPv6-Essentials-Silvia-Hagen/dp/0596100582"><img src="http://www.armetiz.info/files/2011/08/iPv6_Essentials1.jpg" alt="iPv6 Essentials" width="180" height="180" class="alignright size-full wp-image-2119" /></a>Les ouvrages sur IPv6 sont nombreux, ceux de qualité le sont moins.<br />
+<a href="http://www.amazon.fr/IPv6-Essentials-Silvia-Hagen/dp/0596100582">IPv6 Essentials</a> de <strong>Silvia Hagen</strong> est un livre précis traitant des fondamentaux IPv6.</p>
+<p>Au sommaire :</p>
+<ul>
+<li>Why IPv6</li>
+<li><strong>The Structure of the IPv6 Protocol</strong></li>
+<li><strong>IPv6 Addressing</strong></li>
+<li>ICMPv6</li>
+<li>Security with IPv6</li>
+<li>Quality of Service</li>
+<li>Networking Aspects</li>
+<li>Routing Protocols</li>
+<li>Upper-Layer Protocols</li>
+<li><strong>Interoperability</strong></li>
+<li><strong>Mobile IPv6</strong></li>
+<li>Get Your Hands Dirty</li>
+<li>RFCs</li>
+<li>IPv6 Resources</li>
+<li>Recommended Reading</li>
+</ul>
+<h3>La présentation de l&#8217;oeuvre</h3>
+<p>IPv6 Essentials, Second Edition provides a succinct, in-depth tour of all the <strong>new features and functions in IPv6</strong>. It guides you through everything you need to know to get started, including how to configure IPv6 on hosts and routers and which applications currently support IPv6. Aimed at system and network administrators, engineers, network designers, and IT managers, this book will help you understand, plan for, design, and integrate IPv6 into your current IPv4 infrastructure.</p>
+<h3>En ce qui me concerne</h3>
+<p>J&#8217;ai trouvé ce livre tres pragmatique.<br />
+On parle d&#8217;un protocol non pas de choses abstraites, vous allez donc lire de nombreuses pages sur les détails des RFCs.<br />
+Connaitre les détails d&#8217;un protocole peu paraitre futile, mais cela est un passage obligé si vous voulez <strong>comprendre le fonctionnement et réaliser des déploiements de qualité</strong>. </p>
+<p>A mon avis, les chapitres les plus importants sont :</p>
+<ul>
+<li>Chapitre 2 : <strong>The Structure of the IPv6 Protocol</strong></li>
+<li>Chapitre 3 : <strong>IPv6 Addressing</strong>. </ul>
+</li>
+<p>Au départ, je pensais que le Chapitre 10: <strong>Interoperability</strong> serai encore du &#8220;simple&#8221; <strong>Dual-Stack, Teredo, 6To4</strong>.. Bien que ce soit le cas, j&#8217;ai été surpris de voir de nouvelles méthodes comme le <strong>NAT-PT</strong>.<br />
+Aussi, ce chapitre montre differentes études de cas tres interessantes que je vous conseils de lire avec attention.</p>
+<p>Le chapitre 8 : <strong>Routing Protocols</strong>, je l&#8217;ai survolé assez vite car je n&#8217;éprouvais pas le besoin de connaitre les détails sur les <strong>protocoles IGP &amp; EGP avec IPv6</strong>. Toujours est-il, pour ceux que cela interesse ce chapitre est complet avec 78 pages.</p>
+<p>Le dernier chapitre : <strong>Mobile IPv6</strong> est tres charnu. Comme il est dit dans le livre: &#8220;Avant de commencer la lecture de ce Chapitre, prendre une aspiration profonde&#8221;.</p>
+<h3>Conclusion</h3>
+<p>Pour ceux qui ont des bases en IPv4 et qui souhaite faire une <strong>mise à jour de compétence</strong>, c&#8217;est un livre interessant à lire.<br />
+Le fait que cette ressource soit en Anglais n&#8217;est pas vraiment un probleme si vous avez l&#8217;habitude de lire de l&#8217;anglais technique.<br />
+Mon niveau en Anglais n&#8217;est pas des plus haut, et je n&#8217;ai eu aucune difficulté à terminer IPv6 Essentials. Apres, est-ce que j&#8217;ai tout compris&#8230; <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Vous pouvez l’acheter sur <a href="http://www.amazon.fr/IPv6-Essentials-Silvia-Hagen/dp/0596100582">Amazon</a>.<br />
+ISBN : 978-0-596-10058-2</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/livre-ipv6-essentials/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.003 seconds using apc
+Object Caching 558/559 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:15:06 by W3 Total Cache -->

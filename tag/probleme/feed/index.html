@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Problème</title>
+	<atom:link href="http://www.armetiz.info/tag/probleme/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>CentOS 6 &#8211; Apache &amp; NFS</title>
+		<link>http://www.armetiz.info/centos-6-apache-nfs/</link>
+		<comments>http://www.armetiz.info/centos-6-apache-nfs/#comments</comments>
+		<pubDate>Thu, 19 Apr 2012 11:39:41 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Administration]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Configuration]]></category>
+		<category><![CDATA[NFS]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[SELinux]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2197</guid>
+		<description><![CDATA[SELinux est installé et activé par défaut sur les installations CentOS 6. Pour mettre en place une infrastructure Web éclatée, j&#8217;ai choisis de mettre en place un serveur NFS qui.. <a href="http://www.armetiz.info/centos-6-apache-nfs/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://wiki.centos.org/HowTos/SELinux">SELinux</a> est installé et activé par défaut sur les installations CentOS 6.</p>
+<p>Pour mettre en place une infrastructure Web éclatée, j&#8217;ai choisis de mettre en place un serveur NFS qui héberge les fichiers de mes applications PHP.<br />
+Les serveurs Apache sont donc configurés comme des clients NFS, et le DocumentRoot point vers le point de montage NFS.</p>
+<p>Au démarrage d&#8217;Apache :<br />
+<strong>Warning: DocumentRoot [/var/www/tld.domain/subdomains/foo/httpdocs] does not exist</strong></p>
+<p>Ce problème peut-être causé par un défault de configuration de SELinux,<br />
+Pour vérifier on désactive SELinux et on relance Apache.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">setenforce Permissive<br />
+service httpd restart</div></td></tr></tbody></table></div>
+<p>Si Apache démarre correctement, c&#8217;est donc bien une configuration SELinux qui bloque.<br />
+Il faut modifier un <a href="http://wiki.centos.org/TipsAndTricks/SelinuxBooleans">booléen SELinux</a> : <strong>httpd_use_nfs</strong> qui est à &#8220;off&#8221; par défaut.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">setsebool httpd_use_nfs on</div></td></tr></tbody></table></div>
+<p>Cela fonctionnera aussi apres un reboot de votre serveur.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-6-apache-nfs/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Flash &#8211; Modification du domaine d&#8217;application</title>
+		<link>http://www.armetiz.info/flash-modification-du-domaine-dapplication/</link>
+		<comments>http://www.armetiz.info/flash-modification-du-domaine-dapplication/#comments</comments>
+		<pubDate>Wed, 30 Mar 2011 13:46:42 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[bug]]></category>
+		<category><![CDATA[Domain]]></category>
+		<category><![CDATA[Jira]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[Shared]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1985</guid>
+		<description><![CDATA[Cette article fait suite à une incapacité technique de ma part à comprendre les comportements concernant le fonctionnement du domaine d&#8217;application. Voici l&#8217;énoncer du problème, nous avons deux fichiers SWF.. <a href="http://www.armetiz.info/flash-modification-du-domaine-dapplication/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cette article fait suite à une incapacité technique de ma part à comprendre les comportements concernant le fonctionnement du domaine d&#8217;application.</p>
+<p>Voici l&#8217;énoncer du problème, nous avons deux fichiers SWF présents sur deux domaines différents.<br />
+Nous souhaitons simplement pouvoir utiliser une librairie partagée entre ces deux SWF et donc utiliser des définitions de classes communes.<br />
+L&#8217;objectif est donc d&#8217;utiliser un seul domaine d&#8217;application pour les deux SWF.</p>
+<p>D’après la <a href="http://help.adobe.com/fr_FR/as3/dev/WSd75bf4610ec9e22f43855da312214da1d8f-8000.html">méthode officielle</a>,</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">var _loader : Loader = new Loader ();<br />
+var _request : URLRequest = new URLRequest ( &quot;http://www.example.com/foo.swf&quot;);<br />
+var _context : ContextLoader = new ContextLoader ();<br />
+<br />
+_context.applicationDomain = ApplicationDomain.currentDomain;<br />
+<br />
+_loader.load ( _request, _context );</div></td></tr></tbody></table></div>
+<p>Le problème a été retourné dans tout les sens.. nous n&#8217;avons jamais eu les mêmes domaines d&#8217;applications pour l&#8217;enfant et le parent.</p>
+<p>De plus, il est simple de vérifier si deux SWF utilise le même domaine d&#8217;application.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">trace ( String ( __loader.contentLoaderInfo.applicationDomain == ApplicationDomain.currentDomain ) ) ;<br />
+//false systématiquement</div></td></tr></tbody></table></div>
+<p>Les crossdomain sont présents sur les deux serveurs, et les utilisations de <strong>Security.allowDomain (&#8220;*&#8221;);</strong> n&#8217;ont pas été oubliées.</p>
+<p>Aussi, le soucis reste le même lorsque nous travaillons en local et que l&#8217;on charge le SWF avec un chemin relatif.<br />
+Ce qui est étrange, c&#8217;est que dans ce cas les définitions de classes sont utilisables et donne l&#8217;impression d&#8217;un seul domaine d&#8217;application. </p>
+<p>Du coups, j&#8217;y perds totalement mon latin. A savoir que nous avons tester avec le player 10.2.152 et 10.1</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/flash-modification-du-domaine-dapplication/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Linux &#8211; Monitoring network via SNMP</title>
+		<link>http://www.armetiz.info/monitoring-network-snmp-debian/</link>
+		<comments>http://www.armetiz.info/monitoring-network-snmp-debian/#comments</comments>
+		<pubDate>Mon, 14 Feb 2011 06:00:07 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Kernel]]></category>
+		<category><![CDATA[Patch]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[SNMP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1943</guid>
+		<description><![CDATA[Les distributions Debian utilisant un Kernel inférieur à la version 2.36 sont touchées par ce problème. Parce que SNMPD n&#8217;est pas lancé avec l&#8217;utilisateur Root, celui-ci n&#8217;est pas capable de.. <a href="http://www.armetiz.info/monitoring-network-snmp-debian/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img src="http://www.armetiz.info/files/2011/02/debian1.png" alt="debian" width="128" height="128" class="alignleft size-full wp-image-1955" />Les distributions Debian utilisant un <strong>Kernel inférieur à la version 2.36</strong> sont touchées par ce problème.</p>
+<p>Parce que <strong>SNMPD</strong> n&#8217;est pas lancé avec l&#8217;utilisateur Root, celui-ci n&#8217;est pas capable de connaitre la vitesse réelle des interfaces réseaux.<br />
+Voici le résultat que l&#8217;on obtient après une requête <a href="http://fr.wikipedia.org/wiki/Simple_network_management_protocol">SNMP</a>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">IF-MIB::ifSpeed.1 = Gauge32: 10000000<br />
+IF-MIB::ifSpeed.2 = Gauge32: 10000000</div></td></tr></tbody></table></div>
+<p>D&#8217;après SNMP, nous avons donc affaire à des cartes 10Mbps, or il s&#8217;agit de carte 100Mbps.</p>
+<p><strong>Ce bug</strong> est identifié <a href="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=609226">#609226</a> chez Debian.</p>
+<p>Afin d&#8217;obtenir la bonne vitesse de vos cartes réseaux, soit vous attendez que le Kernel 2.36 soit intégré à Debian soit vous appliquez le patch et <a href="http://pyfourmond.free.fr/Compilation-Noyau-Linux.htm">re-compiler un noyaux</a>.</p>
+<p>Voici le fichier <strong>diff</strong> contenant le patch :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">Signed-off-by: Stephen Hemminger <br />
+Signed-off-by: David S. Miller <br />
+<br />
+<br />
+diff --git a/net/core/ethtool.c b/net/core/ethtool.c<br />
+index d2c4da5..970eb98 100644<br />
+--- a/net/core/ethtool.c<br />
++++ b/net/core/ethtool.c<br />
+@@ -1423,6 +1423,7 @@ int dev_ethtool(struct net *net, struct ifreq *ifr)<br />
+&nbsp;<br />
+&nbsp; &nbsp; /* Allow some commands to be done by anyone */<br />
+&nbsp; &nbsp; switch (ethcmd) {<br />
++ &nbsp; case ETHTOOL_GSET:<br />
+&nbsp; &nbsp; case ETHTOOL_GDRVINFO:<br />
+&nbsp; &nbsp; case ETHTOOL_GMSGLVL:<br />
+&nbsp; &nbsp; case ETHTOOL_GCOALESCE:</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/monitoring-network-snmp-debian/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Windows 7 &#8211; Pas d&#8217;accès Internet</title>
+		<link>http://www.armetiz.info/windows-7-pas-acces-internet/</link>
+		<comments>http://www.armetiz.info/windows-7-pas-acces-internet/#comments</comments>
+		<pubDate>Mon, 28 Dec 2009 13:16:23 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Windows]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Bonjour]]></category>
+		<category><![CDATA[bug]]></category>
+		<category><![CDATA[CS3]]></category>
+		<category><![CDATA[DHCP]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Routage]]></category>
+		<category><![CDATA[Seven]]></category>
+		<category><![CDATA[Windows 7]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1483</guid>
+		<description><![CDATA[L&#8217;article a été mis à jours le 14 Avril 2010. Si vous recherchez une entreprise de maintenance informatique proposant des services de qualité pour un faible coût, je vous conseille.. <a href="http://www.armetiz.info/windows-7-pas-acces-internet/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><em>L&#8217;article a été mis à jours le 14 Avril 2010.</em></p>
+<blockquote><p>Si vous recherchez une entreprise de <strong>maintenance informatique</strong> proposant des services de qualité pour un <strong>faible coût</strong>, je vous conseille de contacter <a href="http://www.turnaway.fr">Turnaway.fr</a>.</p></blockquote>
+<p>Lorsque l&#8217;on allume son ordinateur équipé de Windows 7, il arrive que l&#8217;on ne puisse pas accéder à Internet alors que tout les autres ordinateurs fonctionnent parfaitement.<br />
+Les configurations réseaux sont fournies par un <strong>serveur DHCP</strong> correctement configuré et testé depuis longtemps.</p>
+<h3>Les syndromes</h3>
+<p>Des messages : <strong>Réseau non identifié</strong> ou <strong>Pas d&#8217;accès Internet</strong></p>
+<p><a href="http://www.armetiz.info/files/2009/12/taskbar1.png"><img src="http://www.armetiz.info/files/2009/12/taskbar1.png" alt="Pas d&#039;acces Internet" width="295" height="216" class="size-full wp-image-1493" /></a><br />
+<a href="http://www.armetiz.info/files/2009/12/reseau1.png"><img src="http://www.armetiz.info/files/2009/12/reseau1.png" alt="Pas d&#039;acces Internet" width="466" height="140" class="size-full wp-image-1491" /></a></p>
+<p>Ce qui est étrange sur le screenshot ci-dessus, c&#8217;est qu&#8217;il existe deux &#8220;réseaux&#8221; sur une seule connexion physique alors qu&#8217;il s&#8217;agit d&#8217;une configuration réseau standard.</p>
+<h3>L&#8217;explication</h3>
+<p>L&#8217;explication se situe au niveau de la<strong> table de routage IPv4</strong>.<br />
+<a href="http://www.armetiz.info/files/2009/12/route1.png"><img src="http://www.armetiz.info/files/2009/12/route1.png" alt="Table de routage" width="488" height="205" class="aligncenter size-full wp-image-1492" /></a></p>
+<p>En effet, nous remarquons à travers la table de routage qu&#8217;il existe <strong>deux routes par défaut</strong>. A la limite, cela peut arriver, mais avec une métrique identique cela risque de ne pas fonctionner correctement.</p>
+<h3>La solution 1 &#8211; Temporaire</h3>
+<p>Voici la solution que j&#8217;utilise :<br />
+<strong>Supprimer les routes par défaut</strong>; avec un Invité de commande lancé avec les droits d&#8217;administrateur :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">route DELETE 0.0.0.0</div></td></tr></tbody></table></div>
+<p><strong>relancer la découverte DHCP</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">ipconfig /renew</div></td></tr></tbody></table></div>
+<h3>La solution 2 &#8211; Permanente</h3>
+<p>A ceux qui ont le problème, avez-vous un logiciel Adobe ? Comme <strong>Photoshop CS3</strong> ou <strong>Flash CS3</strong> ? Si oui, nous avons trouver le fautif !<br />
+<strong>Adobe CS3</strong> installe un logiciel de découverte réseau basé sur le protocole <a href="http://en.wikipedia.org/wiki/Bonjour_%28software%29">Bonjour</a> de <strong>Apple</strong>. Celui-ci lui permet de trouver les serveurs <a href="http://www.adobe.com/fr/products/creativesuite/versioncue">Version Cue</a> qui sont à proximités. </p>
+<blockquote><p><em>Pour plus d&#8217;information sur l&#8217;utilisation de Bonjour par Adobe CS3, voici une <a href="http://kb2.adobe.com/cps/400/kb400982.html">TechNote</a> en anglais.</em></p></blockquote>
+<p><a href="http://www.armetiz.info/files/2009/12/adobe-lq1.png"><img src="http://www.armetiz.info/files/2009/12/adobe-lq1.png" alt="" width="43" height="72" class="alignright size-full wp-image-1665" /></a></p>
+<p>Le logiciel est installé sous forme de service ce qui nous permet de le désactiver simplement.</p>
+<p>Pour désactiver le service :</p>
+<ul>
+<li>Aller dans le gestionnaire de service : <strong>services.msc</strong></li>
+<li>Clique droit sur &#8220;la chose&#8221; qui commence par <strong>##Id_String1&#8230;.##</strong>, allez dans les  <strong>propriétés</strong></li>
+<li>Pour <strong>Type de démarrage</strong>, sélectionner <strong>Désactivé</strong></li>
+</ul>
+<p>En redémarrant votre ordinateur, vous ne devriez plus avoir le problème.</p>
+<blockquote><p><em>Nous pouvons signifier que le problème ne touche que les utilisateurs de Adobe CS3 et Windows 7.<br />
+Cela s&#8217;explique par une implémentation différente de Bonjour au sein de Adobe CS4 et supérieur.</em></p></blockquote>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/windows-7-pas-acces-internet/feed/</wfw:commentRss>
+		<slash:comments>24</slash:comments>
+		</item>
+		<item>
+		<title>Chez VistaPrint ils ne doivent pas aimer les dates&#8230;</title>
+		<link>http://www.armetiz.info/vistaprint-gestion-date/</link>
+		<comments>http://www.armetiz.info/vistaprint-gestion-date/#comments</comments>
+		<pubDate>Wed, 29 Apr 2009 18:33:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Armetiz]]></category>
+		<category><![CDATA[Commande]]></category>
+		<category><![CDATA[Expédition]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[VistaPrint]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1043</guid>
+		<description><![CDATA[Suite à une commande de carte de visite chez vistaPrint, j&#8217;ai reçu un mail pour me confirmer son envoi. Voici un extrait de ce mail : Récapitulatif de l&#8217;expédition de.. <a href="http://www.armetiz.info/vistaprint-gestion-date/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Suite à une commande de carte de visite chez vistaPrint, j&#8217;ai reçu un mail pour me confirmer son envoi.</p>
+<p>Voici un extrait de ce mail :</p>
+<blockquote><p>
+Récapitulatif de l&#8217;expédition de votre commande :<br />
+Votre commande arrivera <strong>au plus tard le: 08/05/2009</strong><br />
+Numéro de commande : 18071-06611-2S2<br />
+Date de la commande : 26/04/2009<br />
+Votre commande arrivera <strong>au plus tard le: Lent</strong></p>
+<p>Options de livraison: 21 Jours<br />
+Votre commande arrivera <strong>au plus tard le: 17/05/2009</strong>
+</p></blockquote>
+<p>Donc, pour résumer, ma commande arrivera au plus tard le 08 Mai 2009, mais aussi le Lent, et pour finir le 17 Mai 2009.<br />
+Vous savez quelle date c&#8217;est &#8220;lent&#8221; ?</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/vistaprint-gestion-date/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Tentative de jonction au domaine</title>
+		<link>http://www.armetiz.info/tentative-jonction-domain/</link>
+		<comments>http://www.armetiz.info/tentative-jonction-domain/#comments</comments>
+		<pubDate>Fri, 17 Apr 2009 14:35:45 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Windows]]></category>
+		<category><![CDATA[2003]]></category>
+		<category><![CDATA[2008]]></category>
+		<category><![CDATA[Clavier]]></category>
+		<category><![CDATA[Client]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[Domaine]]></category>
+		<category><![CDATA[Jonction]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[Raccourcis]]></category>
+		<category><![CDATA[Résolution]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=984</guid>
+		<description><![CDATA[Mise en situation : Migration d’un parc informatique d’un domaine LYON qui n’existe plus Un domaine de niveau fonctionnel 2000 mixte au FDQN : formation.local Un serveur DNS intégré à.. <a href="http://www.armetiz.info/tentative-jonction-domain/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<h3>Mise en situation :</h3>
+<ul>
+<li>Migration d’un parc informatique d’un domaine LYON qui n’existe plus</li>
+<li>Un domaine de niveau fonctionnel 2000 mixte au <a href="http://fr.wikipedia.org/wiki/Fully_qualified_domain_name">FDQN</a> : formation.local</li>
+<li>Un serveur DNS intégré à Active Directory et configuré lors du DCPROMO</li>
+<li>Un parc informatique assez homogène avec des clients Windows XP</li>
+</ul>
+<h3>Le problème :</h3>
+<p>Nous passons l’ensemble des postes sous FORMATION. Et nous rencontrons un problème à partir du troisième poste “<strong>Erreur lors d’une tentative de jonction au domaine</strong> FORMATION”. Certains postes fonctionnent et d’autres non.</p>
+<h3>Solutions potentielles</h3>
+<p>Après moult vérifications et tentatives, rien n’y fait, jusqu’au moment où &#8220;Victoire !&#8221;<br />
+Voici le résultat de nos recherches, et donc les points qui sont à vérifier si vous rencontrez ce problème.</p>
+<ul>
+<li>Si le nom de l’ordinateur est présent dans &#8220;Computers&#8221; sur l’AD, supprimez le. Théoriquement cela ne pose pas de soucis, mais il peut s’avérer que dans la pratique ce ne soit pas pareil.</li>
+<li>Dans la boite de saisie du nom de domaine, assurez vous d’utiliser le nom DNS et non NetBIOS. Pour nous, cela sera <em>formation.local</em> au lieu de <em>FORMATION</em>. Dans le cas où la configuration NetBIOS ai été modifiée sur votre réseau.</li>
+<li>Videz votre cache DNS grâce à la commande <strong>ipconfig /flushdns</strong>. Faire l’ajout du poste client dans le domaine même si vous savez qu’il va échouer. Vérifiez votre cache DNS grâce à la commande <strong>ipconfig /displaydns</strong>. Vous devriez avoir une réponse sur <strong>_ldap._tcp.dc._msdcs.formation.local</strong> vers le FQDN de votre contrôleur de domaine. Si la résolution de nom n’a pas fonctionné, vérifier vos paramètres au niveau du serveur DNS.</li>
+<li>Au niveau des Firewall, le <strong>port 445</strong> doit être ouvert entre le client et le DC.</li>
+<li><a href="http://support.microsoft.com/kb/908372/en-us">Microsoft a publié une KB</a>. Personnellement la modification des clés de registre n’a rien changé. Mais certains utilisateurs ont été contant de trouver cette astuce.</li>
+<li>Vérifiez l’activation du service “<strong>Assistant TCP/IP NetBIOS</strong>“. Cela à réglé le problème chez nous. Et c’est d’ailleurs pour moi un grand mystère. Si quelqu’un a une explication a proposer, je suis preneur.</li>
+</ul>
+<h3>Raccourcis</h3>
+<p>Voici une petite liste de raccourcis pour aller plus vite et vous la péter devant vos copains les administrateurs :p</p>
+<ul>
+<li><strong>sysdm.cpl</strong> Propriétés Systèmes et ajouter le poste au domaine (serveur / client)</li>
+<li><strong>ncpa.cpl</strong> Panneau d’administration des cartes réseaux (serveur / client)</li>
+<li><strong>dsa.msc</strong> Gestion des utilisateurs d’Active Directory (serveur)</li>
+<li><strong>services.msc</strong> Gestion des services de la machine (serveur / client)</li>
+<li><strong>compmgmt.msc</strong> Gestion locale de l’ordinateur (serveur / client)</li>
+<li><strong>ipconfig /displaydns</strong> Affiche le cache DNS (Il contient aussi le contenu du fichier C:/Windows/System32/Drivers/etc/host)</li>
+<li><strong>ipconfig /flushdns</strong> Vide le cache DNS</li>
+<li><strong>nbtstat -c</strong> Affiche le cache NetBIOS</li>
+<li><strong>nbtstat -R</strong> Vide le cache NetBIOS</li>
+</ul>
+<p>PS : Cette article a été re-publié suite à un <a href="http://www.armetiz.info/indisponibilite-et-perte-de-donnees/">crash de la base de donnée</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/tentative-jonction-domain/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/17 queries in 0.009 seconds using apc
+Object Caching 882/934 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:08:21 by W3 Total Cache -->

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Concert</title>
+	<atom:link href="http://www.armetiz.info/tag/concert/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Executer Icecast sur le port 80 &#8211; Debian</title>
+		<link>http://www.armetiz.info/debian-executer-icecast-port-80/</link>
+		<comments>http://www.armetiz.info/debian-executer-icecast-port-80/#comments</comments>
+		<pubDate>Fri, 28 Jan 2011 13:08:08 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Concert]]></category>
+		<category><![CDATA[Diffusion]]></category>
+		<category><![CDATA[Icecast]]></category>
+		<category><![CDATA[Multicast]]></category>
+		<category><![CDATA[Musique]]></category>
+		<category><![CDATA[Privilège]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1917</guid>
+		<description><![CDATA[Pour exécuter un programme qui écoute sur un port inférieur à 1024 il faut certains privilèges. Par défaut, Icecast est configuré pour se lancer avec l&#8217;utilisateur icecast2 et le groupe.. <a href="http://www.armetiz.info/debian-executer-icecast-port-80/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img alt="Icecast" src="http://www.california-101.com/picts/icecast.png" width="537" height="98" /><br />
+Pour exécuter un programme qui écoute sur un port inférieur à 1024 il faut certains privilèges.</p>
+<p>Par défaut, Icecast est configuré pour se lancer avec l&#8217;utilisateur <strong>icecast2</strong> et le groupe <strong>icecast</strong>.</p>
+<p>Nous allons donc modifier le fichier <strong>/etc/default/icecast</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">user=root<br />
+group=root</div></td></tr></tbody></table></div>
+<p>Ensuite, <strong>/etc/icecast/icecast.xml</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">80<br />
+<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; 0<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; icecast2<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; icecast</div></td></tr></tbody></table></div>
+<p>Lorsque vous lancerez votre <strong>daemon Icecast</strong>, celui-ci sera exécuté par root. Une fois démarré, le programme se chargera de changer l&#8217;utilisateur et le groupe.</p>
+<p>Si vous ne réalisez pas cette opération mais essayer de lancer Icecast sur le port 80, vous aurez le message &#8211; explicite &#8211; suivant :<br />
+<strong><em>Server startup failed.</em></strong></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/debian-executer-icecast-port-80/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Free va fêter ses 10 ans</title>
+		<link>http://www.armetiz.info/free-a-10-ans/</link>
+		<comments>http://www.armetiz.info/free-a-10-ans/#comments</comments>
+		<pubDate>Mon, 14 Sep 2009 09:29:54 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sortie]]></category>
+		<category><![CDATA[Anniversaire]]></category>
+		<category><![CDATA[Concert]]></category>
+		<category><![CDATA[Évènement]]></category>
+		<category><![CDATA[Free]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1310</guid>
+		<description><![CDATA[Et c&#8217;est au palais omnisports de Paris-Bercy que cela se déroulera. Au programme, de la chanson &#8211; Bertignac, Cali, Raphaël, Stephan Eicher &#8211; et de l&#8217;humour avec Gad Elmaleh. Il.. <a href="http://www.armetiz.info/free-a-10-ans/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img class="alignright" alt="Free logo" src="http://www.e-dilik.fr/wp-content/uploads/2009/05/free_logo.jpg" width="30%" height="30%" />Et c&#8217;est au palais omnisports de <strong>Paris-Bercy</strong> que cela se déroulera.<br />
+Au programme, de la chanson &#8211; <strong>Bertignac, Cali, Raphaël, Stephan Eicher</strong> &#8211; et de l&#8217;humour avec <strong>Gad Elmaleh</strong>.</p>
+<p>Il est tout de même étrange de faire un concert pour les <strong>10 ans d&#8217;un FAI</strong>. Mais, peut-être que ceux présent apprendront une grande nouvelle qui <strong>révolutionnera Internet</strong> ?</p>
+<p>Ce sera le 2 Octobre 2009. Les modalités d&#8217;inscriptions ne sont pas encore disponible. Peut-être que cela sera gratuit pour tout les abonnés Free : &#8220;<strong>Pour 29.99€/mois tout compris !</strong>&#8221;</p>
+<p>PS: Tout de même, Free va avoir 10 Ans, c&#8217;est que le temps passe vite&#8230;</p>
+<p><strong>Edit 17 Septembre 2009</strong> : Voici la page pour <a href="http://10ans.free.fr/">les inscriptions</a>, manque de bol les places sont offertes uniquement aux 2 000 premiers inscrits. Sympa pour ceux qui ont une vie à coté du PC. Il aurai pu organiser une <strong>loterie</strong> et ainsi repartir un peu mieux les chances de gagner une place.</p>
+<p>En tout cas, je ne m&#8217;étais pas trompé lorsque je disais que ce serai gratuit pour les abonnées de Free <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br />
+<em>&#8220;2 000 invitations pour 2 personnes sont offertes aux abonnés haut débit Freebox.&#8221;</em></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/free-a-10-ans/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.005 seconds using apc
+Object Caching 425/439 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:17:04 by W3 Total Cache -->

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Modulo</title>
+	<atom:link href="http://www.armetiz.info/tag/modulo/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Algoritheme de déplacement circulaire bidirectionnel</title>
+		<link>http://www.armetiz.info/algoritheme-deplacement-circulaire-bidirectionnel/</link>
+		<comments>http://www.armetiz.info/algoritheme-deplacement-circulaire-bidirectionnel/#comments</comments>
+		<pubDate>Thu, 18 Sep 2008 09:55:09 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Algorithme]]></category>
+		<category><![CDATA[Deplacement]]></category>
+		<category><![CDATA[Modulo]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=290</guid>
+		<description><![CDATA[Voici un petit pense bête pour réaliser un déplacement circulaire bidirectionnel dans un tableau. 123456789/* @position : Position dans le tableau souhaitée @pointeur : Position actuel du tableau @nbEnfant :.. <a href="http://www.armetiz.info/algoritheme-deplacement-circulaire-bidirectionnel/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Voici un petit pense bête pour réaliser un déplacement circulaire bidirectionnel dans un tableau.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">/*<br />
+@position : Position dans le tableau souhaitée<br />
+@pointeur : Position actuel du tableau<br />
+@nbEnfant : Taille du tableau<br />
+*/<br />
+if (position &amp;gt;= 0)<br />
+&nbsp; &nbsp; pointeur = position % nbEnfant ;<br />
+else<br />
+&nbsp; &nbsp; pointeur = nbEnfant + (position % nbEnfant );</div></td></tr></tbody></table></div>
+<p>Edit :<br />
+La fonction ci-dessus ne semble pas fonctionnel pour les nombres négatifs.<br />
+Privilégier celle ci-dessous qui semble faire ces preuves.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">position&nbsp; &nbsp; = (position % nbChildrenDirect);<br />
+while (position &amp;lt; 0)<br />
+{<br />
+&nbsp; &nbsp; position += nbChildrenDirect;<br />
+}</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/algoritheme-deplacement-circulaire-bidirectionnel/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.003 seconds using apc
+Object Caching 375/376 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:17:12 by W3 Total Cache -->

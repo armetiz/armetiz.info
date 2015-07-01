@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Sécurité</title>
+	<atom:link href="http://www.armetiz.info/category/securite/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Pound HTTPS 2 HTTP &#8211; Format Certificat</title>
+		<link>http://www.armetiz.info/pound-https-2-http-certificat-pem-format/</link>
+		<comments>http://www.armetiz.info/pound-https-2-http-certificat-pem-format/#comments</comments>
+		<pubDate>Fri, 02 Mar 2012 05:00:34 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Infrastructure]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[HTTPS]]></category>
+		<category><![CDATA[Pound]]></category>
+		<category><![CDATA[Proxy]]></category>
+		<category><![CDATA[SSL]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2224</guid>
+		<description><![CDATA[Au niveau de la configuration, Pound peut prendre un fichier .pem contenant les certificats du serveurs ainsi que des certificats intermédiaires jusqu&#8217;à l&#8217;autorité de certification ROOT. Ce que je ne.. <a href="http://www.armetiz.info/pound-https-2-http-certificat-pem-format/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Au niveau de la configuration, <strong><a href="http://www.apsis.ch/pound/">Pound</a></strong> peut prendre un fichier .pem contenant les <strong>certificats du serveurs</strong> ainsi que des <strong>certificats intermédiaires</strong> jusqu&#8217;à l&#8217;autorité de <strong>certification ROOT</strong>.</p>
+<p>Ce que je ne savais pas et que j&#8217;ai eu beaucoup de mal à trouver, c&#8217;est qu&#8217;il faut inclure la <strong>clé privée du certificat</strong> pour que Pound puisse démarrer.<br />
+Sans cette clé privée, voici l&#8217;erreur que vous pouvez avoir : SSL_CTX_use_PrivateKey_file Error</p>
+<p>Du coups, voici le format à utiliser :</p>
+<blockquote><p>
+&#8212;&#8211;BEGIN PRIVATE KEY&#8212;&#8211;<br />
+Server key (pasted in the new key here)<br />
+&#8212;&#8211;END PRIVATE KEY&#8212;&#8211;</p>
+<p>&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;<br />
+Server certificate<br />
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;</p>
+<p>&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;<br />
+Verisign Intermediate CA (for Extended Validation Certificates)<br />
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;</p>
+<p>&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;<br />
+Verisign Root CA (Self signed)<br />
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;
+</p></blockquote>
+<p>PS : Information trouvée sur une archive Mailing List :<a href="http://www.apsis.ch/pound/pound_list/archive/2007/2007-11/1195693266000">apsis</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/pound-https-2-http-certificat-pem-format/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Sécurité des systèmes de reconnaissance faciale</title>
+		<link>http://www.armetiz.info/securite-systemes-reconnaissance-faciale/</link>
+		<comments>http://www.armetiz.info/securite-systemes-reconnaissance-faciale/#comments</comments>
+		<pubDate>Fri, 08 Jan 2010 12:56:47 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Authentification]]></category>
+		<category><![CDATA[Dell]]></category>
+		<category><![CDATA[Faille]]></category>
+		<category><![CDATA[Windows]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1520</guid>
+		<description><![CDATA[Installer sur les portables Dell par défaut, le système de reconnaissance faciale FastAccessprésente un gros problème de sécurité. Avec un simple appareil photo numérique de téléphone portable, nous avons réussi.. <a href="http://www.armetiz.info/securite-systemes-reconnaissance-faciale/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/01/photo_identite1.jpg"><img src="http://www.armetiz.info/files/2010/01/photo_identite1.jpg" alt="photo_identite" width="120" height="150" class="alignright size-full wp-image-1522" /></a>Installer sur les portables Dell par défaut, le système de reconnaissance faciale <strong><a href="http://www.sensiblevision.com">FastAccess</a></strong>présente un gros problème de sécurité.</p>
+<p>Avec un simple appareil photo numérique de téléphone portable, nous avons réussi à usurper l&#8217;identité d&#8217;un utilisateur.</p>
+<p>Cela pour dire que le mot de passe a encore de beaux jours devant lui.</p>
+<p>Aussi, il y aura dans les prochains jours un article sur comment &#8220;pourrir&#8221; la vie d&#8217;un utilisateur sous Windows. Cela sera du grand art !</p>
+<p><img alt="FastAccess" src="http://i.dell.com/images/global/learnmore/face-analysis-login-screen.jpg" class="aligncenter" width="380" height="237" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/securite-systemes-reconnaissance-faciale/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Et si monster.com se faisait pirater ?</title>
+		<link>http://www.armetiz.info/base-donne-monster-pirate-hack/</link>
+		<comments>http://www.armetiz.info/base-donne-monster-pirate-hack/#comments</comments>
+		<pubDate>Wed, 28 Jan 2009 12:16:49 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Amazon]]></category>
+		<category><![CDATA[Identité Numérique]]></category>
+		<category><![CDATA[Monster]]></category>
+		<category><![CDATA[Usurpation]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=755</guid>
+		<description><![CDATA[Divulgation de vos mots de passe personnels à cause d'un manque de professionnalisme des services IT de Monster.]]></description>
+				<content:encoded><![CDATA[<p><strong>4.5 Millions de comptes</strong> piratés ? Des <strong>mots de passe stockés en clair</strong> ? Une identité numérique en péril ? Un scénario catastrophe qui rappelle <a href="http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/">l&#8217;histoire d&#8217;anna</a>.</p>
+<p><a href="http://media.monster.com/mm/redux/logo/FRFR_298x76.gif"><img alt="Logo monster" src="http://media.monster.com/mm/redux/logo/FRFR_298x76.gif" width="298" height="76" class="alignright" /></a>Le problème, c&#8217;est qu&#8217;il ne s&#8217;agit pas d&#8217;une histoire mais d&#8217;un fait.<br />
+Monster.com s&#8217;est fait pirater sa base de donnée contenant &#8211; juste &#8211; 4.5 Millions d&#8217;utilisateurs ainsi que les mots de passe associés.<br />
+Cette actualité a été vu sur le site d&#8217;un <a href="http://sid.rstack.org/blog/index.php/319-oops-i-did-it-again">expert en sécurité</a> qui pète un câble face à l&#8217;incompétence des DSI en matière de sécurité.</p>
+<p><a href="http://aide.monster.fr/besafe/jobseeker/index.asp">Monster s&#8217;explique</a> :</p>
+<blockquote><p>Nous avons récemment appris qu’il y a eu un accès illégal à notre base de données et que certaines informations de contact et de compte ont été prises, notamment des <strong>identifiants utilisateur</strong> et <strong>des mots de passe</strong>, des <strong>adresses emails</strong>, des noms, numéros de téléphone et certaines données démographiques basiques. L’information ainsi collectée <strong>ne comprend pas de CV</strong>. Monster ne recueille généralement pas – et l’information collectée ne contient pas – de données sensibles telles que des numéros de <strong>sécurité sociale</strong> ou des <strong>données bancaires</strong>.</p></blockquote>
+<p>Seuls les identifiants, mots de passe et email on été volés, vos CV sont sains et saufs donc aucun risque.</p>
+<p><a href="http://www.armetiz.info/wp-content/uploads/2009/01/navamazonlogofooter_v28243280_.gif"><img src="http://www.armetiz.info/wp-content/uploads/2009/01/navamazonlogofooter_v28243280_.gif" alt="Logo amazon" width="100" height="28" class="size-full wp-image-766 alignleft" /></a>Quelqu&#8217;un devrait peut-être expliquer aux DSI que 90% des personnes utilisent le même mot de passe sur tout les sites à authentification.<br />
+Et que d&#8217;autres sites comme <a href="http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/">Amazon</a> qui ont une politique de sécurité digne d&#8217;un enfant peuvent fournir des informations très confidentielles : Carte Bleu / Cryptogramme &#8230;</p>
+<p>Rappelons que les problèmes de sécurité informatique sont à deux niveaux : utilisateur final et administrateur.<br />
+Alors que les règles de sécurité sur les mots de passe complexes commencent à se répandre, si les administrateurs ne respectent pas les règles de sécurité élémentaires le Web sera encore et toujours un lieu <strong>unsecure</strong>.</p>
+<p>De plus aucune excuse vis-à-vis des utilisateurs.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/base-donne-monster-pirate-hack/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Phishing Hotmail, Gmail, Yahoo &#8211; Attaque de Kevin</title>
+		<link>http://www.armetiz.info/attaque-phishing-hotmail-gmail-yahoo/</link>
+		<comments>http://www.armetiz.info/attaque-phishing-hotmail-gmail-yahoo/#comments</comments>
+		<pubDate>Wed, 10 Dec 2008 21:55:49 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Attaque]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[Kévin]]></category>
+		<category><![CDATA[Phishing]]></category>
+		<category><![CDATA[Protection]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=572</guid>
+		<description><![CDATA[Cela fait quelques semaines qu&#8217;un nouveau contact MSN s&#8217;est ajouté à notre carnet d&#8217;adresse, nous ne le connaissons pas, et nous n&#8217;y portons pas d&#8217;attention spécifique. Quelques jours après, ce.. <a href="http://www.armetiz.info/attaque-phishing-hotmail-gmail-yahoo/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cela fait quelques semaines qu&#8217;un nouveau contact MSN s&#8217;est ajouté à notre carnet d&#8217;adresse, nous ne le connaissons pas, et nous n&#8217;y portons pas d&#8217;attention spécifique.<br />
+Quelques jours après, ce contact nous parle, très peu et de manière courtoise.</p>
+<p>Ce n&#8217;est qu&#8217;après plusieurs &#8211; mini &#8211; échanges qu&#8217;il dit avoir des informations personnelles obtenues sur un tchat&#8230; Surpris, on demande quel tchat, et c&#8217;est à ce moment qu&#8217;il nous envoi une URL qui pointe vers la page de connexion Hotmail.</p>
+<p>A première vu, tout semble normal, mais si l&#8217;on regarde l&#8217;url de plus près, on y trouve :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">http://login.live.com.msn-holmail.com/...</div></td></tr></tbody></table></div>
+<p>Et voila comment l&#8217;on devient <strong>victime de <a href="http://fr.wikipedia.org/wiki/Phishing">phishing</a></strong>.</p>
+<p><img alt="" src="http://www.bitcity.it/immagini/news/ora-i-tentativi-di-phishing-arrivano-anche-dalla-r-1.jpg" class="aligncenter" width="150" height="150" /></p>
+<h3>Analyse de la page</h3>
+<p>En utilisant Firebug pour analyser les flux d&#8217;information, on se rend compte que beaucoup d&#8217;information provient du vrai Hotmail &#8211; JS / CSS &#8211; ce qui permet d&#8217;avoir une &#8220;fausse&#8221; page conforme à l&#8217;original et fonctionnel.<br />
+Deux autres URI tapent à l&#8217;œil :</p>
+<ul>
+<li>http://www.50dh.com/rerapid.php</li>
+<li>http://www.waspami.com/</li>
+</ul>
+<p>Grâce à Google et à sa traduction, nous avons pu en déduire que 50dh.com permettait d&#8217;obtenir des accès VPN/Rapidshare/etc. Tandis que Waspami.com permet de générer des pages de phishing pour Hotmail, Yahoo Mail et Gmail.<br />
+D&#8217;une utilisation très simple, il suffit de rentrer un email &#8211; pas forcement valide &#8211; et de choisir la langue. On obtient par la suite l&#8217;URL qui servira pour <a href="http://login.live.com.msn-holmail.com/fr/a3da64bf774eb14fb770675807ee0bfc.php">l&#8217;attaque.</a></p>
+<p>Chaque tentative de connexion est enregistrée par la fausse page, connexion qui échouera forcement et qui renverra vers la vrai page du service . L&#8217;utilisateur n&#8217;y verra donc que du feu, car il aura l&#8217;impression d&#8217;avoir tapé un mauvais mot de passe et ronchonnera sur le temps perdu à le retaper.<br />
+L&#8217;homme malveillant retournera sur l&#8217;URL qu&#8217;il envoi à toutes ses victimes et se connectera avec l&#8217;email qu&#8217;il a utilisé pour générer la page. Il aura ensuite accès à une liste de login, mot de passe et IP.</p>
+<h3>Comment se protéger ?</h3>
+<p><em>Et là c&#8217;est le drame</em>, car je n&#8217;ai trouvé aucun moyen de protection automatique. La seul protection, c&#8217;est le bon sens. Mais aller dire cela à votre grand-mère qui utilise internet depuis 4 mois ?</p>
+<p>Nous avons fait le test avec l&#8217;utilisation d&#8217;<a href="http://www.armetiz.info/alternative-fai-dns-opendns/">openDNS</a> qui est relié avec <a href="http://www.phishtank.com/">PhishTank</a> pour &#8211; justement &#8211; éviter les problèmes de phishing. Mais rien n&#8217;est bloqué, et nous pouvons tomber dans le panneau sans y faire gaffe.<br />
+<a href="http://www.phishtank.com/">PhishTank</a> est un service de protection contre le phishing qui fonctionne sur un principe de blacklist, donc tant que l&#8217;url n&#8217;a pas été ajoutée, elle n&#8217;est pas connue comme néfaste. Donc si le service de phishing est tout nouveau, il n&#8217;est pas référencé.</p>
+<p>Alors qu&#8217;openDNS aurait dû &#8211; à mes yeux &#8211; être la solution la plus efficace, nous pouvons nous demander que faire ?<br />
+Mais nous sommes techniquement impuissant contre cela, la seul solution possible, c&#8217;est l&#8217;éducation des utilisateurs. On y revient toujours, car c&#8217;est la dessus que se base les attaques du type phishing, sur l&#8217;imprudence des utilisateurs.<br />
+Un peu comme en voiture, on a beau mettre des radars, des ralentisseurs, une personne qui souhaite rouler à 180km/h roulera à cette vitesse.. Alors qu&#8217;en rabâchant du plus jeune age, au plus vielle age qu&#8217;il ne faut pas rouler vite, peut-être que là nous aurons des résultats, peut-être même sans radar <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Si l&#8217;attaque n&#8217;a pas fonctionné, c&#8217;est que les conditions étaient suspects. Donc <strong>Au moindre doute, il faut se méfier</strong>.</p>
+<h3>Histoire de l&#8217;article</h3>
+<p>L&#8217;article aurait dû paraitre plus tôt, et lorsqu&#8217;il y a eu la prise de décision sur sa publication, le service de phishing waspami.com n&#8217;existait plus dans son intégralité&#8230; Les liens qui sont données plus haut ne sont donc plus fonctionnels.<br />
+Il est quand même publié pour montrer que cela peut arriver à tout le monde, et pour moi c&#8217;était la première fois.<br />
+Et puis, c&#8217;est quand même de là que m&#8217;est venu l&#8217;inspiration de l&#8217;article sur <a href="http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/">les déboires d&#8217;anna</a> <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>PS : <a href="http://mod-mandy.forumactif.fr/discussions-en-tout-genre-f10/qu-est-ce-qu-un-kevin-t1604.htm">Qu&#8217;est-ce qu&#8217;un Kévin ?</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/attaque-phishing-hotmail-gmail-yahoo/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Avis à la population : la gestion des mots de passe</title>
+		<link>http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/</link>
+		<comments>http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/#comments</comments>
+		<pubDate>Thu, 04 Dec 2008 16:46:24 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Système]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[Conseils]]></category>
+		<category><![CDATA[Cryptographie]]></category>
+		<category><![CDATA[Développeur]]></category>
+		<category><![CDATA[Hebergeur]]></category>
+		<category><![CDATA[Identité]]></category>
+		<category><![CDATA[Individu]]></category>
+		<category><![CDATA[Mot de passe]]></category>
+		<category><![CDATA[Qualité]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=575</guid>
+		<description><![CDATA[Cet article fait suite à un petit raz le bol envers les développeurs et les concepteurs peu soucieux de la gestion des mots de passe. Nous allons voir pourquoi il.. <a href="http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cet article fait suite à un petit raz le bol envers les développeurs et les concepteurs peu soucieux de la gestion des mots de passe.<br />
+Nous allons voir pourquoi il ne <strong>faut pas stocker les mots de passe en clair</strong>, les <strong>risques</strong> que cela peut engendrer et <strong>les alternatives du stockage en clair</strong>.</p>
+<h3>Stocker les mots de passe en clair</h3>
+<p>Avez-vous déjà eu ces mails désagréables vous confirmant votre inscription, ces mails qui vous font un rappel de login et de mot de passe ?</p>
+<blockquote><p>Rappel pour votre prochaine connexion :</p>
+<ul>
+<li>login: armetiz</li>
+<li>password: biloute</li>
+</ul>
+</blockquote>
+<p>Mais comment diable ce fait-il que le site connaisse mon mot de passe et l&#8217;affiche en clair dans un email ?</p>
+<ul>
+<li>Premièrement, le mail arrivera dans ma boite au lettre, il sera consulter sans condition de sécurité particulière, malheureusement quelqu&#8217;un qui regardait mon écran à vu cette information tellement confidentiel : <strong>mon mot de passe</strong>.</li>
+<li>Deuxièmement, comme 95% des mails non publicitaire ne sont pas supprimés, cela signifie que si l&#8217;on subit un phising réussi, on offre à notre attaquant une vue complète de notre anatomie.</li>
+<li>Troisièmement, le mot de passe en clair a de forte chance d&#8217;avoir été stocké en base de donnée. Comment l&#8217;utilisateur peut-être sur de la sécurité de l&#8217;entreprise ? Un développeur stagiaire qui a accès à la base de donnée peut récupérer tout ce qu&#8217;il désire pour les ré-utiliser autrement.</li>
+</ul>
+<p>Dans la catégorie poids lourd, on peut nommer Amazon.fr qui stocke les numéros de carte bleu ainsi que le cryptogramme ! Une fois inscrit, on peut revenir et commander un article sans même avoir sa CB sous les yeux.</p>
+<p><img alt="" src="http://upload.wikimedia.org/wikipedia/commons/a/a9/OneTimePadExcerpt.agr.jpg" class="aligncenter" width="290" height="87" /></p>
+<h3>Les risques de l&#8217;individu</h3>
+<p>Nous allons commencer par les risques des individus.<br />
+D&#8217;après les exemples ci-dessus, il peut se produire pas mal de scénario catastrophiques. Voici l&#8217;exemple imaginé d&#8217;Anna.</p>
+<blockquote><p>Anna travaillant dans une grande PME, a suivie une formation interne sur les bases de la sécurité informatique, la chose qu&#8217;elle a retenue : des mots de passe <strong>diversifiés</strong> et <strong>complexes</strong> en fonction du type de site. Après cette formation, elle a modifiée son mot de passe, et utilise désormais <strong>trois mots de passe complexes</strong> pour trois types de site</p>
+<ul>
+<li>Commerciaux.</li>
+<li>Non commerciaux.</li>
+<li>Professionnel &#8211; Accès VPN, Connexion système de fichier, etc&#8230;</li>
+</ul>
+<p>Malheureusement, Anna a subit une attaque de <strong>phising Hotmail</strong> qu&#8217;elle utilise comme messagerie principal.<br />
+Cette attaque ayant été correctement orchestré, elle n&#8217;y a vue que du feu et ne s&#8217;est même pas rendue compte que son mot de passe non commercial venait de lui être volé.</p>
+<p>Ses attaquants ont <strong>parcouru ses emails</strong>, ils sont tombés sur une confirmation d&#8217;inscription à un site de vente en ligne pour de la lingerie, rien de bien méchant, sauf que cet email contient le <strong>login de connexion</strong>, ainsi que <strong>le mot de passe</strong> affecté.<br />
+Ils ont aussi vu qu&#8217;une commande sur Amazon avait été passée.</p>
+<p>Pas de bol pour Anna, les attaquants ont été voir sur Amazon si un des deux mots de passe fonctionnait, et c&#8217;est le cas, car elle a bien respectée la règle qu&#8217;on lui a apprise en formation, le mot de passe commercial utilisé pour la vente de lingerie est le même que pour Amazon.<br />
+Les attaquants ont commandés une télévision à 1000€, et ce n&#8217;est pas Anna qui sera livrée&#8230; Sachant qu&#8217;ils ont accès à la boite email, ils ont supprimés le bon de commande et elle ne sera rien avant que son banquier ne l&#8217;appel ou qu&#8217;elle consulte l&#8217;état de son compte.</p>
+<p>Le calvaire de la pauvre Anna ne s&#8217;est pas arrêtée à un téléviseur, car quand on est acteur &#8211; pseudo &#8211; influant sur Internet, les choses vont vite. Et les attaquants se sont amusés avec <strong>l&#8217;identité numérique</strong>, les blogs qu&#8217;elle animait l&#8217;ont bannis, et la réputation qu&#8217;elle avait construit avec cœur s&#8217;est détériorées très rapidement.</p></blockquote>
+<p>Si l&#8217;on regarde l&#8217;expérience d&#8217;Anna, on se rend compte que le phising qu&#8217;elle a subit est sous sa responsabilité, car c&#8217;est son manque d&#8217;attention qui a mené à bien l&#8217;attaque.<br />
+Par contre, le fait que le mot de passe soit affiché en clair dans l&#8217;email est sous l&#8217;entière responsabilité du site web où s&#8217;est inscrit Anna.<br />
+Et si amazon avait ne serai-ce que demandé le cryptogramme de 3 chiffres avant de passer la commande, les 1000€ serai toujours sur son compte bancaire.</p>
+<h3>Les risques des hébergeurs / administrateur</h3>
+<p>&#8220;<em>Moins on en sait, moins on cours de risque</em>&#8220;. Si l&#8217;on part de ce principe, ceux qui conservent les mots de passe en clairs se heurtent à d&#8217;énormes risques légaux.</p>
+<p>Nous allons continuer avec l&#8217;exemple d&#8217;Anna qui a été <strong>porté plainte</strong>, sachant que le débiteur des 1 000€ est Amazon, la banque se retournera contre cette enseigne qui devait s&#8217;assurer que la demande de la vente provenait bien d&#8217;Anna.<br />
+Comme nous ne pouvons pas être sur à 100% de l&#8217;identité de la personne connectée, ils ne doivent pas conserver les codes de carte bleu.</p>
+<p>Anna qui n&#8217;a vraiment pas de chance, s&#8217;est fait usurpée son identité par un stagiaire de la boutique de vente de lingerie qui s&#8217;est amusé à récupérer les mots de passe et à tester l&#8217;accès à des forums en fonction de l&#8217;email et du mot de passe.<br />
+Le stagiaire est itinérant, mais pas la boutique, elle peut être accuser d&#8217;avoir utiliser des données confidentiels et d&#8217;une haute importance, car ces données peuvent ouvrir l&#8217;accès à d&#8217;autres données personnelles. Comment la boutique pourra justifier qu&#8217;elle n&#8217;a pas utiliser à des fins &#8220;personnels&#8221; le mot de passe d&#8217;Anna ?</p>
+<h3>Les alternatives du stockage en claire</h3>
+<p>Pour empêcher que d&#8217;autres personnes ne subissent l&#8217;expérience de la pauvre Anna, qui rappelons le, a usée de méthode d&#8217;utilisateur conscient de la sécurité informatique. Il existe des méthodes très simple à mettre en place.<br />
+Mais pour cela, il faut que les concepteurs, développeurs et même administrateur soit au courant de ces pratiques.</p>
+<p>Lorsque l&#8217;on s&#8217;inscrit sur un site, on ne conserve qu&#8217;un <a href="http://fr.wikipedia.org/wiki/Fonction_de_hachage">Hash</a> du mot de passe, et si un utilisateur redemande le mot de passe, on le <strong>ré-initialise</strong> avec un tout autre mot, libre à la personne de le changer par la suite.</p>
+<p>Amazon a vraiment fait quelque chose de pas &#8220;secure&#8221;. A l&#8217;heure où l&#8217;on <a href="http://www.emilieogez.com/2008/11/20/gemalto-la-securite-numerique-en-question/">se bat pour que messieurs tout le monde ai droit à une sécurité informatique</a>, si de grandes enseignes ne respectent pas les règles élémentaires, c&#8217;est mission impossible.</p>
+<p>Car il faut le rappeler, la sécurité informatique tient du respect des règles par l&#8217;ensemble des acteurs de l&#8217;informatique.<br />
+Si les utilisateurs se forcent à utiliser des mots de passe complexe, et que les sites ne font rien pour en assurer leurs sécurités&#8230; Nous ne seront jamais tranquille.</p>
+<p>PS : Si une loi obligeait tout les développeurs à avoir connaissance des règles de sécurité pour pouvoir exercer&#8230; Nous vivrions dans un monde sans pirate :p</p>
+<p>Pour aller plus loin, voici <a href="http://securite.developpez.com/livres/">une liste de livre traitant de la sécurité informatique</a>, disponible sur Amazon bien sur <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/feed/</wfw:commentRss>
+		<slash:comments>5</slash:comments>
+		</item>
+		<item>
+		<title>Tester vos mots de passe Windows avec Ophcrack</title>
+		<link>http://www.armetiz.info/tester-vos-mots-de-passe-windows-ophcrack/</link>
+		<comments>http://www.armetiz.info/tester-vos-mots-de-passe-windows-ophcrack/#comments</comments>
+		<pubDate>Sat, 29 Nov 2008 13:33:11 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Password]]></category>
+		<category><![CDATA[Protection]]></category>
+		<category><![CDATA[Windows]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=559</guid>
+		<description><![CDATA[Ophcrack est un logiciel qui permet de cracker les mots de passe Windows, il est basé sur une technique de Philippe Oechslin auteur de RainbowCrack. Pour vous donner un exemple,.. <a href="http://www.armetiz.info/tester-vos-mots-de-passe-windows-ophcrack/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://ophcrack.sourceforge.net/">Ophcrack</a> est un logiciel qui permet de cracker les mots de passe Windows, il est basé sur une technique de <a href="http://fr.wikipedia.org/wiki/Philippe_Oechslin">Philippe Oechslin auteur de RainbowCrack</a>.</p>
+<p>Pour vous donner un exemple, le mot de passe Administrateur de mon système a été rendu visible en moins d&#8217;une minute, il contenait six lettres, un symbole, et deux lettres.. Alors que celui de l&#8217;utilisateur principal qui est composé de trois lettres, deux symboles et trois chiffres n&#8217;a pas été trouvé.<br />
+Le mot de passe administrateur a été trouvé grâce à la rainbowtable et non pas avec le brute force, qui est par défaut limité à 4 caractères (lettre, chiffre, symbole).</p>
+<p><a href="http://ophcrack.sourceforge.net/download.php">Quatre téléchargement</a> possible, pour Windows XP ou Vista, en standalone ou en liveCD.</p>
+<p><a href="http://ophcrack.sourceforge.net/"><img alt="" src="http://ophcrack.sourceforge.net/logo.png" class="alignleft" width="93" height="85" /></a>Bien évidement, la version standalone oblige à disposer d&#8217;un accès à une session active de Windows.<br />
+Alors que la version liveCD peut être exécutée par n&#8217;importe qui disposant d&#8217;un accès physique à la machine.</p>
+<p>Ne disposant pas de CD vierge, je suis passé par une <a href="http://www.pendrivelinux.com/2007/06/12/creating-a-bootable-usb-ophcrack/">clé USB</a>.</p>
+<p>Tout cela n&#8217;est pas nouveau, et Windows ne fait rien pour enrailler cette grosse faille, Vista en est la preuve&#8230; Mais à défaut de ne pas pouvoir protéger correctement votre système, vous pouvez utiliser des mots de passe complexe pour passer à travers les tables de hashage, et augmenter la difficulté du bruteforce.</p>
+<p>Car rappelons le, aucun système de sécurité n&#8217;est totalement efficace, ce n&#8217;est qu&#8217;une question de temps&#8230;</p>
+<p><strong>Update</strong>: OPHCrack vient de sortir une nouvelle version estampillée 3.4.0</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/tester-vos-mots-de-passe-windows-ophcrack/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Administration &#8211; Programmation &#8211; Conserver les mots de passe en clair.</title>
+		<link>http://www.armetiz.info/administration-programmation-conserver-les-mots-de-passe-en-clair/</link>
+		<comments>http://www.armetiz.info/administration-programmation-conserver-les-mots-de-passe-en-clair/#comments</comments>
+		<pubDate>Mon, 23 Jun 2008 11:27:56 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sécurité]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=10</guid>
+		<description><![CDATA[Dernièrement, j&#039;ai cédé à FaceBook, alors que je refusais de m&#039;y inscrire, la tentation de voir à quoi cela ressemble fut trop forte. Et c&#039;est dans un élan de folie.. <a href="http://www.armetiz.info/administration-programmation-conserver-les-mots-de-passe-en-clair/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Dernièrement, j&#039;ai cédé à <a href="http://www.facebook.com/" title="FaceBook" target="_blank">FaceBook</a>, alors que je refusais de m&#039;y inscrire, la tentation de voir à quoi cela ressemble fut trop forte.<br />
+Et c&#039;est dans un élan de folie que je me lance dans l&#039;inscription.</p>
+<p>Allant un peu trop vite, je renseigne mal mon adresse mail &#8211; thomasthomas [at] hotmail.com à la place de thomastourlourat [at] hotmail.com.<br />
+C&#039;est en me souvenant que dans les mails de confirmation, certains sites n&#039;hésitent pas à vous afficher en clair votre mot de passe.</p>
+<p>Cela soulève deux problèmes liés à la confidentialité de l&#039;information.</p>
+<p>Premièrement, thomasthomas [at] hotmail.com existe très probablement, quelqu&#039;un aurai donc reçu mon mot de passe et aurai pu naviguer sur l&#039;ensemble des sites en se faisant passer pour moi.<br />
+On entre donc dans l&#039;usurpation d&#039;identité.</p>
+<p>Deuxièmement, le problème ne devrai même pas se poser, aucun programmeur ne doit enregistrer les mots de passe en clair dans une Base de données.<br />
+En effet, pourquoi conserver l&#039;information brute quand on peut simplement conserver son <a href="http://fr.wikipedia.org/wiki/Fonction_de_hachage" title="Wikipédia - Hash" target="_blank">Hash</a>.</p>
+<p>Dans un <a href="http://armetiz.info/categories/livre-securite-informatique-principes-et-methode" title="Livre sur la securite informatique" target="_blank">article précédant</a>, je vous parlais du livre &#8220;<a href="http://www.amazon.fr/S%C3%A9curit%C3%A9-informatique-Principes-Laurent-Bloch/dp/2212120214" title="Amazon - Securite informatique" target="_blank">Sécurité informatique</a>&#8221; de <a href="http://www.laurentbloch.org/" title="Site WWW de Laurent Bloch" target="_blank">Laurent Bloch</a>, qui fait référence à l&#039;intervention de Mr X sur les risques encourus à conserver les mots de passe en clair.<br />
+Pour résumer, en cas de litige entre l&#039;administrateur et un utilisateur Lambda, ce dernier pourrai vous accuser d&#039;usurper son identité.<br />
+De plus, les mots de passe en clair sont une cible pour les attaquants, ce qui amène l&#039;administrateur à mettre des mesures de sécurité en passe. Alors que s&#039;il n&#039;y avait qu&#039;un simple Hash, ce serai une table de base de données moins importante pour les pirates.</p>
+<p>Pour conclure, j&#039;ai été heureux de voir que <a href="http://www.facebook.com/" title="FaceBook" target="_blank">FaceBook</a> n&#039;a pas affiché mon mot de passe dans l&#039;email de confirmation, et que dans la configuration de mon compte sur leur site, il n&#039;apparaît nul part.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/administration-programmation-conserver-les-mots-de-passe-en-clair/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Livre: Sécurité informatique &#8211; Principes et méthode</title>
+		<link>http://www.armetiz.info/livre-securite-informatique-principes-et-methode/</link>
+		<comments>http://www.armetiz.info/livre-securite-informatique-principes-et-methode/#comments</comments>
+		<pubDate>Sun, 22 Jun 2008 18:54:29 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Livres]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Livre]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=11</guid>
+		<description><![CDATA[Dernièrement je me suis offert &#8220;Sécurité informatique &#8211; Principes et méthode&#8221; de Laurent Bloch, et Christophe Wolfhugel. Bon livre sur la sécurité Informatique en général, il aborde les problèmes liés.. <a href="http://www.armetiz.info/livre-securite-informatique-principes-et-methode/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Dernièrement je me suis offert &#8220;<a href="http://www.amazon.fr/S%C3%A9curit%C3%A9-informatique-Principes-Laurent-Bloch/dp/2212120214" title=" Principes et méthodes" target="_blank">Sécurité informatique &#8211; Principes et méthode</a>&#8221; de <a href="http://www.laurentbloch.org/" title="Site WWW de Laurent Bloch" target="_blank">Laurent Bloch</a>, et Christophe Wolfhugel.</p>
+<p>Bon livre sur la sécurité Informatique en général, il aborde les problèmes liés à la programmation sur les architectures courantes ainsi qu&#039;aux réseaux qu&#039;ils soient de petites ou grandes envergures.</p>
+<p>Ne vous attendez pas à avoir des explications détaillées sur le paramétrage des outils, mais plutôt <em><strong>&#8220;Comprendre les menaces informatiques pour les juguler&#8221;</strong></em> &#8211; Dixit la couverture.</p>
+<p>Les auteurs sont parfois &#8220;tranchants&#8221;, plutôt du genre à penser qu&#039;il vaut mieux apprendre à pécher que de fournir un stock de poisson.</p>
+<p>Si vous voulez découvrir, ou même vous spécialisez dans la sécurité d&#039;une domaine IT &#8211; Réseau ou Programmation &#8211; je vous conseille sa lecture.<br />
+En effet il fournit une vision global et reprend tous les aspects de la sécurité, en passant du <strong>management</strong> aux problèmes causés par les <strong>protocoles propriétaires</strong>.<br />
+La partie concernant les droits et obligations juridiques des Administrateurs Réseaux m&#039;a appris quelques notions intéressantes. Ce qui m&#039;a donné envie d&#039;acheter un autre livre plus complet sur le droit informatique, car même en ayant eu des cours de droit dispensés à l&#039;école, on saute beaucoup de point important. Et nul n&#039;est censé ignorer la loi.</p>
+<p>Quelques citations qui m&#039;ont amusées :</p>
+<ul>
+<li>
+<em>&#8220;La présente section sur le management de la sécurité présente des normes et des méthodes que nous n&#039;approuvons pas; elles ne sont pas inutiles, mais nuisibles.&#8221;</em> page 20
+</li>
+<li>
+<em>&#8220;Si votre politique de sécurité repose sur l&#039;éducation des utilisateurs, alors elle est vouée à l&#039;échec.&#8221;</em> page 228
+</li>
+<li>
+<em>&#8220;Le système ou le pare-feu qui protège, c&#039;est celui pour lequel il y a sur le site un ingénieur (oui, un ingénieur, les gens qui savent faire ça sont des ingénieurs)&#8221;</em> page 229
+</li>
+</ul>
+<p>PS : N&#039;hésiter pas à consulter le site de <a href="http://www.laurentbloch.org/" title="Site WWW de Laurent Bloch" target="_blank">Laurent Bloch</a>, car il a des choses très intéressantes à raconter.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/livre-securite-informatique-principes-et-methode/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/18 queries in 0.028 seconds using apc
+Object Caching 657/725 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:11:16 by W3 Total Cache -->

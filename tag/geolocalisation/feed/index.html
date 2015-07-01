@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Geolocalisation</title>
+	<atom:link href="http://www.armetiz.info/tag/geolocalisation/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>[PHP] Convertir IP en entier</title>
+		<link>http://www.armetiz.info/php-convertir-ip-entier/</link>
+		<comments>http://www.armetiz.info/php-convertir-ip-entier/#comments</comments>
+		<pubDate>Tue, 12 Jan 2010 12:12:14 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Convertion]]></category>
+		<category><![CDATA[Geolocalisation]]></category>
+		<category><![CDATA[IP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1575</guid>
+		<description><![CDATA[Voici un petit script PHP qui permet de convertir une adresse IP en entier. 127.0.0.1 donne 2130706433 Cela peut-être intéressant pour les systèmes de géolocalisation par IP. 1234567891011121314151617181920212223echo ipToDecimal (&#34;127.0.0.1&#34;);.. <a href="http://www.armetiz.info/php-convertir-ip-entier/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Voici un petit script PHP qui permet de convertir une adresse IP en entier.</p>
+<blockquote><p>127.0.0.1 donne 2130706433</p></blockquote>
+<p>Cela peut-être intéressant pour les systèmes de géolocalisation par IP.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">echo ipToDecimal (&quot;127.0.0.1&quot;); //Affiche 2130706433<br />
+<br />
+function ipToDecimal ($_pIP)<br />
+{<br />
+&nbsp; &nbsp; $aIPDecimale&nbsp; &nbsp; = explode (&quot;.&quot;, $_pIP);<br />
+<br />
+&nbsp; &nbsp; for ($i = 0 ; $i &amp;lt; count ($aIPDecimale) ; $i++)<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $aIPDecimale[$i] = fillZero (decbin ($aIPDecimale[$i]));<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; $ipDecimal&nbsp; = fillZero (bindec (implode ($aIPDecimale)), 10);<br />
+&nbsp; &nbsp; return $ipDecimal;<br />
+}<br />
+<br />
+function fillZero ($_pBinary, $_pLimit = 8)<br />
+{<br />
+&nbsp; &nbsp; while (strlen ($_pBinary) &amp;lt; $_pLimit)<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $_pBinary = &amp;quot;0&amp;quot; . $_pBinary;<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; return $_pBinary;<br />
+}</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/php-convertir-ip-entier/feed/</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+		<item>
+		<title>Géolocaliser les utilisateurs Drupal</title>
+		<link>http://www.armetiz.info/drupal-user-location-profile/</link>
+		<comments>http://www.armetiz.info/drupal-user-location-profile/#comments</comments>
+		<pubDate>Mon, 28 Sep 2009 21:22:58 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Drupal]]></category>
+		<category><![CDATA[Geolocalisation]]></category>
+		<category><![CDATA[Gmap]]></category>
+		<category><![CDATA[Profile]]></category>
+		<category><![CDATA[Utilisateur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1349</guid>
+		<description><![CDATA[Après avoir galéré quelques heures pour trouver comment géolocaliser les utilisateurs de Drupal. Voici mon retour d&#8217;expérience. Installation des modules Gmap et Location. Paramétrage de votre API Gmap : /admin/settings/gmap.. <a href="http://www.armetiz.info/drupal-user-location-profile/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img src="http://www.armetiz.info/files/2009/09/drupal1.png" alt="drupal" width="160" height="184" class="alignright size-full wp-image-1353" />Après avoir galéré quelques heures pour trouver comment géolocaliser les utilisateurs de Drupal. Voici mon retour d&#8217;expérience.</p>
+<p>Installation des modules <a href="http://drupal.org/project/gmap">Gmap</a> et <a href="http://drupal.org/project/location">Location</a>.</p>
+<ul>
+<li>Paramétrage de votre API Gmap : <strong>/admin/settings/gmap</strong></li>
+<li>Configuration des utilisateurs, tout en bas &#8220;Emplacements des utilisateurs&#8221; :<strong> /admin/user/settings</strong></li>
+</ul>
+<p>Et c&#8217;est fini ! Le reste n&#8217;est qu&#8217;une affaire de thème.</p>
+<p>La manipulation est <strong>très simple</strong>, mais le temps de trouver qu&#8217;il fallait aller dans la <strong>Configuration des utilisateurs</strong> m&#8217;a pris facilement 2h. Donc soit je suis fatigué, soit ce n&#8217;est pas logique.<br />
+En effet, ma <strong>première démarch</strong>e fut d&#8217;activer le module <strong>Profile</strong> et de chercher à rajouter un champs de type <strong>Localisation</strong>.<br />
+Le reste ne fut qu&#8217;une errance sans fin sur Google.</p>
+<p>S&#8217;il y a bien une chose que l&#8217;on peut reprocher à Drupal, c&#8217;est une ergonomie général complètement hétérogène.<br />
+Le soucis des modules, c&#8217;est que chaque développeur y va comme il le souhaite. On arrive vite à une assiette de spaghetti.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/drupal-user-location-profile/feed/</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+		<item>
+		<title>The link of the week &#8211; 02</title>
+		<link>http://www.armetiz.info/link-of-the-week-02/</link>
+		<comments>http://www.armetiz.info/link-of-the-week-02/#comments</comments>
+		<pubDate>Fri, 09 Jan 2009 15:43:50 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Armetiz]]></category>
+		<category><![CDATA[Ambiance]]></category>
+		<category><![CDATA[Analyse]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Geolocalisation]]></category>
+		<category><![CDATA[IHM]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[Jeux]]></category>
+		<category><![CDATA[PDF]]></category>
+		<category><![CDATA[Video]]></category>
+		<category><![CDATA[Word]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=678</guid>
+		<description><![CDATA[Autre édition du fameux link of the week. AdobeTV se dote d&#8217;une version Française Bien démarrer avec Flex BuddyPress est une suite de plugins pour WordPress MU, chacun d&#8217;entre eux.. <a href="http://www.armetiz.info/link-of-the-week-02/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Autre édition du fameux link of the week.</p>
+<ul>
+<li><a href="http://tv.adobe.com/">AdobeTV</a> se dote d&#8217;une <a href="http://tv.adobe.com/fr">version Française</a></li>
+<li><a href="http://www.adobe.com/devnet/flex/quickstart.html">Bien démarrer</a> avec <a href="http://www.adobe.com/devnet/flex/?navID=gettingstarted">Flex</a></li>
+<li><a href="http://www.buddypress-fr.net/">BuddyPress</a> est une suite de plugins pour WordPress MU, chacun d&#8217;entre eux gérant une fonction «sociale» distincte.</li>
+<li><a href="http://www.clever-age.com/veille/blog/un-peu-plus-loin-avec-la-geolocalisation.html">Clever-Age</a> à fait une petite description de l&#8217;avenir de la geolocalisation.</li>
+<li><a href="http://www.korben.info/transformer-un-iphone-en-telecommande-infrarouge.html">Transformer votre iPhone</a> en télécommande infrarouge (pour les flemmards).</li>
+<li>Univers full flash sympa avec <a href="http://mtl12.com/">Montréal en 12 lieu</a>.</li>
+<li>Convertir des <a href="http://www.convertpdftoword.net/">PDF en fichier Word</a>, online s&#8217;il vous plait.</li>
+<li>Tout le monde connait tout le monde : <a href="http://oseox.fr/blog/index.php/620-degre-six">La règle des 6 degrés</a>.</li>
+<li>La <a href="http://www.gobz.org/2008/07/25/la-place-de-lergonomie/">place de l&#8217;ergonomie</a> sur nos machines et une <a href="http://www.gobz.org/2008/03/06/jef-raskin-linterface-humaine/#more-445">analyse des IHM</a> avec présentation de <a href="http://www.songza.com/">Songza</a>, agrégateur musical qui a pour spécifié, une IHM intéressant.</li>
+<li><a href="http://www.jamlegend.com/">JamLegend</a> : Un petit jeu pour vous détendre.</li>
+<li>Lecteur musique en Javascript : <a href="http://www.thecloudplayer.com/">The cloud player</a></li>
+</ul>
+<p>Je vous souhaite à tous un bon weekend <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/link-of-the-week-02/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.013 seconds using apc
+Object Caching 435/446 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:33 by W3 Total Cache -->

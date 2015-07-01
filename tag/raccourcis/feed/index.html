@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Raccourcis</title>
+	<atom:link href="http://www.armetiz.info/tag/raccourcis/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Tentative de jonction au domaine</title>
+		<link>http://www.armetiz.info/tentative-jonction-domain/</link>
+		<comments>http://www.armetiz.info/tentative-jonction-domain/#comments</comments>
+		<pubDate>Fri, 17 Apr 2009 14:35:45 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Windows]]></category>
+		<category><![CDATA[2003]]></category>
+		<category><![CDATA[2008]]></category>
+		<category><![CDATA[Clavier]]></category>
+		<category><![CDATA[Client]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[Domaine]]></category>
+		<category><![CDATA[Jonction]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[Raccourcis]]></category>
+		<category><![CDATA[Résolution]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=984</guid>
+		<description><![CDATA[Mise en situation : Migration d’un parc informatique d’un domaine LYON qui n’existe plus Un domaine de niveau fonctionnel 2000 mixte au FDQN : formation.local Un serveur DNS intégré à.. <a href="http://www.armetiz.info/tentative-jonction-domain/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<h3>Mise en situation :</h3>
+<ul>
+<li>Migration d’un parc informatique d’un domaine LYON qui n’existe plus</li>
+<li>Un domaine de niveau fonctionnel 2000 mixte au <a href="http://fr.wikipedia.org/wiki/Fully_qualified_domain_name">FDQN</a> : formation.local</li>
+<li>Un serveur DNS intégré à Active Directory et configuré lors du DCPROMO</li>
+<li>Un parc informatique assez homogène avec des clients Windows XP</li>
+</ul>
+<h3>Le problème :</h3>
+<p>Nous passons l’ensemble des postes sous FORMATION. Et nous rencontrons un problème à partir du troisième poste “<strong>Erreur lors d’une tentative de jonction au domaine</strong> FORMATION”. Certains postes fonctionnent et d’autres non.</p>
+<h3>Solutions potentielles</h3>
+<p>Après moult vérifications et tentatives, rien n’y fait, jusqu’au moment où &#8220;Victoire !&#8221;<br />
+Voici le résultat de nos recherches, et donc les points qui sont à vérifier si vous rencontrez ce problème.</p>
+<ul>
+<li>Si le nom de l’ordinateur est présent dans &#8220;Computers&#8221; sur l’AD, supprimez le. Théoriquement cela ne pose pas de soucis, mais il peut s’avérer que dans la pratique ce ne soit pas pareil.</li>
+<li>Dans la boite de saisie du nom de domaine, assurez vous d’utiliser le nom DNS et non NetBIOS. Pour nous, cela sera <em>formation.local</em> au lieu de <em>FORMATION</em>. Dans le cas où la configuration NetBIOS ai été modifiée sur votre réseau.</li>
+<li>Videz votre cache DNS grâce à la commande <strong>ipconfig /flushdns</strong>. Faire l’ajout du poste client dans le domaine même si vous savez qu’il va échouer. Vérifiez votre cache DNS grâce à la commande <strong>ipconfig /displaydns</strong>. Vous devriez avoir une réponse sur <strong>_ldap._tcp.dc._msdcs.formation.local</strong> vers le FQDN de votre contrôleur de domaine. Si la résolution de nom n’a pas fonctionné, vérifier vos paramètres au niveau du serveur DNS.</li>
+<li>Au niveau des Firewall, le <strong>port 445</strong> doit être ouvert entre le client et le DC.</li>
+<li><a href="http://support.microsoft.com/kb/908372/en-us">Microsoft a publié une KB</a>. Personnellement la modification des clés de registre n’a rien changé. Mais certains utilisateurs ont été contant de trouver cette astuce.</li>
+<li>Vérifiez l’activation du service “<strong>Assistant TCP/IP NetBIOS</strong>“. Cela à réglé le problème chez nous. Et c’est d’ailleurs pour moi un grand mystère. Si quelqu’un a une explication a proposer, je suis preneur.</li>
+</ul>
+<h3>Raccourcis</h3>
+<p>Voici une petite liste de raccourcis pour aller plus vite et vous la péter devant vos copains les administrateurs :p</p>
+<ul>
+<li><strong>sysdm.cpl</strong> Propriétés Systèmes et ajouter le poste au domaine (serveur / client)</li>
+<li><strong>ncpa.cpl</strong> Panneau d’administration des cartes réseaux (serveur / client)</li>
+<li><strong>dsa.msc</strong> Gestion des utilisateurs d’Active Directory (serveur)</li>
+<li><strong>services.msc</strong> Gestion des services de la machine (serveur / client)</li>
+<li><strong>compmgmt.msc</strong> Gestion locale de l’ordinateur (serveur / client)</li>
+<li><strong>ipconfig /displaydns</strong> Affiche le cache DNS (Il contient aussi le contenu du fichier C:/Windows/System32/Drivers/etc/host)</li>
+<li><strong>ipconfig /flushdns</strong> Vide le cache DNS</li>
+<li><strong>nbtstat -c</strong> Affiche le cache NetBIOS</li>
+<li><strong>nbtstat -R</strong> Vide le cache NetBIOS</li>
+</ul>
+<p>PS : Cette article a été re-publié suite à un <a href="http://www.armetiz.info/indisponibilite-et-perte-de-donnees/">crash de la base de donnée</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/tentative-jonction-domain/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Les raccourcis clavier pour gagner du temps</title>
+		<link>http://www.armetiz.info/raccourcis-clavier-gain-temps/</link>
+		<comments>http://www.armetiz.info/raccourcis-clavier-gain-temps/#comments</comments>
+		<pubDate>Fri, 09 Jan 2009 11:20:33 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[Aide]]></category>
+		<category><![CDATA[Clavier]]></category>
+		<category><![CDATA[Optimisation]]></category>
+		<category><![CDATA[Raccourcis]]></category>
+		<category><![CDATA[Temps]]></category>
+		<category><![CDATA[Utile]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=651</guid>
+		<description><![CDATA[Qui n&#8217;a jamais voulu se passer de sa souris ? Bon, personne hormis les gros geeks :p Mais quant on utilise son ordinateur, il est agréable d&#8217;éviter d&#8217;aller du clavier.. <a href="http://www.armetiz.info/raccourcis-clavier-gain-temps/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Qui n&#8217;a jamais voulu se passer de sa souris ? Bon, personne hormis les gros geeks :p</p>
+<p>Mais quant on utilise son ordinateur, il est agréable d&#8217;éviter d&#8217;aller du clavier à la souris et inversement trop régulièrement. Pour cela, il faut savoir utiliser correctement son clavier.</p>
+<p>Voici un petit listing des raccourcis claviers particulièrement utiles :</p>
+<h3>Firefox</h3>
+<p><a href="http://www.mozilla-europe.org/fr/firefox/"><img src="http://www.armetiz.info/wp-content/uploads/2009/01/firefox-150x150.jpg" alt="Logo firefox" width="150" height="150" class="alignright wp-image-655" /></a>
+<ul>
+<li>Ouverture d&#8217;un onglet : <strong>Ctrl + T</strong></li>
+<li>Fermeture d&#8217;un onglet : <strong>Ctrl + W</strong></li>
+<li>Ré-ouverture du dernier onglet fermé : <strong>Ctrl + Shift + T</strong></li>
+<li>Aller a la page d&#8217;accueil : <strong>Alt + <a href="http://pagesperso-orange.fr/jeanmarc.stoeffler/excel/clavier/Home.JPG" target="_blank">home</a></strong> (lever la main ceux qui découvrent le nom d&#8217;une nouvelle touche :p)</li>
+<li>Aller à un onglet spécifique : <strong>Ctrl + Chiffre</strong> (sachant que l&#8217;onglet de gauche correspond à 1)</li>
+<li>Aller à l&#8217;onglet suivant / précèdent : <strong>Ctrl + <a href="http://www.centre-cired.fr/IMG/gif/04pageup.gif" target="_blank">page up</a></strong> / <strong>page down</strong> (on levé la main au fond :p)</li>
+<li>Aller à l&#8217;onglet suivant : <strong>Ctrl + tab</strong></li>
+<li>Pour modifier l&#8217;url de l&#8217;onglet : <strong>Alt + D</strong></li>
+<li>Rafraichir l&#8217;onglet : <strong>F5</strong></ul>
+</li>
+<h3>Zone de texte éditable</h3>
+<p>Lorsque vous êtes en présence d&#8217;une zone de texte, et que vous en avez le focus (le curseur clignote) :</p>
+<ul>
+<li>Aller à l&#8217;espace suivant / précèdent : <strong>Ctrl + flèche de droite</strong> / <strong>gauche</strong></li>
+<li>Sélectionne le(s) caractères suivant / précèdent : <strong>Shift + flèche de droite</strong> / <strong>gauche</strong></li>
+<li>Fait remonter / descend le curseur d&#8217;environ 90% de l&#8217;espace affiché : <strong>page up</strong> / <strong>page down</strong></li>
+<li>Aller au début / fin de la ligne : <strong>home</strong> / <strong>end</strong></li>
+<li>Aller en haut / bas de la page : <strong>Ctrl + home</strong> / <strong>end</strong></li>
+<li>Supprimer le mot précédent le curseur : <strong>Ctrl + Suppr</strong></li>
+</ul>
+<p>A noter que les raccourcis sont associables, exemple :</p>
+<ul>
+<li>Sélectionne le(s) mots suivant / précédent : <strong>Shift + Ctrl + flèche de droite</strong> / <strong>gauche</strong></li>
+<li>Sélectionne la ligne entière : <strong>Ctrl + end</strong>, puis, <strong>Shift + Ctrl + home</strong></li>
+</ul>
+<h3>Windows</h3>
+<ul>
+<li>Ouvrir un explorateur : <strong>Windows + E</strong> (&#8220;E&#8221; pour Explorer)</li>
+<li>Verrouille la session : <strong>Windows + L</strong> (&#8220;L&lt;&quot; pour Lock</li>
+<li>Pour taper une commande (par exemple, &#8220;cmd&#8221; pour avoir un inviter de commande) : <strong>Windows + R</strong> (&#8220;R&#8221; pour run)</li>
+<li>Pour afficher votre bureau : <strong>Windows + D</strong> (&#8220;D&#8221; pour Desktop)</li>
+<li>Aller à la fenêtre suivante : <strong>Alt + Tab</strong></li>
+<li>Ferme la fenêtre : <strong>Alt + F4</strong></li>
+</ul>
+<h3>Word</h3>
+<ul>
+<li>Mets en majuscule / minuscule le texte sélectionné : <strong>Shift + F3</strong></li>
+</ul>
+<h3>Eclipse</h3>
+<ul>
+<li>Déplace le code sélectionné vers le haut ou bas : <strong>Alt + flèche haut</strong> / <strong>bas</strong></li>
+</ul>
+<h3>Gnome (Environnement Linux)</h3>
+<p><a href="http://fr.wikipedia.org/wiki/GNOME" target="_blank"><img src="http://www.armetiz.info/wp-content/uploads/2009/01/gnome2-logo-text-194-150x150.png" alt="Gnome logo" width="150" height="150" class="alignright size-thumbnail wp-image-661" /></a>
+<ul>
+<li>Agrandit la fenêtre : <strong>Alt + F10</strong></li>
+<li>Réduit la fenêtre : <strong>Alt + F5</strong></li>
+<li><strong>Alt</strong> + clique souris sur une fenêtre permet de déplacer celle-ci</li>
+</ul>
+<h3>En général</h3>
+<ul>
+<li>Sauvegarde le document courant : <strong>Ctrl + S</strong></li>
+<li>Ajoute une tabulation au texte sélectionné : <strong>Tab</strong></li>
+<li>Supprime une tabulation : <strong>Shift + Tab</strong></li>
+</ul>
+<p>Malheureusement, je ne pourrais continuer cet article suite à un <a href="http://www.villiard.com/images/accident-F1.jpg" target="_blank">accident de F1</a>..</p>
+<p>Si vous avez des raccourcis qui vous semble utile, penser à le dire via les commentaires <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/raccourcis-clavier-gain-temps/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.004 seconds using apc
+Object Caching 358/359 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:32 by W3 Total Cache -->

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; gallery2</title>
+	<atom:link href="http://www.armetiz.info/tag/gallery2/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Gallery2: Afficher le contenu d&#8217;un tableau, et une valeur particulière</title>
+		<link>http://www.armetiz.info/gallery2-afficher-le-contenu-dun-tableau-et-une-valeur-particuliere/</link>
+		<comments>http://www.armetiz.info/gallery2-afficher-le-contenu-dun-tableau-et-une-valeur-particuliere/#comments</comments>
+		<pubDate>Wed, 23 Apr 2008 21:01:02 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[gallery2]]></category>
+		<category><![CDATA[smarty]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=20</guid>
+		<description><![CDATA[Avec Gallery2, il peut être intéressant de pouvoir afficher le contenu d&#8217;un tableau, et d&#8217;une valeur de ce tableau. Alors qu&#8217;en php on écrit : 12print_r ($monTableau); //Affiche le contenu.. <a href="http://www.armetiz.info/gallery2-afficher-le-contenu-dun-tableau-et-une-valeur-particuliere/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Avec Gallery2, il peut être intéressant de pouvoir afficher le contenu d&#8217;un tableau, et d&#8217;une valeur de ce tableau.</p>
+<p>Alors qu&#8217;en php on écrit :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">print_r ($monTableau); //Affiche le contenu du tableau<br />
+print ($monTableau[2][3]); //Affiche la valeur de la dimension [2][3]</div></td></tr></tbody></table></div>
+<p>Avec Gallery2, et donc Smarty il faut utiliser la syntaxe suivante :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">{$monTableau|@print_r} //Affiche le contenu du tableau, avec les paires clé/valeur<br />
+{$monTableau.2.3.value} //Affiche la valeur de la dimension [2][3]</div></td></tr></tbody></table></div>
+<p>A noter que si vous voulez la clé correspondante</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">{$monTableau.2.3.key} //Affiche la clé de la dimension [2][3]</div></td></tr></tbody></table></div>
+<p>Voili voilou.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/gallery2-afficher-le-contenu-dun-tableau-et-une-valeur-particuliere/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.004 seconds using apc
+Object Caching 414/425 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:17:13 by W3 Total Cache -->

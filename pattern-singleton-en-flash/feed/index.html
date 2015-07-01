@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Pattern Singleton en Flash</title>
+	<atom:link href="http://www.armetiz.info/pattern-singleton-en-flash/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info/pattern-singleton-en-flash/</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Thu, 03 Apr 2014 20:26:43 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/pattern-singleton-en-flash/#comment-322</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Wed, 18 Nov 2009 15:42:58 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1419#comment-322</guid>
+		<description><![CDATA[Complètement, et ca je ne l&#039;ai vu que trop tard ^^.]]></description>
+		<content:encoded><![CDATA[<p>Complètement, et ca je ne l&#8217;ai vu que trop tard ^^.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Iteratif</title>
+		<link>http://www.armetiz.info/pattern-singleton-en-flash/#comment-321</link>
+		<dc:creator><![CDATA[Iteratif]]></dc:creator>
+		<pubDate>Wed, 18 Nov 2009 15:42:14 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1419#comment-321</guid>
+		<description><![CDATA[La notation avec une première majuscule est volontaire pour donner l&#039;illusion d&#039;utiliser une référence de classe.]]></description>
+		<content:encoded><![CDATA[<p>La notation avec une première majuscule est volontaire pour donner l&#8217;illusion d&#8217;utiliser une référence de classe.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/pattern-singleton-en-flash/#comment-320</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Wed, 18 Nov 2009 15:29:48 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1419#comment-320</guid>
+		<description><![CDATA[Ah ui, tout à fait Thierry !
+Erreur de ma part pour la lecture, je n&#039;ai pas correctement lu le code, je me suis arrêté aux conventions de nommage.
+Où un mot qui commence par une majuscule est une classe, et une constante est écrite entièrement en majuscule.]]></description>
+		<content:encoded><![CDATA[<p>Ah ui, tout à fait Thierry !<br />
+Erreur de ma part pour la lecture, je n&#8217;ai pas correctement lu le code, je me suis arrêté aux conventions de nommage.<br />
+Où un mot qui commence par une majuscule est une classe, et une constante est écrite entièrement en majuscule.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Iteratif</title>
+		<link>http://www.armetiz.info/pattern-singleton-en-flash/#comment-319</link>
+		<dc:creator><![CDATA[Iteratif]]></dc:creator>
+		<pubDate>Wed, 18 Nov 2009 15:24:37 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1419#comment-319</guid>
+		<description><![CDATA[@Thomas, et bien si, voici a nouveau tout le code :
+
+&lt;pre&gt;
+//La classe interne
+package patterns
+{
+	internal class SingletonImpl
+	{
+		private static var instancied:Boolean = false;
+		public function SingletonImpl()
+		{
+			if(instancied)
+				throw new Error (&quot;Pattern Singleton : only one instance is permit&quot;);
+ 
+			instancied = true;
+		}
+ 
+		public function log(msg:String):void {
+			trace(msg);
+		}
+ 
+	}
+}
+&lt;/pre&gt;
+
+Et la constante Singleton de type SingletonImpl :
+&lt;pre&gt;
+package patterns {
+	public const Singleton:SingletonImpl = new SingletonImpl();
+}
+&lt;/pre&gt;
+
+Voici un article à lire concernant le Singleton : http://steve.yegge.googlepages.com/singleton-considered-stupid]]></description>
+		<content:encoded><![CDATA[<p>@Thomas, et bien si, voici a nouveau tout le code :</p>
+<pre>
+//La classe interne
+package patterns
+{
+	internal class SingletonImpl
+	{
+		private static var instancied:Boolean = false;
+		public function SingletonImpl()
+		{
+			if(instancied)
+				throw new Error ("Pattern Singleton : only one instance is permit");
+ 
+			instancied = true;
+		}
+ 
+		public function log(msg:String):void {
+			trace(msg);
+		}
+ 
+	}
+}
+</pre>
+<p>Et la constante Singleton de type SingletonImpl :</p>
+<pre>
+package patterns {
+	public const Singleton:SingletonImpl = new SingletonImpl();
+}
+</pre>
+<p>Voici un article à lire concernant le Singleton : <a href="http://steve.yegge.googlepages.com/singleton-considered-stupid" rel="nofollow">http://steve.yegge.googlepages.com/singleton-considered-stupid</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/pattern-singleton-en-flash/#comment-318</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Wed, 18 Nov 2009 14:33:55 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1419#comment-318</guid>
+		<description><![CDATA[@Iteratif, l&#039;accès à Singleton.log ne pourra pas être fait en l&#039;état... Il faut que log soit une fonction de classe et non d&#039;instance. Me trompe-je ?
+
+Sinon, un pattern est en effet indépendant du langage de programmation. C&#039;est tout l&#039;intérêt du couplage faible en effet ;)]]></description>
+		<content:encoded><![CDATA[<p>@Iteratif, l&#8217;accès à Singleton.log ne pourra pas être fait en l&#8217;état&#8230; Il faut que log soit une fonction de classe et non d&#8217;instance. Me trompe-je ?</p>
+<p>Sinon, un pattern est en effet indépendant du langage de programmation. C&#8217;est tout l&#8217;intérêt du couplage faible en effet 😉</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Iteratif</title>
+		<link>http://www.armetiz.info/pattern-singleton-en-flash/#comment-317</link>
+		<dc:creator><![CDATA[Iteratif]]></dc:creator>
+		<pubDate>Wed, 18 Nov 2009 14:27:41 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1419#comment-317</guid>
+		<description><![CDATA[@Thomas, la souplesse d&#039;écriture est intéressante puisqu&#039;il te suffit d&#039;appeler directement les méthodes de l&#039;objet :
+
+Singleton.log(&quot;toto&quot;);
+
+Par contre je ne vois pas ou cette implémentation ne respecte pas la définition du pattern : &quot;avoir un objet unique et globale&quot;. Par contre il est clair qu&#039;elle ne respecte pas les implémentations des autres langages mais si je ne me trompe pas, un pattern est le plus souvent indépendant du langage de programmation ;)]]></description>
+		<content:encoded><![CDATA[<p>@Thomas, la souplesse d&#8217;écriture est intéressante puisqu&#8217;il te suffit d&#8217;appeler directement les méthodes de l&#8217;objet :</p>
+<p>Singleton.log(&#8220;toto&#8221;);</p>
+<p>Par contre je ne vois pas ou cette implémentation ne respecte pas la définition du pattern : &#8220;avoir un objet unique et globale&#8221;. Par contre il est clair qu&#8217;elle ne respecte pas les implémentations des autres langages mais si je ne me trompe pas, un pattern est le plus souvent indépendant du langage de programmation 😉</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/pattern-singleton-en-flash/#comment-316</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Wed, 18 Nov 2009 14:01:41 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1419#comment-316</guid>
+		<description><![CDATA[@Zed-K, la deuxième méthode de permet pas d&#039;utiliser Singleton.prop, ou alors prop doit être une propriété de classe et non d&#039;instance.
+
+A toi de construire ton Singleton comme tu préfère au niveau de son accès.]]></description>
+		<content:encoded><![CDATA[<p>@Zed-K, la deuxième méthode de permet pas d&#8217;utiliser Singleton.prop, ou alors prop doit être une propriété de classe et non d&#8217;instance.</p>
+<p>A toi de construire ton Singleton comme tu préfère au niveau de son accès.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Zed-K</title>
+		<link>http://www.armetiz.info/pattern-singleton-en-flash/#comment-315</link>
+		<dc:creator><![CDATA[Zed-K]]></dc:creator>
+		<pubDate>Wed, 18 Nov 2009 13:35:46 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1419#comment-315</guid>
+		<description><![CDATA[En effet, au temps pour moi.
+
+Sinon, la différence entre les 2 méthodes est la façon dont on accède au Singleton. Ce n&#039;est qu&#039;une question de goût, personnellement je préfère y accéder par  &quot;Singleton.prop&quot;, que je trouve plus concis et lisible que &quot;Singelton.instance.prop&quot;.
+
+Par contre, cette méthode pose problème si l&#039;on souhaite documenter la classe via AsDoc (j&#039;avais d&#039;ailleurs posé la question à Itératif sur le forum de flexx.fr, si mes souvenirs sont bons).]]></description>
+		<content:encoded><![CDATA[<p>En effet, au temps pour moi.</p>
+<p>Sinon, la différence entre les 2 méthodes est la façon dont on accède au Singleton. Ce n&#8217;est qu&#8217;une question de goût, personnellement je préfère y accéder par  &#8220;Singleton.prop&#8221;, que je trouve plus concis et lisible que &#8220;Singelton.instance.prop&#8221;.</p>
+<p>Par contre, cette méthode pose problème si l&#8217;on souhaite documenter la classe via AsDoc (j&#8217;avais d&#8217;ailleurs posé la question à Itératif sur le forum de flexx.fr, si mes souvenirs sont bons).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/pattern-singleton-en-flash/#comment-314</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Wed, 18 Nov 2009 09:48:41 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1419#comment-314</guid>
+		<description><![CDATA[@Zed-K, comme le dit Iteratif, il est possible d&#039;instancier plusieurs fois le singleton en modifiant le package... On ne respect donc pas - à la lettre - la définition du pattern.
+
+@Iteratif, on en revient quasiment à la méthode décrit dans l&#039;article. Il s&#039;agit d&#039;ailleurs de la méthode que l&#039;on retrouve un peu partout sur les forums.]]></description>
+		<content:encoded><![CDATA[<p>@Zed-K, comme le dit Iteratif, il est possible d&#8217;instancier plusieurs fois le singleton en modifiant le package&#8230; On ne respect donc pas &#8211; à la lettre &#8211; la définition du pattern.</p>
+<p>@Iteratif, on en revient quasiment à la méthode décrit dans l&#8217;article. Il s&#8217;agit d&#8217;ailleurs de la méthode que l&#8217;on retrouve un peu partout sur les forums.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Iteratif</title>
+		<link>http://www.armetiz.info/pattern-singleton-en-flash/#comment-313</link>
+		<dc:creator><![CDATA[Iteratif]]></dc:creator>
+		<pubDate>Tue, 17 Nov 2009 18:41:03 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1419#comment-313</guid>
+		<description><![CDATA[Salut,
+
+L&#039;implémentation du Singleton sur WIkipédia n&#039;empêche pas de créer de nouvelles instances mais la démarche est plus longue. Il faut créer une nouvelle constante dans le même package que la classe interne SingletonImpl avec un nom différent, soi:
+
+&lt;pre&gt;
+package patterns {
+    public const MyOtherSingleton:SingletonImpl = new SingletonImpl();
+}
+&lt;/pre&gt;
+
+Mais une petite modification de code peut résoudre le problème :
+
+&lt;pre&gt;
+package patterns
+{
+	internal class SingletonImpl
+	{
+		private static var instancied:Boolean = false;
+		public function SingletonImpl()
+		{
+			if(instancied)
+				throw new Error (&quot;Pattern Singleton : only one instance is permit&quot;);
+				
+			instancied = true;
+		}
+		
+		public function log(msg:String):void {
+			trace(msg);
+		}
+
+	}
+}
+&lt;/pre&gt;
+
+Et là, plus possible de créer plusieurs instances ;)]]></description>
+		<content:encoded><![CDATA[<p>Salut,</p>
+<p>L&#8217;implémentation du Singleton sur WIkipédia n&#8217;empêche pas de créer de nouvelles instances mais la démarche est plus longue. Il faut créer une nouvelle constante dans le même package que la classe interne SingletonImpl avec un nom différent, soi:</p>
+<pre>
+package patterns {
+    public const MyOtherSingleton:SingletonImpl = new SingletonImpl();
+}
+</pre>
+<p>Mais une petite modification de code peut résoudre le problème :</p>
+<pre>
+package patterns
+{
+	internal class SingletonImpl
+	{
+		private static var instancied:Boolean = false;
+		public function SingletonImpl()
+		{
+			if(instancied)
+				throw new Error ("Pattern Singleton : only one instance is permit");
+				
+			instancied = true;
+		}
+		
+		public function log(msg:String):void {
+			trace(msg);
+		}
+
+	}
+}
+</pre>
+<p>Et là, plus possible de créer plusieurs instances 😉</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 7/12 queries in 0.002 seconds using apc
+Object Caching 348/349 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:11:37 by W3 Total Cache -->

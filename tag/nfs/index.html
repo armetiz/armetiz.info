@@ -1,0 +1,502 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+
+
+<!-- Mirrored from www.armetiz.info/tag/nfs/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 Jul 2015 09:10:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head profile="http://gmpg.org/xfn/11">
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	
+	<title>NFS | Armetiz</title>
+	
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+	
+		
+	
+	<link rel="stylesheet" href="../../wp-content/themes/elogix/style.css" type="text/css" />
+	<link rel="stylesheet" href="../../wp-content/themes/elogix/framework/css/responsive.css" type="text/css" />
+	
+	<link rel="pingback" href="../../xmlrpc.php" />
+
+	
+<!-- All in One SEO Pack 2.2.6.2 by Michael Torbert of Semper Fi Web Design[291,318] -->
+<meta name="keywords"  content="administration,centos,configuration,linux,nfs,problème,selinux" />
+<meta name="robots" content="noindex,follow" />
+
+<link rel="canonical" href="" />
+<!-- /all in one seo pack -->
+<link rel="alternate" type="application/rss+xml" title="Armetiz &raquo; Feed" href="../../feed/" />
+<link rel="alternate" type="application/rss+xml" title="Armetiz &raquo; Comments Feed" href="../../comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Armetiz &raquo; NFS Tag Feed" href="feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.armetiz.info\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.2"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='codecolorer-css'  href='../../wp-content/plugins/codecolorer/codecolorere2dc.css?ver=0.9.9' type='text/css' media='screen' />
+<script type='text/javascript' src='../../wp-content/themes/elogix/framework/js/jquery97e1.js?ver=1.7'></script>
+<script type='text/javascript' src='../../wp-content/themes/elogix/framework/js/jquery.flexslider5152.js?ver=1.0'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var staticrandomposts = {"SRP_Loading":"Loading...","SRP_Refresh":"Refresh...","SRP_AjaxUrl":"http:\/\/www.armetiz.info\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../wp-content/plugins/static-random-posts-widget/js/static-random-posts68b3.js?ver=1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc0db0.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.2.2" />
+<script src='http://hosting.armetiz.info/?dm=9ce8d0fb011e1e4ec643ac563c43caf5&amp;action=load&amp;blogid=6&amp;siteid=1&amp;t=242507516&amp;back=http%3A%2F%2Fwww.armetiz.info%2Ftag%2Fnfs%2F' type='text/javascript'></script>	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+	
+	<style>
+	
+	
+#logo{margin-top:45px!important}
+
+a:hover, .post-entry h2 a:hover{color:#80B600}
+
+#contactform #submit:hover{background-color:#80B600}
+
+::-moz-selection{background-color:#80B600}
+.::selection{background-color:#80B600}
+
+.color-hr{background:#80B600}
+
+#infobar{background:#80B600}
+
+#infobar .openbtn{background-color:#80B600}
+
+#infobar2{background-color:#80B600}
+
+#nav ul li a:hover{color:#80B600; border-color:#80B600}
+
+#nav ul li.current-menu-item a, 
+#nav ul li.current-page-ancestor a, 
+#nav ul li.current-menu-ancestor a{border-color:#80B600; background-color:#80B600; color:#80B600}
+
+#nav ul li.current-menu-item ul li a:hover, 
+#nav ul li.current-page-ancestor ul li a:hover, 
+#nav ul li.current-menu-ancestor ul li a:hover{color:#80B600!important}
+
+#nav ul.sub-menu{border-color:#80B600}
+
+#latestposts .entry a.readmore{color:#80B600}
+
+#latestwork .entry:hover{border-color:#80B600}
+#latestwork .entry:hover h4 a{color:#80B600}
+
+#latestwork .entry:hover img{border-color:#80B600}
+
+a.work-carousel-prev:hover{background-color:#80B600}
+
+a.work-carousel-next:hover{background-color:#80B600}
+
+.post-thumb a:hover{border-color:#80B600}
+
+.big-post-thumb img{border-color:#80B600}
+
+.post-entry a.readmore{color:#80B600}
+.post-entry a.readmore:hover{background-color:#80B600}
+
+.meta a:hover{color:#80B600}
+
+.navigation a:hover{color:#80B600}
+
+a#cancel-comment-reply-link{color:#80B600}
+
+#commentform #submit:hover{background-color:#80B600}
+.posts-prev a:hover, .posts-next a:hover{background-color:#80B600}
+
+#filters li a:hover{color:#80B600}
+
+.work-item:hover{background-color:#fff; border-color:#80B600}
+.work-item:hover h3 a{color:#80B600}
+
+.work-item:hover img{border-color:#80B600}
+
+#sidebar .widget_nav_menu li.current-menu-item a{color:#80B600!important}
+
+#sidebar a:hover{color:#80B600}
+
+#breadcrumb a:hover{color:#80B600}
+
+#lasttweet{background-color:#80B600}
+
+.plan.featured{border-color:#80B600}
+.pricing-table .plan.featured:last-child{border-color:#80B600}
+
+.plan.featured h3{background-color:#80B600}
+
+.plan.featured .price{background-color:#80B600}
+
+.toggle .title:hover{color:#80B600}
+.toggle .title.active{color:#80B600}
+
+ul.tabNavigation li a.active{ color:#80B600;  border-bottom:1px solid #fff;  border-top:1px solid #80B600}
+
+ul.tabNavigation li a:hover{color:#80B600}
+
+.button{ background-color:#80B600}
+
+#home-slider .flex-control-nav li a:hover{background:#80B600}
+#home-slider .flex-control-nav li a.active{background:#80B600}
+
+.accordion .title.active a{color:#80B600!important}
+
+#latestposts .entry a.readmore:hover{background-color:#80B600}
+
+.post-entry h2 a:hover, .search-result h2 a:hover, .work-detail-description a:hover{color:#80B600}
+
+.entry a {
+  color: #80B600;
+}
+@media only screen and (max-width: 767px) {
+	#header{
+		border-top:6px solid #80B600;
+	}
+}
+
+	
+	</style>
+    
+</head>
+
+<body class="archive tag tag-nfs tag-433">
+	
+			
+			
+		
+							    
+			    		<div id="background" style="background-image:url(http://hosting.armetiz.info/armetiz/files/2012/07/bg1-300x23711.png); background-position: top left; background-repeat: repeat;"></div>
+			    
+			      
+		
+	 
+	
+	<div id="wrap">
+		
+					<div id="infobar" class="showit">
+				<a href="http://www.tourlourat.com/cv/francais.html">CV Ingénieur Informatique</a> - <a href="http://www.tourlourat.com/cv/english.html">IT Engineer Resume</a>				<div class="openbtn cursor">Open</div>
+				<div class="closebtn">X</div>
+			</div>
+		
+		<div id="header" class="clearfix">
+
+			<div id="logo"><a href="../../">
+				            		Armetiz            				</a></div>
+			
+			<div id="slogan">Thomas Tourlourat &#8211; Ingénieur Informatique, CEO @Wozbe.com			</div>
+			
+			<div id="social" class="clearfix">
+				<ul>
+											<li class="twitter"><a href="http://twitter.com/armetiz" target="_blank" title="Twitter">
+							Twitter	
+						</a></li>
+																<li class="facebook"><a href="https://www.facebook.com/thomastourlourat" target="_blank" title="Facebook">
+							Facebook						</a></li>
+																																									<li class="linkedin"><a href="http://fr.linkedin.com/in/tourlourat" target="_blank" title="LinkedIn">
+							LinkedIn						</a></li>
+														</ul>
+			</div>
+			
+		</div>
+		
+		<div id="nav" class="clearfix">
+			<div class="menu-default-container"><ul id="menu-default" class="menu"><li id="menu-item-2573" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-2573"><a title="Accueil" href="../../">Accueil</a></li>
+<li id="menu-item-3204" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3204"><a>Thèmes</a>
+<ul class="sub-menu">
+	<li id="menu-item-2575" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2575"><a href="../../category/systeme/">Système</a></li>
+	<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../../category/programmation/">Programmation</a></li>
+	<li id="menu-item-2574" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2574"><a href="../../category/livres/">Livres</a></li>
+	<li id="menu-item-3205" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3205"><a href="../../category/aeronautique-2/">Aéronautique</a></li>
+</ul>
+</li>
+<li id="menu-item-2577" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2577"><a href="http://www.turnaway.fr/">Infogérance</a></li>
+<li id="menu-item-3529" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3529"><a href="http://anowis-formations.com/">Formations</a></li>
+<li id="menu-item-3355" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3355"><a href="http://wozbe.com/">Prestations</a>
+<ul class="sub-menu">
+	<li id="menu-item-3357" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3357"><a href="http://wozbe.com/fr/skills">Développement</a></li>
+	<li id="menu-item-3358" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3358"><a href="http://wozbe.com/fr/skills">Infrastructure</a></li>
+	<li id="menu-item-3359" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3359"><a href="http://wozbe.com/fr/skills">Architecture &#038; DevOps</a></li>
+	<li id="menu-item-3356" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3356"><a href="http://wozbe.com/fr/references">Réferences</a></li>
+</ul>
+</li>
+<li id="menu-item-2572" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2572"><a title="CV Ingénieur Informatique" href="http://www.tourlourat.com/cv/francais.html">CV</a></li>
+<li id="menu-item-2677" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2677"><a title="Contact" href="../../contact/">Contact</a></li>
+</ul></div>			<div class="clear"></div>
+		</div>
+
+
+				
+		<div id="page" class="border-top clearfix">
+
+		<div class="color-hr2"></div>
+
+		<div id="content-part">
+
+						
+				<div id="post-2197" class="clearfix post-2197 post type-post status-publish format-standard hentry category-linux-systeme tag-administration tag-centos tag-configuration tag-linux-systeme tag-nfs tag-probleme tag-selinux">
+		
+			<div class="post-thumb">
+									<a href="../../centos-6-apache-nfs/"><img src="../../wp-content/themes/elogix/framework/images/no-thumb.png" /></a>
+							</div>
+			
+			<div class="post-entry">
+				<h2><a href="../../centos-6-apache-nfs/">CentOS 6 &#8211; Apache &amp; NFS</a></h2>
+	
+				<div class="meta">
+					Posted on <strong>April 19th, 2012</strong> · Posted in <a href="../../category/systeme/linux-systeme/" rel="category tag">Linux</a>				</div>
+	
+				<div class="entry">
+					<p>SELinux est installé et activé par défaut sur les installations CentOS 6. Pour mettre en place une infrastructure Web éclatée, j&#8217;ai choisis de mettre en place un serveur NFS qui.. <a href="../../centos-6-apache-nfs/" class="readmore">read more</a></p>
+				</div>
+
+			</div>
+
+		</div>
+
+			
+			<div class="navigation clearfix">
+	<div class="prev-posts"></div>
+	<div class="next-posts"></div>
+</div>			
+		</div>		
+			
+		
+
+	
+	<div id="sidebar" class="sidebar-right">
+		<div id="text-7" class="widget widget_text">			<div class="textwidget"><div style="text-align: center">
+I'm CEO - <a href="http://wozbe.com/">@Wozbe</a><br />
+<a href="http://wozbe.com/"><img width="100" height="100" src="http://wozbe.com/bundles/app/images/logo-wozbe-letter.png" /></a>
+</div></div>
+		</div><div id="text-10" class="widget widget_text">			<div class="textwidget"><div style="text-align: center">
+Expert at <a href="http://1cup.io/">1Cup.io</a><br />
+<a href="http://1cup.io/"><img width="160" height="99" src="http://hosting.armetiz.info/armetiz/files/2014/10/1cupexpert.png" /></a>
+</div></div>
+		</div><div id="text-9" class="widget widget_text">			<div class="textwidget"><div style="text-align: center">
+Team member of<br />
+<a href="http://thebigbrainscompany.com/"><img width="160" height="160" src="https://0.gravatar.com/avatar/0864eef93c9c491ce6039181f6b14371?r=x&amp;s=160" /></a>
+</div></div>
+		</div><div id="search-2" class="widget widget_search"><form method="get" id="searchform" action="http://www.armetiz.info/">
+	<fieldset>
+		<input type="text" name="s" id="s" value="To search type and hit enter" onfocus="if(this.value=='To search type and hit enter')this.value='';" onblur="if(this.value=='')this.value='To search type and hit enter';" />
+	</fieldset>
+</form></div><div id="text-3" class="widget widget_text">			<div class="textwidget"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-9960742798574490";
+/* 215x300 */
+google_ad_slot = "9982555711";
+google_ad_width = 200;
+google_ad_height = 200;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+		</div><div id="text-8" class="widget widget_text"><h2>@armetiz</h2>			<div class="textwidget"><a class="twitter-timeline" href="https://twitter.com/armetiz" data-widget-id="362113985643962369">Tweets by @armetiz</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+		</div><div id="staticrandomposts-2" class="widget widget_staticrandomposts"><h2>Random Posts</h2><ul class='static-random-posts' id='static-random-posts-2'><li><a href='../../apolline-leon-la-sorciere-des-tuileries/' title='Apolline &amp; Léon, la sorcière des Tuileries'>Apolline &amp; Léon, la sorcière des Tuileries</a></li>
+<li><a href='../../iphone-camera-espace/' title='Filmer l&#039;espace avec un iPhone et quelques ficelles'>Filmer l&#039;espace avec un iPhone et quelques ficelles</a></li>
+<li><a href='../../fresque-chronologique-20/' title='Fresque chronologique'>Fresque chronologique</a></li>
+<li><a href='../../as3-redimensionner-swf-charger/' title='AS3 - Redimensionner un SWF chargé'>AS3 - Redimensionner un SWF chargé</a></li>
+<li><a href='../../migration-1and1-vers-abergement/' title='Migration 1and1 vers Abergement'>Migration 1and1 vers Abergement</a></li>
+</ul><br /><a href='../../wp-admin/admin-ajax83c1.html?action=refreshstatic&amp;number=2&amp;name=widget_staticrandomposts&amp;_wpnonce=b5d6c894d0' class='static-refresh'>Refresh...</a></div><div id="tag_cloud-2" class="widget widget_tag_cloud"><h2>Tags</h2><div class="tagcloud"><a href='../actionscript/' class='tag-link-62' title='9 topics' style='font-size: 12.529411764706pt;'>ActionScript</a>
+<a href='../adobe/' class='tag-link-65' title='18 topics' style='font-size: 18.294117647059pt;'>Adobe</a>
+<a href='../air/' class='tag-link-34' title='8 topics' style='font-size: 11.5pt;'>AIR</a>
+<a href='../android-systeme/' class='tag-link-35' title='5 topics' style='font-size: 8pt;'>Android</a>
+<a href='../animation/' class='tag-link-79' title='5 topics' style='font-size: 8pt;'>Animation</a>
+<a href='../apache/' class='tag-link-82' title='6 topics' style='font-size: 9.4411764705882pt;'>Apache</a>
+<a href='../application/' class='tag-link-88' title='6 topics' style='font-size: 9.4411764705882pt;'>Application</a>
+<a href='../astuce/' class='tag-link-95' title='8 topics' style='font-size: 11.5pt;'>Astuce</a>
+<a href='../centos/' class='tag-link-131' title='10 topics' style='font-size: 13.352941176471pt;'>CentOS</a>
+<a href='../compilation/' class='tag-link-154' title='9 topics' style='font-size: 12.529411764706pt;'>Compilation</a>
+<a href='../configuration/' class='tag-link-163' title='5 topics' style='font-size: 8pt;'>Configuration</a>
+<a href='../conseils/' class='tag-link-165' title='6 topics' style='font-size: 9.4411764705882pt;'>Conseils</a>
+<a href='../debian/' class='tag-link-188' title='10 topics' style='font-size: 13.352941176471pt;'>Debian</a>
+<a href='../dns/' class='tag-link-212' title='5 topics' style='font-size: 8pt;'>DNS</a>
+<a href='../drupal/' class='tag-link-8' title='5 topics' style='font-size: 8pt;'>Drupal</a>
+<a href='../developpement/' class='tag-link-201' title='8 topics' style='font-size: 11.5pt;'>Développement</a>
+<a href='../elearning/' class='tag-link-9' title='9 topics' style='font-size: 12.529411764706pt;'>Elearning</a>
+<a href='../entrepreneur/' class='tag-link-238' title='5 topics' style='font-size: 8pt;'>Entrepreneur</a>
+<a href='../liens-flash/' class='tag-link-42' title='28 topics' style='font-size: 22pt;'>Flash</a>
+<a href='../flex/' class='tag-link-43' title='10 topics' style='font-size: 13.352941176471pt;'>Flex</a>
+<a href='../formation/' class='tag-link-272' title='7 topics' style='font-size: 10.470588235294pt;'>Formation</a>
+<a href='../framework/' class='tag-link-10' title='11 topics' style='font-size: 14.176470588235pt;'>Framework</a>
+<a href='../google/' class='tag-link-289' title='14 topics' style='font-size: 16.235294117647pt;'>google</a>
+<a href='../http/' class='tag-link-308' title='8 topics' style='font-size: 11.5pt;'>HTTP</a>
+<a href='../installation/' class='tag-link-335' title='5 topics' style='font-size: 8pt;'>Installation</a>
+<a href='../iphone/' class='tag-link-350' title='6 topics' style='font-size: 9.4411764705882pt;'>iPhone</a>
+<a href='../javascript/' class='tag-link-44' title='7 topics' style='font-size: 10.470588235294pt;'>Javascript</a>
+<a href='../konbini-vie-professionnelle/' class='tag-link-45' title='5 topics' style='font-size: 8pt;'>Konbini</a>
+<a href='../libre/' class='tag-link-377' title='13 topics' style='font-size: 15.617647058824pt;'>Libre</a>
+<a href='../linux-systeme/' class='tag-link-46' title='17 topics' style='font-size: 17.882352941176pt;'>Linux</a>
+<a href='../livre/' class='tag-link-385' title='11 topics' style='font-size: 14.176470588235pt;'>Livre</a>
+<a href='../lyon/' class='tag-link-393' title='9 topics' style='font-size: 12.529411764706pt;'>Lyon</a>
+<a href='../musique/' class='tag-link-17' title='5 topics' style='font-size: 8pt;'>Musique</a>
+<a href='../mysql/' class='tag-link-427' title='5 topics' style='font-size: 8pt;'>MySQL</a>
+<a href='../nodejs/' class='tag-link-438' title='8 topics' style='font-size: 11.5pt;'>NodeJS</a>
+<a href='../php-programmation/' class='tag-link-49' title='9 topics' style='font-size: 12.529411764706pt;'>PHP</a>
+<a href='../probleme/' class='tag-link-496' title='6 topics' style='font-size: 9.4411764705882pt;'>Problème</a>
+<a href='../programmation/' class='tag-link-19' title='7 topics' style='font-size: 10.470588235294pt;'>Programmation</a>
+<a href='../projet/' class='tag-link-500' title='9 topics' style='font-size: 12.529411764706pt;'>Projet</a>
+<a href='../serveur/' class='tag-link-553' title='18 topics' style='font-size: 18.294117647059pt;'>Serveur</a>
+<a href='../systeme/' class='tag-link-26' title='7 topics' style='font-size: 10.470588235294pt;'>Système</a>
+<a href='../securite/' class='tag-link-22' title='14 topics' style='font-size: 16.235294117647pt;'>Sécurité</a>
+<a href='../video/' class='tag-link-28' title='25 topics' style='font-size: 20.970588235294pt;'>Video</a>
+<a href='../web/' class='tag-link-30' title='6 topics' style='font-size: 9.4411764705882pt;'>Web</a>
+<a href='../windows/' class='tag-link-31' title='9 topics' style='font-size: 12.529411764706pt;'>Windows</a></div>
+</div>	</div>
+
+</div>
+
+
+<div id="footerwrap">		
+		<div id="breadcrumb">
+			<a href="../../">Armetiz</a>		</div>
+		
+		
+								<div id="lasttweet">
+				<div id="status"></div>
+			</div>
+							
+		
+		<div id="footer" class="clearfix">
+			
+			<div id="text-4" class="widget widget_text col-4"><h2>Informations</h2>			<div class="textwidget">Thomas Tourlourat<br />
+Lyon, France<br />
+<br />
+Téléphone: <a href="tel:+33626525698">+33 6 26 52 56 98</a><br />
+Email: <a href="mailto:thomas@tourlourat.com">thomas@tourlourat.com</a><br />
+<br />
+Consultant IT  @<a href="http://wozbe.com/">wozbe.com</a><br />
+<br />
+<div style="text-align: center">
+<a href="http://wozbe.com/"><img width="100" height="100" src="http://wozbe.com/bundles/app/images/logo-wozbe-letter.png" /></a>
+</div></div>
+		</div><div id="linkcat-657" class="widget widget_links col-4"><h2>Social Network</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="http://www.amazon.fr/registry/wishlist/2EUSMIX86RN1F" target="_blank">Amazon Whislist</a></li>
+<li><a href="http://www.deezer.com/fr/profile/1674910" rel="me" target="_blank">Deezer</a></li>
+<li><a href="http://delicious.com/Armetiz" rel="me" target="_blank">Delicious</a></li>
+<li><a href="https://github.com/armetiz" rel="me" target="_blank">Github</a></li>
+<li><a href="http://www.linkedin.com/in/tourlourat" rel="me">LinkedIn</a></li>
+<li><a href="http://www.netvibes.com/thomastourlourat" rel="me">Netvibes</a></li>
+<li><a href="http://twitter.com/armetiz" rel="me" target="_blank">Twitter</a></li>
+<li><a href="http://fr.viadeo.com/fr/profile/thomas.tourlourat" rel="me" target="_blank">Viadeo</a></li>
+
+	</ul>
+</div>
+<div id="recent-comments-3" class="widget widget_recent_comments col-4"><h2>Commentaires</h2><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='http://www.poulailler.org/' rel='external nofollow' class='url'>Paul Edmond</a></span> on <a href="../../semaine-de-revision-atpl-iaag/#comment-1152">Semaine de révision ATPL à l&#8217;IAAG</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://philippesimard.ca/' rel='external nofollow' class='url'>philippe</a></span> on <a href="../../iframe-responsive-design/#comment-1148">iFrame &#038; Responsive Design</a></li><li class="recentcomments"><span class="comment-author-link">sam</span> on <a href="../../windows-7-pas-acces-internet/#comment-1112">Windows 7 &#8211; Pas d&#8217;accès Internet</a></li><li class="recentcomments"><span class="comment-author-link">Cedrick Oka</span> on <a href="../../node-js-mise-production-simple/#comment-1080">NodeJS &#8211; Mise en production</a></li><li class="recentcomments"><span class="comment-author-link">fab</span> on <a href="../../desactiver-wifi-freebox-sdk/#comment-1063">Désactiver le WiFi de la Freebox à certaines heures</a></li></ul></div><div id="text-6" class="widget widget_text col-4"><h2>Products</h2>			<div class="textwidget"><ul>
+<li><a href="http://wozbe.com/">Consulting</a></li>
+<li><a href="http://anowis-formations.com/">Formations</a></li>
+<li><a href="http://lextend.com/">Lextend - Avocats</a></li>
+<li><a href="http://1cupexpert.com/">1CupExpert</a></li>
+</ul>
+<br />
+<br />
+<h2>Thèmes</h2>
+<ul>
+<li>Haut Disponibilité</li>
+<li>Performance</li>
+<li>Temps réel</li>
+</ul></div>
+		</div>			
+		</div>
+		<div id="copyright">
+			&copy; Copyright 2015 Armetiz / WordPress Theme by <a href="http://hellominti.com/">minti</a>
+			<div id="back-to-top">
+				<a href="#wrap"><img src="../../wp-content/themes/elogix/framework/images/top.png" alt="top" width="18" height="16" /></a>
+			</div>
+		</div>
+		
+
+</div>
+
+</div>
+	
+	<link rel='stylesheet' id='prettyphoto_css-css'  href='../../wp-content/themes/elogix/framework/js/prettyPhoto/css/prettyPhoto3a05.css?ver=4.2.2' type='text/css' media='all' />
+<script type='text/javascript' src='../../wp-content/themes/elogix/framework/js/jquery.easing5152.js?ver=1.0'></script>
+<script type='text/javascript' src='../../wp-content/themes/elogix/framework/js/selectivizr5152.js?ver=1.0'></script>
+<script type='text/javascript' src='../../wp-content/themes/elogix/framework/js/mediaqueries5152.js?ver=1.0'></script>
+<script type='text/javascript' src='../../wp-content/themes/elogix/framework/js/superfish5152.js?ver=1.0'></script>
+<script type='text/javascript' src='../../wp-content/themes/elogix/framework/js/jquery.mobilemenu5152.js?ver=1.0'></script>
+<script type='text/javascript' src='../../wp-content/themes/elogix/framework/js/jquery.prettyPhoto5152.js?ver=1.0'></script>
+<script type='text/javascript' src='../../wp-content/themes/elogix/framework/js/scripts5152.js?ver=1.0'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpAjax = {"noPerm":"You do not have permission to do that.","broken":"An unidentified error has occurred."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../wp-includes/js/wp-ajax-response.min3a05.js?ver=4.2.2'></script>
+	
+    <script>
+	   
+	   $(document).ready(function() {
+  
+		    // set your twitter id
+		    		    var user = 'armetiz';
+		      
+		    // using jquery built in get json method with twitter api, return only one result
+		    $.getJSON('http://api.twitter.com/1/statuses/user_timeline/' + user + '.json?count=2&callback=?', function(data)      {
+		          
+		        // result returned
+		        var tweet = data[0].text;
+		      
+		        // process links and reply
+		        tweet = tweet.replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig, function(url) {
+		            return '<a href="'+url+'" target="_blank">'+url+'</a>';
+		        }).replace(/B@([_a-z0-9]+)/ig, function(reply) {
+		            return  reply.charAt(0)+'<a href="http://twitter.com/%27+reply.substring%281%29+%27">'+reply.substring(1)+'</a>';
+		        });
+		      
+		        // output the result
+		        $("#lasttweet").html(tweet);
+		    });
+		      
+		});
+	    
+    </script>
+	
+	<script>
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3801711-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>	
+</body>
+
+
+<!-- Mirrored from www.armetiz.info/tag/nfs/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 Jul 2015 09:10:35 GMT -->
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 14/19 queries in 0.012 seconds using apc
+Object Caching 1068/1071 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:09:36 by W3 Total Cache -->

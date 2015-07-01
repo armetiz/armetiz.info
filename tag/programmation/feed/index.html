@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Programmation</title>
+	<atom:link href="http://www.armetiz.info/tag/programmation/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Désactiver le WiFi de la Freebox à certaines heures</title>
+		<link>http://www.armetiz.info/desactiver-wifi-freebox-sdk/</link>
+		<comments>http://www.armetiz.info/desactiver-wifi-freebox-sdk/#comments</comments>
+		<pubDate>Tue, 09 Oct 2012 06:53:12 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Cron]]></category>
+		<category><![CDATA[Domotique]]></category>
+		<category><![CDATA[Freebox]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[npm]]></category>
+		<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Projet]]></category>
+		<category><![CDATA[SDK]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2745</guid>
+		<description><![CDATA[Je viens de sortir un SDK &#8211; short edition &#8211; sous NodeJS pour la Freebox: node-freebox-sdk. Actuellement, il n&#8217;y a que la gestion du wifi de disponible. Mon objectif étant.. <a href="http://www.armetiz.info/desactiver-wifi-freebox-sdk/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Je viens de sortir un SDK &#8211; short edition &#8211; sous NodeJS pour la Freebox: <a href="https://github.com/armetiz/node-freebox-sdk">node-freebox-sdk</a>.</p>
+<p>Actuellement, il n&#8217;y a que la gestion du wifi de disponible.<br />
+Mon objectif étant de pouvoir <strong>activer / désactiver le WiFi</strong> de notre domicile à certaines heures.</p>
+<p>Sur <a href="http://linuxfr.org/forums/programmationshell/posts/activerd%C3%A9sactiver-le-wifi-dune-freebox-v6-depuis-le-r%C3%A9seau-local">linuxfr.org</a> &#8211; 404 : Copier sur Github : <a href="https://github.com/armetiz/bash-freebox-wifi-manager/blob/master/freebox_wifi.sh">bash-freebox-wifi-manager</a> &#8211; , quelqu&#8217;un a rendu disponible une solution pour faire cela en utilisant le shell &#038; curl.<br />
+Cette solution fonctionne très bien, mais je souhaitais développer un peu avec <a href="http://nodejs.org/">NodeJS</a>.</p>
+<p>Voyons comment mettre en place la solution NodeJS avec une <a href="http://fr.wikipedia.org/wiki/Crontab">tâche planifiée</a>.</p>
+<p>Nous allons commencer par installer le SDK Freebox via npm.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">npm <span style="color: #c20cb9; font-weight: bold;">install</span> freebox-sdk</div></td></tr></tbody></table></div>
+<p>Ensuite, nous allons créer l&#8217;application <strong>/home/john.doe/freebox-wifi-manager</strong></p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #003366; font-weight: bold;">var</span> Freebox <span style="color: #339933;">=</span> require<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;freebox-sdk&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #003366; font-weight: bold;">var</span> freebox <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">new</span> Freebox<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; password<span style="color: #339933;">:</span> <span style="color: #3366CC;">&quot;&quot;</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; wifiChannel<span style="color: #339933;">:</span> <span style="color: #CC0000;">11</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; wifiHtMode<span style="color: #339933;">:</span> <span style="color: #3366CC;">&quot;disabled&quot;</span> &nbsp;<span style="color: #006600; font-style: italic;">//disabled, 20, 40_lower, 40_upper</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #003366; font-weight: bold;">var</span> command <span style="color: #339933;">=</span> process.<span style="color: #660066;">argv</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">2</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span><br />
+<br />
+freebox.<span style="color: #660066;">on</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;connect&quot;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">switch</span> <span style="color: #009900;">&#40;</span>command<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">&quot;wifi:on&quot;</span> <span style="color: #339933;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">wifiOn</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;wifi is on&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">break</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">&quot;wifi:off&quot;</span> <span style="color: #339933;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">wifiOff</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;wifi is off&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">break</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">&quot;wifi:status&quot;</span> <span style="color: #339933;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">wifiStatus</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #000066;">status</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;wifi is &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span><span style="color: #000066;">status</span>.<span style="color: #660066;">active</span> <span style="color: #339933;">?</span> <span style="color: #3366CC;">&quot;on&quot;</span> <span style="color: #339933;">:</span> <span style="color: #3366CC;">&quot;off&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">break</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #003366; font-weight: bold;">default</span><span style="color: #339933;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;command unknown&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+freebox.<span style="color: #660066;">on</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;error&quot;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>message<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;error: &quot;</span> <span style="color: #339933;">+</span> message<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+freebox.<span style="color: #660066;">connect</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Vous pouvez tester si cela fonctionne</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager<br />
+node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager wifi:on<br />
+node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager wifi:status<br />
+node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager wifi:off<br />
+node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager wifi:status</div></td></tr></tbody></table></div>
+<p>Pour finir,<br />
+Mise en place du <a href="http://fr.wikipedia.org/wiki/Crontab">crontab</a> qui permet d&#8217;allumer le WiFi en semaine de 7h à 9h, de 17h à 00h et le weekend. Le reste du temps, le WiFi sera désactivé.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;"># m h &nbsp;dom mon dow &nbsp; command</span><br />
+<span style="color: #000000;">0</span> <span style="color: #000000;">7</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000;">1</span>-<span style="color: #000000;">6</span> node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager on<br />
+<span style="color: #000000;">0</span> <span style="color: #000000;">9</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000;">1</span>-<span style="color: #000000;">5</span> node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager off<br />
+<span style="color: #000000;">0</span> <span style="color: #000000;">17</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000;">1</span>-<span style="color: #000000;">5</span> node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager on<br />
+<span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000;">0</span>-<span style="color: #000000;">5</span> node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager off</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/desactiver-wifi-freebox-sdk/feed/</wfw:commentRss>
+		<slash:comments>28</slash:comments>
+		</item>
+		<item>
+		<title>Livre &#8211; Actionscript Developer&#8217;s Guide to Robotlegs</title>
+		<link>http://www.armetiz.info/livre-actionscript-guide-to-robotlegs/</link>
+		<comments>http://www.armetiz.info/livre-actionscript-guide-to-robotlegs/#comments</comments>
+		<pubDate>Fri, 09 Sep 2011 08:29:01 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Livres]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Formation]]></category>
+		<category><![CDATA[Learning]]></category>
+		<category><![CDATA[Livre]]></category>
+		<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Ressource]]></category>
+		<category><![CDATA[Robotlegs]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2135</guid>
+		<description><![CDATA[Actionscript Developer&#8217;s Guide to Robotlegs est le premier ouvrage sur le Framework AS3 Robotlegs, Pour ceux qui ne connaisse pas Robolegs, voici la description officielle : Robotlegs is a pure.. <a href="http://www.armetiz.info/livre-actionscript-guide-to-robotlegs/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.amazon.fr/Actionscript-Developers-Guide-Robotlegs-Hooks/dp/1449308902">Actionscript Developer&#8217;s Guide to Robotlegs</a> est le premier ouvrage sur le Framework AS3 <a href="http://www.robotlegs.org/">Robotlegs</a>,</p>
+<p>Pour ceux qui ne connaisse pas <strong>Robolegs</strong>, voici la description officielle : </p>
+<p><a href="http://www.armetiz.info/files/2011/09/robotlegs_book1.jpg"><img src="http://www.armetiz.info/files/2011/09/robotlegs_book1.jpg" alt="robotlegs book" class="alignright size-full wp-image-2139" /></a><strong>Robotlegs</strong> is a <strong>pure AS3 micro-architecture</strong> (framework) with a light footprint and limited scope.<br />
+Simply put, Robotlegs is there to help you wire your objects together. It provides the <strong>glue</strong> that your application needs to easily function in a decoupled way.<br />
+Through the use of automated metadata based dependency injection Robotlegs <strong>removes boilerplate</strong> code in an application.<br />
+By promoting loose coupling and avoiding the use of Singletons and statics in the framework Robotlegs can help you write code that is highly <strong>testable</strong>.</p>
+<h3>Description</h3>
+<p>Le livre a été écrit par deux développeurs de Robotlegs : <a href="http://www.xxcoder.net/">Stray</a> &amp; <a href="http://joelhooks.com/">Joel Hooks</a>.<br />
+Les 138 pages sont simple à lire. L&#8217;anglais est purement technique et ne sera pas une barriere à votre compréhension. Les exemples sont nombreux ainsi que les schemas qui aident énormément à la compréhension des liaisons entre les différents composants.</p>
+<h3>Les chapitres</h3>
+<ul>
+<li>Robotlegs is a lightweight framework for ActionScript</li>
+<li>The Robotlegs dream</li>
+<li>Anatomy of a Robotlegs application</li>
+<li>Automated <strong>Dependency Injection</strong></li>
+<li>The Robotlegs <strong>context in action</strong></li>
+<li>The <strong>CommandMap</strong> in action</li>
+<li><strong>Models and Services</strong> – how are they different?</li>
+<li>Connecting views with <strong>Mediators</strong></li>
+<li>Working with Robotlegs: Rich Examples</li>
+<li><strong>Testing</strong> your Robotlegs application</li>
+<li>Power-ups</li>
+<li>Appendix A: Troubleshooting tips</li>
+<li>Appendix B: Swiftsuspenders – the power behind the Robotlegs injector</li>
+</ul>
+<h3>Conclusion</h3>
+<p>Si vous avez déjà une expertise sur Robotlegs, je vous conseils malgré cela cette lecture. En effet, les 138 pages se lisent tres rapidement. De plus, la confrontation avec d&#8217;autres méthodes de travail est toujours constructive.</p>
+<p>Pour une description plus détaillée du livre, aller voir le blog de <a href="http://www.xxcoder.net/actionscript-developers-guide-to-robotlegs-done">Stray</a>.<br />
+Vous povuez l&#8217;acheter directement sur <a href="http://www.amazon.fr/Actionscript-Developers-Guide-Robotlegs-Hooks/dp/1449308902">Amazon</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/livre-actionscript-guide-to-robotlegs/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Cours informatique gratuits</title>
+		<link>http://www.armetiz.info/cours-informatique-gratuits/</link>
+		<comments>http://www.armetiz.info/cours-informatique-gratuits/#comments</comments>
+		<pubDate>Fri, 15 May 2009 18:38:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Cours]]></category>
+		<category><![CDATA[Formation]]></category>
+		<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Sécurité]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1121</guid>
+		<description><![CDATA[Ce site regroupe de nombreux supports de cours informatique portant sur divers domaines. Les cours et formations informatiques que vous pourrez trouver ici sont toutes à télécharger gratuitement et sous.. <a href="http://www.armetiz.info/cours-informatique-gratuits/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.polymorphe.org"><img src="http://www.armetiz.info/wp-content/uploads/2009/05/polymorphe.png" alt="polymorphe" width="400" height="80" class="size-full wp-image-1124" /></a></p>
+<blockquote><p>Ce site regroupe de nombreux <strong>supports de cours informatique</strong> portant sur divers domaines. Les cours et formations informatiques que vous pourrez trouver ici sont toutes à <strong>télécharger gratuitement</strong> et sous divers formats :<strong> doc, html, pdf, ps</strong>.</p></blockquote>
+<p>Après la description, voyons le contenu:</p>
+<ul>
+<li><a href="http://www.polymorphe.org/index.php?/Bases-de-donnees/Voir-categorie">Base de données</a>, 58 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Bureautique/Voir-categorie">Bureautique</a>, 9 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Calcul-Scientifique/Voir-categorie">Calcul Scientifique</a>, 12 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Conception/Voir-categorie">Conception</a>, 7 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Divers/Voir-categorie">Divers</a>, 11 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Gestion-de-l-information/Voir-categorie">Gestion de l&#8217;information</a>, 22 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Programmation/Voir-categorie">Programmation</a>, 48 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Reseaux/Voir-categorie">Réseaux</a>, 38 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Statistiques/Voir-categorie">Statistiques</a>, 8 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Securite/Voir-categorie">Sécurité</a>, 23 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Systemes-d-exploitation/Voir-categorie">Systèmes d&#8217;exploitation</a>, 28 fichiers</li>
+</ul>
+<p>Soit 264 fichiers le 15 Mai 2009. Cela ne représente pas une si grande base de documents par rapport à <a href="http://ocwfinder.com/">OpenCourseWare</a> (cf: <a href="http://fr.wikipedia.org/wiki/OpenCourseWare">Wikipédia</a>); mais quand même, tout les <strong>supports de cours sont en Françai</strong>s ce qui peut être très appréciable.</p>
+<p>PS: <a href="http://www.polymorphe.org/index.php?/component/option,com_docmanrss/id,1/lang,fr/">RSS des derniers documents</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/cours-informatique-gratuits/feed/</wfw:commentRss>
+		<slash:comments>15</slash:comments>
+		</item>
+		<item>
+		<title>Découvrir la POO avec Flash</title>
+		<link>http://www.armetiz.info/decouvrir-la-poo-avec-flash/</link>
+		<comments>http://www.armetiz.info/decouvrir-la-poo-avec-flash/#comments</comments>
+		<pubDate>Fri, 10 Oct 2008 13:58:49 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Découverte]]></category>
+		<category><![CDATA[Initiation]]></category>
+		<category><![CDATA[Tutoriel]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=419</guid>
+		<description><![CDATA[Certains graphistes n&#8217;ayant pas une formation de développeur ont quelques difficultés à utiliser la Programmation Orientée Objet sous Flash. Non pas que l&#8217;implémentation de la POO soit spécifique avec Flash,.. <a href="http://www.armetiz.info/decouvrir-la-poo-avec-flash/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Certains graphistes n&#8217;ayant pas une formation de développeur ont quelques difficultés à utiliser la <a href="http://fr.wikipedia.org/wiki/Orient%C3%A9_objet">Programmation Orientée Objet</a> sous Flash.</p>
+<p>Non pas que l&#8217;implémentation de la POO soit spécifique avec Flash, mais un graphiste n&#8217;a surement aucun intérêt à apprendre la POO sous Java, donc autant lire un tutoriel de programmation sous Flash.<br />
+De plus, le passage &#8211; certes vieux &#8211; de AS2 vers AS3 à laissé sur le carreau de nombreuses personnes.</p>
+<p>Voici un tutoriel d&#8217;initiation à la <a href="http://www.bases-as3.fr/index.php/2008/10/10/as-programmation-objet">programmation objet sous Flash</a>. Pour ceux qui n&#8217;ont jamais développer, prenez votre temps et appréhendez cet article tranquillement; pour ceux qui effectuent encore leur migration AS2 vers AS3, oubliez l&#8217;espace de votre lecture vos anciennes habitudes, et n&#8217;essayez pas de faire de comparaison.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/decouvrir-la-poo-avec-flash/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Algoritheme de déplacement circulaire bidirectionnel</title>
+		<link>http://www.armetiz.info/algoritheme-deplacement-circulaire-bidirectionnel/</link>
+		<comments>http://www.armetiz.info/algoritheme-deplacement-circulaire-bidirectionnel/#comments</comments>
+		<pubDate>Thu, 18 Sep 2008 09:55:09 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Algorithme]]></category>
+		<category><![CDATA[Deplacement]]></category>
+		<category><![CDATA[Modulo]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=290</guid>
+		<description><![CDATA[Voici un petit pense bête pour réaliser un déplacement circulaire bidirectionnel dans un tableau. 123456789/* @position : Position dans le tableau souhaitée @pointeur : Position actuel du tableau @nbEnfant :.. <a href="http://www.armetiz.info/algoritheme-deplacement-circulaire-bidirectionnel/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Voici un petit pense bête pour réaliser un déplacement circulaire bidirectionnel dans un tableau.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">/*<br />
+@position : Position dans le tableau souhaitée<br />
+@pointeur : Position actuel du tableau<br />
+@nbEnfant : Taille du tableau<br />
+*/<br />
+if (position &amp;gt;= 0)<br />
+&nbsp; &nbsp; pointeur = position % nbEnfant ;<br />
+else<br />
+&nbsp; &nbsp; pointeur = nbEnfant + (position % nbEnfant );</div></td></tr></tbody></table></div>
+<p>Edit :<br />
+La fonction ci-dessus ne semble pas fonctionnel pour les nombres négatifs.<br />
+Privilégier celle ci-dessous qui semble faire ces preuves.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">position&nbsp; &nbsp; = (position % nbChildrenDirect);<br />
+while (position &amp;lt; 0)<br />
+{<br />
+&nbsp; &nbsp; position += nbChildrenDirect;<br />
+}</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/algoritheme-deplacement-circulaire-bidirectionnel/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Animation graphique à partir d&#8217;un spectre sonore</title>
+		<link>http://www.armetiz.info/animation-a-partir-spectre-sonore/</link>
+		<comments>http://www.armetiz.info/animation-a-partir-spectre-sonore/#comments</comments>
+		<pubDate>Thu, 18 Sep 2008 08:09:52 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Processing]]></category>
+		<category><![CDATA[Animation]]></category>
+		<category><![CDATA[Graphisme]]></category>
+		<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[RadioHead]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=267</guid>
+		<description><![CDATA[Flight404 découvert très récemment par l&#8217;intermédiaire de BIT-101 à créé une animation sur le thème de RadhioHead qui mérite à être connu. L&#8217;article s&#8217;appelle Visualizing Radiohead, vous y trouverez les.. <a href="http://www.armetiz.info/animation-a-partir-spectre-sonore/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.flight404.com/blog/">Flight404</a> découvert très récemment par l&#8217;intermédiaire de <a href="http://www.bit-101.com/blog/">BIT-101</a> à créé une animation sur le thème de <strong>RadhioHead</strong> qui mérite à être connu.</p>
+<p>L&#8217;article s&#8217;appelle <a href="http://www.flight404.com/blog/wp-trackback.php?p=121">Visualizing Radiohead</a>, vous y trouverez les méthode utilisées pour effectuer les calcules graphique.</p>
+<p>PS : La vidéo contient bien sur du son, et si vous ne connaissez pas le <a href="http://www.deezer.com/#music/album/36776">dernier album</a> de <a href="http://www.deezer.com/#music/artist/399">RadioHead</a> c&#8217;est une bonne occasion pour le découvrir.</p>
+<p><a href="http://vimeo.com/935317?pg=embed&amp;sec=935317">Weird Fishes: Arpeggi</a> from <a href="http://vimeo.com/flight404?pg=embed&amp;sec=935317">flight404</a> on <a href="http://vimeo.com?pg=embed&amp;sec=935317">Vimeo</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/animation-a-partir-spectre-sonore/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Gallery2: Afficher le contenu d&#8217;un tableau, et une valeur particulière</title>
+		<link>http://www.armetiz.info/gallery2-afficher-le-contenu-dun-tableau-et-une-valeur-particuliere/</link>
+		<comments>http://www.armetiz.info/gallery2-afficher-le-contenu-dun-tableau-et-une-valeur-particuliere/#comments</comments>
+		<pubDate>Wed, 23 Apr 2008 21:01:02 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[gallery2]]></category>
+		<category><![CDATA[smarty]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=20</guid>
+		<description><![CDATA[Avec Gallery2, il peut être intéressant de pouvoir afficher le contenu d&#8217;un tableau, et d&#8217;une valeur de ce tableau. Alors qu&#8217;en php on écrit : 12print_r ($monTableau); //Affiche le contenu.. <a href="http://www.armetiz.info/gallery2-afficher-le-contenu-dun-tableau-et-une-valeur-particuliere/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Avec Gallery2, il peut être intéressant de pouvoir afficher le contenu d&#8217;un tableau, et d&#8217;une valeur de ce tableau.</p>
+<p>Alors qu&#8217;en php on écrit :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">print_r ($monTableau); //Affiche le contenu du tableau<br />
+print ($monTableau[2][3]); //Affiche la valeur de la dimension [2][3]</div></td></tr></tbody></table></div>
+<p>Avec Gallery2, et donc Smarty il faut utiliser la syntaxe suivante :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">{$monTableau|@print_r} //Affiche le contenu du tableau, avec les paires clé/valeur<br />
+{$monTableau.2.3.value} //Affiche la valeur de la dimension [2][3]</div></td></tr></tbody></table></div>
+<p>A noter que si vous voulez la clé correspondante</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">{$monTableau.2.3.key} //Affiche la clé de la dimension [2][3]</div></td></tr></tbody></table></div>
+<p>Voili voilou.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/gallery2-afficher-le-contenu-dun-tableau-et-une-valeur-particuliere/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.006 seconds using apc
+Object Caching 944/987 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:08:22 by W3 Total Cache -->

@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz</title>
+	<atom:link href="http://www.armetiz.info/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Raspberry Pi &#8211; Proxy HTTP Transparent &amp; Bridge Wifi</title>
+		<link>http://www.armetiz.info/raspberry-pi-proxy-http-transparent-bridge-wifi/</link>
+		<comments>http://www.armetiz.info/raspberry-pi-proxy-http-transparent-bridge-wifi/#comments</comments>
+		<pubDate>Sat, 29 Nov 2014 11:15:06 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Proxy]]></category>
+		<category><![CDATA[raspberry]]></category>
+		<category><![CDATA[Réseaux]]></category>
+		<category><![CDATA[squid]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3517</guid>
+		<description><![CDATA[Suite à l&#8217;installation de notre point d&#8217;accès Wifi sur le Raspberry Pi, passons à l&#8217;installation d&#8217;un serveur Proxy HTTP Transparent pour l&#8217;ensemble des clients Wifi. La distribution Raspbian propose SQUID.. <a href="http://www.armetiz.info/raspberry-pi-proxy-http-transparent-bridge-wifi/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Suite à l&#8217;installation de notre <a href="http://www.armetiz.info/raspberry-pi-point-dacces-wifi/">point d&#8217;accès Wifi sur le Raspberry Pi</a>, passons à l&#8217;installation d&#8217;un serveur <strong>Proxy HTTP Transparent</strong> pour l&#8217;ensemble des clients Wifi.</p>
+<p>La distribution Raspbian propose <strong>SQUID 2.7 stable9</strong>, attention aux différences de configuration entre les versions si vous allez piocher sur Internet.</p>
+<p>Personnellement j&#8217;utilise une clé <strong>USB montée sur le Raspberry</strong> pour stocker les fichiers cache de SQUID. N&#8217;hésitez pas à adapter la procédure à votre environnement.</p>
+<p><strong>Attention</strong>, mon Raspberry est configuré avec un bail DHCP statique IP 192.168.10.45.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get install</span> squid<br />
+<span style="color: #c20cb9; font-weight: bold;">mkdir</span> <span style="color: #000000; font-weight: bold;">/</span>mnt<span style="color: #000000; font-weight: bold;">/</span>usb<span style="color: #000000; font-weight: bold;">/</span>squid<br />
+<span style="color: #c20cb9; font-weight: bold;">chown</span> proxy:proxy <span style="color: #000000; font-weight: bold;">/</span>mnt<span style="color: #000000; font-weight: bold;">/</span>usb<span style="color: #000000; font-weight: bold;">/</span>squid<br />
+cmod <span style="color: #000000;">750</span> <span style="color: #000000; font-weight: bold;">/</span>mnt<span style="color: #000000; font-weight: bold;">/</span>usb<span style="color: #000000; font-weight: bold;">/</span>squid<br />
+<br />
+iptables <span style="color: #660033;">-t</span> nat <span style="color: #660033;">-A</span> PREROUTING <span style="color: #660033;">-i</span> br0 <span style="color: #660033;">-p</span> tcp <span style="color: #660033;">-m</span> tcp <span style="color: #660033;">--dport</span> <span style="color: #000000;">80</span> <span style="color: #660033;">-j</span> DNAT <span style="color: #660033;">--to-destination</span> 192.168.10.45:<span style="color: #000000;">3128</span></div></td></tr></tbody></table></div>
+<p>Petite note sur la partie <strong>iptables</strong>. Tous les flux TCP/80 qui entrent sur l&#8217;interface <strong>br0</strong> seront transmis à SQUID.</p>
+<p>Terminons avec la configuration <strong>SQUID</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#FILE /etc/squid/squid.conf</span><br />
+visible_hostname proxy<br />
+<br />
+acl wozbe src 192.168.10.0<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">24</span><br />
+<br />
+http_port <span style="color: #000000;">3128</span> transparent<br />
+http_access allow wozbe<br />
+http_reply_access allow wozbe<br />
+<br />
+cache_access_log none<br />
+cache_log none<br />
+cache_store_log none<br />
+<br />
+cache_dir ufs <span style="color: #000000; font-weight: bold;">/</span>mnt<span style="color: #000000; font-weight: bold;">/</span>usb<span style="color: #000000; font-weight: bold;">/</span>squid <span style="color: #000000;">1000</span> <span style="color: #000000;">16</span> <span style="color: #000000;">256</span><br />
+cache_mem <span style="color: #000000;">256</span> MB<br />
+maximum_object_size <span style="color: #000000;">10</span> MB</div></td></tr></tbody></table></div>
+<p>Les points que vous devez adapter sont le masque réseau &#8211; ici <strong>192.168.10.0/24</strong> &#8211; et le répertoire de cache &#8211; ici <strong>/mnt/usb/squid</strong>.</p>
+<p>Appliquons la configuration en relançant SQUID.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">service squid restart</div></td></tr></tbody></table></div>
+<p>Si vous avez des retours, n&#8217;hésitez pas via les commentaires.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/raspberry-pi-proxy-http-transparent-bridge-wifi/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Raspberry Pi &#8211; Point d&#8217;accès Wifi</title>
+		<link>http://www.armetiz.info/raspberry-pi-point-dacces-wifi/</link>
+		<comments>http://www.armetiz.info/raspberry-pi-point-dacces-wifi/#comments</comments>
+		<pubDate>Sat, 29 Nov 2014 10:02:57 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[access]]></category>
+		<category><![CDATA[Network]]></category>
+		<category><![CDATA[point]]></category>
+		<category><![CDATA[raspberry]]></category>
+		<category><![CDATA[wifi]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3508</guid>
+		<description><![CDATA[A la maison la Freebox est un peu isolée par rapport au salon et la connexion Wifi est très mauvaise. Voyons comme utiliser le Raspberry Pi en tant que point.. <a href="http://www.armetiz.info/raspberry-pi-point-dacces-wifi/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>A la maison la Freebox est un peu isolée par rapport au salon et la connexion Wifi est très mauvaise.</p>
+<p>Voyons comme utiliser le <strong>Raspberry Pi</strong> en tant que <strong>point d&#8217;accès WiFi</strong>.</p>
+<p>Au niveau matériel,<br />
+Cela a été réalisé avec un Raspberry Pi B+, et un dongle <a href="http://www.amazon.fr/Edimax-EW-7811UN-Nano-Adaptateur-sans/dp/B003MTTJOY/">Wifi USB Edimax</a>.</p>
+<p>Au niveau logiciel,<br />
+<a href="http://doc.ubuntu-fr.org/hostapd">Hostapd</a> a été utilisé pour créer le point d&#8217;accès Wifi. Comme la version présente dans le repository de <strong>Raspbian</strong> ne supporte par le <strong>Chipset RTL8188</strong> du dongle Edimax, nous compilerons une version adaptée par <a href="https://github.com/jenssegers">Jenssegers</a> qui en a le support.</p>
+<p>Après avoir banché le dongle USB,<br />
+Voici les étapes d&#8217;installation <strong>hostapd</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get install</span> <span style="color: #c20cb9; font-weight: bold;">gcc</span> <span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+<span style="color: #c20cb9; font-weight: bold;">wget</span> https:<span style="color: #000000; font-weight: bold;">//</span>github.com<span style="color: #000000; font-weight: bold;">/</span>jenssegers<span style="color: #000000; font-weight: bold;">/</span>RTL8188-hostapd<span style="color: #000000; font-weight: bold;">/</span>archive<span style="color: #000000; font-weight: bold;">/</span>v1.1.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-zxvf</span> v1.1.tar.gz<br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> RTL8188-hostapd-<span style="color: #000000;">1.1</span><span style="color: #000000; font-weight: bold;">/</span>hostapd<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>Maintenant,<br />
+Editons la <strong>configuration réseau</strong> pour créer un bridge entre <strong>eth0 &#038; wlan0</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#FILE /etc/network/interfaces</span><br />
+<br />
+uto lo<br />
+<br />
+iface lo inet loopback<br />
+<br />
+auto br0<br />
+iface br0 inet dhcp<br />
+bridge_ports eth0 wlan0</div></td></tr></tbody></table></div>
+<p>Passons à la configuration du <strong>point d&#8217;accès Wifi</strong>.</p>
+<div class="codecolorer-container ini blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br /></div></td><td><div class="ini codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">#FILE /etc/hostapd/hostapd.conf<br />
+<br />
+# Basic configuration<br />
+<br />
+<span style="color: #000099;">ssid</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">Wozbe</span><br />
+<span style="color: #000099;">channel</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">1</span><br />
+<span style="color: #000099;">wpa_passphrase</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">TheBigBrainsCompany</span><br />
+<br />
+<span style="color: #000099;">interface</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">wlan0</span><br />
+<span style="color: #000099;">bridge</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">br0</span><br />
+<br />
+# WPA and WPA2 configuration<br />
+<span style="color: #000099;">wmm_enabled</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">0</span><br />
+<br />
+<span style="color: #000099;">macaddr_acl</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">0</span><br />
+<span style="color: #000099;">auth_algs</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">1</span><br />
+<span style="color: #000099;">ignore_broadcast_ssid</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">0</span><br />
+<span style="color: #000099;">wpa</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">3</span><br />
+<br />
+<span style="color: #000099;">wpa_key_mgmt</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">WPA-PSK</span><br />
+<span style="color: #000099;">wpa_pairwise</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">TKIP</span><br />
+<span style="color: #000099;">rsn_pairwise</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">CCMP</span><br />
+<br />
+# Hardware configuration<br />
+<br />
+<span style="color: #000099;">driver</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">rtl871xdrv</span><br />
+<span style="color: #000099;">ieee80211n</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">1</span><br />
+<span style="color: #000099;">hw_mode</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">g</span><br />
+<span style="color: #000099;">device_name</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">RTL8192CU</span><br />
+<span style="color: #000099;">manufacturer</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">Realtek</span></div></td></tr></tbody></table></div>
+<p>Je vous laisse adapter la configuration ci-dessus en fonction de votre réseau.</p>
+<p>Ajoutons une configuration permettant le <strong>forward du traffic IPv4</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#FILE /etc/sysctl.conf</span><br />
+<br />
+net.ipv4.ip_forward=<span style="color: #000000;">1</span></div></td></tr></tbody></table></div>
+<p>Une fois l&#8217;ensemble des configurations établies,<br />
+Appliquez les configurations et lancez votre point d&#8217;accès.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sysctl <span style="color: #660033;">--system</span><br />
+service networking restart<br />
+service hostapd restart</div></td></tr></tbody></table></div>
+<p>Modifier la configuration Wifi de votre périphérique réseau et profitez du Wifi.</p>
+<p>Vous trouverez plus d&#8217;information sur les sites suivants :</p>
+<ul>
+<li><a href="http://doc.ubuntu-fr.org/hostapd">Configuration hostapd</a></li>
+<li><a href="http://jenssegers.be/blog/43/realtek-rtl8188-based-access-point-on-raspberry-pi">Installation hostapd pour Realtek RTL8188</a></li>
+</ul>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/raspberry-pi-point-dacces-wifi/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Entrepreneur, venez rencontrer un expert métier grâce à 1Cup Expert</title>
+		<link>http://www.armetiz.info/entrepreneur-venez-rencontrer-un-expert-metier-grace-a-1cupexpert/</link>
+		<comments>http://www.armetiz.info/entrepreneur-venez-rencontrer-un-expert-metier-grace-a-1cupexpert/#comments</comments>
+		<pubDate>Thu, 16 Oct 2014 11:12:13 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Entreprendre]]></category>
+		<category><![CDATA[Wozbe]]></category>
+		<category><![CDATA[1Cup]]></category>
+		<category><![CDATA[Entrepreneur]]></category>
+		<category><![CDATA[Évènement]]></category>
+		<category><![CDATA[La Cuisine Du Web]]></category>
+		<category><![CDATA[Lyon]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3498</guid>
+		<description><![CDATA[1Cup Expert est un événement à destination des entrepreneurs actuellement présent à Paris, Lyon, Aix-en-Provence, Bordeaux &#038; Montréal !  Tous les mois, une rencontre informelle et gratuite est organisée dans.. <a href="http://www.armetiz.info/entrepreneur-venez-rencontrer-un-expert-metier-grace-a-1cupexpert/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://1cup.io">1Cup Expert</a> est un événement à destination des entrepreneurs actuellement présent à Paris, Lyon, Aix-en-Provence, Bordeaux &#038; Montréal !  Tous les mois, <strong>une rencontre informelle et gratuite</strong> est organisée dans un lieu public.</p>
+<p>Sans RDV, venez rencontrer un expert <a href="http://1cup.io">1Cup Expert</a> pour échanger des problématiques que vous rencontrez dans l&#8217;execution de vos projets. Il prendra le temps d&#8217;échanger avec vous pour répondre &#8211; s&#8217;il le peut &#8211; à vos questions en <strong>vous offrant son expertise</strong>.</p>
+<p>Cela vous concerne si vous êtes un <strong>entrepreneur débutant ou aguerri</strong>, si vous avez des questions métiers, à la phase initiale de votre réflexion ou avec une startup sur le feu.</p>
+<p>L&#8217;objectif principal est <strong>d&#8217;aider les entrepreneurs</strong> dans leurs prises de décisions grâce à notre expertise. 1Cup Expert permet aussi de <strong>favoriser les rencontres, les échanges et la création de partenariats</strong> entre entrepreneurs dans une atmosphère dynamique et informelle propice à l&#8217;enrichissement d&#8217;idées.</p>
+<p>La prochaine édition aura lieu le <strong>23 Octobre</strong> tout l&#8217;après-midi à partir de 14h. <strong>Découvrez les lieux des experts ainsi que leurs domaines d&#8217;expertise sur <a href="http://1cup.io">1Cup Expert</a></strong></p>
+<p>Si vous avez envie d&#8217;apporter votre expertise, quelque soit votre domaine d&#8217;activité, <a href="mailto:contact@1cup.io">contacter l&#8217;équipe</a> qui vous accueillera avec plaisir !</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/entrepreneur-venez-rencontrer-un-expert-metier-grace-a-1cupexpert/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Jouer une animation Phaser en sens inverse</title>
+		<link>http://www.armetiz.info/reverse-phaser-animation-inverse-boucle/</link>
+		<comments>http://www.armetiz.info/reverse-phaser-animation-inverse-boucle/#comments</comments>
+		<pubDate>Wed, 17 Sep 2014 09:36:25 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Phaser]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3489</guid>
+		<description><![CDATA[Pour jouer une animation Phaser en boucle, le plus simple est de posséder une texture dont le début et la fin sont proches. Comme cela n&#8217;est pas toujours le cas,.. <a href="http://www.armetiz.info/reverse-phaser-animation-inverse-boucle/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pour jouer une animation <a href="http://phaser.io">Phaser</a> en boucle, le plus simple est de posséder une <strong>texture</strong> dont le début et la fin sont proches.</p>
+<p>Comme cela n&#8217;est pas toujours le cas, voici comment jouer votre animation dans les deux sens, ou encore &#8220;<strong>How to reverse a Phaser animation</strong>&#8221;</p>
+<h2>Première méthode, utilisant la programmation événementielle</h2>
+<p>La première méthode consiste à définir deux animations, une à l&#8217;endroit et une à l&#8217;envers. L&#8217;objectif étant de lancer l&#8217;animation <strong>forward</strong> à la fin de l&#8217;animation <strong>reverse</strong> et vice-versa.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #003366; font-weight: bold;">var</span> frameRate <span style="color: #339933;">=</span> <span style="color: #CC0000;">20</span><span style="color: #339933;">;</span><br />
+<span style="color: #003366; font-weight: bold;">var</span> <span style="color: #000066;">forward</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">sprite</span>.<span style="color: #660066;">animations</span>.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><br />
+&nbsp; &nbsp; <span style="color: #3366CC;">'forward'</span><span style="color: #339933;">,</span> <br />
+&nbsp; &nbsp; Phaser.<span style="color: #660066;">Animation</span>.<span style="color: #660066;">generateFrameNames</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'vapeur_'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">6</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'.png'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">5</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <br />
+&nbsp; &nbsp; frameRate<br />
+<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #003366; font-weight: bold;">var</span> reverse <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">sprite</span>.<span style="color: #660066;">animations</span>.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><br />
+&nbsp; &nbsp; <span style="color: #3366CC;">'reverse'</span><span style="color: #339933;">,</span> <br />
+&nbsp; &nbsp; Phaser.<span style="color: #660066;">Animation</span>.<span style="color: #660066;">generateFrameNames</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'vapeur_'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">6</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'.png'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">5</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <br />
+&nbsp; &nbsp; frameRate<br />
+<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000066;">forward</span>.<span style="color: #660066;">onComplete</span>.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">sprite</span>.<span style="color: #660066;">animations</span>.<span style="color: #660066;">play</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'reverse'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+reverse.<span style="color: #660066;">onComplete</span>.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">sprite</span>.<span style="color: #660066;">animations</span>.<span style="color: #660066;">play</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'forward'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">sprite</span>.<span style="color: #660066;">animations</span>.<span style="color: #660066;">play</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'forward'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<h2>Deuxième méthode, simple &#038; recommandée</h2>
+<p>La deuxième méthode, beaucoup plus simple et que je recommande, consiste à assembler deux listes de <strong>frames</strong>: l&#8217;une correspondant à l&#8217;animation à l&#8217;endroit, et l&#8217;autre correspondant à l&#8217;animation à l&#8217;envers.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #003366; font-weight: bold;">var</span> frameRate <span style="color: #339933;">=</span> <span style="color: #CC0000;">20</span><span style="color: #339933;">;</span><br />
+<span style="color: #003366; font-weight: bold;">var</span> loop <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">sprite</span>.<span style="color: #660066;">animations</span>.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><br />
+&nbsp; &nbsp; <span style="color: #3366CC;">'default'</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; Phaser.<span style="color: #660066;">Animation</span>.<span style="color: #660066;">generateFrameNames</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'vapeur_'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">6</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'.png'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">5</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">concat</span><span style="color: #009900;">&#40;</span>Phaser.<span style="color: #660066;">Animation</span>.<span style="color: #660066;">generateFrameNames</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'vapeur_'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">6</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'.png'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">5</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; frameRate<span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; loop<br />
+<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/reverse-phaser-animation-inverse-boucle/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Blend Web Mix &#8211; Lyon !</title>
+		<link>http://www.armetiz.info/blend-web-mix-lyon/</link>
+		<comments>http://www.armetiz.info/blend-web-mix-lyon/#comments</comments>
+		<pubDate>Fri, 04 Oct 2013 10:30:23 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Wozbe]]></category>
+		<category><![CDATA[Business]]></category>
+		<category><![CDATA[Conférence]]></category>
+		<category><![CDATA[Lyon]]></category>
+		<category><![CDATA[Rencontre]]></category>
+		<category><![CDATA[Social]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3443</guid>
+		<description><![CDATA[Cela fait pas mal de temps que j&#8217;entends dire que Lyon est la ville du numérique, et avec cet événement le Blend Web Mix ne fait que rajouter une couche.. <a href="http://www.armetiz.info/blend-web-mix-lyon/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cela fait pas mal de temps que j&#8217;entends dire que Lyon est la ville du numérique, et avec cet événement le <a href="http://www.blendconference.com/">Blend Web Mix</a> ne fait que rajouter une couche à cette idée !</p>
+<p>Le <strong>1 et le 2 Octobre 2013</strong> a eu lieu le <a href="http://www.blendconference.com/">Blend Web Mix</a> organisé par la <a href="http://www.lacuisineduweb.com/">Cuisine du Web</a>.</p>
+<p>L&#8217;événement se voulait mixte, nous avons donc eu droit à des conférences <strong>Tech, Marketing, Business, Recherche</strong> etc..<br />
+Bref, une vraie réussite !</p>
+<p>Coté humain,<br />
+J&#8217;ai rencontré plusieurs personnes très intéressantes dont une partie de l&#8217;équipe de <a href="http://www.thewalkingweb.fr/">The Walking Web</a> et de <a href="http://www.gang-corporate.com/">Gang Corp</a>.<br />
+Des mecs sympas avec <strong>une motivation débordante</strong> !<br />
+Et coté motivation, ce genre d&#8217;événement est une vraie source. Chez <a href="http://wozbe.com">Wozbe</a> l&#8217;envie de bosser est à son top !</p>
+<p>Pour continuer un peu votre lecture, vous pouvez voir comment <a href="http://www.lopinion.fr/blog/hotspot/grand-lyon-tisse-toile-seduire-entrepreneurs-web-4622">Le Grand Lyon tisse sa toile pour séduire les entrepreneurs du Web</a></p>
+<p><a href="http://www.armetiz.info/files/2013/10/Blend.jpg"><img src="http://www.armetiz.info/files/2013/10/Blend.jpg" alt="Blend" width="650" height="234" class="aligncenter size-full wp-image-3455" /></a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/blend-web-mix-lyon/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Semaine de révision ATPL à l&#8217;IAAG</title>
+		<link>http://www.armetiz.info/semaine-de-revision-atpl-iaag/</link>
+		<comments>http://www.armetiz.info/semaine-de-revision-atpl-iaag/#comments</comments>
+		<pubDate>Fri, 13 Sep 2013 06:00:16 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Aéronautique]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3413</guid>
+		<description><![CDATA[Cela fait plusieurs mois que j&#8217;ai le projet de passer la formation de pilote de ligne théorique, plus connue sous le nom technique de ATPL Théorique. Les révisions ont pour.. <a href="http://www.armetiz.info/semaine-de-revision-atpl-iaag/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cela fait plusieurs mois que j&#8217;ai le projet de passer la formation de pilote de ligne théorique, plus connue sous le nom technique de <a href="http://fr.wikipedia.org/wiki/Licence_de_pilote_de_ligne">ATPL Théorique</a>.<br />
+Les révisions ont pour moi réellement commencé début Avril après <a href="http://www.armetiz.info/compte-rendu-examen-ppl/">l&#8217;obtention de mon PPL</a>.</p>
+<p>Comme tout apprenant à la formation <strong>ATPL Théorique à distance</strong>, deux semaines de révisions sur site sont nécessaires.<br />
+J&#8217;ai donc passé une première semaine à Merville, à quelques kilomètre de Lille, dans les locaux de <a href="http://www.amaurydelagrange.com/">l&#8217;IAAG</a> avec cinq autres apprenants.</p>
+<p>Bien que chargée, la semaine a été extrêmement agréable. Pouvoir être en immersion dans le monde aéronautique a été pour moi bénéfique, car une vraie <strong>source de motivation</strong>. </p>
+<p>La chose la plus délicate a été de retourner 7h par jour sur une chaise face à un tableau, et être 100% disponible pour suivre les cours.</p>
+<p>Je ne connais pas les autres écoles de formation ATPL, mais les intervenants à l&#8217;IAAG ont été <strong>très professionnels et rigoureux</strong>.<br />
+Entre deux cours, nous avons été visiter les hangars où sont stockés pièces et avions servant régulièrement aux apprentis mécaniciens. Voir et toucher un <strong>réacteur de Concorde</strong> est assez impressionnant !</p>
+<p>Pour l&#8217;hébergement,<br />
+Nous avons logé au &#8220;Château&#8221; de l&#8217;école situé à quelques kilomètres, à la <strong>Motte au Bois</strong>, ce qui m&#8217;a rappelé mes années étudiantes.</p>
+<p>Je pense passer quelques certifications ATPL à partir de fin Octobre. Croisons les doigts !</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/semaine-de-revision-atpl-iaag/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Choix du statut juridique &#8211; Développement &amp; Infrastructure Web</title>
+		<link>http://www.armetiz.info/choix-statut-juridique-developpement-infrastructure-web/</link>
+		<comments>http://www.armetiz.info/choix-statut-juridique-developpement-infrastructure-web/#comments</comments>
+		<pubDate>Tue, 27 Aug 2013 09:40:40 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Wozbe]]></category>
+		<category><![CDATA[Conseil]]></category>
+		<category><![CDATA[Entreprise]]></category>
+		<category><![CDATA[SARL]]></category>
+		<category><![CDATA[Statut]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3363</guid>
+		<description><![CDATA[Lorsque l&#8217;on souhaite lancer son entreprise, le moment où l&#8217;on doit choisir le statut juridique est assez impressionnant. De mon coté, Malgré ce que tout le monde me disait, j&#8217;en.. <a href="http://www.armetiz.info/choix-statut-juridique-developpement-infrastructure-web/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Lorsque l&#8217;on souhaite lancer son entreprise, le moment où l&#8217;on doit choisir le <strong>statut juridique</strong> est assez impressionnant.</p>
+<p>De mon coté,<br />
+Malgré ce que tout le monde me disait, j&#8217;en faisais <strong>toute une montagne</strong>. </p>
+<p>La lecture d&#8217;informations à haute dose a duré quasiment deux semaines. Ce qui en soit n&#8217;est pas énorme. Mais pendant ce temps, rien d&#8217;autre n&#8217;avançait et surtout je me noyais, je perdais la motivation !<br />
+Cela s&#8217;est transformé en une étape bloquante !</p>
+<p>Rétrospectivement,<br />
+Je pense qu&#8217;il est important de se renseigner pour connaitre <strong>les impacts d&#8217;un statut juridique</strong>. Mais je pense qu&#8217;il faut éviter de vouloir aller trop loin et avoir le statut ultime, car le temps passe et la motivation doit rester forte ! Bloquer sur une décision peut être source de découragement. </p>
+<p>Du coups,<br />
+Après avoir hésité énormément entre la <strong><a href="http://www.apce.com/pid593/sas-sasu.html?espace=1&#038;tp=1">SASU</a>, <a href="http://www.apce.com/pid588/eurl.html?espace=1&#038;tp=1">EURL</a>, <a href="http://www.apce.com/pid11669/l-eirl.html?espace=1&#038;tp=1">EIRL</a> et <a href="http://www.apce.com/pid6185/l-auto-entrepreneur.html?espace=1&#038;tp=1">AE</a></strong>, pour <a href="http://wozbe.com">wozbe</a> <strong>la décision se sera portée sur le statut de la SARL/EURL</strong>.<br />
+Les arguments qui m&#8217;ont guidé sont nombreux, mais l&#8217;argument qui a fait pencher la balance a été le choix qu&#8217;ont fait mes amis. La création d&#8217;une entreprise était une chose nouvelle pour moi, et je voulais éviter de m&#8217;isoler. Les amis qui sont dans le même secteur d&#8217;activité que moi sont en SARL, j&#8217;ai donc pris le même bateau qu&#8217;eux.</p>
+<p><strong>Si vous voulez plus d&#8217;information</strong> sur les différents statuts, Google sera vraiment votre ami, ainsi que le site de <a href="http://www.apce.com/pid223/7-choisir-un-statut-juridique.html">l&#8217;APCE</a>.</p>
+<p style="text-align: center"><a href="http://wozbe.com"><img src="http://www.armetiz.info/files/2013/07/logo-wozbe-full-alpha.png" alt="logo-wozbe-full-alpha" width="250" height="116" class="size-full wp-image-3284" /></a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/choix-statut-juridique-developpement-infrastructure-web/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>ReWork &#8211; Réussir autrement</title>
+		<link>http://www.armetiz.info/livre-rework-reussir-autrement/</link>
+		<comments>http://www.armetiz.info/livre-rework-reussir-autrement/#comments</comments>
+		<pubDate>Mon, 26 Aug 2013 09:53:57 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Entreprendre]]></category>
+		<category><![CDATA[Livres]]></category>
+		<category><![CDATA[Aventure]]></category>
+		<category><![CDATA[Conseils]]></category>
+		<category><![CDATA[Entrepreneur]]></category>
+		<category><![CDATA[Livre]]></category>
+		<category><![CDATA[SARL]]></category>
+		<category><![CDATA[Wozbe]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3364</guid>
+		<description><![CDATA[ReWork est un livre écrit par les co-fondateurs de 37signals Jason Fried et David Heinemeier Hansson. Ce livre est une piqûre de rappel sur des notions évidentes que l&#8217;on oublie.. <a href="http://www.armetiz.info/livre-rework-reussir-autrement/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2013/08/rework.jpg"><img src="http://www.armetiz.info/files/2013/08/rework.jpg" alt="rework" width="174" height="261" class="alignleft size-full wp-image-3367" /></a><a href="http://www.amazon.fr/Rework-R%C3%A9ussir-autrement-Jason-Fried/dp/284001713X">ReWork</a> est un livre écrit par les co-fondateurs de 37signals <strong>Jason Fried</strong> et <strong>David Heinemeier Hansson</strong>.</p>
+<p>Ce livre est une piqûre de rappel sur des notions évidentes que l&#8217;on oublie bien trop souvent. A travers ce livre, on ressent bien le mode de fonctionnement de 37signals via la méthode agile, et on a envie d&#8217;aller dans ce sens.</p>
+<p>Bien que ce ne soit pas un livre extraordinaire, moi <strong>j&#8217;ai aimé ce livre</strong>.<br />
+Il est bon de lire que l&#8217;on peut y arriver avec une grosse envie de réussir ! </p>
+<p>Attention, se finit très très rapidement ! Je ne suis pas un grand lecteur, et je l&#8217;ai fini en 3 jours à raison de quelques heures dans un hamac !</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/livre-rework-reussir-autrement/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Beanstalkd &#8211; Job Queuing</title>
+		<link>http://www.armetiz.info/beanstalkd-service-job-queuing/</link>
+		<comments>http://www.armetiz.info/beanstalkd-service-job-queuing/#comments</comments>
+		<pubDate>Wed, 10 Jul 2013 06:00:05 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Asynchrone]]></category>
+		<category><![CDATA[Beanstalkd]]></category>
+		<category><![CDATA[IO]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Message]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[RabbitMQ]]></category>
+		<category><![CDATA[ZeroMQ]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2716</guid>
+		<description><![CDATA[Beanstalkd est un service de Job Queuing efficace et surtout simple que je souhaite vous présentez depuis un long moment. Pour rappel, les systèmes de Job Queuing sont utilisés sur.. <a href="http://www.armetiz.info/beanstalkd-service-job-queuing/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://kr.github.io/beanstalkd/">Beanstalkd</a> est un service de <a href="http://en.wikipedia.org/wiki/Job_queue">Job Queuing</a> <strong>efficace et surtout simple</strong> que je souhaite vous présentez depuis un long moment.</p>
+<p>Pour rappel, les systèmes de Job Queuing sont utilisés sur des traitements type <strong>Producteur-Consommateur asynchrone</strong>, ils permettent une évolution horizontale de vos projets.</p>
+<p>Des services réseaux comme <a href="http://kr.github.io/beanstalkd/">Beanstalkd</a>, <a href="http://www.rabbitmq.com/">RabbitMQ</a> ou <a href="http://www.zeromq.org/">ZeroMQ</a> simplifient le transfert de message entre différents serveurs, d&#8217;où l&#8217;évolution horizontale.</p>
+<p>On différencie <strong>Beanstalkd</strong> de ses concurrents par la simplicité d&#8217;utilisation et d&#8217;administration.<br />
+Par exemple, <a href="http://www.rabbitmq.com/">RabbitMQ</a> est un outil de <strong>Message Queuing</strong> très complet mais dont la mise en place, l&#8217;utilisation et l&#8217;administration sont plus difficiles. <a href="http://www.zeromq.org/">ZeroMQ</a> est un protocole Socket à faible latence, il s&#8217;agit d&#8217;un Framework plus que d&#8217;un <strong>service d&#8217;entreprise</strong>.</p>
+<p><strong>Beanstalkd</strong> en plus de sa simplicité, dispose d&#8217;autres avantages :</p>
+<ul>
+<li>Des clients dans de <a href="https://github.com/kr/beanstalkd/wiki/Client-Libraries">nombreux languages</a></li>
+<li>Système de Tubes</li>
+<li>Rapide et peu consommateur de cycle CPU</li>
+<li>Persistance des messages</li>
+<li>Et bien d&#8217;autres&#8230;</li>
+</ul>
+<p>Pour les utilisateurs PHP,<br />
+Vous pouvez utiliser directement la librairie <a href="https://github.com/pda/pheanstalk/">pda/peanstalk</a>.<br />
+Si vous êtes développeur <strong>Symfony 2</strong>, <a href="https://github.com/armetiz/LeezyPheanstalkBundle">LeezyPheanstalkBundle</a> fournit une intégration de la librairie ainsi que differentes fonctions liées à Symfony :</p>
+<ul>
+<li>Interface Ligne de Commande &#8211; CLI &#8211; pour gérer les Tubes &#038; Messages.</li>
+<li>Une intégration au <a href="http://symfony.com/doc/current/components/event_dispatcher/introduction.html">système d&#8217;évenement Symfony</a>.</li>
+<li>Une intégration au <a href="http://symfony.com/doc/current/book/internals.html#profiler">Profiler de Symfony</a> pour analyser vos serveurs Beanstalkd.</li>
+<li>Une intégration au système de <a href="http://symfony.com/doc/master/cookbook/logging/monolog.html">Journalisation monolog de Symfony.</a></li>
+</ul>
+<p>Si vous voulez poursuivre un peu vos lectures sur Beanstalk, voici quelques liens en Anglais : <a href="http://www.quora.com/Beanstalk-work-queue/What-are-the-advantages-and-disadvantages-of-Beanstalkd-as-a-work-queue">Les avantages et désavantages de Beanstalkd</a>, <a href="http://dev.af83.com/2013/03/13/why-you-should-consider-beanstalkd.html">Pourquoi devez-vous étudier Beanstalkd</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/beanstalkd-service-job-queuing/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Wozbe &#8211; Réalisation de produits &amp; services Web</title>
+		<link>http://www.armetiz.info/wozbe-realisation-de-produits-services-web/</link>
+		<comments>http://www.armetiz.info/wozbe-realisation-de-produits-services-web/#comments</comments>
+		<pubDate>Thu, 04 Jul 2013 15:31:02 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Wozbe]]></category>
+		<category><![CDATA[Agence]]></category>
+		<category><![CDATA[Aventure]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[eCommerce]]></category>
+		<category><![CDATA[Lyon]]></category>
+		<category><![CDATA[Rencontre]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3273</guid>
+		<description><![CDATA[Hier je clôturai une page de ma vie en quittant Konbini, aujourd&#8217;hui je me lance à mon compte en créant la société Wozbe ! Cela fait de nombreuses années que.. <a href="http://www.armetiz.info/wozbe-realisation-de-produits-services-web/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://wozbe.com"><img src="http://www.armetiz.info/files/2013/07/logo-wozbe-short.png" alt="logo-wozbe-short" width="100" height="100" class="alignright size-full wp-image-3286" /></a>Hier je clôturai une page de ma vie en <a href="http://www.armetiz.info/konbini-la-fin-dune-aventure/">quittant Konbini</a>, aujourd&#8217;hui je me lance <strong>à mon compte</strong> en créant la société <a href="http://wozbe.com">Wozbe</a> !</p>
+<p>Cela fait de nombreuses années que je souhaite m&#8217;exercer à l&#8217;entreprenariat.<br />
+Mais la <strong>création d&#8217;une entreprise</strong> est une chose nouvelle pour moi. C&#8217;est donc naturellement que j&#8217;ai <strong>perdu/passé du temps à choisir</strong> mon statut, le fameux nom <em><strong>Wozbe</strong></em>, trouver un comptable ou encore organiser les documents, devis et factures qu&#8217;il a fallut rédiger.</p>
+<p><strong>La région Lyonnaise</strong> où j&#8217;habite est très active au niveau du Numérique, et j&#8217;espère pouvoir profiter de cette synergie !<br />
+Bientôt membre de <a href="http://www.lacuisineduweb.com/">La Cuisine du Web</a>, je fréquente des soirées de networking : <a href="http://www.aperoentrepreneurs.com/">AperoEntrepreneurs</a>, <a href="http://www.lacuisineduweb.com/happy-cuisine-1.html">Happy Cuisine</a>, <a href="http://humantalks.com/">HumanTalks</a>, des evenements annuels comme le <a href="http://www.startinlyon.com/">StartInLyon</a> et le <a href="http://startupweekend.org/">StartupWeekend</a> où mon équipe est d&#8217;ailleurs arrivée deuxième !</p>
+<p>En Octobre il y a le <a href="http://www.blendconference.com/">Blend Web Mix</a> à Lyon ! Gros évenement autour du Web.</p>
+<p>Bref, je prends le temps de sortir faire des <strong>rencontres humaines &#038; business</strong>.</p>
+<p style="text-align: center"><a href="http://wozbe.com"><img src="http://www.armetiz.info/files/2013/07/logo-wozbe-full-alpha.png" alt="logo-wozbe-full-alpha" width="250" height="116" class="size-full wp-image-3284" /></a></p>
+<p>Wozbe est donc une entreprise qui réalise des <strong>produits &#038; services Web</strong> en tenant compte des <strong>besoins &#038; objectifs business</strong>.<br />
+On propose de l&#8217;accompagnement ainsi que de l&#8217;opérationnel sur des problématiques de développement &#038; d&#8217;infrastructure.</p>
+<p>Aussi, et ce à titre personnel,<br />
+Si vous avez un <strong>projet de startup</strong> et que vous cherchez un associé pour gérer la partie technique &#8211; N&#8217;hésitez pas à <a href="http://www.armetiz.info/contact/">me contacter</a> pour que l&#8217;on puisse se rencontrer !</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/wozbe-realisation-de-produits-services-web/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/15 queries in 0.029 seconds using apc
+Object Caching 1095/1104 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:03:25 by W3 Total Cache -->

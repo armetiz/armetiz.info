@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Serveur</title>
+	<atom:link href="http://www.armetiz.info/tag/serveur/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>LeezyPheanstalkBundle 2.0.0 released</title>
+		<link>http://www.armetiz.info/leezypheanstalkbundle-2-released/</link>
+		<comments>http://www.armetiz.info/leezypheanstalkbundle-2-released/#comments</comments>
+		<pubDate>Tue, 26 Mar 2013 09:47:07 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Beanstalkd]]></category>
+		<category><![CDATA[Bundle]]></category>
+		<category><![CDATA[CLI]]></category>
+		<category><![CDATA[Message]]></category>
+		<category><![CDATA[Queuing]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Symfony]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2983</guid>
+		<description><![CDATA[En partant d&#8217;une simple intégration de la librairie PHP pda/pheanstalk, le LeezyPheanstalkBundle intègre maintenant de nombreuses fonctionnalités interessantes lorsque l&#8217;on souhaite travailler avec le serveur de Message Queuing Beanstalkd. Voici.. <a href="http://www.armetiz.info/leezypheanstalkbundle-2-released/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>En partant d&#8217;une simple intégration de la librairie PHP <a href="https://github.com/pda/pheanstalk">pda/pheanstalk</a>, le <a href="https://github.com/armetiz/LeezyPheanstalkBundle">LeezyPheanstalkBundle</a> intègre maintenant de nombreuses fonctionnalités interessantes lorsque l&#8217;on souhaite travailler avec le serveur de <strong>Message Queuing</strong> <a href="http://kr.github.com/beanstalkd/">Beanstalkd</a>.</p>
+<p>Voici les fonctionnalités que vous pourrez utiliser :</p>
+<ul>
+<li><strong>Gestion par CLI</strong> des données Beanstalkd</li>
+<li>Intégration au <strong>Profiler</strong> de Symfony2</li>
+<li>Intégration au système d&#8217;évenement de Symfony2</li>
+<li>Intégration au système de <strong>journalisation MongoLog</strong></li>
+<li>Personnalisation via le <strong>pattern Proxy</strong></li>
+</ul>
+<p>Ce projet est mon premier projet open-source utilisé par plus de deux personnes. C&#8217;est très agréable de voir que l&#8217;on fait des choses utiles et de se forcer à faire les choses bien.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/leezypheanstalkbundle-2-released/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Intégrité md5</title>
+		<link>http://www.armetiz.info/integrite-md5/</link>
+		<comments>http://www.armetiz.info/integrite-md5/#comments</comments>
+		<pubDate>Fri, 03 Aug 2012 08:22:43 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Hash]]></category>
+		<category><![CDATA[Intégrité]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[MD5]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2555</guid>
+		<description><![CDATA[Pour vérifier l&#8217;intégrité de vos fichiers, il faut enregistrer leur état à un instant T et vérifier cet été à un instant T+1. Pour cela, le plus simple est de.. <a href="http://www.armetiz.info/integrite-md5/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pour vérifier l&#8217;intégrité de vos fichiers, il faut enregistrer leur état à un <strong>instant T</strong> et vérifier cet été à un <strong>instant T+1</strong>.<br />
+Pour cela, le plus simple est de réaliser un hash de chacun des fichiers, et de vérifier ce hash régulièrement.</p>
+<p>Récupérer un <a href="http://fr.wikipedia.org/wiki/MD5">hash md5</a> de l&#8217;ensemble des fichiers d&#8217;un répertoire. Il s&#8217;agit ici de la prise de référence.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">find tld.domain.www/ -type f -print0 | xargs -0 md5sum &gt;&gt; tld.domain.www.md5</div></td></tr></tbody></table></div>
+<p>Pour vérifier l&#8217;intégrité de vos fichiers par rapport à votre référence.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">md5sum -c tld.domain.www.md5 | grep -v &quot;OK&quot;</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/integrite-md5/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Livre &#8211; Javascript: The Good Parts</title>
+		<link>http://www.armetiz.info/javascript-the-good-parts/</link>
+		<comments>http://www.armetiz.info/javascript-the-good-parts/#comments</comments>
+		<pubDate>Mon, 02 Jul 2012 06:05:28 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Livres]]></category>
+		<category><![CDATA[Application]]></category>
+		<category><![CDATA[Best Practices]]></category>
+		<category><![CDATA[Conseils]]></category>
+		<category><![CDATA[Formation]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Programming]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2542</guid>
+		<description><![CDATA[JavaScript: The good Parts de Douglas Crockford. Voici un livre interessant à lire et que je vous conseille. Les 140 pages qui le composent en font ouvrage concis. Il s&#8217;agit.. <a href="http://www.armetiz.info/javascript-the-good-parts/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.amazon.fr/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742">JavaScript: The good Parts</a> de <strong><a href="http://www.crockford.com/">Douglas Crockford</a></strong>.<br />
+<strong>Voici un livre interessant à lire et que je vous conseille.</strong></p>
+<p>Les 140 pages qui le composent en font ouvrage concis. Il s&#8217;agit à mon avis d&#8217;un livre à lire pour tout ceux qui souhaitent faire du Javascript de <strong>qualité</strong> ou qui souhaite aller plus loin.</p>
+<p>La majeur partie du livre traite des <strong>fondements du langage</strong> en s&#8217;appuyant sur les bonnes pratiques. Les defaults de Javascript sont montrés du doigt dans les deux premieres Annexes.</p>
+<p>Voici les différents chapitres :<br />
+<img class="alignright size-full wp-image-2543" src="http://www.armetiz.info/files/2012/06/javascript_the_good_parts1.gif" alt="" width="182" height="240" /></p>
+<ul>
+<li>Good Parts</li>
+<li>Grammar</li>
+<li><strong>Objects</strong></li>
+<li><strong>Functions</strong></li>
+<li><strong>Inheritance</strong></li>
+<li>Arrays</li>
+<li>Regular Expressions</li>
+<li>Methods</li>
+<li>Style</li>
+<li><strong>Beautiful Features</strong></li>
+<li><strong>Appendix A. Awful Parts</strong></li>
+<li><strong>Appendix B. Bas Parts</strong></li>
+<li>Appendix C. JSLint</li>
+<li>Appendix D. Syntax Diagrams</li>
+<li>Appendix E. JSON</li>
+</ul>
+<p>Pour tout ceux qui souhaitent faire du <a href="http://www.armetiz.info/livre-node-up-and-running/">NodeJS</a> ou des applications fullstack JS coté client, vous devriez sérieusement penser à acheter ce livre.</p>
+<p>Voici une phrase que j&#8217;ai aimé et qui est tiré de la fin du chapitre &#8220;<em>Beautiful Features</em>&#8221;</p>
+<blockquote><p>It would be nice if products and programming languages were designed to have only good parts.</p></blockquote>
+<p>Juste avant cela il prends la métaphore de nos micro-ondes qui ont pleins de boutons et de fonctionnalités. Au final, on ne se sert que du bouton &#8220;Start&#8221; et de l&#8217;horloge en piochant dans le réfrigérateur. De plus, qui n&#8217;a jamais passer trop de temps à régler l&#8217;heure de cet appareil.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/javascript-the-good-parts/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Livre &#8211; Node Up and Running</title>
+		<link>http://www.armetiz.info/livre-node-up-and-running/</link>
+		<comments>http://www.armetiz.info/livre-node-up-and-running/#comments</comments>
+		<pubDate>Thu, 21 Jun 2012 06:16:13 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Livres]]></category>
+		<category><![CDATA[Asynchrone]]></category>
+		<category><![CDATA[Découverte]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Livre]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Server]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2525</guid>
+		<description><![CDATA[Node &#8211; Up and Running est un livre sur NodeJS écrit par Tom Hughes-Croucher &#38; Mike Wilson. Ecrit en Anglais, il vous permettra de mettre le pied à l&#8217;étrier de.. <a href="http://www.armetiz.info/livre-node-up-and-running/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://nodejs.org/"><img src="http://www.armetiz.info/files/2012/06/nodejs1.gif" alt="nodejs" width="180" height="236" class="alignleft size-full wp-image-2527" /></a><a href="http://www.amazon.fr/Node-Up-Running-Tom-Hughes-Croucher/dp/1449398588/">Node &#8211; Up and Running</a> est un livre sur <a href="http://nodejs.org/">NodeJS</a> écrit par <em>Tom Hughes-Croucher</em> &amp; <em>Mike Wilson</em>.</p>
+<p>Ecrit en Anglais, il vous permettra de mettre le pied à l&#8217;étrier de <strong>NodeJS avec facilité</strong>.<br />
+Les 170 pages sont consacrées à la découverte et à la prise en main de NodeJS, ainsi qu&#8217;aux problématiques qu&#8217;il tente de résoudre par son approche &#8220;Even-Driven&#8221;.</p>
+<p>
+Personnellement, j&#8217;ai vraiment apprécié cet ouvrage. J&#8217;avais déjà envie de travailler avec NodeJS, et bien cela est confirmé !</p>
+<p>Voici les chapitres du livre:</p>
+<ul>
+<li>A Very Brief Introduction to Node.js</li>
+<li>Doing Interesting Things</li>
+<li>Building Robust Node Applications</li>
+<li>Core APIs</li>
+<li>Helper APIs</li>
+<li>Data Access</li>
+<li>Important External Modules</li>
+<li>Extending Node</li>
+</ul>
+<p>Il est à noter que l&#8217;exploration de la <a href="http://nodejs.org/api/">documentation API</a> est quasiment obligatoire une fois que vous avez terminé le livre. Cela vous permettra d&#8217;aller plus loin dans votre découverte et d&#8217;avoir toutes les clés en main.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/livre-node-up-and-running/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>CentOS – Installer le module h264 streaming pour Lighttpd</title>
+		<link>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/</link>
+		<comments>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/#comments</comments>
+		<pubDate>Tue, 12 Jun 2012 10:20:48 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[h264]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Installation]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Lighttpd]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Streaming]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2505</guid>
+		<description><![CDATA[Nous allons commencer avec l&#8217;installation de lighttpd. Personnellement, j&#8217;utilise les repository EPEL pour le faire. 1yum install lighttpd Installation des outils et des headers. 1yum install automake autoconf libtool bzip2-devel.. <a href="http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Nous allons commencer avec l&#8217;installation de lighttpd. Personnellement, j&#8217;utilise les repository EPEL pour le faire.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> lighttpd</div></td></tr></tbody></table></div>
+<p>Installation des outils et des headers.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> <span style="color: #c20cb9; font-weight: bold;">autoconf</span> libtool bzip2-devel zlib-devel <span style="color: #c20cb9; font-weight: bold;">gcc</span> <span style="color: #c20cb9; font-weight: bold;">make</span> pcre-devel</div></td></tr></tbody></table></div>
+<p><strong>Note</strong>: Avant de commencer, il est à noter que le lien donné par <a href="http://h264.code-shop.com/trac/wiki/Mod-H264-Streaming-Lighttpd-Version2">code-shop</a> pour la compilation du module h264 avec Lighttpd 1.4.x ne contient pas les fichiers nécessaires à la compilation du module.<br />
+Voici donc la version que j&#8217;avais utilisé pour la compilation sous <a href="http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/">Debian avec Lighttpd 1.4.19</a>. Cela fonctionne parfaitement sous <strong>CentOS6</strong> avec <strong>Lighttpd 1.4.28</strong>. </p>
+<p>Download de <a href="http://armetiz.info/wp-content/uploads/2012/06/lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar1.gz">lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz</a></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>armetiz.info<span style="color: #000000; font-weight: bold;">/</span>wp-content<span style="color: #000000; font-weight: bold;">/</span>uploads<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">2012</span><span style="color: #000000; font-weight: bold;">/</span>06<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar1.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz</div></td></tr></tbody></table></div>
+<p>Ensuite, nous allons telecharger les sources correspondant à la version précedement installé de Lighttpd.<br />
+Actuellement, sous CentOS 6 avec EPEL, il s&#8217;agit de Lighttp 1.4.28</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;lighttpd-1.4.28.tar.gz&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>download.lighttpd.net<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span>releases-<span style="color: #000000;">1.4</span>.x<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> lighttpd-1.4.28.tar.gz</div></td></tr></tbody></table></div>
+<p>Copie des modules h264 dans les sources de la 1.4.28</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.c mod_streaming_export.h moov.<span style="color: #000000; font-weight: bold;">*</span> mp4_io.<span style="color: #000000; font-weight: bold;">*</span> mp4_process.<span style="color: #000000; font-weight: bold;">*</span> mp4_reader.<span style="color: #000000; font-weight: bold;">*</span> mp4_writer.<span style="color: #000000; font-weight: bold;">*</span> output_bucket.<span style="color: #000000; font-weight: bold;">*</span> output_mp4.<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">vim</span> Makefile.am</div></td></tr></tbody></table></div>
+<p>Vous pouvez rajouter les lignes suivantes après la définition du module <strong>mod_flv_streaming</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">lib_LTLIBRARIES += mod_h264_streaming.la<br />
+mod_h264_streaming_la_SOURCES = mod_h264_streaming.c \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mod_streaming_export.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; moov.c moov.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_io.c mp4_io.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_reader.c mp4_reader.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_writer.c mp4_writer.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_process.c mp4_process.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_bucket.c output_bucket.h \<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_mp4.c output_mp4.h<br />
+mod_h264_streaming_la_CFLAGS = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>AM_CFLAGS<span style="color: #7a0874; font-weight: bold;">&#41;</span> -DBUILDING_H264_STREAMING<br />
+mod_h264_streaming_la_LDFLAGS = <span style="color: #660033;">-module</span> <span style="color: #660033;">-export-dynamic</span> <span style="color: #660033;">-avoid-version</span> <span style="color: #660033;">-no-undefined</span><br />
+mod_h264_streaming_la_LIBADD = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>common_libadd<span style="color: #7a0874; font-weight: bold;">&#41;</span></div></td></tr></tbody></table></div>
+<p>On va s&#8217;occuper de la compilation</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.28<span style="color: #000000; font-weight: bold;">/</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>autogen.sh<br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #660033;">--prefix</span>=<span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>On va maintenant récupérer le .so que l&#8217;on vient de compiler et correspondant au module h264.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span>lib<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.so <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>lib64<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<p>Alors que les étapes spécifiques aux binaires sont terminés,<br />
+Voici la partie configuration : <strong>/etc/lighttpd/conf.d/h264.conf</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">## /etc/lighttpd/conf.d/h264.conf</span><br />
+<span style="color: #666666; font-style: italic;">#######################################################################</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## &nbsp;H264 Module </span><br />
+<span style="color: #666666; font-style: italic;">## --------------- </span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## see http://h264.code-shop.com/trac/wiki/Mod-H264-Streaming-Lighttpd-Version2</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<br />
+server.modules += <span style="color: #7a0874; font-weight: bold;">&#40;</span> <span style="color: #ff0000;">&quot;mod_h264_streaming&quot;</span> <span style="color: #7a0874; font-weight: bold;">&#41;</span><br />
+<br />
+h264-streaming.extensions = <span style="color: #7a0874; font-weight: bold;">&#40;</span> <span style="color: #ff0000;">&quot;.mp4&quot;</span> <span style="color: #7a0874; font-weight: bold;">&#41;</span><br />
+<span style="color: #666666; font-style: italic;">#######################################################################</span></div></td></tr></tbody></table></div>
+<p>Dans le fichier <strong>/etc/lighttpd/modules.conf</strong>, nous allons ajouter le chargement du fichier de configuration précédemment créé.</p>
+<p>Apres le scope concernant <strong>server.modules</strong>, nous ajoutons</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">## /etc/lighttpd/modules.conf</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## mod_h264_streaming</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+include <span style="color: #ff0000;">&quot;conf.d/h264.conf&quot;</span></div></td></tr></tbody></table></div>
+<h3>Mise à jour</h3>
+<p>Attention, lorsque vous allez mettre à jour vos paquets via &#8220;<strong>yum update</strong>&#8220;, il est fort probable d&#8217;obtenir l&#8217;erreur suivante lors du démarrage de lighttpd.</p>
+<blockquote><p>
+(plugin.c.421) plugin-version doesn&#8217;t match lighttpd-version for h264_streaming<br />
+(server.c.926) Initialization of plugins failed. Going down.
+</p></blockquote>
+<p>En gros, le <strong>module h264</strong> que vous avez compiler n&#8217;est plus valide pour la nouvelle version de <strong>lighttpd</strong> que vous avez récupéré suite à une mise à jour.</p>
+<p>Dans un premier temps, désactiver le module h264 afin de pouvoir lancer lighttpd correctement :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">## /etc/lighttpd/modules.conf</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">## mod_h264_streaming</span><br />
+<span style="color: #666666; font-style: italic;">##</span><br />
+<span style="color: #666666; font-style: italic;">#include &quot;conf.d/h264.conf&quot;</span></div></td></tr></tbody></table></div>
+<p>Une fois fait, vous pouvez démarrer <strong>lighttpd</strong> tranquillement et recommencer la compilation du <strong>module h264</strong>.<br />
+Pour cela, rien de plus simple: reprenez le tutoriel à son début en prenant soin de récuperer les sources de lighttpd correspondant à la version installée.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Livre &#8211; IPv6 Essentials</title>
+		<link>http://www.armetiz.info/livre-ipv6-essentials/</link>
+		<comments>http://www.armetiz.info/livre-ipv6-essentials/#comments</comments>
+		<pubDate>Thu, 11 Aug 2011 09:22:52 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Livres]]></category>
+		<category><![CDATA[Anglais]]></category>
+		<category><![CDATA[Compétence]]></category>
+		<category><![CDATA[Conception]]></category>
+		<category><![CDATA[Déploiement]]></category>
+		<category><![CDATA[Infrastructure]]></category>
+		<category><![CDATA[IPv4]]></category>
+		<category><![CDATA[IPv6]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Livre]]></category>
+		<category><![CDATA[Network]]></category>
+		<category><![CDATA[Réseaux]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2118</guid>
+		<description><![CDATA[Les ouvrages sur IPv6 sont nombreux, ceux de qualité le sont moins. IPv6 Essentials de Silvia Hagen est un livre précis traitant des fondamentaux IPv6. Au sommaire : Why IPv6.. <a href="http://www.armetiz.info/livre-ipv6-essentials/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.amazon.fr/IPv6-Essentials-Silvia-Hagen/dp/0596100582"><img src="http://www.armetiz.info/files/2011/08/iPv6_Essentials1.jpg" alt="iPv6 Essentials" width="180" height="180" class="alignright size-full wp-image-2119" /></a>Les ouvrages sur IPv6 sont nombreux, ceux de qualité le sont moins.<br />
+<a href="http://www.amazon.fr/IPv6-Essentials-Silvia-Hagen/dp/0596100582">IPv6 Essentials</a> de <strong>Silvia Hagen</strong> est un livre précis traitant des fondamentaux IPv6.</p>
+<p>Au sommaire :</p>
+<ul>
+<li>Why IPv6</li>
+<li><strong>The Structure of the IPv6 Protocol</strong></li>
+<li><strong>IPv6 Addressing</strong></li>
+<li>ICMPv6</li>
+<li>Security with IPv6</li>
+<li>Quality of Service</li>
+<li>Networking Aspects</li>
+<li>Routing Protocols</li>
+<li>Upper-Layer Protocols</li>
+<li><strong>Interoperability</strong></li>
+<li><strong>Mobile IPv6</strong></li>
+<li>Get Your Hands Dirty</li>
+<li>RFCs</li>
+<li>IPv6 Resources</li>
+<li>Recommended Reading</li>
+</ul>
+<h3>La présentation de l&#8217;oeuvre</h3>
+<p>IPv6 Essentials, Second Edition provides a succinct, in-depth tour of all the <strong>new features and functions in IPv6</strong>. It guides you through everything you need to know to get started, including how to configure IPv6 on hosts and routers and which applications currently support IPv6. Aimed at system and network administrators, engineers, network designers, and IT managers, this book will help you understand, plan for, design, and integrate IPv6 into your current IPv4 infrastructure.</p>
+<h3>En ce qui me concerne</h3>
+<p>J&#8217;ai trouvé ce livre tres pragmatique.<br />
+On parle d&#8217;un protocol non pas de choses abstraites, vous allez donc lire de nombreuses pages sur les détails des RFCs.<br />
+Connaitre les détails d&#8217;un protocole peu paraitre futile, mais cela est un passage obligé si vous voulez <strong>comprendre le fonctionnement et réaliser des déploiements de qualité</strong>. </p>
+<p>A mon avis, les chapitres les plus importants sont :</p>
+<ul>
+<li>Chapitre 2 : <strong>The Structure of the IPv6 Protocol</strong></li>
+<li>Chapitre 3 : <strong>IPv6 Addressing</strong>. </ul>
+</li>
+<p>Au départ, je pensais que le Chapitre 10: <strong>Interoperability</strong> serai encore du &#8220;simple&#8221; <strong>Dual-Stack, Teredo, 6To4</strong>.. Bien que ce soit le cas, j&#8217;ai été surpris de voir de nouvelles méthodes comme le <strong>NAT-PT</strong>.<br />
+Aussi, ce chapitre montre differentes études de cas tres interessantes que je vous conseils de lire avec attention.</p>
+<p>Le chapitre 8 : <strong>Routing Protocols</strong>, je l&#8217;ai survolé assez vite car je n&#8217;éprouvais pas le besoin de connaitre les détails sur les <strong>protocoles IGP &amp; EGP avec IPv6</strong>. Toujours est-il, pour ceux que cela interesse ce chapitre est complet avec 78 pages.</p>
+<p>Le dernier chapitre : <strong>Mobile IPv6</strong> est tres charnu. Comme il est dit dans le livre: &#8220;Avant de commencer la lecture de ce Chapitre, prendre une aspiration profonde&#8221;.</p>
+<h3>Conclusion</h3>
+<p>Pour ceux qui ont des bases en IPv4 et qui souhaite faire une <strong>mise à jour de compétence</strong>, c&#8217;est un livre interessant à lire.<br />
+Le fait que cette ressource soit en Anglais n&#8217;est pas vraiment un probleme si vous avez l&#8217;habitude de lire de l&#8217;anglais technique.<br />
+Mon niveau en Anglais n&#8217;est pas des plus haut, et je n&#8217;ai eu aucune difficulté à terminer IPv6 Essentials. Apres, est-ce que j&#8217;ai tout compris&#8230; <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Vous pouvez l’acheter sur <a href="http://www.amazon.fr/IPv6-Essentials-Silvia-Hagen/dp/0596100582">Amazon</a>.<br />
+ISBN : 978-0-596-10058-2</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/livre-ipv6-essentials/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Debian &#8211; Installer le module h264 streaming pour Lighttpd</title>
+		<link>http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/</link>
+		<comments>http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/#comments</comments>
+		<pubDate>Thu, 17 Mar 2011 10:44:08 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[h264]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Installation]]></category>
+		<category><![CDATA[Lighttpd]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Streaming]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1970</guid>
+		<description><![CDATA[Ce tutoriel est un condensé de mes recherches sur Internet pour l&#8217;installation du module h264 streaming pour Lighttpd. Voici les deux principales ressources : h264.code-shop.com &#38; Debian root ( allemand.. <a href="http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Ce tutoriel est un condensé de mes recherches sur Internet pour l&#8217;installation du module <a href="http://h264.code-shop.com">h264 streaming</a> pour <strong>Lighttpd</strong>.</p>
+<p>Voici les deux principales ressources : <a href="http://h264.code-shop.com/trac/wiki/Mod-H264-Streaming-Lighttpd-Version2">h264.code-shop.com</a> &amp; <a href="http://www.debianroot.de/server/lighttpd-mp4h264-video-streaming-mod_h264_streaming-1168.html">Debian root ( allemand )</a>.</p>
+<p>L&#8217;objectif des prochaines commandes est de recompiler Lighttpd pour récupérer les modules h264-streaming et les copier dans le Lighttpd qui est géré par votre gestionnaire de paquet.</p>
+<p>Installation des paquets utiles à la compilation de Lighttpd.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get install</span> build-essential <span style="color: #c20cb9; font-weight: bold;">automake</span> <span style="color: #c20cb9; font-weight: bold;">autoconf</span> libtool pkg-config libpcre3-dev zlib1g-dev libbz2-dev libfam-dev</div></td></tr></tbody></table></div>
+<p>Les paquets : <strong>libpcre3-dev zlib1g-dev libbz2-dev libfam-dev</strong> ne sont pas nécessaires. Si vous ne souhaitez pas les installés, penser à invoquer la commande <strong>./configure</strong> avec les options <strong>&#8211;without-pcre &#8211;without-zlib &#8211;without-bzip2 &#8211;without-fam</strong></p>
+<p>S&#8217;il n&#8217;est pas déjà présent sur votre Debian, installons Lighttpd.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get install</span> lighttpd</div></td></tr></tbody></table></div>
+<p>Téléchargeons les sources de <strong>Lighttpd 1.4.18</strong> contenant le module <strong>h264 streaming</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+<span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>h264.code-shop.com<span style="color: #000000; font-weight: bold;">/</span>download<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-zxvf</span> lighttpd-1.4.18_mod_h264_streaming-2.2.9.tar.gz</div></td></tr></tbody></table></div>
+<p>Téléchargeons les sources de Lighttpd géré par votre gestionnaire de paquet. Lors de la rédaction de l&#8217;article, Debian Lenny utilise Lighttpd version 1.4.19.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get <span style="color: #7a0874; font-weight: bold;">source</span></span> lighttpd</div></td></tr></tbody></table></div>
+<p>Copions les quelques fichiers sources utiles à la compilation du module h264 streaming.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.18<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.c mod_streaming_export.h moov.<span style="color: #000000; font-weight: bold;">*</span> mp4_io.<span style="color: #000000; font-weight: bold;">*</span> mp4_process.<span style="color: #000000; font-weight: bold;">*</span> <br />
+mp4_reader.<span style="color: #000000; font-weight: bold;">*</span> mp4_writer.<span style="color: #000000; font-weight: bold;">*</span> output_bucket.<span style="color: #000000; font-weight: bold;">*</span> output_mp4.<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.19<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<p>Nous allons modifier le fichier <strong>Makefile</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.19<span style="color: #000000; font-weight: bold;">/</span>src<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">vim</span> Makefile.am</div></td></tr></tbody></table></div>
+<p>Vous pouvez rajouter les lignes suivantes après la définition du module <strong>mod_flv_streaming</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">lib_LTLIBRARIES += mod_h264_streaming.la<br />
+mod_h264_streaming_la_SOURCES = mod_h264_streaming.c <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mod_streaming_export.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; moov.c moov.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_io.c mp4_io.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_reader.c mp4_reader.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_writer.c mp4_writer.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mp4_process.c mp4_process.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_bucket.c output_bucket.h <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_mp4.c output_mp4.h<br />
+mod_h264_streaming_la_CFLAGS = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>AM_CFLAGS<span style="color: #7a0874; font-weight: bold;">&#41;</span> -DBUILDING_H264_STREAMING<br />
+mod_h264_streaming_la_LDFLAGS = <span style="color: #660033;">-module</span> <span style="color: #660033;">-export-dynamic</span> <span style="color: #660033;">-avoid-version</span> <span style="color: #660033;">-no-undefined</span><br />
+mod_h264_streaming_la_LIBADD = $<span style="color: #7a0874; font-weight: bold;">&#40;</span>common_libadd<span style="color: #7a0874; font-weight: bold;">&#41;</span></div></td></tr></tbody></table></div>
+<p>On lance la compilation. Le résultat sera enregistré dans <strong>/opt/lighttpd.</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>lighttpd-1.4.19<br />
+.<span style="color: #000000; font-weight: bold;">/</span>autogen.sh<br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #660033;">--enable-maintainer-mode</span> <span style="color: #660033;">--prefix</span>=<span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>Copions les binaires du module h264 dans l&#8217;installation de Lighttpd géré par votre gestionnaire de paquet.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span>lib<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">cp</span> mod_h264_streaming.so mod_expire.so mod_secdownload.so <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>lib<span style="color: #000000; font-weight: bold;">/</span>lighttpd<span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<p>Éditer le fichier /etc/lighttpd/lighttpd.conf et rajouter :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">server.modules = <span style="color: #7a0874; font-weight: bold;">&#40;</span> <br />
+&nbsp; ...,<br />
+&nbsp; <span style="color: #ff0000;">&quot;mod_h264_streaming&quot;</span>,<br />
+&nbsp; ...<br />
+<span style="color: #7a0874; font-weight: bold;">&#41;</span><br />
+h264-streaming.extensions = <span style="color: #7a0874; font-weight: bold;">&#40;</span> <span style="color: #ff0000;">&quot;.mp4&quot;</span> <span style="color: #7a0874; font-weight: bold;">&#41;</span></div></td></tr></tbody></table></div>
+<p>Maintenant que tout est fini, vous pouvez relancer votre serveur HTTP et profiter.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/debian-install-module-h264-streaming-lighttpd/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>Linux &#8211; Configurer une IP Alias sur Loopback</title>
+		<link>http://www.armetiz.info/configurer-ip-alias-loopback/</link>
+		<comments>http://www.armetiz.info/configurer-ip-alias-loopback/#comments</comments>
+		<pubDate>Tue, 01 Mar 2011 14:11:27 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Fedora]]></category>
+		<category><![CDATA[Haute Disponibilité]]></category>
+		<category><![CDATA[Keepalived]]></category>
+		<category><![CDATA[RedHat]]></category>
+		<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1895</guid>
+		<description><![CDATA[Cette configuration peut-être utile dans bien des cas. Sous Debian-like : Édition du fichier /etc/network/interfaces 1234auto lo:0 iface lo:0 inet static &#160; &#160; &#160; &#160; address 192.168.3.1 &#160; &#160; &#160;.. <a href="http://www.armetiz.info/configurer-ip-alias-loopback/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cette configuration peut-être utile dans bien des cas. </p>
+<p>Sous <strong>Debian-like</strong> :<br />
+Édition du fichier <strong>/etc/network/interfaces</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">auto lo:0<br />
+iface lo:0 inet static<br />
+&nbsp; &nbsp; &nbsp; &nbsp; address 192.168.3.1<br />
+&nbsp; &nbsp; &nbsp; &nbsp; netmask 255.255.255.255</div></td></tr></tbody></table></div>
+<p>Sous <strong>RedHat-like</strong> :<br />
+Édition du fichier <strong>/etc/sysconfig/network-scripts/ifcfg-lo.0</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">DEVICE=&quot;lo:0&quot;<br />
+BOOTPROTO=&quot;static&quot;<br />
+IPADDR=&quot;192.168.3.1&quot;<br />
+NETMASK=&quot;255.255.255.255&quot;<br />
+NM_CONTROLLED=&quot;yes&quot;<br />
+ONBOOT=&quot;yes&quot;</div></td></tr></tbody></table></div>
+<p>Si vous souhaitez désactiver certaines réponses aux requêtes ARP. Ce qui peut-etre utile lorsque vous configurez un environnement HA avec par exemple <a href="http://www.linuxvirtualserver.org/">LVS</a>.</p>
+<p>Édition du fichier <strong>/etc/sysctl.conf</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">net.ipv4.conf.lo.forwarding=0<br />
+net.ipv4.conf.lo.arp_ignore=1<br />
+net.ipv4.conf.lo.arp_announce=2<br />
+net.ipv4.conf.all.arp_ignore=1<br />
+net.ipv4.conf.all.arp_announce=2</div></td></tr></tbody></table></div>
+<p>Pour appliquer les modifications</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sysctl -p</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/configurer-ip-alias-loopback/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Executer Icecast sur le port 80 &#8211; Debian</title>
+		<link>http://www.armetiz.info/debian-executer-icecast-port-80/</link>
+		<comments>http://www.armetiz.info/debian-executer-icecast-port-80/#comments</comments>
+		<pubDate>Fri, 28 Jan 2011 13:08:08 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Concert]]></category>
+		<category><![CDATA[Diffusion]]></category>
+		<category><![CDATA[Icecast]]></category>
+		<category><![CDATA[Multicast]]></category>
+		<category><![CDATA[Musique]]></category>
+		<category><![CDATA[Privilège]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1917</guid>
+		<description><![CDATA[Pour exécuter un programme qui écoute sur un port inférieur à 1024 il faut certains privilèges. Par défaut, Icecast est configuré pour se lancer avec l&#8217;utilisateur icecast2 et le groupe.. <a href="http://www.armetiz.info/debian-executer-icecast-port-80/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img alt="Icecast" src="http://www.california-101.com/picts/icecast.png" width="537" height="98" /><br />
+Pour exécuter un programme qui écoute sur un port inférieur à 1024 il faut certains privilèges.</p>
+<p>Par défaut, Icecast est configuré pour se lancer avec l&#8217;utilisateur <strong>icecast2</strong> et le groupe <strong>icecast</strong>.</p>
+<p>Nous allons donc modifier le fichier <strong>/etc/default/icecast</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">user=root<br />
+group=root</div></td></tr></tbody></table></div>
+<p>Ensuite, <strong>/etc/icecast/icecast.xml</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">80<br />
+<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; 0<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; icecast2<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; icecast</div></td></tr></tbody></table></div>
+<p>Lorsque vous lancerez votre <strong>daemon Icecast</strong>, celui-ci sera exécuté par root. Une fois démarré, le programme se chargera de changer l&#8217;utilisateur et le groupe.</p>
+<p>Si vous ne réalisez pas cette opération mais essayer de lancer Icecast sur le port 80, vous aurez le message &#8211; explicite &#8211; suivant :<br />
+<strong><em>Server startup failed.</em></strong></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/debian-executer-icecast-port-80/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Générateur de mot de passe</title>
+		<link>http://www.armetiz.info/generateur-password/</link>
+		<comments>http://www.armetiz.info/generateur-password/#comments</comments>
+		<pubDate>Fri, 14 Jan 2011 10:29:27 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Projets]]></category>
+		<category><![CDATA[Generateur]]></category>
+		<category><![CDATA[Installation]]></category>
+		<category><![CDATA[Password]]></category>
+		<category><![CDATA[Projet]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1903</guid>
+		<description><![CDATA[L&#8217;installation de serveur nécessite la saisie de mot de passe. Vous pouvez utiliser le même mot de passe sur l&#8217;ensemble de vos serveurs, mais cela n&#8217;est pas secure du tout... <a href="http://www.armetiz.info/generateur-password/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://password.armetiz.info/"><img src="http://www.armetiz.info/files/2011/01/Capture-d’écran-2011-01-14-à-11.11.031.png" alt="Générateur mot de passe" width="410" height="102" class="aligncenter size-full wp-image-1906" /></a></p>
+<p><strong>L&#8217;installation de serveur</strong> nécessite la saisie de mot de passe. Vous pouvez utiliser le même mot de passe sur l&#8217;ensemble de vos serveurs, mais cela n&#8217;est pas <strong>secure</strong> du tout.</p>
+<p>Afin de vous simplifier la <strong>création de mot de passe complexe</strong>, voici un <a href="http://password.armetiz.info">Générateur de mot de passe.</a><br />
+Celui-ci crée de manière aléatoire des mots de passe de 10 caractères, contenant lettre majuscule, minuscule ainsi que des chiffres. Les symboles ne sont pas utilisés.</p>
+<p>Il n&#8217;y a aucune option possible. L&#8217;intérêt étant d&#8217;avoir rapidement un mot de passe complexe. Les lettres portant à confusion ne sont pas utilisées : <strong>o, O, 0, i, I, l, L</strong>.</p>
+<p><a href="http://password.armetiz.info">Générateur de mot de passe.</a></p>
+<p><strong>Edit 28 Janvier 2011</strong> : En commentaires, <a href="http://www.armetiz.info/generateur-password/#comment-895">Armaury</a> parle du logiciel <strong>pwgen</strong> disponible dans les dépôts officiels des principales distributions.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/generateur-password/feed/</wfw:commentRss>
+		<slash:comments>13</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.025 seconds using apc
+Object Caching 1978/1990 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:08:25 by W3 Total Cache -->

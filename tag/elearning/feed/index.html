@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Elearning</title>
+	<atom:link href="http://www.armetiz.info/tag/elearning/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Enregistrer les sources Flash au format XML</title>
+		<link>http://www.armetiz.info/enregistrer-sources-flash-format-xml/</link>
+		<comments>http://www.armetiz.info/enregistrer-sources-flash-format-xml/#comments</comments>
+		<pubDate>Thu, 22 Apr 2010 08:25:51 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Amélioration]]></category>
+		<category><![CDATA[CS5]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[Tache]]></category>
+		<category><![CDATA[XML]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1671</guid>
+		<description><![CDATA[Adobe Creative Suite 5 va sortir dans les prochains jours, et hormis l&#8217;iPhone packager qui semblait être le cheval de bataille cette année, les autres améliorations sont passées un peu.. <a href="http://www.armetiz.info/enregistrer-sources-flash-format-xml/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2009/12/adobe-lq1.png"><img src="http://www.armetiz.info/files/2009/12/adobe-lq1.png" alt="" width="43" height="72" class="alignleft size-full wp-image-1665" /></a><strong>Adobe Creative Suite 5</strong> va sortir dans les prochains jours, et hormis <strong>l&#8217;iPhone packager</strong> qui semblait être le cheval de bataille cette année, les autres améliorations sont passées un peu à la trappe.</p>
+<p>Sur <a href="http://labs.adobe.com/technologies/flashcs5/">Adobe Labs</a> ont peut trouver les nouveautés de Flash CS5, et sur le nouveau <a href="http://blog.mediabox.fr/flash-pro-cs5-les-nouveautes">blog de mediabox</a> la traduction Française.</p>
+<p>Personnellement, je remarque un point très intéressant : <strong>XML based FLA files</strong>, où encore <strong>Fichiers FLA basés sur le XML</strong>.<br />
+Qu&#8217;est-ce que cela signifie ? Mediabox le définit comme tel :</p>
+<blockquote><p>En enregistrant votre document .fla, vous constaterez dans votre boite de dialogue <strong>la possibilité d’enregistrer</strong> votre travail sous un <strong>format non compressé .xfl</strong>. Vous aurez alors la <strong>création d’un dossier</strong> reprenant la structure de votre document et de votre librairie. Il sera alors facile à des personnes tiers non familières de Flash, de pouvoir modifier le contenu de la librairie, en changeant les textes, les images etc. Le tout sans avoir besoin de ré-ouvrir votre document dans Flash et de chercher où est le contenu à modifier.</p></blockquote>
+<p>Dans tout les cas, cela signifie que nous pourrons accéder à la structure de nos animations sans passer obligatoirement par les <strong>fichiers FLA</strong>, qui sont des fichiers au <strong>format binaire non ouvert</strong>.<br />
+Mais aussi et surtout, nous pourrons indirectement <strong>automatiser certaines tâches</strong> !</p>
+<p>Je prends l&#8217;exemple d&#8217;un <a href="http://www.projet-elearning.com/">projet eLearning</a> où le nombre de FLA dépasse la centaine. Sur chacun de ces FLA il y a des <strong>éléments redondants</strong>.<br />
+Après avoir livré la version de recette au client, celui-ci nous dit qu&#8217;il n&#8217;aime pas la tête du personnage Dupon.<br />
+Ce personnage est sur 80% des animations réalisées. </p>
+<p>Actuellement, plusieurs solutions s&#8217;offre à vous. Vous avez utilisé une <strong>librairie partagée</strong>, il va falloir ré-ouvrir tout les FLA, faire la mise à jour des symboles et re-compiler chaque FLA.<br />
+Si vous n&#8217;avez pas de librairie partagée, il faudra remplacer à la main le symbole du personnage dans chaque FLA et lancer la compilation sur chacun.</p>
+<p>Avec Adobe Flash CS5, il sera possible d&#8217;automatiser la modification d&#8217;un élément sur l&#8217;ensemble des sources. Celle-ci pouvant être enregistrée au format XML, un simple <strong>script PHP</strong> fera l&#8217;affaire.<br />
+Il est déjà possible d&#8217;<strong>automatiser la compilation de FLA</strong>, <a href="http://www.gskinner.com/blog/archives/2004/08/jsfl_fla_batch.html">gSkinner</a> et <a href="http://www.mikechambers.com/blog/2003/11/01/flashcommand-flash-2004-command-line-compiler/">Mike Chambers</a> l&#8217;ont fait. </p>
+<p><a href="http://www.armetiz.info/files/2009/11/adobe_air1.jpg"><img src="http://www.armetiz.info/files/2009/11/adobe_air1.jpg" alt="" width="150" height="150" class="alignright size-full wp-image-1425" /></a>Je n&#8217;ai pas pu tester cette nouvelle version de Flash.<br />
+Il faut donc prendre cela au conditionnel, car il n&#8217;est pas dit que Adobe ai pensé à réaliser un compilateur de fichier SWF à partir de source XML.</p>
+<p>Mais si tout cela s&#8217;avère être exact, il n&#8217;est pas impossible de voir apparaître des applications Adobe AIR permettant de modifier des éléments au sein d&#8217;un groupe de fichier source XML.</p>
+<p>Edit : Valerio Virgillito <strong>Ingénieur chez Adobe</strong> a publié un article concernant le format XFL de Flash CS5 : <a href="http://blog.mencio.com/?p=28">XFL and Live Editing</a>.<br />
+On peut y apprendre des informations intéressantes. Comme le fait que le fichier FLA ne sera plus un fichier binaire fermé, mais un <strong>package de fichier compressé XML</strong>; à la sauce des fichiers Docx surement.<br />
+Mais aussi que les modifications des fichiers composants l&#8217;animation seront automatiquement pris en compte par Flash CS5. Je vous conseils de regarder la <strong>vidéo</strong> de son article pour une meilleur visibilité.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/enregistrer-sources-flash-format-xml/feed/</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		</item>
+		<item>
+		<title>Cours informatique gratuits</title>
+		<link>http://www.armetiz.info/cours-informatique-gratuits/</link>
+		<comments>http://www.armetiz.info/cours-informatique-gratuits/#comments</comments>
+		<pubDate>Fri, 15 May 2009 18:38:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Cours]]></category>
+		<category><![CDATA[Formation]]></category>
+		<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Sécurité]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1121</guid>
+		<description><![CDATA[Ce site regroupe de nombreux supports de cours informatique portant sur divers domaines. Les cours et formations informatiques que vous pourrez trouver ici sont toutes à télécharger gratuitement et sous.. <a href="http://www.armetiz.info/cours-informatique-gratuits/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.polymorphe.org"><img src="http://www.armetiz.info/wp-content/uploads/2009/05/polymorphe.png" alt="polymorphe" width="400" height="80" class="size-full wp-image-1124" /></a></p>
+<blockquote><p>Ce site regroupe de nombreux <strong>supports de cours informatique</strong> portant sur divers domaines. Les cours et formations informatiques que vous pourrez trouver ici sont toutes à <strong>télécharger gratuitement</strong> et sous divers formats :<strong> doc, html, pdf, ps</strong>.</p></blockquote>
+<p>Après la description, voyons le contenu:</p>
+<ul>
+<li><a href="http://www.polymorphe.org/index.php?/Bases-de-donnees/Voir-categorie">Base de données</a>, 58 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Bureautique/Voir-categorie">Bureautique</a>, 9 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Calcul-Scientifique/Voir-categorie">Calcul Scientifique</a>, 12 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Conception/Voir-categorie">Conception</a>, 7 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Divers/Voir-categorie">Divers</a>, 11 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Gestion-de-l-information/Voir-categorie">Gestion de l&#8217;information</a>, 22 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Programmation/Voir-categorie">Programmation</a>, 48 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Reseaux/Voir-categorie">Réseaux</a>, 38 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Statistiques/Voir-categorie">Statistiques</a>, 8 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Securite/Voir-categorie">Sécurité</a>, 23 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Systemes-d-exploitation/Voir-categorie">Systèmes d&#8217;exploitation</a>, 28 fichiers</li>
+</ul>
+<p>Soit 264 fichiers le 15 Mai 2009. Cela ne représente pas une si grande base de documents par rapport à <a href="http://ocwfinder.com/">OpenCourseWare</a> (cf: <a href="http://fr.wikipedia.org/wiki/OpenCourseWare">Wikipédia</a>); mais quand même, tout les <strong>supports de cours sont en Françai</strong>s ce qui peut être très appréciable.</p>
+<p>PS: <a href="http://www.polymorphe.org/index.php?/component/option,com_docmanrss/id,1/lang,fr/">RSS des derniers documents</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/cours-informatique-gratuits/feed/</wfw:commentRss>
+		<slash:comments>15</slash:comments>
+		</item>
+		<item>
+		<title>Serious Drink Lyonnais</title>
+		<link>http://www.armetiz.info/serious-drink-lyon-05/</link>
+		<comments>http://www.armetiz.info/serious-drink-lyon-05/#comments</comments>
+		<pubDate>Tue, 21 Apr 2009 21:41:11 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sortie]]></category>
+		<category><![CDATA[Bières]]></category>
+		<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Lyon]]></category>
+		<category><![CDATA[Rencontre]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1002</guid>
+		<description><![CDATA[Si vous avez envie de passer une petite soirée à boire des bières et parler des technologies Flex ou Elearning n&#8217;hésiter pas à vous inscrire sur le site de la.. <a href="http://www.armetiz.info/serious-drink-lyon-05/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Si vous avez envie de passer une petite soirée à <strong>boire des bières</strong> et <strong>parler des technologies Flex ou Elearning</strong> n&#8217;hésiter pas à vous inscrire sur le site de la <a href="http://www.lafabrick.com/blog/2009/04/20/1120-prenez-vous-au-serious-serious-drink-party-vol-05/comment-page-1">Fabrick</a> en laissant un petit commentaire <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Rendez-vous Jeudi 23 Avril 2009, à partir de 19h30 au café Cousu.<br />
+Passage Thiaffait<br />
+19,rue René Leynaud<br />
+69001 Lyon<br />
+Tel: 04 72 98 83 38</p>
+<p>PS : Les bières ne sont pas obligatoires, on peut aussi boire un coca ou un lait fraise sans soucis <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p><a href="http://maps.google.fr/maps?f=q&amp;source=embed&amp;hl=fr&amp;geocode=&amp;q=passage+thiaffait+lyon&amp;sll=47.15984,2.988281&amp;sspn=24.227066,39.902344&amp;ie=UTF8&amp;t=h&amp;z=14&amp;iwloc=A&amp;ll=45.777222,4.837418">Agrandir le plan</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/serious-drink-lyon-05/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>4ème édition des Journées Lyonnaises du E-learning</title>
+		<link>http://www.armetiz.info/journees-lyonnaises-learning/</link>
+		<comments>http://www.armetiz.info/journees-lyonnaises-learning/#comments</comments>
+		<pubDate>Wed, 01 Apr 2009 21:05:06 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Colloque]]></category>
+		<category><![CDATA[Conférence]]></category>
+		<category><![CDATA[Formation]]></category>
+		<category><![CDATA[INSA]]></category>
+		<category><![CDATA[Lyon]]></category>
+		<category><![CDATA[Salon]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=964</guid>
+		<description><![CDATA[Avis aux Lyonnais qui font du Elearning ou qui sont attirés par le milieu car en Juin se tiendra un colloque international. Au programme : Les coûts du E-learning Le.. <a href="http://www.armetiz.info/journees-lyonnaises-learning/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Avis aux Lyonnais qui font du Elearning ou qui sont attirés par le milieu car en Juin se tiendra un <a href="http://www.lyon-elearning.com/">colloque international.</a><br />
+<a href="http://www.lyon-elearning.com/spip.php?article81">Au programme</a> :
+<ul>
+<li>Les coûts du E-learning</li>
+<ul>
+<li>Le coût du droit : des risques juridiques à maîtriser</li>
+<li>Le coût de la pédagogie : un enseignement à financer</li>
+</ul>
+<li>Les bénéfices du E-learning</li>
+<ul>
+<li>La valeur ajoutée</li>
+<li>Les économies d’échelle</li>
+</ul>
+<li>La protection de la valorisation</li>
+<ul>
+<li>La démarche juridique</li>
+<li>La démarche qualité</li>
+</ul>
+</ul>
+<p>Voici la <a href="http://www.lyon-elearning.com/spip.php?article12">présentation</a> de cette 4° édition :<br />
+<blockquote><strong>Valorisation du E-learning</strong> sous toutes ses facettes : droit d’auteur,&gt; contrefaçon, indexation, valeur économique du E-learning, protection de l’investissement,&#8230; autant de thèmes que nous proposons d’aborder pour la <strong>4ème édition des Journées Lyonnaises du E-learning</strong>.</p>
+<p>Depuis maintenant 3 ans nous organisons un colloque consacré au E-Learning : les journées lyonnaises du E-Learning.</p>
+<p>Nous vous donnons rendez-vous les 25 et 26 juin prochain à Lyon pour une nouvelle édition des Journées Lyonnaises du E-learning : <a href="http://www.lyon-elearning.com/spip.php?rubrique18"><em>&#8220;la valorisation du E-learning&#8221;</em></a></p>
+<p>Cette année sera marquée par un autre évènement, Moodle Moot Juin 2009 à l’INSA de Lyon, que nous soutenons activement. <strong>Du 22 au 26 juin 2009 la semaine du E-learning sera lyonnaise !</strong></p>
+<p>Virtuellement vôtre</p>
+<p><a href="http://www.lyon-elearning.com/spip.php?article43">Gérald Delabre</a> et <a href="http://www.droit-elearning.com/article.php3?id_article=23">Yann Bergheaud</a><br />
+Coordinateurs scientifiques des Journées lyonnaises du E-Learning</p></blockquote>
+<p>Normalement vous devriez me voir la-bas, <strong>et vous</strong>, vous y allez ?</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/journees-lyonnaises-learning/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Podcast elearning par Jérome Hidalgo</title>
+		<link>http://www.armetiz.info/podcast-elearning/</link>
+		<comments>http://www.armetiz.info/podcast-elearning/#comments</comments>
+		<pubDate>Mon, 09 Mar 2009 10:38:14 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Creative Commons]]></category>
+		<category><![CDATA[Delicious]]></category>
+		<category><![CDATA[Interview]]></category>
+		<category><![CDATA[Lyon]]></category>
+		<category><![CDATA[Podcast]]></category>
+		<category><![CDATA[Screentoaster]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=946</guid>
+		<description><![CDATA[Jérôme Hidalgo qui anime elearningblog.fr s&#8217;est lancé dans la réalisation de podcast du eLearning. Le but étant de discuter avec des personnes travaillant dans la formation et d&#8217;échanger avec eux.. <a href="http://www.armetiz.info/podcast-elearning/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://elearningblog.fr/a-propos/">Jérôme Hidalgo</a> qui anime <a href="http://elearningblog.fr/">elearningblog.fr</a> s&#8217;est lancé dans la réalisation de podcast du eLearning.</p>
+<p>Le but étant de discuter avec des personnes travaillant dans la formation et d&#8217;échanger avec eux sur les <strong>concepts du eLearning</strong> et des <strong>nouveaux médias</strong>.</p>
+<p><a href="http://elearningblog.fr/podcasts/podcast-elearning-n%c2%b01-mars-2009/"><img alt="Podcast elearning" src="http://elearningblog.fr/wp-content/uploads/2009/03/podcast001.jpg" width="645" height="144" /></a></p>
+<p><strong>Pour la première</strong>, j&#8217;ai servi de cobaye à Jérôme, cela lui a permit de tester les outils qu&#8217;il utilisera par la suite, et de voir comment se passe la réalisation d&#8217;un podcast.<br />
+Au programme :
+<ul>
+<li>Screentoaster</li>
+<li>Je veille et c’est Delicious par Stéphane Wattier</li>
+<li>Les creative commons</li>
+<li>10 serious games marketing</li>
+</ul>
+<p>Ce fut aussi une grande première pour moi, je ne suis pas du tout habitué à ce genre d&#8217;intervention et c&#8217;est avec une certaine &#8220;angoisse&#8221; que j&#8217;ai abordé les premières secondes d&#8217;échange.<br />
+En fait, hormis un problème de micro avec mon laptop, un lapsus entre Serious Game et <a href="http://www.lafabrick.com/blog/2009/01/06/647-serious-drink-0090108/">Serious Drink</a>, tout s&#8217;est bien passé.</p>
+<p>Ayant beaucoup moins d&#8217;expérience professionnelle que les futurs intervenants, j&#8217;avais très peur de ne pas savoir quoi dire et surtout de dire beaucoup de choses inintéressantes.</p>
+<p>En fait l&#8217;enregistrement brute de pomme dure 1h, et la version retaillée 20min. On a donc été plutôt bavard <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br />
+Concernant mon discours&#8230; Je reste assez sceptique, mais bon je suppose que l&#8217;on a tous du mal à s&#8217;entendre parler et à se dire que l&#8217;on dit des choses intéressantes.</p>
+<p>En tout cas, <strong>Jérôme a produit un podcast de qualité</strong>. Vous pouvez l&#8217;écouter sur <a href="http://elearningblog.fr/podcasts/podcast-elearning-n%c2%b01-mars-2009/">elearningblog</a>.</p>
+<p>Vivement la suite <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/podcast-elearning/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>25 things I hate about facebook</title>
+		<link>http://www.armetiz.info/25-things-i-hate-about-facebook/</link>
+		<comments>http://www.armetiz.info/25-things-i-hate-about-facebook/#comments</comments>
+		<pubDate>Thu, 05 Mar 2009 19:39:07 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Social 2.0]]></category>
+		<category><![CDATA[Anglais]]></category>
+		<category><![CDATA[Distraction]]></category>
+		<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Facebook]]></category>
+		<category><![CDATA[Julian Smith]]></category>
+		<category><![CDATA[Langue]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=939</guid>
+		<description><![CDATA[Rassurez-vous, je ne ferai que le titre dans la langue de Shakespeare. Julian Smith a fait une vidéo amusante qui parle des trucs chiants sur Facebook. On retrouvera : Les.. <a href="http://www.armetiz.info/25-things-i-hate-about-facebook/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Rassurez-vous, je ne ferai que le titre dans la langue de Shakespeare.</p>
+<p><a href="http://juliansmith.tv/" target="_blank">Julian Smith</a> a fait une vidéo amusante qui parle des trucs chiants sur Facebook.<br />
+On retrouvera :</p>
+<ul>
+<li>Les pokes</li>
+<li>Les &#8220;Rejoindre le groupe&#8221;</li>
+<li>Les ragots</li>
+<li>Les notifications événementiels</li>
+<li>Les dates clés comme les anniversaires</li>
+<li>Les 39 personnes que l&#8217;on n&#8217;a jamais vu</li>
+</ul>
+<p>Tout cela dans une ambiance jeune et distractive.<br />
+La vidéo est en anglais mais sous-titré grâce au site <a href="http://langolab.com">langoLAB</a> qui permet d&#8217;apprendre une langue grâce aux sous titrage.</p>
+<p>Voici le lien de <a href="http://english.langolab.com/video/1254/25-things-i-hate-about-facebook" target="_blank">langoLAB</a>, et celui de l&#8217;auteur <a href="http://juliansmithproductions.wordpress.com/2009/02/13/25-things-i-hate-about-facebook/" target="_blank">Julian Smith</a></p>
+<p>PS : La vidéo a déjà bien parcourue Internet, et il y&#8217;a des chances que l&#8217;on revoit Julian Smith sur d&#8217;autres vidéos.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/25-things-i-hate-about-facebook/feed/</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+		<item>
+		<title>Adobe Captivate 4 Disponible</title>
+		<link>http://www.armetiz.info/adobe-captivate-4-disponible/</link>
+		<comments>http://www.armetiz.info/adobe-captivate-4-disponible/#comments</comments>
+		<pubDate>Thu, 29 Jan 2009 11:21:39 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[Captivate]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Version]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=779</guid>
+		<description><![CDATA[Légèrement médiatisé, Adobe a sorti une nouvelle version de son logiciel de rapide learning : Captivate 4. Vous créez rapidement du contenu e-learning professionnel [&#8230;] sans posséder de compétences particulières.. <a href="http://www.armetiz.info/adobe-captivate-4-disponible/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.adobe.com/fr/products/captivate/" target="_blank"><img class="alignleft" alt="Captivate" src="http://www.adobe.com/images/store/product_boxshots/112x112/box_captivate4_112x112.jpg" width="112" height="112" /></a>Légèrement médiatisé, Adobe a sorti une nouvelle version de son logiciel de <strong>rapide learning</strong> : <a href="http://www.adobe.com/fr/products/captivate/">Captivate 4</a>.</p>
+<blockquote><p><em>Vous créez rapidement du contenu e-learning professionnel [&#8230;] sans posséder de compétences particulières en programmation ou en multimédia. [&#8230;] Vous pouvez diffuser massivement vos contenus via des systèmes LMS.</em></p></blockquote>
+<p><a href="http://www.adobe.com/fr/products/captivate/features/?view=topnew" target="_blank">Les nouveautés</a> au programme :</p>
+<ul>
+<li>Annotation de fichiers SWF</li>
+<li>Modèles de projet professionnels</li>
+<li>Widgets personnalisables</li>
+<li>Flux de production PowerPoint circulaire</li>
+<li>Table des matières et agrégateur</li>
+<li>Fonctions de synthèse vocale</li>
+<li>Variables et actions avancées</li>
+<li>Options de sortie étendues</li>
+<li>Prise en charge des calques Adobe Photoshop</li>
+<li>Flux de production simplifiés et ergonomie optimisée</li>
+</ul>
+<p>Et maintenant, l&#8217;exportation SWF se fait <strong>en AS3 avec l&#8217;AVM2</strong>.<br />
+Rappelez-vous lorsque vous vouliez importer votre animation Captivate dans une interface Flash développé en AS3, il fallait utiliser un <a href="http://www.jumpeyecomponents.com/Flash-Components/Various/ActionScript-Bridge-91/" target="_blank">bridge</a> pour faire communiquer les deux.</p>
+<p>Avec cette nouvelle exportation, il va être possible d&#8217;importer du Captivate dans des projets <strong>Flex</strong> pour enrichir vos présentations.</p>
+<p><strong>Avez-vous</strong> des retours d&#8217;expériences sur cette version 4 ?</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/adobe-captivate-4-disponible/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>CrossKnowledge s&#8217;agrandit avec Epistema</title>
+		<link>http://www.armetiz.info/crossknowledge-achete-epistema/</link>
+		<comments>http://www.armetiz.info/crossknowledge-achete-epistema/#comments</comments>
+		<pubDate>Thu, 22 Jan 2009 18:57:11 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Crossknowledge]]></category>
+		<category><![CDATA[EasyQuizz]]></category>
+		<category><![CDATA[Epistema]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=726</guid>
+		<description><![CDATA[Acquisition Epistema par CrossKnowledge.]]></description>
+				<content:encoded><![CDATA[<p>Vu premièrement sur <a href="http://www.elearning.fr/crossknowledge-acquiert-epistema/" target="_blank">eLearning.fr</a>, et &#8220;confirmé&#8221; par <a href="http://communiquespresse.blogspot.com/2009/01/communiqu-dcouverte-cnn3r2tc.html" target="_blank">Communiquer de presse</a> : <strong>CrossKnowledge annonce l&#8217;acquisition de l&#8217;éditeur Epistema</strong>.</p>
+<blockquote><p><em>Pour <a href="http://www.crossknowledge.net/fr-fr/" target="_blank">CrossKnowledge</a>, il s&#8217;agit d&#8217;une acquisition stratégique. La complémentarité des outils, la qualité des solutions développées par Epistema en matière de plateforme et de systèmes d&#8217;évaluation des compétences, ainsi que les évolutions actuelles dans le domaine de la gestion collaborative et du web 2.0, vont permettre à CrossKnowledge de développer fortement ses capacités technologiques et d&#8217;accélérer encore son rythme d&#8217;innovation, pour offrir des solutions renouvelées à ses clients.</em></p></blockquote>
+<p><a href="http://www.armetiz.info/wp-content/uploads/2009/01/2231.png" target="_blank"><img src="http://www.armetiz.info/wp-content/uploads/2009/01/2231.png" alt="2231" width="60%" height="60%" class="alignright size-full wp-image-729" /></a><a href="//www.epistema.com/fr" target="_blank">Epistema</a> est une entreprise fournissant des applicatifs dédiés au eLearning et proposant aussi la création de contenu pédagogique.<br />
+Leurs logiciels phares <a href="http://www.epistema.com/fr/page.php?rubrique=pages_produits&amp;page=48" target="_blank">Epistema LMS</a> et <a href="http://www.epistema.com/fr/page.php?rubrique=pages_produits&amp;page=4" target="_blank">EasyQuizz Pro</a> sont vraiment très agréable à utiliser.<br />
+EasyQuizz permet de générer un ensemble de questionnaire respectant <a href="http://fr.wikipedia.org/wiki/SCORM" target="_blank">Scorm</a> ou <a href="http://fr.wikipedia.org/wiki/AICC" target="_blank">AICC</a>. Parmi ces questionnaires on retrouve les classiques QCU/QCM ou les textes à trous, mais surtout des questions à aiguillages avec un défilement différent en fonction des réponses utilisateurs.<br />
+Epistema LMS est un <strong>Learning Management System</strong> au même titre que <a href="http://www.syfadis.com/" target="_blank">Sysfadis</a> ou <a href="http://docs.moodle.org/fr/%C3%80_propos_de_Moodle" target="_blank">Moodle</a>, là où il tire son épingle du jeu par rapport aux autres, c&#8217;est sur son interface d&#8217;administration riche en information et en une analyse des parcours apprenants pertinente.</p>
+<p>Je n&#8217;ai pas eu a faire à <a href="http://www.epistema.com/fr/">Epistema</a> pour la génération de contenu pédagogique ou le suivi de projet, et je ne pourrai donc pas vous en parler.</p>
+<p>En tout cas, les membres de l&#8217;équipe technique et commercial sont vraiment des gens avec qui échanger est agréable.</p>
+<p>L&#8217;acquisition <a href="http://www.epistema.com/fr/">Epistema</a> par <a href="http://www.crossknowledge.net/fr-fr/">CrossKnowledge</a> apportera surement de nouveau produit car l&#8217;échange de compétence est toujours un plus pour l&#8217;évolution des outils.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/crossknowledge-achete-epistema/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Rapide Learning &#8211; Développement de ressource pédagogique</title>
+		<link>http://www.armetiz.info/rapide-learning-ressource-pedagogique/</link>
+		<comments>http://www.armetiz.info/rapide-learning-ressource-pedagogique/#comments</comments>
+		<pubDate>Tue, 28 Oct 2008 13:38:44 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Avant Gout]]></category>
+		<category><![CDATA[Buzz]]></category>
+		<category><![CDATA[Formatio]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=459</guid>
+		<description><![CDATA[INTUITION ELEARNING STUDIO vous propose une solution tout-en-un, pour la réalisation de vos contenus elearning. Répondez avec la plus grande simplicité, et avec une impressionnante rapidité, aux impératifs de conception.. <a href="http://www.armetiz.info/rapide-learning-ressource-pedagogique/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.speedernet.fr"><img alt="" src="http://www.speedernet.fr/images/stories/box_intuition.jpg" class="alignleft" width="117" height="129" /></a></p>
+<blockquote><p>INTUITION ELEARNING STUDIO vous propose une solution <strong>tout-en-un</strong>, pour la réalisation de vos <strong>contenus elearning</strong>.</p>
+<p>Répondez avec la plus grande simplicité, et avec une impressionnante rapidité, aux impératifs de conception : une <strong>liberté de réalisation intégrale</strong>, <strong>aucune ligne de code</strong> n’est nécessaire, toutes les actions sont pré-programmées, plusieurs centaines d’objets graphiques en bibliothèque, des mascottes intégralement animées,&#8230; </p></blockquote>
+<p>C&#8217;est donc un logiciel permettant la construction de contenu pédagogique &#8211; eLearning.<br />
+L&#8217;intérêt de ce type d&#8217;application est pour vous d&#8217;être &#8220;<strong>acteur</strong>&#8221; à toutes les phases de conception.<br />
+Vous maitrisez l&#8217;aspect graphique, les trames de formation, et l&#8217;interactivité qu&#8217;aura votre apprenant.<br />
+Nous sommes donc en présence d&#8217;un PowerPoint du eLearning.</p>
+<p>Pour avoir discuté avec l&#8217;un des développeurs (<a href="http://www.avant-gout.com">Adrien Piffaretti</a>), l&#8217;outil est vraiment adapté à la réalisation de formation elearning ponctuelle, sans devoir sortir l&#8217;artillerie lourde.</p>
+<p>Par exemple, votre entreprise doit former une centaine de collaborateurs à une nouvelle procédure administrative. Plutôt que de faire un PowerPoint inadapté, vous pouvez opter pour <a href="http://www.speedernet.fr/content/view/39/92/">Intuition</a> qui vous permettra d&#8217;offrir une formation elearning à moindre cout.</p>
+<p><a href="http://www.speedernet.fr/content/view/39/92/">Intuition Elearning Studio</a><br />
+Editeur : <a href="http://www.speedernet.fr">Speedernet</a><br />
+Responsable des développements : <a href="http://www.avant-gout.com">Adrien Piffaretti</a><br />
+<a href="http://www.speedernet.fr/content/view/30/119/">Version d’essai sans limite d&#8217;utilisation</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/rapide-learning-ressource-pedagogique/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/20 queries in 0.016 seconds using apc
+Object Caching 672/746 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:07:48 by W3 Total Cache -->

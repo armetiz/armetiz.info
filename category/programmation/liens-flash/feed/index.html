@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Flash</title>
+	<atom:link href="http://www.armetiz.info/category/programmation/liens-flash/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Que faire à montréal &#8211; Application RIA</title>
+		<link>http://www.armetiz.info/que-faire-a-montreal-application-ria/</link>
+		<comments>http://www.armetiz.info/que-faire-a-montreal-application-ria/#comments</comments>
+		<pubDate>Thu, 19 Apr 2012 11:14:47 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Application]]></category>
+		<category><![CDATA[Deezer]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Montreal]]></category>
+		<category><![CDATA[Référencement]]></category>
+		<category><![CDATA[RIA]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=231</guid>
+		<description><![CDATA[Made in Montréal Outil d&#8217;exploration basé sur une application RIA utilisant la technologie Flash d&#8217;Adobe. MadeinMTL.com regorge d&#8217;informations sur les bons coins de Montréal. Le site n&#8217;est pas tout jeune,.. <a href="http://www.armetiz.info/que-faire-a-montreal-application-ria/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.madeinmtl.com"><img src="http://www.armetiz.info/wp-content/uploads/2008/09/capture.png" alt="" width="77" height="77" class="alignright size-medium wp-image-259" /></a></p>
+<h3>Made in Montréal</h3>
+<p>Outil d&#8217;exploration basé sur une application RIA utilisant la technologie Flash d&#8217;Adobe.<br />
+<a href="http://www.madeinmtl.com">MadeinMTL.com</a> regorge d&#8217;informations sur les bons coins de Montréal.</p>
+<p>Le site n&#8217;est pas tout jeune, il a été ouvert en 2003, et une nouvelle version de leur application à vu le jour récemment.<br />
+Quand on regarde la partie &#8220;<em>A propos</em>&#8220;, nous observons :</p>
+<blockquote><p>MadeinMTL permet l&#8217;exploration virtuelle de Montréal, â travers plus de <strong>15 000 photos</strong>, <strong>400 textes</strong>, <strong>50 heures</strong> de vidéo, <strong>40 capsules sonores</strong> et <strong>25 courts-métrages</strong>, intégrés dans un <em>environnement organique</em>, qui traduit l&#8217;expérience véritable que nous avons d&#8217;une ville en y habitant ou en la visitant. </p></blockquote>
+<p><strong>PS : L&#8217;article était en brouillon sur mon blog depuis 2008.</strong></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/que-faire-a-montreal-application-ria/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Actionscript &#8211; Les Flashvars &amp; les preloaders</title>
+		<link>http://www.armetiz.info/flashvar-preloader-parameters/</link>
+		<comments>http://www.armetiz.info/flashvar-preloader-parameters/#comments</comments>
+		<pubDate>Mon, 20 Jun 2011 05:05:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Application]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[Flashvar]]></category>
+		<category><![CDATA[Paramètre]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2067</guid>
+		<description><![CDATA[Mise en situation : Application_A.swf est une application autonome qui utilise les Flashvar. Application_Preloader.swf est un preloader qui va charger Application_A.swf. L&#8217;objectif c&#8217;est de pouvoir utiliser les Flashvar avec Application_Preloader.swf.. <a href="http://www.armetiz.info/flashvar-preloader-parameters/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><strong>Mise en situation</strong> :</p>
+<ul>
+<li>Application_A.swf est une application autonome qui utilise les Flashvar. </li>
+<li>Application_Preloader.swf est un preloader qui va charger Application_A.swf.</li>
+</ul>
+<p>L&#8217;objectif c&#8217;est de pouvoir utiliser les Flashvar avec Application_Preloader.swf pour qu&#8217;elles soient transmises à Application_A.swf.</p>
+<p>Pour cela, nous allons utiliser une instance de <a href="http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/net/URLVariables.html">URLVariables</a> que l&#8217;on passera à <a href="http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/net/URLRequest.html">URLRequest</a>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">var _urlRequest &nbsp; &nbsp; : URLRequest&nbsp; &nbsp; = new URLRequest ( &quot;http://www.domain.tld/Application_A.swf&quot; );<br />
+var _urlVariables &nbsp; : URLVariables&nbsp; = new URLVariables ();<br />
+var _loader &nbsp; &nbsp; : Loader&nbsp; &nbsp; = new Loader ();<br />
+<br />
+for (var property : String in loaderInfo.parameters ) <br />
+{<br />
+&nbsp; &nbsp; _urlVariables[property] = loaderInfo.parameters[property];<br />
+}<br />
+<br />
+_urlRequest.method&nbsp; = URLRequestMethod.GET;<br />
+_urlRequest.data&nbsp; &nbsp; = _urlVariables;<br />
+<br />
+_loader &nbsp; &nbsp; = new Loader ();<br />
+_loader.load ( _urlRequest );</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/flashvar-preloader-parameters/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Actionscript &#8211; NetStream &amp; P2P</title>
+		<link>http://www.armetiz.info/actionscript-netstream-p2p/</link>
+		<comments>http://www.armetiz.info/actionscript-netstream-p2p/#comments</comments>
+		<pubDate>Fri, 17 Jun 2011 12:48:08 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[Application]]></category>
+		<category><![CDATA[Audio]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Flux]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iPad]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[Microphone]]></category>
+		<category><![CDATA[Multicast]]></category>
+		<category><![CDATA[NetStream]]></category>
+		<category><![CDATA[P2P]]></category>
+		<category><![CDATA[Peer-to-peer]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2058</guid>
+		<description><![CDATA[Ce petit programme permet d&#8217;afficher la camera d&#8217;une personne qui se connecte. Cela est fait grâce à l&#8217;utilisation d&#8217;un flux NetStream lui même utilisant une connexion P2P sans serveur. A.. <a href="http://www.armetiz.info/actionscript-netstream-p2p/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Ce petit programme permet d&#8217;afficher la camera d&#8217;une personne qui se connecte. Cela est fait grâce à l&#8217;utilisation d&#8217;un flux <strong>NetStream</strong> lui même utilisant une connexion <strong>P2P sans serveur</strong>.</p>
+<p>A noter que cela n&#8217;est absolument pas optimisé. Si vous avez des conseils à donner sur la configuration du NetStream, NetConnection, NetGroup ou encore du GroupSpecifier pour améliorer les performances, n&#8217;hésitez pas..</p>
+<div class="codecolorer-container actionscript3 blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br />50<br />51<br />52<br />53<br />54<br />55<br />56<br />57<br />58<br />59<br />60<br />61<br />62<br />63<br />64<br />65<br />66<br />67<br />68<br />69<br />70<br /></div></td><td><div class="actionscript3 codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> nc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netconnection%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netconnection.html"><span style="color: #004993;">NetConnection</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> group &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> NetGroup<span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> <span style="color: #004993;">connected</span> &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=boolean%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:boolean.html"><span style="color: #004993;">Boolean</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> sendStream&nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> listenStreams &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=object%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:object.html"><span style="color: #004993;">Object</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> groupspec &nbsp; <span style="color: #000066; font-weight: bold;">:</span> GroupSpecifier<span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> listenStream&nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #6699cc; font-weight: bold;">var</span> id &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=string%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:string.html"><span style="color: #004993;">String</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+<span style="color: #0033ff; font-weight: bold;">public</span> <span style="color: #339966; font-weight: bold;">function</span> WebcamP2P<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><br />
+<span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">super</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: #004993;">stage</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">align</span> &nbsp; &nbsp; &nbsp; &nbsp; = <a href="http://www.google.com/search?q=stagealign%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:stagealign.html"><span style="color: #004993;">StageAlign</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">TOP_LEFT</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <span style="color: #004993;">stage</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">scaleMode</span> &nbsp; &nbsp; = <a href="http://www.google.com/search?q=stagescalemode%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:stagescalemode.html"><span style="color: #004993;">StageScaleMode</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NO_SCALE</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; id&nbsp; = <a href="http://www.google.com/search?q=string%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:string.html"><span style="color: #004993;">String</span></a> <span style="color: #000000;">&#40;</span> <span style="color: #000000;">&#40;</span> <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=date%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:date.html"><span style="color: #004993;">Date</span></a> <span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">time</span> <span style="color: #000066; font-weight: bold;">*</span> <a href="http://www.google.com/search?q=int%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:int.html"><span style="color: #004993;">int</span></a> <span style="color: #000000;">&#40;</span> <a href="http://www.google.com/search?q=math%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:math.html"><span style="color: #004993;">Math</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">random</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000066; font-weight: bold;">*</span> <span style="color: #000000; font-weight:bold;">1000</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; nc = <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=netconnection%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netconnection.html"><span style="color: #004993;">NetConnection</span></a> <span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; nc<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">addEventListener</span><span style="color: #000000;">&#40;</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NET_STATUS</span><span style="color: #000066; font-weight: bold;">,</span> <span style="color: #004993;">netStatus</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; nc<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">connect</span><span style="color: #000000;">&#40;</span><span style="color: #990000;">&quot;rtmfp:&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #000000;">&#125;</span><br />
+<br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #339966; font-weight: bold;">function</span> <span style="color: #004993;">netStatus</span> <span style="color: #000000;">&#40;</span>event<span style="color: #000066; font-weight: bold;">:</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">:</span><span style="color: #0033ff; font-weight: bold;">void</span><br />
+<span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">switch</span><span style="color: #000000;">&#40;</span>event<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">info</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">code</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">case</span> <span style="color: #990000;">&quot;NetConnection.Connect.Success&quot;</span><span style="color: #000066; font-weight: bold;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setupGroup<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">break</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">case</span> <span style="color: #990000;">&quot;NetGroup.Connect.Success&quot;</span><span style="color: #000066; font-weight: bold;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #004993;">connected</span> = <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">break</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">case</span> <span style="color: #990000;">&quot;NetGroup.MulticastStream.PublishNotify&quot;</span><span style="color: #000066; font-weight: bold;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #004993;">trace</span> <span style="color: #000000;">&#40;</span> <span style="color: #990000;">&quot;name of the detected stream : &quot;</span> <span style="color: #000066; font-weight: bold;">+</span> event<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">info</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">name</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #6699cc; font-weight: bold;">var</span> _video&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=video%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:video.html"><span style="color: #004993;">Video</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #6699cc; font-weight: bold;">var</span> _listenStream &nbsp; <span style="color: #000066; font-weight: bold;">:</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _video &nbsp;= <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=video%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:video.html"><span style="color: #004993;">Video</span></a> <span style="color: #000000;">&#40;</span> <span style="color: #000000; font-weight:bold;">320</span><span style="color: #000066; font-weight: bold;">,</span> <span style="color: #000000; font-weight:bold;">240</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _listenStream &nbsp; = <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a> <span style="color: #000000;">&#40;</span> nc<span style="color: #000066; font-weight: bold;">,</span> groupspec<span style="color: #000066; font-weight: bold;">.</span>groupspecWithoutAuthorizations<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _listenStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">play</span> <span style="color: #000000;">&#40;</span> event<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">info</span><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">name</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _video<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">attachNetStream</span> <span style="color: #000000;">&#40;</span> _listenStream <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #004993;">addChild</span> <span style="color: #000000;">&#40;</span> _video <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0033ff; font-weight: bold;">break</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <span style="color: #000000;">&#125;</span><br />
+<span style="color: #000000;">&#125;</span><br />
+<br />
+<span style="color: #0033ff; font-weight: bold;">private</span> <span style="color: #339966; font-weight: bold;">function</span> setupGroup<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">:</span><span style="color: #0033ff; font-weight: bold;">void</span><br />
+<span style="color: #000000;">&#123;</span><br />
+&nbsp; &nbsp; groupspec = <span style="color: #0033ff; font-weight: bold;">new</span> GroupSpecifier<span style="color: #000000;">&#40;</span><span style="color: #990000;">&quot;myGroup/groupOne&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>postingEnabled &nbsp; &nbsp;= <span style="color: #0033ff; font-weight: bold;">false</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>multicastEnabled &nbsp;= <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>ipMulticastMemberUpdatesEnabled = <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>routingEnabled&nbsp; &nbsp; = <span style="color: #0033ff; font-weight: bold;">false</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; groupspec<span style="color: #000066; font-weight: bold;">.</span>addIPMulticastAddress<span style="color: #000000;">&#40;</span><span style="color: #990000;">&quot;225.225.0.1:30303&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; group = <span style="color: #0033ff; font-weight: bold;">new</span> NetGroup<span style="color: #000000;">&#40;</span>nc<span style="color: #000066; font-weight: bold;">,</span>groupspec<span style="color: #000066; font-weight: bold;">.</span>groupspecWithoutAuthorizations<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; group<span style="color: #000066; font-weight: bold;">.</span>receiveMode &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = NetGroupReceiveMode<span style="color: #000066; font-weight: bold;">.</span>NEAREST<span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; group<span style="color: #000066; font-weight: bold;">.</span>replicationStrategy &nbsp; &nbsp; &nbsp; = NetGroupReplicationStrategy<span style="color: #000066; font-weight: bold;">.</span>RAREST_FIRST<span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; group<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">addEventListener</span><span style="color: #000000;">&#40;</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NET_STATUS</span><span style="color: #000066; font-weight: bold;">,</span><span style="color: #004993;">netStatus</span><span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; sendStream = <span style="color: #0033ff; font-weight: bold;">new</span> <a href="http://www.google.com/search?q=netstream%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstream.html"><span style="color: #004993;">NetStream</span></a> <span style="color: #000000;">&#40;</span>nc<span style="color: #000066; font-weight: bold;">,</span> groupspec<span style="color: #000066; font-weight: bold;">.</span>groupspecWithoutAuthorizations<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">addEventListener</span><span style="color: #000000;">&#40;</span><a href="http://www.google.com/search?q=netstatusevent%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:netstatusevent.html"><span style="color: #004993;">NetStatusEvent</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">NET_STATUS</span><span style="color: #000066; font-weight: bold;">,</span> netStreamHandler<span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span>multicastAvailabilitySendToAll &nbsp; = <span style="color: #0033ff; font-weight: bold;">true</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">attachAudio</span> <span style="color: #000000;">&#40;</span> <a href="http://www.google.com/search?q=microphone%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:microphone.html"><span style="color: #004993;">Microphone</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">getMicrophone</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">attachCamera</span> <span style="color: #000000;">&#40;</span> <a href="http://www.google.com/search?q=camera%20inurl:http://livedocs.adobe.com/flex/201/langref/%20inurl:camera.html"><span style="color: #004993;">Camera</span></a><span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">getCamera</span> <span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+&nbsp; &nbsp; sendStream<span style="color: #000066; font-weight: bold;">.</span><span style="color: #004993;">publish</span> <span style="color: #000000;">&#40;</span> id <span style="color: #000000;">&#41;</span><span style="color: #000066; font-weight: bold;">;</span><br />
+<span style="color: #000000;">&#125;</span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/actionscript-netstream-p2p/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Flash &#8211; Modification du domaine d&#8217;application</title>
+		<link>http://www.armetiz.info/flash-modification-du-domaine-dapplication/</link>
+		<comments>http://www.armetiz.info/flash-modification-du-domaine-dapplication/#comments</comments>
+		<pubDate>Wed, 30 Mar 2011 13:46:42 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[bug]]></category>
+		<category><![CDATA[Domain]]></category>
+		<category><![CDATA[Jira]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[Shared]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1985</guid>
+		<description><![CDATA[Cette article fait suite à une incapacité technique de ma part à comprendre les comportements concernant le fonctionnement du domaine d&#8217;application. Voici l&#8217;énoncer du problème, nous avons deux fichiers SWF.. <a href="http://www.armetiz.info/flash-modification-du-domaine-dapplication/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cette article fait suite à une incapacité technique de ma part à comprendre les comportements concernant le fonctionnement du domaine d&#8217;application.</p>
+<p>Voici l&#8217;énoncer du problème, nous avons deux fichiers SWF présents sur deux domaines différents.<br />
+Nous souhaitons simplement pouvoir utiliser une librairie partagée entre ces deux SWF et donc utiliser des définitions de classes communes.<br />
+L&#8217;objectif est donc d&#8217;utiliser un seul domaine d&#8217;application pour les deux SWF.</p>
+<p>D’après la <a href="http://help.adobe.com/fr_FR/as3/dev/WSd75bf4610ec9e22f43855da312214da1d8f-8000.html">méthode officielle</a>,</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">var _loader : Loader = new Loader ();<br />
+var _request : URLRequest = new URLRequest ( &quot;http://www.example.com/foo.swf&quot;);<br />
+var _context : ContextLoader = new ContextLoader ();<br />
+<br />
+_context.applicationDomain = ApplicationDomain.currentDomain;<br />
+<br />
+_loader.load ( _request, _context );</div></td></tr></tbody></table></div>
+<p>Le problème a été retourné dans tout les sens.. nous n&#8217;avons jamais eu les mêmes domaines d&#8217;applications pour l&#8217;enfant et le parent.</p>
+<p>De plus, il est simple de vérifier si deux SWF utilise le même domaine d&#8217;application.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">trace ( String ( __loader.contentLoaderInfo.applicationDomain == ApplicationDomain.currentDomain ) ) ;<br />
+//false systématiquement</div></td></tr></tbody></table></div>
+<p>Les crossdomain sont présents sur les deux serveurs, et les utilisations de <strong>Security.allowDomain (&#8220;*&#8221;);</strong> n&#8217;ont pas été oubliées.</p>
+<p>Aussi, le soucis reste le même lorsque nous travaillons en local et que l&#8217;on charge le SWF avec un chemin relatif.<br />
+Ce qui est étrange, c&#8217;est que dans ce cas les définitions de classes sont utilisables et donne l&#8217;impression d&#8217;un seul domaine d&#8217;application. </p>
+<p>Du coups, j&#8217;y perds totalement mon latin. A savoir que nous avons tester avec le player 10.2.152 et 10.1</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/flash-modification-du-domaine-dapplication/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>AMF / Zend Authentication using Database</title>
+		<link>http://www.armetiz.info/zend-authentication-database/</link>
+		<comments>http://www.armetiz.info/zend-authentication-database/#comments</comments>
+		<pubDate>Tue, 19 Oct 2010 08:16:06 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[Authentification]]></category>
+		<category><![CDATA[Base de données]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Service]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843</guid>
+		<description><![CDATA[Cet article s&#8217;inscrit à la suite du précèdent billet : Authentification &#38; Autorisation avec Zend AMF. Zend_Amf_Adobe_Auth est une classe livré avec Zend 1.10. Elle peut être utilisée comme service.. <a href="http://www.armetiz.info/zend-authentication-database/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cet article s&#8217;inscrit à la suite du précèdent billet : <a href="http://www.armetiz.info/authentification-autorisation-zend-amf">Authentification &amp; Autorisation avec Zend AMF</a>.</p>
+<p><strong>Zend_Amf_Adobe_Auth</strong> est une classe livré avec Zend 1.10. Elle peut être utilisée comme service d&#8217;authentification pour un serveur <strong>Zend_Amf_Server</strong>. Le soucis, c&#8217;est que cette classe fonctionne conjointement avec un fichier XML réputé statique.</p>
+<p>Voici donc le code d&#8217;une classe qui permet l&#8217;authentification d&#8217;un utilisateur AMF via la base de données.<br />
+Sachant que nous développons cela pour offrir des services AMF, cette classe utilisera la logique métier implémentée au sein des services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Auth_AmfDatabase extends Zend_Amf_Auth_Abstract<br />
+{<br />
+&nbsp; &nbsp; protected $_acl;<br />
+&nbsp; &nbsp; protected $_users = array();<br />
+<br />
+&nbsp; &nbsp; public function __construct()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_acl = new Zend_Acl();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oServiceRole &nbsp; = new Service_Role ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oRoles &nbsp; &nbsp; = $oServiceRole-&amp;gt;fetchAll ( );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; foreach ( $oRoles as $oRole )<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_acl-&amp;gt;addRole ( new Zend_Acl_Role( $oRole-&amp;gt;title ) );<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function getAcl()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return $this-&amp;gt;_acl;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function authenticate()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (empty($this-&amp;gt;_username) ||<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; empty($this-&amp;gt;_password)) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; require_once 'Zend/Auth/Adapter/Exception.php';<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new Zend_Auth_Adapter_Exception('Username/password should be set');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oServiceUser &nbsp; = new Service_User ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oUser&nbsp; &nbsp; &nbsp; = $oServiceUser-&amp;gt;authentication ( $this-&amp;gt;_username, $this-&amp;gt;_password );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; if ( null == $oUser )<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return new Zend_Auth_Result(Zend_Auth_Result::FAILURE,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; null,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('Username and / or Password not found')<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; else<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id = new stdClass();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id-&amp;gt;role = $oUser-&amp;gt;role-&amp;gt;code;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id-&amp;gt;name = $oUser-&amp;gt;username;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return new Zend_Auth_Result(Zend_Auth_Result::SUCCESS, $id);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Le <strong>constructeur</strong> récupère l&#8217;ensemble des rôles existants en base de données pour peupler l&#8217;objet ACL.<br />
+La méthode <strong>authenticate</strong> va vérifier le couple Login / Password, et en cas de succès va retourner un objet <strong>Zend_Auth_Result</strong> contenant lui même un objet standard.<br />
+Cet objet standard doit avoir une propriété <strong>role</strong> et <strong>name</strong>, le <strong>rôle</strong> contiendra l&#8217;identifiant que vous avez définit dans vos autorisations ACL. Le <strong>name</strong> devra contenir le login de votre utilisateur.</p>
+<p>Cette classe a été inspirée par <strong>Zend_Amf_Adobe_Auth</strong>. N&#8217;hésitez pas à l&#8217;adapter pour vos propres besoins.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/zend-authentication-database/feed/</wfw:commentRss>
+		<slash:comments>20</slash:comments>
+		</item>
+		<item>
+		<title>Installer FMS 4 sur Debian 5.0</title>
+		<link>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/</link>
+		<comments>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/#comments</comments>
+		<pubDate>Thu, 09 Sep 2010 13:31:46 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Didacticiel]]></category>
+		<category><![CDATA[P2P]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Tutoriel]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1820</guid>
+		<description><![CDATA[Pour annoncer la sortie de Flash Media Server 4. Voici un petit tutoriel présentant l&#8217;installation de FMS 4 sur Debian Lenny. Cette version sera disponible pour un plus grand nombre.. <a href="http://www.armetiz.info/installer-fms-4-sur-debian-5-0/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img alt="" src="http://www.adobe.com/ubi/globalnav/include/adobe-lq.png" class="alignleft" width="43" height="72" />Pour annoncer la sortie de Flash Media Server 4. Voici un petit tutoriel présentant l&#8217;installation de <strong>FMS 4</strong> sur <strong>Debian Lenny</strong>.</p>
+<p>Cette version sera disponible pour un plus grand nombre de machine avec le <strong>support du 64Bits</strong>. Elle permettra de <strong>réduire considérablement les coûts</strong> de bande passante pour la <strong>VoD grâce au P2P</strong> mais aussi pour le live grâce au <strong>Multicast</strong>.</p>
+<h3>Installation</h3>
+<p>L&#8217;installation se déroule sur une <a href="http://www.debian.org/distrib/">Debian 5.0</a> où il n&#8217;y a que le système de base.</p>
+<p>FMS 4 nécessite la librairie <a href="http://packages.debian.org/fr/lenny/libnspr4-dev">libnspr4</a>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">apt-get install libnspr4-dev</div></td></tr></tbody></table></div>
+<p>Ensuite, <a href="http://www.adobe.com/go/tryflashmediaserver_fr">récupérer FMS 4</a> pour Linux.<br />
+Dé-zipper le fichier : <strong>FlashMediaServer_4_all.zip</strong> fraichement téléchargé.<br />
+Il existe deux versions pour Linux, la <strong>32bits</strong> et la <strong>64bits</strong>. A vous de choisir celle qui convient à votre architecture.</p>
+<p>Pour décompresser et extraire l&#8217;archive.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">tar -xzvf FlashMediaServer4.tar.gz</div></td></tr></tbody></table></div>
+<p>Lancer le script d&#8217;installation FMS qui se trouve dans le répertoire où vous avez extrait l&#8217;archive du dessus.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">./installFMS</div></td></tr></tbody></table></div>
+<p>A un moment, on vous demandera un licence. Nous souhaitons utiliser la version de développement, donc nous passons cette étape en appuyant sur <strong>ENTREE</strong> et en répondant non à la question :<br />
+<blockquote><em>You have not entered a serial number.  Falling back to<br />
+the Adobe Flash Media Development Server!<br />
+Would you like to try again?</em></p></blockquote>
+<h3>Options par défaut</h3>
+<ul>
+<li>Répertoire d&#8217;installation : /opt/adobe/fms</li>
+<li>Adobe FMS Server port : 1935 &amp; 80</li>
+<li>Adobe FMS Admin Server port : 1111</li>
+</ul>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/installer-fms-4-sur-debian-5-0/feed/</wfw:commentRss>
+		<slash:comments>8</slash:comments>
+		</item>
+		<item>
+		<title>Authentification et Autorisation avec Zend AMF</title>
+		<link>http://www.armetiz.info/authentification-autorisation-zend-amf/</link>
+		<comments>http://www.armetiz.info/authentification-autorisation-zend-amf/#comments</comments>
+		<pubDate>Mon, 05 Jul 2010 08:23:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[AS3]]></category>
+		<category><![CDATA[CRUD]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Server]]></category>
+		<category><![CDATA[Service]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1786</guid>
+		<description><![CDATA[Nous allons voir comment mettre en place l&#8217;authentification et l&#8217;autorisation lorsque l&#8217;on souhaite travailler avec Zend et le protocole AMF. Au niveau des pré-requit, vous devez avoir une architecture Zend.. <a href="http://www.armetiz.info/authentification-autorisation-zend-amf/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Nous allons voir comment mettre en place <strong>l&#8217;authentification</strong> et <strong>l&#8217;autorisation</strong> lorsque l&#8217;on souhaite travailler avec Zend et le protocole AMF.</p>
+<p>Au niveau des pré-requit, vous devez avoir une architecture <strong>Zend et AMF opérationnelle</strong>.<br />
+Aussi, je vous conseils de lire la documentation sur <a href="http://framework.zend.com/manual/fr/zend.auth.introduction.html">Zend_Auth</a> et <a href="http://framework.zend.com/manual/fr/zend.acl.introduction.html">Zend_Acl</a>.<br />
+Vous devez avoir compris la notion de <strong>rôle</strong> et de <strong>ressource</strong>.</p>
+<h3>Objectifs</h3>
+<p>Si vous fournissez des services à travers le réseau, et qu&#8217;ils peuvent avoir un impact sur la cohérence des données, vous vous devez de sécuriser l&#8217;accès à ces services.</p>
+<p>Sécurisé l&#8217;accès signifie restreinte l&#8217;accès, mais aussi chiffrer les communications.<br />
+Nous ne traiterons pas la partie chiffrement des échanges, pour cela je vous laissez chercher de la documentation sur HTTPS.</p>
+<h3>Point de départ</h3>
+<p>Ci-dessous, un exemple de contrôleur Zend offrant des services AMF.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class ServiceController extends Zend_Controller_Action<br />
+{<br />
+&nbsp; &nbsp; public function init()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_helper-&amp;gt;viewRenderer-&amp;gt;setNoRender();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_helper-&amp;gt;layout-&amp;gt;disableLayout();<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public function amfAction()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; $server = new Zend_Amf_Server();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; //Liste des services<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;Service_User&quot; );<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;Service_Book&quot; );<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;ZendAmfServiceBrowser&quot; );<br />
+<br />
+&nbsp; &nbsp; //Mapping des objets PHP avec les objets ActionScript &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; $server-&amp;gt;setClassMap('UserDTO', 'Model_DTO_User');<br />
+&nbsp; &nbsp; $server-&amp;gt;setClassMap('BookDTO', 'Model_DTO_Book');<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; $server-&amp;gt;setProduction(false);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; ZendAmfServiceBrowser::$ZEND_AMF_SERVER = $server;<br />
+<br />
+&nbsp; &nbsp; echo ($server-&amp;gt;handle());<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Nous avons donc <u>deux services</u>, et <u>deux types d&#8217;objets</u> pouvant être utilisés.</p>
+<p>Vous remarquerez l&#8217;utilisation de <a href="http://www.zamfbrowser.org/">ZamfBrowser</a>, ce service couplé avec une application Adobe AIR permet de travailler facilement avec les services.</p>
+<p>Voici à quoi ressemble les prototypes d&#8217;un de mes services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Service_Book<br />
+{<br />
+&nbsp; &nbsp; public function createBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function readBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function updateBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function deleteBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function isRentBy (Model_DTO_User $oUser) {}<br />
+}</div></td></tr></tbody></table></div>
+<blockquote><p>L&#8217;autre service est composé lui aussi des méthodes <strong>CRUD</strong> (Create, Read, Update, Delete), ainsi que d&#8217;autres fonctions métiers.</p></blockquote>
+<p>Sachant que mon application cliente Flash utilise ces services, il est très facile à un utilisateur de découvrir <strong>l&#8217;URI de la passerelle AMF</strong>.<br />
+En l&#8217;état, une personne ayant l&#8217;accès à ma passerelle AMF pourrai utiliser toutes les fonctions de mes services. Ce qui implique qu&#8217;il puisse modifier ma base de données.</p>
+<p><em>Remarquer que si l&#8217;on supprime le service de ZamfBrowser, l&#8217;utilisateur n&#8217;aura pas accès à la liste exhaustive des services. Si vous êtes en production, je vous conseils donc de supprimer ce service pour des raisons de sécurité.</em></p>
+<h3>Mise en place de l&#8217;authentification</h3>
+<p>Nous allons commencer par mettre en place l&#8217;authentification,<br />
+Sachant que nous utilisons un client Flash, il est logique d&#8217;utiliser <strong>Zend_Amf_Adobe_Auth</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$authAdapter = new Zend_Amf_Adobe_Auth(APPLICATION_PATH . '/config/password.xml');<br />
+$server-&amp;gt;setAuth($authAdapter );</div></td></tr></tbody></table></div>
+<p>Avec ces deux lignes, nous avons mis en place l&#8217;authentification au niveau du serveur.<br />
+Il vous reste à définir le fichier password.xml</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Le fichier password.xml contient les identifiants et les mots de passe des utilisateurs.<br />
+C&#8217;est à ce niveau que vous définissez les affectations d&#8217;identifiants à un rôle.</p>
+<p>Si vous avez besoin de plus de souplesse au niveau de la gestion des identifiants, je vous conseils la lecture de <a href="http://framework.zend.com/manual/fr/zend.auth.adapter.dbtable.html">Authentification avec une table de base de données</a>.</p>
+<p><em>Il est à noter, que si vous ne spécifier aucun identifiant lors de votre connexion au serveur AMF vous serez considéré comme un invité : <strong>Zend_Amf_Constants::GUEST_ROLE</strong></em></p>
+<h3>Mise en place de l&#8217;autorisation</h3>
+<p>Maintenant que nous avons correctement définit l&#8217;authentification, passons à l&#8217;autorisation.<br />
+C&#8217;est maintenant que nous allons donner les autorisations ou refus d&#8217;accès aux services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Avec ces deux lignes, vous avez définit une <strong>Acces Control List</strong>.<br />
+Vous le constatez, aucune autorisation n&#8217;est définit; mais il est important de noter que maintenant, <strong>plus personne n&#8217;a accès à vos services</strong>.</p>
+<p>Pour donner l&#8217;accès à nos deux services à n&#8217;importe qui, nous allons procéder comme suit :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('Service_User') );<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('Service_Book') );<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('ZendAmfServiceBrowser') );<br />
+<br />
+$acl-&amp;gt;allow (null, 'Service_User');<br />
+$acl-&amp;gt;allow (null, 'Service_Book');<br />
+$acl-&amp;gt;allow (null, 'ZendAmfServiceBrowser);<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Ci-dessus, nous avons une liste explicite des autorisations.<br />
+Si nous avions voulu faire dans l&#8217;implicite, nous aurions procédé ainsi :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$acl-&amp;gt;allow ();<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Pour aller plus loin dans l&#8217;explication, nous allons maintenant définir l&#8217;ensemble de nos autorisations.</p>
+<blockquote><p>Nous souhaitons que le rôle administrateur est accès à tout, et nous souhaitons que les utilisateurs non authentifiés n&#8217;est pas accès aux fonctions de mise à jour.</p></blockquote>
+<p>Rappelez-vous, nous avons vu plus haut que vous étiez connecter avec le rôle invité lorsque vous ne spécifiez aucun identifiant.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+<br />
+//Définition les rôles.<br />
+$acl-&amp;gt;addRole ( new Zend_Acl_Role(Zend_Amf_Constants::GUEST_ROLE) );<br />
+<br />
+//Définition des autorisations<br />
+$acl-&amp;gt;allow ();<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;create&quot;);<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;update&quot;);<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;delete&quot;);<br />
+<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p><u>Premièrement,</u><br />
+Nous avons dû définir le rôle invité pour pouvoir travailler ses autorisations.</p>
+<p><u>Deuxièmement,</u><br />
+Nous avons utilisé le principe des listes noires. Si nous avions utilisez un système de liste blanche, nous aurions du définir l&#8217;ensemble des rôles, et l&#8217;ensemble des autorisations.<br />
+C&#8217;est donc en partant du principe que tout le monde a accès à tout, que nous avons fermé les portes aux anonymes.</p>
+<p><u><strong>Explication des fonctions Deny &amp; Allow :</strong></u><br />
+<strong>Zend_Acl::deny</strong> et <strong>Zend_Acl::allow</strong> utilisent les mêmes arguments.<br />
+Le premier paramètre correspond à un rôle, cela ne change pas des ACL Zend classique.<br />
+Le deuxième paramètre correspond à une ressource. Avec Zend AMF, une ressource correspond à un Service.<br />
+Le troisième paramètre correspond ici à la fonction d&#8217;un service AMF.</p>
+<p>Nous avons utiliser <strong>null</strong> au niveau du deuxième paramètre pour dire : <strong>tout les services</strong>.</p>
+<h3>initAcl</h3>
+<p>Ce dernier paragraphe pour vous parlez de mon opposition face aux spécifications de la documentation <a href="http://framework.zend.com/manual/1.10/en/zend.amf.server.html">Zend_AMF_Server</a> :</p>
+<blockquote><p><em>If the ACL object is set, and the class being called defines initAcl() method, this method will be called with the ACL object as an argument. The class then can create additional ACL rules and return TRUE, or return FALSE if no access control is required for this class.</em></p></blockquote>
+<p>En gros, il existe une autre manière de définir les autorisations,<br />
+Si vous avez définit un ACL au niveau de votre Serveur AMF. Ce dernier vérifiera l&#8217;existence d&#8217;une fonction <strong>initAcl</strong> sur les services lorsqu&#8217;ils seront appelés.</p>
+<p>Cette fonction est ce que l&#8217;on appel un <a href="http://fr.wikipedia.org/wiki/Hook_%28informatique%29">Hook</a>, et vous permets de définir les autorisations et refus au sein de la définition même de vos services.<br />
+Autant vous dire que <strong>niveau maintenance et centralisation de l&#8217;information c&#8217;est très moyen</strong>..<br />
+De plus, si l&#8217;on pend l&#8217;exemple de <strong>ZendAmfServiceBrowser</strong>, vous allez devoir modifier la définition de ce service, et cela à chaque fois qu&#8217;il y aura une nouvelle version ?</p>
+<p>Voici un exemple de fonctionnement</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Service_Book<br />
+{<br />
+&nbsp; &nbsp; public function initAcl ($acl)<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'create');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'update');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'delete');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return true;<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p><strong>Pour aller plus loin</strong> : Vous trouverez un article dédié à l&#8217;authentification pour Zend AMF Server avec une base de données : <a href="http://www.armetiz.info/zend-authentication-database/">AMF / Zend Authentication using Database</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/authentification-autorisation-zend-amf/feed/</wfw:commentRss>
+		<slash:comments>22</slash:comments>
+		</item>
+		<item>
+		<title>Google I/O : Vidéo, Android et Adobe</title>
+		<link>http://www.armetiz.info/google-io-video-android-adobe/</link>
+		<comments>http://www.armetiz.info/google-io-video-android-adobe/#comments</comments>
+		<pubDate>Fri, 21 May 2010 08:42:25 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Android]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Beta]]></category>
+		<category><![CDATA[Conférence]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[google]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1695</guid>
+		<description><![CDATA[Pour ceux qui ne suivent pas l&#8217;actualité, Google tient en ce moment des conférences appelées Google Input/Ouput. Format vidéo Internet Pour le premier jour de conférence, nous avons eu droit.. <a href="http://www.armetiz.info/google-io-video-android-adobe/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pour ceux qui ne suivent pas l&#8217;actualité, Google tient en ce moment des conférences appelées <a href="http://code.google.com/intl/fr/events/io/2010/">Google Input/Ouput</a>.</p>
+<h3>Format vidéo Internet</h3>
+<p>Pour le premier jour de conférence, nous avons eu droit &#8211; entre autre &#8211; à l&#8217;annonce du format vidéo <a href="http://www.webmproject.org/">WebM</a> qui &#8211; normalement &#8211; devrai devenir le standard vidéo libre du net.<br />
+La raison de ce nouveau format, c&#8217;est que l&#8217;utilisation du H.264 est soumise à une licence payante. A cause de cela Firefox ne pouvait pas lire les vidéos H.264&#8230;<br />
+<a href="http://www.armetiz.info/files/2010/05/froyo1.png"><img src="http://www.armetiz.info/files/2010/05/froyo1.png" alt="" width="200" height="168" class="alignright size-full wp-image-1696" /></a></p>
+<h3>Android 2.2</h3>
+<p>Autre nouveauté, concernant <strong>Android</strong>.<br />
+Nous avons eu la confirmation de la nouvelle version Android 2.2 nommé Froyo, qui apporte son lot d&#8217;amélioration :
+<ul>
+<li>Support complet de <strong>Flash Player 10.1</strong> et <strong>Adobe AIR 2.5</strong></li>
+<li>2 à 5 fois plus rapide que les anciennes version grâce à un nouveau compilateur <strong>Dalvik JIT</strong></li>
+<li>Navigation internet 2 à 3 fois plus rapide grâce à un nouveau moteur Javascript</li>
+<li>Installation des applications sur la carte SD possible en natif</li>
+<li>Mise à jour automatique des applications installées à partir du Market</li>
+</ul>
+<p>Pour ceux qui développent pour Android, la <a href="http://developer.android.com/sdk/android-2.2.html">version 2.2 du SDK</a> est disponible.</p>
+<h3>Google TV</h3>
+<p>Pour le coups, je ne vais pas m&#8217;étendre dessus, je préfère rediriger vers de l&#8217;information bien plus précise.<br />
+Vous pouvez donc aller faire un tour sur le 20minutes : <a href="http://www.20minutes.fr/article/405920/High-Tech-Laborieusement-presente-Google-TV-va-t-il-revolutionner-la-tele.php">HIGH-TECH &#8211; Via Android et un processeur Intel, Google veut marier la télé et le Web. Tout le Web&#8230;</a></p>
+<h3>Adobe</h3>
+<p>A cette occasion, Adobe en a profité pour ouvrir l&#8217;accès à la Bêta du <a href="http://labs.adobe.com/technologies/flashplayer10/">Player Flash 10.1 pour Android</a> et à la prerelease de <a href="http://blogs.adobe.com/air/2010/05/air_android_prerelease.html">Adobe AIR pour Android</a>.</p>
+<p>Alors que Adobe AIR peut s&#8217;installer sur Android 2.1, <strong>FP 10.1 doit être installé sur Android 2.2</strong>.<br />
+C&#8217;est dommage car très &#8211; très &#8211; peu de gens disposent de la nouvelle version Android Froyo, mais cela annonce aussi que Google ne devrai pas tarder à mettre à jour les terminaux <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/google-io-video-android-adobe/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Enregistrer les sources Flash au format XML</title>
+		<link>http://www.armetiz.info/enregistrer-sources-flash-format-xml/</link>
+		<comments>http://www.armetiz.info/enregistrer-sources-flash-format-xml/#comments</comments>
+		<pubDate>Thu, 22 Apr 2010 08:25:51 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Amélioration]]></category>
+		<category><![CDATA[CS5]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[Tache]]></category>
+		<category><![CDATA[XML]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1671</guid>
+		<description><![CDATA[Adobe Creative Suite 5 va sortir dans les prochains jours, et hormis l&#8217;iPhone packager qui semblait être le cheval de bataille cette année, les autres améliorations sont passées un peu.. <a href="http://www.armetiz.info/enregistrer-sources-flash-format-xml/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2009/12/adobe-lq1.png"><img src="http://www.armetiz.info/files/2009/12/adobe-lq1.png" alt="" width="43" height="72" class="alignleft size-full wp-image-1665" /></a><strong>Adobe Creative Suite 5</strong> va sortir dans les prochains jours, et hormis <strong>l&#8217;iPhone packager</strong> qui semblait être le cheval de bataille cette année, les autres améliorations sont passées un peu à la trappe.</p>
+<p>Sur <a href="http://labs.adobe.com/technologies/flashcs5/">Adobe Labs</a> ont peut trouver les nouveautés de Flash CS5, et sur le nouveau <a href="http://blog.mediabox.fr/flash-pro-cs5-les-nouveautes">blog de mediabox</a> la traduction Française.</p>
+<p>Personnellement, je remarque un point très intéressant : <strong>XML based FLA files</strong>, où encore <strong>Fichiers FLA basés sur le XML</strong>.<br />
+Qu&#8217;est-ce que cela signifie ? Mediabox le définit comme tel :</p>
+<blockquote><p>En enregistrant votre document .fla, vous constaterez dans votre boite de dialogue <strong>la possibilité d’enregistrer</strong> votre travail sous un <strong>format non compressé .xfl</strong>. Vous aurez alors la <strong>création d’un dossier</strong> reprenant la structure de votre document et de votre librairie. Il sera alors facile à des personnes tiers non familières de Flash, de pouvoir modifier le contenu de la librairie, en changeant les textes, les images etc. Le tout sans avoir besoin de ré-ouvrir votre document dans Flash et de chercher où est le contenu à modifier.</p></blockquote>
+<p>Dans tout les cas, cela signifie que nous pourrons accéder à la structure de nos animations sans passer obligatoirement par les <strong>fichiers FLA</strong>, qui sont des fichiers au <strong>format binaire non ouvert</strong>.<br />
+Mais aussi et surtout, nous pourrons indirectement <strong>automatiser certaines tâches</strong> !</p>
+<p>Je prends l&#8217;exemple d&#8217;un <a href="http://www.projet-elearning.com/">projet eLearning</a> où le nombre de FLA dépasse la centaine. Sur chacun de ces FLA il y a des <strong>éléments redondants</strong>.<br />
+Après avoir livré la version de recette au client, celui-ci nous dit qu&#8217;il n&#8217;aime pas la tête du personnage Dupon.<br />
+Ce personnage est sur 80% des animations réalisées. </p>
+<p>Actuellement, plusieurs solutions s&#8217;offre à vous. Vous avez utilisé une <strong>librairie partagée</strong>, il va falloir ré-ouvrir tout les FLA, faire la mise à jour des symboles et re-compiler chaque FLA.<br />
+Si vous n&#8217;avez pas de librairie partagée, il faudra remplacer à la main le symbole du personnage dans chaque FLA et lancer la compilation sur chacun.</p>
+<p>Avec Adobe Flash CS5, il sera possible d&#8217;automatiser la modification d&#8217;un élément sur l&#8217;ensemble des sources. Celle-ci pouvant être enregistrée au format XML, un simple <strong>script PHP</strong> fera l&#8217;affaire.<br />
+Il est déjà possible d&#8217;<strong>automatiser la compilation de FLA</strong>, <a href="http://www.gskinner.com/blog/archives/2004/08/jsfl_fla_batch.html">gSkinner</a> et <a href="http://www.mikechambers.com/blog/2003/11/01/flashcommand-flash-2004-command-line-compiler/">Mike Chambers</a> l&#8217;ont fait. </p>
+<p><a href="http://www.armetiz.info/files/2009/11/adobe_air1.jpg"><img src="http://www.armetiz.info/files/2009/11/adobe_air1.jpg" alt="" width="150" height="150" class="alignright size-full wp-image-1425" /></a>Je n&#8217;ai pas pu tester cette nouvelle version de Flash.<br />
+Il faut donc prendre cela au conditionnel, car il n&#8217;est pas dit que Adobe ai pensé à réaliser un compilateur de fichier SWF à partir de source XML.</p>
+<p>Mais si tout cela s&#8217;avère être exact, il n&#8217;est pas impossible de voir apparaître des applications Adobe AIR permettant de modifier des éléments au sein d&#8217;un groupe de fichier source XML.</p>
+<p>Edit : Valerio Virgillito <strong>Ingénieur chez Adobe</strong> a publié un article concernant le format XFL de Flash CS5 : <a href="http://blog.mencio.com/?p=28">XFL and Live Editing</a>.<br />
+On peut y apprendre des informations intéressantes. Comme le fait que le fichier FLA ne sera plus un fichier binaire fermé, mais un <strong>package de fichier compressé XML</strong>; à la sauce des fichiers Docx surement.<br />
+Mais aussi que les modifications des fichiers composants l&#8217;animation seront automatiquement pris en compte par Flash CS5. Je vous conseils de regarder la <strong>vidéo</strong> de son article pour une meilleur visibilité.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/enregistrer-sources-flash-format-xml/feed/</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		</item>
+		<item>
+		<title>Adobe donne le ton aux utilisateurs iPhone / iPad</title>
+		<link>http://www.armetiz.info/adobe-donne-le-ton/</link>
+		<comments>http://www.armetiz.info/adobe-donne-le-ton/#comments</comments>
+		<pubDate>Thu, 11 Feb 2010 14:49:39 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Apple]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[iPad]]></category>
+		<category><![CDATA[iPhone]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1618</guid>
+		<description><![CDATA[Avec un simple message, Adobe donne le ton aux utilisateurs iPhone qui souhaitent installer le player Flash. Et montre que tout est de la faute à Apple si Flash n&#8217;est.. <a href="http://www.armetiz.info/adobe-donne-le-ton/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Avec un simple message, Adobe donne le ton aux utilisateurs <strong>iPhone </strong>qui souhaitent installer le player <strong>Flash</strong>. Et montre que tout est de la faute à <strong>Apple </strong>si Flash n&#8217;est pas présent.</p>
+<p>Voici une traduction :<br />
+<em>Apple restreint l&#8217;utilisation des technologies requises par les produits comme Flash Player. Tant que Apple ne supprimera pas ces restrictions, Adobe ne pourra pas fournir Flash Player pour l&#8217;iPhone ou l&#8217;iPod Touch.</em></p>
+<p><a href="http://www.armetiz.info/files/2010/02/iphone_flash1.png"><img src="http://www.armetiz.info/files/2010/02/iphone_flash1.png" alt="" width="316" height="240" class="size-full wp-image-1619" /></a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/adobe-donne-le-ton/feed/</wfw:commentRss>
+		<slash:comments>14</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 9/15 queries in 0.006 seconds using apc
+Object Caching 1480/1548 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:11:28 by W3 Total Cache -->

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; SELinux</title>
+	<atom:link href="http://www.armetiz.info/tag/selinux/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>CentOS 6 &#8211; Apache &amp; NFS</title>
+		<link>http://www.armetiz.info/centos-6-apache-nfs/</link>
+		<comments>http://www.armetiz.info/centos-6-apache-nfs/#comments</comments>
+		<pubDate>Thu, 19 Apr 2012 11:39:41 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Administration]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Configuration]]></category>
+		<category><![CDATA[NFS]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[SELinux]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2197</guid>
+		<description><![CDATA[SELinux est installé et activé par défaut sur les installations CentOS 6. Pour mettre en place une infrastructure Web éclatée, j&#8217;ai choisis de mettre en place un serveur NFS qui.. <a href="http://www.armetiz.info/centos-6-apache-nfs/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://wiki.centos.org/HowTos/SELinux">SELinux</a> est installé et activé par défaut sur les installations CentOS 6.</p>
+<p>Pour mettre en place une infrastructure Web éclatée, j&#8217;ai choisis de mettre en place un serveur NFS qui héberge les fichiers de mes applications PHP.<br />
+Les serveurs Apache sont donc configurés comme des clients NFS, et le DocumentRoot point vers le point de montage NFS.</p>
+<p>Au démarrage d&#8217;Apache :<br />
+<strong>Warning: DocumentRoot [/var/www/tld.domain/subdomains/foo/httpdocs] does not exist</strong></p>
+<p>Ce problème peut-être causé par un défault de configuration de SELinux,<br />
+Pour vérifier on désactive SELinux et on relance Apache.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">setenforce Permissive<br />
+service httpd restart</div></td></tr></tbody></table></div>
+<p>Si Apache démarre correctement, c&#8217;est donc bien une configuration SELinux qui bloque.<br />
+Il faut modifier un <a href="http://wiki.centos.org/TipsAndTricks/SelinuxBooleans">booléen SELinux</a> : <strong>httpd_use_nfs</strong> qui est à &#8220;off&#8221; par défaut.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">setsebool httpd_use_nfs on</div></td></tr></tbody></table></div>
+<p>Cela fonctionnera aussi apres un reboot de votre serveur.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-6-apache-nfs/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.015 seconds using apc
+Object Caching 381/382 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:14:38 by W3 Total Cache -->

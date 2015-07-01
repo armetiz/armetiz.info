@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Fait étrange avec un TextField et une class de document</title>
+	<atom:link href="http://www.armetiz.info/fait-etrange-avec-un-textfield-et-une-class-de-document/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info/fait-etrange-avec-un-textfield-et-une-class-de-document/</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Thu, 03 Apr 2014 20:26:43 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/fait-etrange-avec-un-textfield-et-une-class-de-document/#comment-11</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Sat, 24 Jan 2009 18:58:44 +0000</pubDate>
+		<guid isPermaLink="false">http://armetiz.info/?p=23#comment-11</guid>
+		<description><![CDATA[C&#039;est en effet cela, à l&#039;époque où j&#039;ai écris cet article je n&#039;en avais pas conscience.
+
+Merci à toi Ademus en tout cas.
+
+Armetiz.]]></description>
+		<content:encoded><![CDATA[<p>C&#8217;est en effet cela, à l&#8217;époque où j&#8217;ai écris cet article je n&#8217;en avais pas conscience.</p>
+<p>Merci à toi Ademus en tout cas.</p>
+<p>Armetiz.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ademus</title>
+		<link>http://www.armetiz.info/fait-etrange-avec-un-textfield-et-une-class-de-document/#comment-10</link>
+		<dc:creator><![CDATA[ademus]]></dc:creator>
+		<pubDate>Sat, 24 Jan 2009 18:04:45 +0000</pubDate>
+		<guid isPermaLink="false">http://armetiz.info/?p=23#comment-10</guid>
+		<description><![CDATA[avec le code suivant, ça marche; il faut attendre que la scéne ait été mise à jour graphiqueent pour pouvoir accéder à ses éléments graphiques.
+
+package
+{
+	import flash.display.MovieClip;
+	import flash.text.TextField;
+	import flash.events.Event;
+	public class effacer extends MovieClip
+	{
+		public function effacer()
+		{
+			stop();
+			trace(this.numChildren);//affiche: 1
+			trace(getChildAt (0));//affiche: [object TextField]
+			nextFrame();
+			stage.invalidate();
+			addEventListener(Event.RENDER,upToDate);
+		}
+		public function upToDate(e)
+		{
+			trace(this.numChildren);//affiche: 1
+			trace(getChildAt (0));//affiche: [object TextField]
+			trace(typeof (getChildAt (0)));//affiche: object
+		}
+	}
+}]]></description>
+		<content:encoded><![CDATA[<p>avec le code suivant, ça marche; il faut attendre que la scéne ait été mise à jour graphiqueent pour pouvoir accéder à ses éléments graphiques.</p>
+<p>package<br />
+{<br />
+	import flash.display.MovieClip;<br />
+	import flash.text.TextField;<br />
+	import flash.events.Event;<br />
+	public class effacer extends MovieClip<br />
+	{<br />
+		public function effacer()<br />
+		{<br />
+			stop();<br />
+			trace(this.numChildren);//affiche: 1<br />
+			trace(getChildAt (0));//affiche: [object TextField]<br />
+			nextFrame();<br />
+			stage.invalidate();<br />
+			addEventListener(Event.RENDER,upToDate);<br />
+		}<br />
+		public function upToDate(e)<br />
+		{<br />
+			trace(this.numChildren);//affiche: 1<br />
+			trace(getChildAt (0));//affiche: [object TextField]<br />
+			trace(typeof (getChildAt (0)));//affiche: object<br />
+		}<br />
+	}<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 7/12 queries in 0.005 seconds using apc
+Object Caching 276/277 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:15:15 by W3 Total Cache -->

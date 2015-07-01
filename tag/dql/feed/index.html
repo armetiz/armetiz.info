@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; DQL</title>
+	<atom:link href="http://www.armetiz.info/tag/dql/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Ordonner les resultats Doctrine avec une table de composition</title>
+		<link>http://www.armetiz.info/ordonner-resultats-doctrine-table-liaison/</link>
+		<comments>http://www.armetiz.info/ordonner-resultats-doctrine-table-liaison/#comments</comments>
+		<pubDate>Tue, 01 Jun 2010 06:00:59 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Doctrine]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[DOM]]></category>
+		<category><![CDATA[DQL]]></category>
+		<category><![CDATA[Ordre]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1716</guid>
+		<description><![CDATA[Prenons le schéma ci-dessus. Au niveau de la définition, nous avons deux entités : Bureau ( rooms ) et Utilisateur ( users ). Ces deux entités sont liées par une.. <a href="http://www.armetiz.info/ordonner-resultats-doctrine-table-liaison/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/05/composition1.png"><img src="http://www.armetiz.info/files/2010/05/composition1.png" alt="" width="333" height="69" class="aligncenter size-full wp-image-1717" /></a></p>
+<p>Prenons le schéma ci-dessus.<br />
+Au niveau de la définition, nous avons deux entités : <strong>Bureau </strong>( rooms ) et <strong>Utilisateur </strong>( users ). Ces deux entités sont liées par une relation <strong>manyToMany </strong>car un utilisateur peut avoir plusieurs bureaux, et un bureau peut avoir plusieurs utilisateurs.<br />
+Pour pouvoir intégrer l&#8217;ordonnancement des utilisateurs au sein d&#8217;une pièce, nous avons ajouté le champs &#8220;<strong>index</strong>&#8221; sur la table de liaison.</p>
+<p>Grâce à cette définition, nous pouvons avoir les cas suivants :<br />
+&#8211; Robert est à la place #2 dans le bureau d&#8217;accueil<br />
+&#8211; Robert est à la place #1 dans le bureau du président<br />
+&#8211; Annie est à la place #1 dans le bureau du président</p>
+<h3>Définition des Domain Model Object</h3>
+<p><a href="http://www.armetiz.info/files/2010/05/doctrine1.gif"><img src="http://www.armetiz.info/files/2010/05/doctrine1.gif" alt="doctrine" width="191" height="53" class="alignright size-full wp-image-1710" /></a><br />
+Nous allons maintenant définir les liaisons Doctrine entre ces objets.<br />
+Je n&#8217;utiliserai pas la définition YAML.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br />50<br />51<br />52<br />53<br />54<br />55<br />56<br />57<br />58<br />59<br />60<br />61<br />62<br />63<br />64<br />65<br />66<br />67<br />68<br />69<br />70<br />71<br />72<br />73<br />74<br />75<br />76<br />77<br />78<br />79<br />80<br />81<br />82<br />83<br />84<br />85<br />86<br />87<br />88<br />89<br />90<br />91<br />92<br />93<br />94<br />95<br />96<br />97<br />98<br />99<br />100<br />101<br />102<br />103<br />104<br />105<br />106<br />107<br />108<br />109<br />110<br />111<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">abstract class Model_Base_Room extends Model_Base<br />
+{<br />
+&nbsp; &nbsp; public function setTableDefinition()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;setTableName('rooms');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('id_room as idRoom', 'integer', 4, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'integer',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '4',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('title', 'string', 80, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'string',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'notnull' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '80',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public function setUp()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; parent::setUp();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasMany('Model_User as users', array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'refClass' =&amp;gt; 'Model_CompoRoomsUsers',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'local' =&amp;gt; 'id_room',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'foreign' =&amp;gt; 'id_user'));<br />
+&nbsp; &nbsp; }<br />
+}<br />
+<br />
+abstract class Model_Base_User extends Model_Base<br />
+{<br />
+&nbsp; &nbsp; public function setTableDefinition()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;setTableName('users');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('id_user as idUser', 'integer', 4, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'integer',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '4',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('firstname', 'string', 80, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'string',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'notnull' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '80',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public function setUp()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; parent::setUp();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasMany('Model_Room as rooms', array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'refClass' =&amp;gt; 'Model_CompoRoomsUsers',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'local' =&amp;gt; 'id_user',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'foreign' =&amp;gt; 'id_room'));<br />
+&nbsp; &nbsp; }<br />
+}<br />
+<br />
+abstract class Model_Base_CompoRoomsUsers extends Model_Base<br />
+{<br />
+&nbsp; &nbsp; public function setTableDefinition()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;setTableName('compo_rooms_users');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('id_room as idRoom', 'integer', 4, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'integer',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '4',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('id_user as idUser', 'integer', 4, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'integer',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '4',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasColumn('index', 'integer', 4, array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'type' =&amp;gt; 'integer',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'fixed' =&amp;gt; 0,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'unsigned' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'primary' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'notnull' =&amp;gt; true,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'autoincrement' =&amp;gt; false,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'length' =&amp;gt; '4',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;));<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function setUp()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasOne('Model_User as user', array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'local' =&amp;gt; 'id_user',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'foreign' =&amp;gt; 'id_user'));<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;hasOne('Model_Room as room', array(<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'local' =&amp;gt; 'id_room',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'foreign' =&amp;gt; 'id_room'));<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<h3>Ordonner avec DQL</h3>
+<p>Après cette longue définition, nous pouvons passer au code DQL qui permettra d&#8217;ordonner les résultats en fonction de l&#8217;index de notre table de liaison.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$query&nbsp; = Doctrine_Query::create ()<br />
+&nbsp; &nbsp; -&amp;gt;select (&quot;room.*, users.*&quot;)<br />
+&nbsp; &nbsp; -&amp;gt;from (&quot;Model_Room room&quot;)<br />
+&nbsp; &nbsp; -&amp;gt;leftJoin (&quot;room.users users&quot;)<br />
+&nbsp; &nbsp; -&amp;gt;orderBy (&quot;room.id_room, users.Model_CompoRoomsUsers.index ASC&quot;);</div></td></tr></tbody></table></div>
+<p>Prenez note du fait que nous trions dans un premier temps par identifiant de bureau et ensuite par index. Si nous n&#8217;utilisions qu&#8217;un tri par index, l&#8217;ordre des bureaux serai incohérent.</p>
+<h3>Pour aller plus loin</h3>
+<p>Nous avons décrit le fonctionnement pour ordonner des résultats à partir d&#8217;une table de liaison.<br />
+Mais vous pouvez aussi utiliser cette méthode pour conditionner le résultat.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/ordonner-resultats-doctrine-table-liaison/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.011 seconds using apc
+Object Caching 377/378 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:24 by W3 Total Cache -->

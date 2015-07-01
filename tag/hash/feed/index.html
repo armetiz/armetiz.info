@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Hash</title>
+	<atom:link href="http://www.armetiz.info/tag/hash/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Intégrité md5</title>
+		<link>http://www.armetiz.info/integrite-md5/</link>
+		<comments>http://www.armetiz.info/integrite-md5/#comments</comments>
+		<pubDate>Fri, 03 Aug 2012 08:22:43 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Hash]]></category>
+		<category><![CDATA[Intégrité]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[MD5]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2555</guid>
+		<description><![CDATA[Pour vérifier l&#8217;intégrité de vos fichiers, il faut enregistrer leur état à un instant T et vérifier cet été à un instant T+1. Pour cela, le plus simple est de.. <a href="http://www.armetiz.info/integrite-md5/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pour vérifier l&#8217;intégrité de vos fichiers, il faut enregistrer leur état à un <strong>instant T</strong> et vérifier cet été à un <strong>instant T+1</strong>.<br />
+Pour cela, le plus simple est de réaliser un hash de chacun des fichiers, et de vérifier ce hash régulièrement.</p>
+<p>Récupérer un <a href="http://fr.wikipedia.org/wiki/MD5">hash md5</a> de l&#8217;ensemble des fichiers d&#8217;un répertoire. Il s&#8217;agit ici de la prise de référence.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">find tld.domain.www/ -type f -print0 | xargs -0 md5sum &gt;&gt; tld.domain.www.md5</div></td></tr></tbody></table></div>
+<p>Pour vérifier l&#8217;intégrité de vos fichiers par rapport à votre référence.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">md5sum -c tld.domain.www.md5 | grep -v &quot;OK&quot;</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/integrite-md5/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.029 seconds using apc
+Object Caching 391/403 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:14:31 by W3 Total Cache -->

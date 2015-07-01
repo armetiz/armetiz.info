@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Analytics</title>
+	<atom:link href="http://www.armetiz.info/tag/analytics/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Google Analytics &#8211; Callback on JS TrackEvent</title>
+		<link>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/</link>
+		<comments>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/#comments</comments>
+		<pubDate>Wed, 16 Jan 2013 10:44:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Analytics]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Web]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2890</guid>
+		<description><![CDATA[En utilisant le système Tracking Event de Google Analytics. Parfois, vous avez besoin de vous assurer qu&#8217;un évenement est correctement enregistré par Google avant de réaliser une action. L&#8217;exemple le.. <a href="http://www.armetiz.info/google-analytics-callback-on-js-trackevent/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>En utilisant le système <a href="https://developers.google.com/analytics/devguides/collection/gajs/">Tracking Event</a> de Google Analytics.<br />
+Parfois, vous avez besoin de vous assurer qu&#8217;un évenement est correctement enregistré par Google avant de réaliser une action.<br />
+L&#8217;exemple le plus concret, c&#8217;est le changement de page juste après avoir enregistré un clic sur un lien.</p>
+<p>L&#8217;ensemble des tracking de l&#8217;API Google Analytics sont asynchrones, comment s&#8217;assurer que l&#8217;évenement a bien été enregistré ?</p>
+<p>Voici <strong>deux manières de faire</strong>, l&#8217;une étant plus officielle que l&#8217;autre.</p>
+<p>La premiere méthode utilise la possibilité de mettre des &#8220;<strong>Callback</strong>&#8221; au sein de la Queue (<strong>GAQ : Google Analytics Queue</strong>).<br />
+La documentation <a href="https://developers.google.com/analytics/devguides/collection/gajs/#PushingFunctions">Google Analytics</a> est assez explicite : &#8220;<em>The functions can contain any arbitrary JavaScript and like command arrays, they are executed in the order in which they are pushed onto _gaq</em>&#8220;.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #3366CC;">'_trackEvent'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Test'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Clicked'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;event tracked&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Pour la deuxième méthode &#8211; récupérée sur Stack Overflow &#8211; je n&#8217;ai pas trouvé de validation au sein de la documentation. Mais après quelques tests, elle semble fonctionner.<br />
+On part du principe que la méthode &#8220;push&#8221; de l&#8217;objet &#8220;_gaq&#8221; prends en 2° paramètres une fonction &#8220;callback&#8221; exécutée lorsque la commande a été traité.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #3366CC;">'_trackEvent'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Test'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Clicked'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;event tracked&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Bien sûr,<br />
+La deuxième méthode n&#8217;étant pas officielle, bien que plus élégante elle n&#8217;est pas recommandée.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Google Analytics API disponible</title>
+		<link>http://www.armetiz.info/google-analytics-api/</link>
+		<comments>http://www.armetiz.info/google-analytics-api/#comments</comments>
+		<pubDate>Wed, 22 Apr 2009 08:11:57 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Analytics]]></category>
+		<category><![CDATA[API]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Plugin]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1011</guid>
+		<description><![CDATA[Sur le blog Analytics on peut voir que l&#8217;API de Google Analytics est disponible. The Data Export API is easy to use and provides read-only access to all your Analytics.. <a href="http://www.armetiz.info/google-analytics-api/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Sur le blog <a href="http://analytics.blogspot.com/2009/04/attention-developers-google-analytics.html">Analytics</a> on peut voir que l&#8217;<a href="http://code.google.com/intl/fr/apis/analytics/docs/">API de Google Analytics</a> est disponible.<br />
+<blockquote>
+The Data Export API is easy to use and provides read-only access to all your Analytics data.  Any data that&#8217;s available through the standard Analytics web interface is available through the API. The Analytics API is a Google Data API. This is the same API protocol for Google Calendar, Finance and Webmaster Tools.  If you&#8217;ve used any of these APIs, the Google Analytics Data Export API will look very familiar to you. </p></blockquote>
+<p><img class="aligncenter" alt="Google Analytics" src="http://analytics.blogspot.com/logo_analytics_blog.gif" width="277" height="65" /><br />
+<strong>Traduction</strong> par moi même (donc ne pas utiliser dans des documents officiels :p)<br />
+<blockquote>L&#8217;API d&#8217;exportation de données est facile à utiliser et fournit un accès en lecture seule à toutes vos données de Google Analytics. Toutes les données disponibles à travers l&#8217;interface Web standard sont disponibles grâce à l&#8217;API. L&#8217;API Analytics est une API Google Data. C&#8217;est le même protocole d&#8217;API pour Google Calendar, Finance et Webmaster Tools. Si vous avez déjà utilisé une de ces API, celle de Google Analytics vous sera très familière.</p></blockquote>
+<p>Alors, qui est-ce qui veux développer un <strong>module WordPress</strong> pour afficher directement les statistiques dans le BackOffice ? <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/google-analytics-api/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.027 seconds using apc
+Object Caching 426/446 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:14:22 by W3 Total Cache -->

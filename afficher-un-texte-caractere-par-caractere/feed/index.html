@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Afficher un texte, caractère par caractère</title>
+	<atom:link href="http://www.armetiz.info/afficher-un-texte-caractere-par-caractere/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info/afficher-un-texte-caractere-par-caractere/</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Thu, 03 Apr 2014 20:26:43 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/afficher-un-texte-caractere-par-caractere/#comment-24</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Thu, 20 Aug 2009 14:01:49 +0000</pubDate>
+		<guid isPermaLink="false">http://armetiz.info/?p=6#comment-24</guid>
+		<description><![CDATA[De rien :)]]></description>
+		<content:encoded><![CDATA[<p>De rien <img src="http://www.armetiz.info/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mémé</title>
+		<link>http://www.armetiz.info/afficher-un-texte-caractere-par-caractere/#comment-23</link>
+		<dc:creator><![CDATA[Mémé]]></dc:creator>
+		<pubDate>Thu, 20 Aug 2009 14:00:23 +0000</pubDate>
+		<guid isPermaLink="false">http://armetiz.info/?p=6#comment-23</guid>
+		<description><![CDATA[Merci Dude.]]></description>
+		<content:encoded><![CDATA[<p>Merci Dude.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/afficher-un-texte-caractere-par-caractere/#comment-22</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Thu, 20 Aug 2009 13:44:07 +0000</pubDate>
+		<guid isPermaLink="false">http://armetiz.info/?p=6#comment-22</guid>
+		<description><![CDATA[Pour des renseignements de ce type, je te renverrai vers médiabox, qui est une communauté de développeur Flash en tout genre.
+
+Ton problème pour en intéresser d&#039;autres, et je te répondrai dessus.]]></description>
+		<content:encoded><![CDATA[<p>Pour des renseignements de ce type, je te renverrai vers médiabox, qui est une communauté de développeur Flash en tout genre.</p>
+<p>Ton problème pour en intéresser d&#8217;autres, et je te répondrai dessus.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mémé</title>
+		<link>http://www.armetiz.info/afficher-un-texte-caractere-par-caractere/#comment-21</link>
+		<dc:creator><![CDATA[Mémé]]></dc:creator>
+		<pubDate>Thu, 20 Aug 2009 13:36:41 +0000</pubDate>
+		<guid isPermaLink="false">http://armetiz.info/?p=6#comment-21</guid>
+		<description><![CDATA[Salut et merci pour ton tuto,
+seulement je n&#039;arrive pas à le faire fonctionner.
+En fait j&#039;ai une classe Intros.as qui doit gérer l&#039;apparence des textes d&#039;intros qui sont récupérés depuis un fichier xml.
+et l&#039;affichage que peux donner ton code me servirait bcp.
+
+mon code en vrac si t&#039;as le temps d&#039;y jeter un oeil.
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+package {
+
+	import flash.display.*;
+	import flash.text.*;
+	import flash.events.*;
+	import flash.geom.*;
+	import gs.TweenLite;
+	import gs.easing.*;
+	import flash.net.*;
+	import gs.TweenMax;
+	import flash.utils.Timer;
+	import flash.events.TimerEvent;
+
+
+
+
+	////Nom de la classe en MC/////
+
+	public class Intros extends MovieClip {
+
+
+		public var texte1:TextField;
+		public var titre:String;
+		public var cont_content:MovieClip;
+		public var delaiFrappe : int = 100;
+		public var unTimer : Timer = new Timer (delaiFrappe, titre.length);
+
+		////////fonction constructeur///////
+		public function Intros(_titre:String):void {
+
+			addEventListener(Event.ADDED_TO_STAGE,onStageAccess);
+			trace(&quot;__________ Intros Called &quot;);
+			trace(&quot;_titre : &quot; +_titre);
+			trace(&quot;titre:&quot; +titre);
+
+			titre = _titre;
+		}
+		public function onStageAccess(e:Event):void {
+
+
+			trace(&quot;INTRO      &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;        onStageAcces&quot;);
+			addEventListener(Event.REMOVED_FROM_STAGE,onStageRemove);
+			removeEventListener(Event.ADDED_TO_STAGE,onStageAccess);
+
+
+			contenu();
+		}
+		public function contenu() {
+
+			texte1.selectable = false;
+			//texte1.text = titre;
+			texte1.textColor = Math.random() * 0xFFFFFF;
+			texte1.wordWrap = true;
+			texte1.multiline = true;
+			texte1.width = 750;
+			texte1.height = 370;
+			unTimer.addEventListener(TimerEvent.TIMER, onTimer);
+			unTimer.start();
+
+			//texte1.mask = maske;
+			//cont_content.addChild(maske);
+
+			//trace( maske + &quot;_____________________________________________________calllllllllllllllled&quot;);
+
+			/*var maskIntro1:Sprite = new Sprite();
+			maskIntro1.graphics.beginFill(0x00FF00);
+			maskIntro1.graphics.drawRect(STitre1.x, STitre1.y, 1, 70);
+			var maskIntro2:Sprite = new Sprite();
+			maskIntro2.graphics.beginFill(0x00FF00);
+			maskIntro2.graphics.drawRect(STitre1.x, STitre1.y + 70, 1, 70);
+			var maskIntro3:Sprite = new Sprite();
+			maskIntro3.graphics.beginFill(0x00FF00);
+			maskIntro3.graphics.drawRect(STitre1.x, STitre1.y + 140, 1, 70);
+			texte1.mask = maskIntro1;
+			texte1.mask = maskIntro2;
+			texte1.mask = maskIntro3;
+			TweenMax.to(maskIntro1, 0.5,{scaleX:700});
+			TweenMax.to(maskIntro2, 0.5,{scaleX:700, delay:0.2});
+			TweenMax.to(maskIntro3, 0.5,{scaleX:700, delay:0.4});
+			addChild(maskIntro1);
+			addChild(maskIntro2);
+			addChild(maskIntro3);*/
+
+		}
+		function onTimer(e: TimerEvent):void {
+			texte1.text = texte1.text.concat (titre.charAt(e.target.currentCount));
+		}
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+		private function onStageRemove(e:Event):void {
+
+			removeEventListener(Event.REMOVED_FROM_STAGE,onStageRemove);
+		}
+	}
+}
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;]]></description>
+		<content:encoded><![CDATA[<p>Salut et merci pour ton tuto,<br />
+seulement je n&#8217;arrive pas à le faire fonctionner.<br />
+En fait j&#8217;ai une classe Intros.as qui doit gérer l&#8217;apparence des textes d&#8217;intros qui sont récupérés depuis un fichier xml.<br />
+et l&#8217;affichage que peux donner ton code me servirait bcp.</p>
+<p>mon code en vrac si t&#8217;as le temps d&#8217;y jeter un oeil.</p>
+<p>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br />
+package {</p>
+<p>	import flash.display.*;<br />
+	import flash.text.*;<br />
+	import flash.events.*;<br />
+	import flash.geom.*;<br />
+	import gs.TweenLite;<br />
+	import gs.easing.*;<br />
+	import flash.net.*;<br />
+	import gs.TweenMax;<br />
+	import flash.utils.Timer;<br />
+	import flash.events.TimerEvent;</p>
+<p>	////Nom de la classe en MC/////</p>
+<p>	public class Intros extends MovieClip {</p>
+<p>		public var texte1:TextField;<br />
+		public var titre:String;<br />
+		public var cont_content:MovieClip;<br />
+		public var delaiFrappe : int = 100;<br />
+		public var unTimer : Timer = new Timer (delaiFrappe, titre.length);</p>
+<p>		////////fonction constructeur///////<br />
+		public function Intros(_titre:String):void {</p>
+<p>			addEventListener(Event.ADDED_TO_STAGE,onStageAccess);<br />
+			trace(&#8220;__________ Intros Called &#8220;);<br />
+			trace(&#8220;_titre : &#8221; +_titre);<br />
+			trace(&#8220;titre:&#8221; +titre);</p>
+<p>			titre = _titre;<br />
+		}<br />
+		public function onStageAccess(e:Event):void {</p>
+<p>			trace(&#8220;INTRO      &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;        onStageAcces&#8221;);<br />
+			addEventListener(Event.REMOVED_FROM_STAGE,onStageRemove);<br />
+			removeEventListener(Event.ADDED_TO_STAGE,onStageAccess);</p>
+<p>			contenu();<br />
+		}<br />
+		public function contenu() {</p>
+<p>			texte1.selectable = false;<br />
+			//texte1.text = titre;<br />
+			texte1.textColor = Math.random() * 0xFFFFFF;<br />
+			texte1.wordWrap = true;<br />
+			texte1.multiline = true;<br />
+			texte1.width = 750;<br />
+			texte1.height = 370;<br />
+			unTimer.addEventListener(TimerEvent.TIMER, onTimer);<br />
+			unTimer.start();</p>
+<p>			//texte1.mask = maske;<br />
+			//cont_content.addChild(maske);</p>
+<p>			//trace( maske + &#8220;_____________________________________________________calllllllllllllllled&#8221;);</p>
+<p>			/*var maskIntro1:Sprite = new Sprite();<br />
+			maskIntro1.graphics.beginFill(0x00FF00);<br />
+			maskIntro1.graphics.drawRect(STitre1.x, STitre1.y, 1, 70);<br />
+			var maskIntro2:Sprite = new Sprite();<br />
+			maskIntro2.graphics.beginFill(0x00FF00);<br />
+			maskIntro2.graphics.drawRect(STitre1.x, STitre1.y + 70, 1, 70);<br />
+			var maskIntro3:Sprite = new Sprite();<br />
+			maskIntro3.graphics.beginFill(0x00FF00);<br />
+			maskIntro3.graphics.drawRect(STitre1.x, STitre1.y + 140, 1, 70);<br />
+			texte1.mask = maskIntro1;<br />
+			texte1.mask = maskIntro2;<br />
+			texte1.mask = maskIntro3;<br />
+			TweenMax.to(maskIntro1, 0.5,{scaleX:700});<br />
+			TweenMax.to(maskIntro2, 0.5,{scaleX:700, delay:0.2});<br />
+			TweenMax.to(maskIntro3, 0.5,{scaleX:700, delay:0.4});<br />
+			addChild(maskIntro1);<br />
+			addChild(maskIntro2);<br />
+			addChild(maskIntro3);*/</p>
+<p>		}<br />
+		function onTimer(e: TimerEvent):void {<br />
+			texte1.text = texte1.text.concat (titre.charAt(e.target.currentCount));<br />
+		}<br />
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</p>
+<p>		private function onStageRemove(e:Event):void {</p>
+<p>			removeEventListener(Event.REMOVED_FROM_STAGE,onStageRemove);<br />
+		}<br />
+	}<br />
+}<br />
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 7/12 queries in 0.031 seconds using apc
+Object Caching 294/295 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:17:00 by W3 Total Cache -->

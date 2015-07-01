@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Framework</title>
+	<atom:link href="http://www.armetiz.info/tag/framework/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Meteor &#8211; NPM Integration</title>
+		<link>http://www.armetiz.info/meteor-npm-integration/</link>
+		<comments>http://www.armetiz.info/meteor-npm-integration/#comments</comments>
+		<pubDate>Tue, 09 Apr 2013 10:03:32 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Anglais]]></category>
+		<category><![CDATA[Asynchronous]]></category>
+		<category><![CDATA[Cloud]]></category>
+		<category><![CDATA[Fibers]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Future]]></category>
+		<category><![CDATA[Meteor]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[R&D]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3075</guid>
+		<description><![CDATA[Since a few weeks, I&#8217;m testing MeteorJS and I really like it ! The 0.6 version has been released with NPM Integration. Which means that you can use any Node.. <a href="http://www.armetiz.info/meteor-npm-integration/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Since a few weeks, I&#8217;m testing <a href="http://meteor.com/">MeteorJS</a> and I really like it !</p>
+<p>The 0.6 version has been released with <strong>NPM Integration</strong>. Which means that you can use any Node package without the need to tweak your Meteor Application.</p>
+<p>At the time of writing, there is no official documentation about this point, only a <a href="https://github.com/avital/meteor-xml2js-npm-demo">github demo with xml2js</a>.<br />
+This article is a short <strong>how-to</strong> about :</p>
+<ul>
+<li><strong>NPM Integration</strong></li>
+<li>Invoke functions <strong>from client to server</strong></li>
+<li>Use asynchronous methods on server with <strong><a href="https://github.com/laverdet/node-fibers">Fibers</a> &#038; Future</strong></li>
+</ul>
+<p>Let&#8217;s try to use <a href="https://github.com/armetiz/node-freebox-sdk">freebox-sdk</a> with a newly created Meteor Application.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ meteor update <span style="color: #666666; font-style: italic;">#update meteor</span><br />
+$ meteor create freebox <span style="color: #666666; font-style: italic;">#create a new project</span><br />
+$ <span style="color: #7a0874; font-weight: bold;">cd</span> freebox<br />
+$ meteor <span style="color: #666666; font-style: italic;">#run your application</span><br />
+=<span style="color: #000000; font-weight: bold;">&gt;</span> Meteor server running on: http:<span style="color: #000000; font-weight: bold;">//</span>localhost:<span style="color: #000000;">3000</span><span style="color: #000000; font-weight: bold;">/</span></div></td></tr></tbody></table></div>
+<p>Meteor should run your newly created Application. Check that you get the <strong>Running</strong> message without any error. If you got some, just try to fix them <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Create the <strong>packages</strong> directory structure.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ <span style="color: #c20cb9; font-weight: bold;">mkdir</span> packages <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> packages<br />
+$ <span style="color: #c20cb9; font-weight: bold;">mkdir</span> freebox-sdk <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> freebox-sdk<br />
+$ <span style="color: #c20cb9; font-weight: bold;">touch</span> package.js freebox-sdk.js</div></td></tr></tbody></table></div>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #006600; font-style: italic;">// file: package.js</span><br />
+Npm.<span style="color: #660066;">depends</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #3366CC;">'freebox-sdk'</span><span style="color: #339933;">:</span> <span style="color: #3366CC;">'0.3.0'</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #003366; font-weight: bold;">Package</span>.<span style="color: #660066;">on_use</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>api<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; api.<span style="color: #660066;">add_files</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'freebox-sdk.js'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'server'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>The <em>package.js</em> contains the dependency definition.<br />
+When the package will be available, the <em>freebox-sdk.js</em> file will be added to the server scope.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #006600; font-style: italic;">// file: freebox-sdk.js</span><br />
+Freebox <span style="color: #339933;">=</span> Npm.<span style="color: #660066;">require</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;freebox-sdk&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+freeboxFacade <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; get<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>options<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #003366; font-weight: bold;">new</span> Freebox<span style="color: #009900;">&#40;</span>options<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; <span style="color: #009900;">&#125;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p><em>Freebox</em> &#038; <em>freeboxFacade</em> are new global variables and are available on your Meteor Application.<br />
+For this <strong>use case</strong>, I have defined a useless <strong>Facade for the freebox-sdk package</strong>.<br />
+Use the <strong>var</strong> keyword to define variable only attached to this file.</p>
+<p>At this point, <strong>freebox-sdk</strong> is automatically downloaded &#038; attached to Meteor through <em>Freebox</em> &#038; <em>freeboxFacade</em> variables.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #006600; font-style: italic;">// file: freebox.js</span><br />
+<span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>Meteor.<span style="color: #660066;">isClient</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; Template.<span style="color: #660066;">hello</span>.<span style="color: #660066;">events</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #3366CC;">'click input[name=&quot;status&quot;]'</span> <span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Meteor.<span style="color: #660066;">call</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'getStatus'</span><span style="color: #339933;">,</span> jQuery<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'input[name=&quot;password&quot;]'</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">val</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>error<span style="color: #339933;">,</span> result<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>_.<span style="color: #660066;">isString</span><span style="color: #009900;">&#40;</span>result<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'message: '</span> <span style="color: #339933;">+</span> result<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'wifi active: '</span> <span style="color: #339933;">+</span> result.<span style="color: #660066;">active</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><br />
+<br />
+<span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>Meteor.<span style="color: #660066;">isServer</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; Meteor.<span style="color: #660066;">startup</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #003366; font-weight: bold;">var</span> Future <span style="color: #339933;">=</span> Npm.<span style="color: #660066;">require</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'fibers/future'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; Meteor.<span style="color: #660066;">methods</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; getStatus<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>password<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">unblock</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #003366; font-weight: bold;">var</span> future <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">new</span> Future<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #003366; font-weight: bold;">var</span> freebox <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">new</span> Freebox<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span>password<span style="color: #339933;">:</span> password<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">on</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'connect'</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">wifiStatus</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #000066;">status</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; future.<span style="color: #660066;">ret</span><span style="color: #009900;">&#40;</span><span style="color: #000066;">status</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">on</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'error'</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>message<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; future.<span style="color: #660066;">ret</span><span style="color: #009900;">&#40;</span>message<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">connect</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #006600; font-style: italic;">// Wait for async to finish before returning</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #006600; font-style: italic;">// the result</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">return</span> future.<span style="color: #660066;">wait</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>The <strong>freebox-sdk</strong> is composed of asynchronous methods, calls have to be done on server-side. I&#8217;m using <a href="https://github.com/laverdet/node-fibers">Fibers</a> to &#8216;wait&#8217; for async (wifiStatus) to finish before returning the result to the client. </p>
+<p>For this example I&#8217;m using some <a href="http://docs.meteor.com/#packages">Meteor packages</a> : jquery &#038; underscore.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ meteor add jquery<br />
+$ meteor add underscore</div></td></tr></tbody></table></div>
+<p>The HTML part is really simple. Just add a new button</p>
+<div class="codecolorer-container html4strict blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="html4strict codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #808080; font-style: italic;">&lt;!-- file: freebox.html --&gt;</span><br />
+<span style="color: #009900;">&lt;<a href="http://december.com/html/4/element/head.html"><span style="color: #000000; font-weight: bold;">head</span></a>&gt;</span><br />
+&nbsp; <span style="color: #009900;">&lt;<a href="http://december.com/html/4/element/title.html"><span style="color: #000000; font-weight: bold;">title</span></a>&gt;</span>test<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><a href="http://december.com/html/4/element/title.html"><span style="color: #000000; font-weight: bold;">title</span></a>&gt;</span><br />
+<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><a href="http://december.com/html/4/element/head.html"><span style="color: #000000; font-weight: bold;">head</span></a>&gt;</span><br />
+<br />
+<span style="color: #009900;">&lt;<a href="http://december.com/html/4/element/body.html"><span style="color: #000000; font-weight: bold;">body</span></a>&gt;</span><br />
+&nbsp; {{&gt; hello}}<br />
+<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><a href="http://december.com/html/4/element/body.html"><span style="color: #000000; font-weight: bold;">body</span></a>&gt;</span><br />
+<br />
+<span style="color: #009900;">&lt;template <span style="color: #000066;">name</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;hello&quot;</span>&gt;</span><br />
+&nbsp; <span style="color: #009900;">&lt;<a href="http://december.com/html/4/element/h1.html"><span style="color: #000000; font-weight: bold;">h1</span></a>&gt;</span>Hello World!<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><a href="http://december.com/html/4/element/h1.html"><span style="color: #000000; font-weight: bold;">h1</span></a>&gt;</span><br />
+&nbsp; <span style="color: #009900;">&lt;<a href="http://december.com/html/4/element/input.html"><span style="color: #000000; font-weight: bold;">input</span></a> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;button&quot;</span> <span style="color: #000066;">value</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;get status&quot;</span> <span style="color: #000066;">name</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;status&quot;</span> <span style="color: #66cc66;">/</span>&gt;</span><br />
+<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span>template&gt;</span></div></td></tr></tbody></table></div>
+<p>Now,<br />
+Run your meteor application, go to <strong>http://localhost:3000/</strong> and open a JS Console. Click on the &#8220;Click button&#8221; and see if your wifi is enable!</p>
+<div class="alert-message warning"><a class="close" href="#">×</a><span>If the NPM module has <strong>architecture-specific</strong> binary components</span></div>
+<p>If the NPM module has <strong>architecture-specific</strong> binary components, bundles built with <strong>meteor bundle</strong> or <strong>meteor deploy</strong> will contain the components as built for the developer&#8217;s platform and <strong>may not run on other platforms</strong>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/meteor-npm-integration/feed/</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+		<item>
+		<title>Configurer YUI en phase de développement</title>
+		<link>http://www.armetiz.info/configurer-yui-phase-developpement/</link>
+		<comments>http://www.armetiz.info/configurer-yui-phase-developpement/#comments</comments>
+		<pubDate>Wed, 13 Mar 2013 09:00:30 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Mojito]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[V8]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[Yahoo]]></category>
+		<category><![CDATA[YUI]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2956</guid>
+		<description><![CDATA[Actuellement je suis en pleine découverte du framework Yahoo YUI 3 que je vous recommande vivement ! Comme tout bon novice, je fais des erreurs. Javascript étant un language peu.. <a href="http://www.armetiz.info/configurer-yui-phase-developpement/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Actuellement je suis en pleine découverte du framework <strong>Yahoo YUI 3</strong> que je vous recommande vivement !<br />
+Comme tout bon novice, je fais des erreurs. Javascript étant un language peu bavard les erreurs sont parfois difficiles à diagnostiquer.</p>
+<p><img src="http://www.armetiz.info/files/2013/03/yui-logo.png" alt="yui-logo" width="117" height="52" class="alignright size-full wp-image-2963" />Par défaut,<br />
+Le <a href="http://yuilibrary.com/yui/docs/yui/#loading-modules">chargement des modules YUI</a> est optimisé pour la production, soit <strong>un seul fichier minifié</strong>.</p>
+<p><a href="https://github.com/yui/yui3/issues/513">Dernièrement</a> j&#8217;ai eu une mauvaise utilisation du YUI, et l&#8217;erreur impactait le Framework lui meme sans message explicite&#8230; Du coups, difficile de savoir ce que j&#8217;avais fait de mal car tout le code source de YUI était illisible.</p>
+<p>Bref,<br />
+Voici la configuration YUI à utiliser pour récupérer des modules dont la source est lisible :</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">YUI<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; debug<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; combine<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">false</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; filter<span style="color: #339933;">:</span> <span style="color: #3366CC;">&quot;raw&quot;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>.<span style="color: #003366; font-weight: bold;">use</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;app&quot;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>Y<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #006600; font-style: italic;">//here your Y code</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/configurer-yui-phase-developpement/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Livre &#8211; Beginning PhoneGap</title>
+		<link>http://www.armetiz.info/livre-beginning-phonegap/</link>
+		<comments>http://www.armetiz.info/livre-beginning-phonegap/#comments</comments>
+		<pubDate>Thu, 19 Apr 2012 07:35:33 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Livres]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[jquery]]></category>
+		<category><![CDATA[Mobile]]></category>
+		<category><![CDATA[PhoneGap]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[Projet]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2302</guid>
+		<description><![CDATA[Beginning PhoneGap, Mobile Web Framework for JavaScript and HTML5 se propose de vous faire découvrir PhoneGap. Ce livre n&#8217;a pas été pour moi un coups de coeur. Vous trouverez une.. <a href="http://www.armetiz.info/livre-beginning-phonegap/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.amazon.fr/Beginning-PhoneGap-Mobile-Framework-JavaScript/dp/1430239034/"><img src="http://www.armetiz.info/files/2012/04/beginning_phonegap1.jpg" alt="beginning_phonegap" width="150" height="150" class="alignleft size-full wp-image-2303" /></a><a href="http://www.amazon.fr/gp/product/1430239034/">Beginning PhoneGap, Mobile Web Framework for JavaScript and HTML5</a> se propose de vous faire découvrir <a href="http://phonegap.com/">PhoneGap</a>.</p>
+<p>Ce livre n&#8217;a pas été pour moi un coups de coeur. Vous trouverez une centaine de pages sur PhoneGap, les autres 200 pages seront sur <a href="http://jquerymobile.com/">jQueryMobile</a>, <a href="http://www.sencha.com/">Sencha</a> ou autres frameworks.</p>
+<p>Du coups, <strong>je ne vous recommande pas</strong> la lecture de ce livre pour découvrir <strong>PhoneGap</strong>.<br />
+Afin d&#8217;aller plus loin, <a href="http://www.kitpages.fr/news">Kitpages</a> m&#8217;a conseillé la lecture de <a href="http://www.amazon.fr/Phonegap-Beginners-Guide-Andrew-Lunny/dp/1849515360/">Phonegap Beginner&#8217;s Guide</a> qui semble être un ouvrage portant sur l&#8217;utilisation de PhoneGap lui meme plus que sur les frameworks qui peuvent améliorer la production de projet via PhoneGap.<br />
+<a href="http://phonegap.com/"><img src="http://www.armetiz.info/files/2012/04/phonegap1.jpg" alt="phonegap" width="130" height="130" class="alignright size-full wp-image-2307" /></a></p>
+<h3>PhoneGap</h3>
+<p>D&#8217;après ce que j&#8217;en ai vu le produit semble très interessant pour de <strong>petit projet</strong>. </p>
+<p>L&#8217;interêt principal étant de pouvoir réaliser rapidement une WebAPP HTML/CSS/JS et compiler sans effort via <a href="https://build.phonegap.com/">PhoneGap Builder</a> pour les principaux acteurs mobiles.</p>
+<p>Les projets un peu <strong>touchy</strong> auront sans doute plus de difficulté à trouver un avantage à l&#8217;utilisation de PhoneGap. </p>
+<p><a href="http://wallbase.cc/wallpaper/903289">Illustration</a> </p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/livre-beginning-phonegap/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Doctrine 2 &amp; i18n</title>
+		<link>http://www.armetiz.info/doctrine-2-internationalization/</link>
+		<comments>http://www.armetiz.info/doctrine-2-internationalization/#comments</comments>
+		<pubDate>Fri, 14 Oct 2011 08:57:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Doctrine]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[i18n]]></category>
+		<category><![CDATA[Information]]></category>
+		<category><![CDATA[Internationalisation]]></category>
+		<category><![CDATA[Langue]]></category>
+		<category><![CDATA[Monde]]></category>
+		<category><![CDATA[Système]]></category>
+		<category><![CDATA[Traduction]]></category>
+		<category><![CDATA[Translation]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2154</guid>
+		<description><![CDATA[Doctrine 2 est dépourvu &#8211; en natif &#8211; de système de traduction. Grâce au système d&#8217;extension, des contributeurs dont certains membres de l&#8217;équipe de développement Doctrine ont développés Gedmo, un.. <a href="http://www.armetiz.info/doctrine-2-internationalization/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/10/dbal_icon1.png"><img src="http://www.armetiz.info/files/2011/10/dbal_icon1.png" alt="" width="75" height="75" class="alignright size-full wp-image-2162" /></a><strong>Doctrine 2</strong> est dépourvu &#8211; en natif &#8211; de système de traduction.<br />
+Grâce au système d&#8217;extension, des contributeurs dont certains membres de l&#8217;équipe de développement Doctrine ont développés <a href="https://github.com/l3pp4rd/DoctrineExtensions">Gedmo</a>, un pack d&#8217;extension pour Doctrine.</p>
+<p>Cette extension inclue :
+<ul>
+<li>Tree</li>
+<li><strong>Translatable</strong></li>
+<li>Sluggable</li>
+<li>Timestampable</li>
+<li>Loggable</li>
+<li>Sortable</li>
+</ul>
+<p>Nous nous intéresserons à <strong>Translatable</strong> qui nous permettra de traduire nos données.</p>
+<p>Travaillant avec le <strong>Framework Zend</strong>, les exemples seront orientés pour cette architecture, il est à noter que cela n&#8217;est pas un pré-requit et que cela fonctionnera avec ou sans Zend Framework.</p>
+<h3>Fonctionnement</h3>
+<p>Le module <strong>i18n</strong> de Gedmo fonctionne grâce à l&#8217;utilisation d&#8217;un table annexe contenant la traduction de certaines propriétés de vos Entités.<br />
+La table de traduction contient donc <strong>le nom du champs traduite</strong>, <strong>la langue</strong>, <strong>la valeur</strong>, <strong>le type d&#8217;objet</strong> ainsi qu&#8217;une <strong>reference vers cet objet</strong>.</p>
+<p>Par défaut, l&#8217;extension aura besoin de la table : <strong>ext_translations</strong><br />
+Les champs suivant seront ainsi necessaire :</p>
+<ul>
+<li>id</li>
+<li>content</li>
+<li>field</li>
+<li>locale</li>
+<li>foreign_key</li>
+<li>object_class</li>
+</ul>
+<p>Voici un jeu de donnée qui vous permettra de mieux comprendre l&#8217;utilisation de ce type de structure :</p>
+<blockquote>
+<ul>
+<li>content : Un día me voy a comprar el mundo</li>
+<li>field : title</li>
+<li>locale : es_es</li>
+<li>foreign_key : 3</li>
+<li>object_class : EntityArticle</li>
+</ul>
+<ul>
+<li>content : Un jour j&#8217;achèterai le monde</li>
+<li>field : title</li>
+<li>locale : fr_fr</li>
+<li>foreign_key : 3</li>
+<li>object_class : EntityArticle</li>
+</ul>
+<ul>
+<li>content : Le monde semble être à l&#8217;agonie, que pouvons nous faire pour le sauver.</li>
+<li>field : description</li>
+<li>locale : fr_fr</li>
+<li>foreign_key : 3</li>
+<li>object_class : EntityArticle</li>
+</ul>
+</blockquote>
+<p>A noter, que les données relatives à la langue par défaut de votre application sont stockés au sein de la table gerant directement votre entité.<br />
+Par défaut, nous utilisons la langue &#8220;<strong>en_US</strong>&#8220;, ce qui signifie que la table <strong>ext_translations</strong> ne contiendra pas de traduction pour &#8220;en_US&#8221;.<br />
+Dans mon exemple, ces données seront stockés dans la table &#8220;<strong>articles</strong>&#8221; de l&#8217;entité <strong>EntityArticle</strong></p>
+<p>Ainsi, l&#8217;extension stockera l&#8217;ensemble des traductions de votre application au sein d&#8217;une même table.<br />
+Attention, le champs &#8220;<strong>forien_key</strong>&#8221; ne correspond pas à une clé étrangère pour votre base de donnée relationnelle.<br />
+Une des possibilités de l&#8217;extension consiste à pouvoir définir une table spécifique à la traduction d&#8217;une Entités, ainsi vous pourrez définir une vrai <strong>clé étrangère</strong> au sein de votre <strong>RDBMS</strong>.</p>
+<h3>Exploitation</h3>
+<p>Au niveau de l&#8217;exploitation des données,<br />
+Vous définirez la langue utilisée au sein de votre application lors de l&#8217;execution, cela correspondra normalement à la langue de l&#8217;utilisateur.<br />
+Il ne restera plus qu&#8217;a utiliser votre application comme vous en avez l&#8217;habitude.</p>
+<p>Nous partons du principe que votre environnement Doctrine est correctement configuré et fonctionnel.</p>
+<p>Voici la configuration minimum a définir :</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000088;">$classLoader</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineCommonClassLoader<span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">'Gedmo'</span><span style="color: #339933;">,</span> APPLICATION_PATH <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/../library/'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$classLoader</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">register</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$config</span> &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineORMConfiguration<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$driverChain</span>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineORMMappingDriverDriverChain<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$entityDriver</span> &nbsp; &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineORMMappingDriverXmlDriver <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$translatableDriver</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$config</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">newDefaultAnnotationDriver</span><span style="color: #009900;">&#40;</span> APPLICATION_PATH <span style="color: #339933;">.</span> <span style="color: #0000ff;">'/../library/DoctrineExtensions/Gedmo/Translatable/Entity'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$driverChain</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addDriver</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$entityDriver</span><span style="color: #339933;">,</span> &nbsp; &nbsp; <span style="color: #0000ff;">'EntityArticle'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$driverChain</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addDriver</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$translatableDriver</span><span style="color: #339933;">,</span> &nbsp; <span style="color: #0000ff;">'GedmoTranslatable'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$config</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setMetadataDriverImpl</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$driverChain</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$eventManager</span> &nbsp; &nbsp; &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> DoctrineCommonEventManager<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$translatableListener</span> &nbsp; <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> GedmoTranslatableTranslationListener<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+<span style="color: #000088;">$translatableListener</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setTranslationFallback</span><span style="color: #009900;">&#40;</span> <span style="color: #009900; font-weight: bold;">true</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$eventManager</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addEventSubscriber</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$translatableListener</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000088;">$entityManager</span> <span style="color: #339933;">=</span> DoctrineORMEntityManager<span style="color: #339933;">::</span><span style="color: #004000;">create</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$conn</span><span style="color: #339933;">,</span> <span style="color: #000088;">$config</span><span style="color: #339933;">,</span> <span style="color: #000088;">$eventManager</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Ensuite, il faut configurer vos entités.<br />
+J&#8217;utilise le XML Mapping, vous trouverez facilement l&#8217;équivalence pour YAML / Annotation.</p>
+<div class="codecolorer-container xml blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="xml codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Nous avons simplement ajouté le noeud XML <strong>gedmo:translatable</strong> à notre champs afin de spécifier que celui-ci peut-être traduit.<br />
+A noter qu&#8217;il faut inclure l&#8217;espace de nom <strong>xmlns:gedmo</strong>.</p>
+<p>Voici un exemple d&#8217;utilisation avec Doctrine</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">//En utilisant la langue par défaut qui est l'anglais,</span><br />
+<span style="color: #000088;">$article</span> &nbsp; &nbsp;<span style="color: #339933;">=</span> <span style="color: #000088;">$entityManager</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'EntityArticle'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$article</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getTitle</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <br />
+<span style="color: #666666; font-style: italic;">//One day I'll buy the world</span><br />
+<br />
+<span style="color: #666666; font-style: italic;">//En spécifiant la langue espagnole,</span><br />
+<span style="color: #000088;">$translatableListener</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setTranslatableLocale</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;es_es&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$article</span> &nbsp; &nbsp;<span style="color: #339933;">=</span> <span style="color: #000088;">$entityManager</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">find</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'EntityArticle'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$article</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getTitle</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <br />
+<span style="color: #666666; font-style: italic;">//Un día me voy a comprar el mundo</span></div></td></tr></tbody></table></div>
+<h3>Entity de traduction</h3>
+<p>Nous avons vu précédemment que les traductions sont par défaut stockées dans la table <strong>ext_translations</strong>.<br />
+Voyons comment utiliser une table dédiée à la traduction d&#8217;une entité. Cela permettra en plus d&#8217;avoir une structure de base de donnée plus propre, et d&#8217;avoir des clés étrangère au sein de votre RDBMS.</p>
+<div class="codecolorer-container xml blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="xml codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp; &nbsp; &nbsp; &nbsp; ..</div></td></tr></tbody></table></div>
+<p>Créons la class ArticleTranslation qui n&#8217;a rien de bien extraordinaire, sauf qu&#8217;elle doit étendre AbstractTranslation qui va définir les differentes propriétés de votre table de traduction.</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000000; font-weight: bold;">namespace</span> Entity<br />
+<br />
+<span style="color: #000000; font-weight: bold;">use</span> GedmoTranslatableEntityAbstractTranslation<span style="color: #339933;">;</span><br />
+<span style="color: #000000; font-weight: bold;">use</span> DoctrineORMMapping <span style="color: #b1b100;">as</span> ORM<span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #000000; font-weight: bold;">class</span> ArticleTranslation <span style="color: #000000; font-weight: bold;">extends</span> AbstractTranslation<br />
+<span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>A cela, ajoutons le fichier de mapping.</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Il ne vous reste plus qu&#8217;a créer la table article_translation avec les champs énuméré en début d&#8217;article.</p>
+<h3>Conclusion</h3>
+<p>Comparer à Doctrine 1, la mise en place de l&#8217;internationalisation pour votre application peut sembler plus difficile. Par contre, l&#8217;exploitation de cette implementation est tout simplement <strong>user-friendly</strong>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/doctrine-2-internationalization/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>Recherche développeur PHP5 / ZEND &#8211; Paris</title>
+		<link>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/</link>
+		<comments>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/#comments</comments>
+		<pubDate>Thu, 31 Mar 2011 12:29:38 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Konbini]]></category>
+		<category><![CDATA[Annonce]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[CDI]]></category>
+		<category><![CDATA[Embauche]]></category>
+		<category><![CDATA[Emplois]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[R&D]]></category>
+		<category><![CDATA[Recherche]]></category>
+		<category><![CDATA[Recrutement]]></category>
+		<category><![CDATA[Zend]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1993</guid>
+		<description><![CDATA[L&#8217;équipe de technique de Konbini recrute ! On recherche un développeur passionné avec des compétences avancées sur le Framework Zend &#38; des connaissances sur le Framework Doctrine 1.2 et/ou 2... <a href="http://www.armetiz.info/recherche-developpeur-php5-zend-paris/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.konbini.com"><img alt="logo konbini" src="http://static.konbini.com/images/logo_130_130.gif" class="alignleft" width="130" height="130" /></a>L&#8217;équipe de technique de <a href="https://remixjobs.com/emploi/Developpement/Developpeur-euse-PHP5-MySQL-ZEND-H-F/4698">Konbini recrute</a> !</p>
+<p>On recherche un développeur passionné avec des compétences avancées sur le <strong>Framework Zend</strong> &amp; des connaissances sur le <strong>Framework Doctrine</strong> 1.2 et/ou 2.</p>
+<p>En description de poste, voici l&#8217;annonce officielle : <i>vos principales missions seront le développement continu de l’application métier de Konbini ayant pour finalité de développer un écosystème cohérent autour de l’activité de production, diffusion et monétisation de contenus vidéos. Vous participerez également à l’ingénierie et à la mise en place des services des applications client de la plateforme publique de Konbini.</i>.</p>
+<p>Des connaissances en HTML, XML, CSS &amp; jQuery sont bien évidemment necessaires.</p>
+<p>Nous travaillons beaucoup avec les technologies Adobe sur des projets <strong>ActionScript 3</strong> pure ou <strong>Flex</strong>. Si vous avez des notions sur ces langages, vous serez moins perdu lors de nos discutions en pause café <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>A titre personnel, l&#8217;ambiance chez <a href="http://blog.konbini.com">Konbini</a> est tres agréable et vous changera complètement des <strong>SSII</strong><strong> ou <strong>WebAgency</strong>. Si vous recherchez une aventure qui sorte de l&#8217;ordinaire avec des <strong>projets ambitieux</strong>, contactez nous !</p>
+<p>Lien vers l&#8217;offre <a href="https://remixjobs.com/emploi/Developpement/Developpeur-euse-PHP5-MySQL-ZEND-H-F/4698">RemixJobs</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Mise en production de Zend Framework sur un serveur mutualisé</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/</link>
+		<comments>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comments</comments>
+		<pubDate>Fri, 04 Jun 2010 08:06:56 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Zend]]></category>
+		<category><![CDATA[Astuces]]></category>
+		<category><![CDATA[Conseils]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[htaccess]]></category>
+		<category><![CDATA[Mutualisé]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[RewriteRule]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724</guid>
+		<description><![CDATA[Lorsque l&#8217;on dispose d&#8217;un serveur dédié, la mise en production d&#8217;une application Zend Framework est assez simple; il suffit de modifier le DocumentRoot du VirtualHost. Si l&#8217;on dispose d&#8217;un hébergement.. <a href="http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/06/zend-framework1.png"><img src="http://www.armetiz.info/files/2010/06/zend-framework1.png" alt="Zend Framework Logo" width="185" height="187" class="alignright size-full wp-image-1727" /></a>Lorsque l&#8217;on dispose d&#8217;un serveur dédié, la mise en production d&#8217;une application Zend Framework est assez simple; il suffit de modifier le <strong>DocumentRoot</strong> du <strong>VirtualHost</strong>.</p>
+<p>Si l&#8217;on dispose d&#8217;un hébergement mutualisé, il faut aussi pouvoir proposer à nos visiteurs un accès au site via <strong>www.domain.tld</strong> et non pas www.domain.tld/public/</p>
+<h3>Première solution</h3>
+<p>La première solution, consiste à déplacer le fichier /public/index.php à la racine du domaine et de modifier la définition de la constante <strong>APPLICATION_PATH</strong> de ce même fichier.<br />
+Le seul soucis de cette solution, c&#8217;est que les appels aux ressources de type <strong>CSS</strong> ou <strong>JS</strong> devront être modifiés pour pointer vers www.domain.tld/public/<br />
+Personnellement, je trouve cela complètement nul&#8230;</p>
+<h3>Deuxième solution</h3>
+<p>La deuxième solution &#8211; bien plus élégante &#8211; passe par l&#8217;ajout d&#8217;un .htaccess à la racine du domaine.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">RewriteEngine On<br />
+# Only apply to URLs on this domain<br />
+RewriteCond %{HTTP_HOST} ^(www.)?domain.tld$<br />
+<br />
+# Only apply to URLs that aren't already under folder.<br />
+RewriteCond %{REQUEST_URI} !^/public/<br />
+<br />
+# Don't apply to URLs that go to existing files or folders.<br />
+RewriteCond %{REQUEST_FILENAME} !-f<br />
+RewriteCond %{REQUEST_FILENAME} !-d<br />
+<br />
+# Rewrite all those to insert /folder.<br />
+RewriteRule ^(.*)$ /public/$1<br />
+<br />
+# Also redirect the root folder.<br />
+RewriteCond %{HTTP_HOST} ^(www.)?domain.tld$<br />
+RewriteRule ^(/)?$ public/index.php [L]</div></td></tr></tbody></table></div>
+<p>Là, tout est magique et fonctionne sans <strong>aucune autre modification</strong> de l&#8217;application.<br />
+Pour protéger l&#8217;accès à vos autres répertoires, et principalement <strong>/application</strong> qui contient surement vos <strong>mots de passe BDD</strong> non chiffrés. Rajouter un fichier .htaccess contenant</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">deny from all</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/feed/</wfw:commentRss>
+		<slash:comments>19</slash:comments>
+		</item>
+		<item>
+		<title>Transfer Object Assembler avec Doctrine 1</title>
+		<link>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/</link>
+		<comments>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/#comments</comments>
+		<pubDate>Mon, 31 May 2010 10:06:12 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Doctrine]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[DBAL]]></category>
+		<category><![CDATA[DTO]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Konbini]]></category>
+		<category><![CDATA[ORM]]></category>
+		<category><![CDATA[Pattern]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1693</guid>
+		<description><![CDATA[Le pattern Transfert Object TO, Data Transfert Object DTO, ou encore Value Object VO permet d&#8217;échanger des données entre deux applications. Wikipédia : Son but est de simplifier les transferts.. <a href="http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/05/doctrine1.gif"><img src="http://www.armetiz.info/files/2010/05/doctrine1.gif" alt="doctrine" width="191" height="53" class="alignright size-full wp-image-1710" /></a>Le <a href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/TransferObject.html">pattern Transfert Object</a> <strong>TO</strong>, <strong>Data Transfert Object DTO</strong>, ou encore <strong>Value Object VO</strong> permet d&#8217;échanger des données entre deux applications.</p>
+<p>Wikipédia : <em>Son but est de simplifier les transferts de données entre les sous-systèmes d&#8217;une application logiciel. Les objets de transfert de données sont souvent utilisés en conjonction des objets d&#8217;accès aux données.</em></p>
+<p>Qui dit <strong>Transfert Object</strong>, veux aussi dire <a href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/TransferObjectAssembler.html">Transfert Object Assembler</a>. </p>
+<h3>Conversion d&#8217;object</h3>
+<p>Le pattern <strong>Transfert Object Assembler</strong> permet de passer d&#8217;un DTO à un Objet d&#8217;accès au données, et inversement.<br />
+C&#8217;est le moyen le plus simple pour travailler avec le pattern Data Transert Object et un <strong>ORM</strong>.</p>
+<h3>Domain Object Model -&gt; Data Transfert Object</h3>
+<p>Avec l&#8217;<a href="http://www.doctrine-project.org/">ORM Doctrine</a>, le transfert d&#8217;un &#8220;<strong>Domain Object Model DOM</strong>&#8221; ou ici <strong>Doctrine_Record</strong> vers un <strong>DTO</strong> est très simple.<br />
+Il suffit de réaliser un parser qui analyse l&#8217;objet issu de Doctrine, et qui remplit les données du DTO.</p>
+<h3>Data Transfert Object -&gt; Domain Object Model</h3>
+<p>Convertir un DTO vers un DOM peut s&#8217;avère plus complexe.<br />
+En effet, Doctrine utilise des collections d&#8217;objet qui lui sont propres, mais a aussi besoin de connaitre les clés primaires et leurs contenus pour pouvoir créer un objet. Car un objet issu de Doctrine_Record n&#8217;a pas les même propriétés quand il est existant en base de donnée, ou qu&#8217;il est en phase d&#8217;être sauvegardé.</p>
+<h3>Implémentation de Transfer Object Assembler</h3>
+<p>Une implémentation du pattern <strong>Transfert Object Assembler</strong> vient de voir le jour après moult et moult péripéties.</p>
+<p>Cette implémentation permet donc le transférer de DTOs à partir de DOMs et inversement.<br />
+Associer au pattern Service Layer, cela peut s&#8217;avérer être très pratique.</p>
+<p>Voici un exemple simple d&#8217;utilisation :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$oProgram = new ProgramDTO ();<br />
+$oProgram-&amp;gt;title = &quot;Dorothe&quot;;<br />
+<br />
+$oVideoDTO = new VideoDTO ();<br />
+$oVideoDTO-&amp;gt;idVideo = 30;<br />
+$oVideoDTO-&amp;gt;program = $oProgram;<br />
+<br />
+$oAssembler = $new Assembler ();<br />
+$oVideo = $oAssembler-&amp;gt;createDomainObject ($oVideoDTO);<br />
+$oVideo-&amp;gt;save ();</div></td></tr></tbody></table></div>
+<p>Nous avons ici créé une nouvelle entrée dans la table programs, et réalisé une liaison entre ce nouvel objet et la vidéo existante d&#8217;identifiant 30.<br />
+Le tout one-shot !</p>
+<p>L&#8217;intérêt de cette implémentation, c&#8217;est d&#8217;être fonctionnel avec :</p>
+<ul>
+<li>Les objets persistant</li>
+<li>Les objets non-persistant</li>
+<li>Les compositions d&#8217;objets sur N niveau</li>
+</ul>
+<h3>Utilisation avec le pattern Service Layer</h3>
+<p>Nous allons voir l&#8217;exemple le plus simple, soit l&#8217;implémentation des méthodes CRUD pour un objet générique.<br />
+L&#8217;utilisation du nommage des classes provient de l&#8217;utilisation de Zend Framework.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br />50<br />51<br />52<br />53<br />54<br />55<br />56<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function create (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; &nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler &nbsp; &nbsp; = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; &nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, true);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;save ();<br />
+&nbsp; &nbsp; $poVideoDTO-&amp;gt;idShow&nbsp; = $oModelVideo-&amp;gt;idShow;<br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function read (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $query&nbsp; = Doctrine_Query::create ()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;select (&quot;video.*&quot;)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;from (&quot;Model_Video video&quot;)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;where (&quot;video.id_show = ?&quot;, $piIdVideo);<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $query-&amp;gt;fetchOne ();<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; return $oAssembler-&amp;gt;createTransfertObject ($oModelVideo);<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function update (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, true);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;save ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function delete (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, false);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;delete ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}</div></td></tr></tbody></table></div>
+<h3>Téléchargement</h3>
+<p>Contenu de l&#8217;archive :</p>
+<ul>
+<li>Implémentation du pattern Transfer Object Assembler</li>
+<li>Interface du pattern Transfer Object Assembler</li>
+<li>Classe de définition d&#8217;un DTO</li>
+</ul>
+<p>Pour faire fonctionner l&#8217;assembler. Vous devez définir une classe qui hérite de Assembler, et ainsi surchargez la propriété $_relationships avec vos liaisons entre DTO et DOM.</p>
+<p><strong>Dernière mise à jour : 20 Septembre 2010</strong><br />
+<a href='http://www.armetiz.info/wp-content/uploads/2010/09/Transfert_Object_Assembler_Doctrine_1.2.zip'>Transfert_Object_Assembler_Doctrine_1.2.zip</a> &#8211; 6 Ko.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/feed/</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+		<item>
+		<title>Deux Slide show Javascript</title>
+		<link>http://www.armetiz.info/deux-slide-show-javascript/</link>
+		<comments>http://www.armetiz.info/deux-slide-show-javascript/#comments</comments>
+		<pubDate>Wed, 05 Aug 2009 11:58:57 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[contenu]]></category>
+		<category><![CDATA[défilement]]></category>
+		<category><![CDATA[div]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[html]]></category>
+		<category><![CDATA[jquery]]></category>
+		<category><![CDATA[slidshow]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1183</guid>
+		<description><![CDATA[Scrollable et Horinaja: deux scripts permettant de réaliser un slide show sur du contenu HTML en Javascript. Cela est pratique pour faire défiler des images, ou des blocs contenus dans.. <a href="http://www.armetiz.info/deux-slide-show-javascript/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://flowplayer.org/tools/scrollable.html">Scrollable</a> et <a href="http://www.davidmassiani.com/horinaja/">Horinaja</a>: deux scripts permettant de réaliser un slide show sur du contenu HTML en Javascript.<br />
+Cela est pratique pour faire défiler des images, ou des blocs contenus dans des <strong>div</strong>.</p>
+<h3>Scrollable</h3>
+<p><a href="http://flowplayer.org/tools/scrollable.html">Scrollable</a> est un tools de la suite <a href="http://flowplayer.org/">Flowplayer</a>. Il est <strong>rapide </strong>à mettre en place et utilise JQuery. La <strong>documentation </strong>est suffisamment fournit pour utiliser correctement le script.<br />
+Les options de configuration sont assez nombreuses.</p>
+<h3>Horinaja</h3>
+<p><a href="http://www.davidmassiani.com/horinaja/"><img class="alignright" alt="Horinaja" src="http://www.davidmassiani.com/horinaja/image/logo.png" width="127" height="20" /></a><a href="http://www.davidmassiani.com/horinaja/">Horinaja</a> utilise <strong>JQuery </strong>ou <strong>scriptaculous</strong>, ce sera à vous de choisir la version que vous souhaitez.<br />
+La documentation semble plus petite, mais est-ce un tord ?  A vous de jugez car je n&#8217;ai pas encore utilisé cette solution.</p>
+<p>PS: Entre <strong>Slide show</strong>, <strong>scroll </strong>et <strong>défilement</strong> j&#8217;ai eu beaucoup de mal à faire mon choix. Vous avez un mot plus adapté ?<br />
+PS2: Si vous avez d&#8217;autres solutions à proposées, n&#8217;hésiter pas à me le faire savoir.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/deux-slide-show-javascript/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>PureMVC et Objective-C : Mission iPhone</title>
+		<link>http://www.armetiz.info/puremvc-langage-iphone/</link>
+		<comments>http://www.armetiz.info/puremvc-langage-iphone/#comments</comments>
+		<pubDate>Mon, 19 Jan 2009 09:22:29 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[Portabilité]]></category>
+		<category><![CDATA[PureMVC]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=704</guid>
+		<description><![CDATA[Nous parlions de PureMVC dans le précédent article &#8211; Reflex : Architecture MVC &#8211; et bien le revoici pour vous annoncer que PureMVC à été porté pour Objective-C qui est.. <a href="http://www.armetiz.info/puremvc-langage-iphone/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Nous parlions de <a href="http://puremvc.org/">PureMVC</a> dans le précédent article &#8211; <a href="http://www.armetiz.info/reflex-architecture-mvc/">Reflex : Architecture MVC</a> &#8211; et bien le revoici pour vous annoncer que <a href="http://puremvc.org/content/view/121/1/">PureMVC à été porté</a> pour <a href="http://fr.wikipedia.org/wiki/Objective_C">Objective-C</a> qui est le langage de développement de l&#8217;iPhone.</p>
+<p>Cela nous amène à constater l&#8217;intérêt de PureMVC face à ces concurrents, car CairnGorm est une ligne de conduite utilisable avec Flex uniquement, car Reflex est une micro-architecture Flex facile à apprendre, car Vegas est un très gros et très riche framework ActionScript 1, 2 et 3.<br />
+Là où PureMVC sort son épingle du jeu, c&#8217;est sur sa portabilité, citons :</p>
+<ul>
+<li>AS 2 : Flex 1.5, Flash 8, FlashLite</li>
+<li>AS 3 : Flex 2, 3, Flash 9/CS3, AIR</li>
+<li>C# : .NET 1.0/2.0 Silverlight, Windows Mobile and Pocket PC</li>
+<li>ColdFusion</li>
+<li>haXe : JavaScript, Flash 8, Flash 9 and the Neko VM</li>
+<li>Java : Java Mobile, Standard and Enterprise Editions (ME, SE, EE), JavaFX, Servlets, Applets, GWT<br />
+JavaScript</li>
+<li>PHP : Version 5 &amp; 6</li>
+<li>Python : Python 2.5 for wxPython and Google App Engine</li>
+<li>Objective-C : iPhone</li>
+</ul>
+<p>N&#8217;ayant pas d&#8217;iPhone &#8211; et ne projetant pas d&#8217;en acheter un &#8211; je ne pourrai pas faire de teste, mais si cela intéresse quelqu&#8217;un, il pourra nous faire son feedback <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>A vos claviers <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/puremvc-langage-iphone/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Reflex : Architecture MVC</title>
+		<link>http://www.armetiz.info/reflex-architecture-mvc/</link>
+		<comments>http://www.armetiz.info/reflex-architecture-mvc/#comments</comments>
+		<pubDate>Thu, 15 Jan 2009 11:17:05 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[CairnGorm]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[IOC]]></category>
+		<category><![CDATA[MVC]]></category>
+		<category><![CDATA[Pattern]]></category>
+		<category><![CDATA[PureMVC]]></category>
+		<category><![CDATA[Reflex]]></category>
+		<category><![CDATA[Vegas]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=689</guid>
+		<description><![CDATA[Fabien de la Fabrick a publié une &#8220;micro-architecture&#8221; MVC pour Flex. Ces mots de présentation sont : Souvent dans le monde de Flex, les équipes ne sont pas forcement homogènes... <a href="http://www.armetiz.info/reflex-architecture-mvc/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Fabien de la <a href="http://www.lafabrick.com">Fabrick</a> a publié une &#8220;micro-architecture&#8221; MVC pour Flex.<br />
+Ces mots de présentation sont :</p>
+<blockquote><p>Souvent dans le monde de Flex, les équipes ne sont pas forcement homogènes. Certains sont habitués à la rigueur de Java, d’autres sont plus “devsigners freestyle” venant du monde Flash. Les premiers aiment les grosses mécaniques comme <a href="http://puremvc.org/">PureMVC</a>, ou <a href="http://www.pranaframework.org/">Prana Framework</a> “Spring like”. Les seconds connaissent au mieux <a href="http://opensource.adobe.com/wiki/display/cairngorm/Cairngorm">Cairngorm</a>, au pire confondent <a href="http://en.wikipedia.org/wiki/Model-view-controller">MVC</a> et <a href="http://fr.wikipedia.org/wiki/Ventilation_m%C3%A9canique_contr%C3%B4l%C3%A9e">VMC</a> &#8211; ce qui n’a rien a voir, sauf si vous faites une application riche sur le thème de la ventilation.</p></blockquote>
+<p>Pour l&#8217;instant deux didacticiels sont disponibles : <a href="http://www.lafabrick.com/blog/2009/01/13/786-reflex-1-une-micro-architecture-pour-flex-simple/">Introduction et Exemple</a> et <a href="http://www.lafabrick.com/blog/2009/01/15/819-reflex-2-vous-reprendez-bien-un-peu-de-ioc/">l&#8217;utilisation de l&#8217;IOC</a> où il faut comprendre &#8220;Injection Of Content&#8221; plutôt que &#8220;<a href="http://fr.wikipedia.org/wiki/Inversion_de_contr%C3%B4le">Inversion Of Control</a>&#8220;.</p>
+<p>Ceci est un article orienté publicité d&#8217;une part, mais aussi &#8220;déploiement&#8221;. Toute personne recherchant un <strong>framework MVC</strong> tombera sur <a href="http://puremvc.org/">PureMVC</a> ou <a href="http://opensource.adobe.com/wiki/display/cairngorm/Cairngorm">Cairngorm</a>, et bien maintenant, il y aura aussi <a href="http://www.lafabrick.com/blog/2009/01/13/786-reflex-1-une-micro-architecture-pour-flex-simple/">ReFlex</a> qui entrera dans la liste.</p>
+<p>Si vous utilisez ReFlex, n&#8217;hésitez pas à faire des retours à l&#8217;auteur.</p>
+<p><strong>Edit</strong> : Oubli de ma part, gros framework incluant le pattern MVC : <a href="http://code.google.com/p/vegas/">Vegas</a> développé par <a href="http://www.ekameleon.net/blog/">eKameleon</a>. D&#8217;ailleurs Vega n&#8217;inclue pas uniquement le pattern MVC, mais aussi beaucoup d&#8217;autres choses, il peut avoir l&#8217;air très difficile à appréhender. Mais comme toute nouvelle découverte, cela demande de l&#8217;investissement. Mais rassurez-vous, c&#8217;est un framework très riche en documentation.</p>
+<p>A vous de faire votre choix <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/reflex-architecture-mvc/feed/</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 8/23 queries in 0.035 seconds using apc
+Object Caching 1527/1637 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:08:02 by W3 Total Cache -->

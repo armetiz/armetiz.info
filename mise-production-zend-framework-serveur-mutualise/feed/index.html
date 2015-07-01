@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Mise en production de Zend Framework sur un serveur mutualisé</title>
+	<atom:link href="http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Thu, 03 Apr 2014 20:26:43 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comment-498</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Mon, 30 Jul 2012 08:48:44 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724#comment-498</guid>
+		<description><![CDATA[@André, la remarque n&#039;est pas mauvaise du tout.
+Je vais répondre en prenant des pincettes, car je suis passé sous Symfony2 depuis plusieurs mois et j&#039;ai un peu lâché Zend Framework.
+
+Le répertoire /application sous Zend Framework v1 contient la logique métier de votre application. Là où cela peux-être déroutant, c&#039;est que /application contient aussi la partie &lt;strong&gt;vue&lt;/strong&gt; de l&#039;application : layout, helper...
+Maintenant, le répertoire /application n&#039;a pas vocation a être rendu accesible sur http, c&#039;est pour cela qu&#039;il est conseillé de mettre les ressources HTTP dans le répertoire /public et non pas dans /application.
+
+Voici tout de meme une petite solution qui doit fonctionner.
+Prenons le cas de /application/views/assets qui est un répertoire nouvellement créé contenant les ressources HTTP de votre application. Vous pouvez faire un lien symbolique entre /public/assets -&gt; /application/views/assets.
+
+En espérant avoir été utile.
+
+Thomas.]]></description>
+		<content:encoded><![CDATA[<p>@André, la remarque n&#8217;est pas mauvaise du tout.<br />
+Je vais répondre en prenant des pincettes, car je suis passé sous Symfony2 depuis plusieurs mois et j&#8217;ai un peu lâché Zend Framework.</p>
+<p>Le répertoire /application sous Zend Framework v1 contient la logique métier de votre application. Là où cela peux-être déroutant, c&#8217;est que /application contient aussi la partie <strong>vue</strong> de l&#8217;application : layout, helper&#8230;<br />
+Maintenant, le répertoire /application n&#8217;a pas vocation a être rendu accesible sur http, c&#8217;est pour cela qu&#8217;il est conseillé de mettre les ressources HTTP dans le répertoire /public et non pas dans /application.</p>
+<p>Voici tout de meme une petite solution qui doit fonctionner.<br />
+Prenons le cas de /application/views/assets qui est un répertoire nouvellement créé contenant les ressources HTTP de votre application. Vous pouvez faire un lien symbolique entre /public/assets -&gt; /application/views/assets.</p>
+<p>En espérant avoir été utile.</p>
+<p>Thomas.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: André</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comment-497</link>
+		<dc:creator><![CDATA[André]]></dc:creator>
+		<pubDate>Mon, 30 Jul 2012 08:24:11 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724#comment-497</guid>
+		<description><![CDATA[Bonjour,
+
+Les fichiers CSS et plus encore les fichiers JS font à priori totalement partie de &quot;l&#039;application WEB&quot;, aussi de prîme abord on pourrait penser que leur place est quelque part DANS le sous-dossiers /application...
+
+N&#039;est-ce pas assez peu naturel de placer CSS, JS et images &quot;de l&#039;application WEB&quot; dans /public, et donc &quot;en dehors&quot; de /application ? S&#039;agissant des images, je parle bien de celles de l&#039;application, comme un icône sur un bouton, et non pas - par exemple - d&#039;une image/photo rattachée au profil d&#039;un utilisateur du site, auquel cas l&#039;image me semble cette fois avoir tout naturellement sa place  dans /public, et en tout cas en dehors de /application...
+
+N&#039;est-il pas possible, de façon élégante, de maintenir CSS/IS/IMG *de l&#039;application* dans /application ?
+
+Si c&#039;est idiot, ne pas taper, mais connaissances sur le Framework Zend sont encore maigres ! :)]]></description>
+		<content:encoded><![CDATA[<p>Bonjour,</p>
+<p>Les fichiers CSS et plus encore les fichiers JS font à priori totalement partie de &#8220;l&#8217;application WEB&#8221;, aussi de prîme abord on pourrait penser que leur place est quelque part DANS le sous-dossiers /application&#8230;</p>
+<p>N&#8217;est-ce pas assez peu naturel de placer CSS, JS et images &#8220;de l&#8217;application WEB&#8221; dans /public, et donc &#8220;en dehors&#8221; de /application ? S&#8217;agissant des images, je parle bien de celles de l&#8217;application, comme un icône sur un bouton, et non pas &#8211; par exemple &#8211; d&#8217;une image/photo rattachée au profil d&#8217;un utilisateur du site, auquel cas l&#8217;image me semble cette fois avoir tout naturellement sa place  dans /public, et en tout cas en dehors de /application&#8230;</p>
+<p>N&#8217;est-il pas possible, de façon élégante, de maintenir CSS/IS/IMG *de l&#8217;application* dans /application ?</p>
+<p>Si c&#8217;est idiot, ne pas taper, mais connaissances sur le Framework Zend sont encore maigres ! <img src="http://www.armetiz.info/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ruth</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comment-496</link>
+		<dc:creator><![CDATA[Ruth]]></dc:creator>
+		<pubDate>Thu, 12 Apr 2012 08:04:52 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724#comment-496</guid>
+		<description><![CDATA[Enfin j&#039;aperçois le bout du tunnel, j&#039;ai enfin pu herberger mon site. il me reste une derniere tâche à effectuer : le charger le fichier css...
+
+Merci]]></description>
+		<content:encoded><![CDATA[<p>Enfin j&#8217;aperçois le bout du tunnel, j&#8217;ai enfin pu herberger mon site. il me reste une derniere tâche à effectuer : le charger le fichier css&#8230;</p>
+<p>Merci</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comment-495</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Wed, 11 Apr 2012 21:32:59 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724#comment-495</guid>
+		<description><![CDATA[Un petit tour sur Google : 
+- http://www.z-f.fr/forum/viewtopic.php?id=4895
+- http://forums.zend.com/viewtopic.php?f=69&amp;t=6029]]></description>
+		<content:encoded><![CDATA[<p>Un petit tour sur Google :<br />
+&#8211; <a href="http://www.z-f.fr/forum/viewtopic.php?id=4895" rel="nofollow">http://www.z-f.fr/forum/viewtopic.php?id=4895</a><br />
+&#8211; <a href="http://forums.zend.com/viewtopic.php?f=69&#038;t=6029" rel="nofollow">http://forums.zend.com/viewtopic.php?f=69&#038;t=6029</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ruth</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comment-494</link>
+		<dc:creator><![CDATA[Ruth]]></dc:creator>
+		<pubDate>Wed, 11 Apr 2012 11:19:47 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724#comment-494</guid>
+		<description><![CDATA[Là, je tombe sur quelque chose d&#039;inattendu une erreure sans information &quot;An error occured, Application Error&quot;
+chez mon hebergeur OVH]]></description>
+		<content:encoded><![CDATA[<p>Là, je tombe sur quelque chose d&#8217;inattendu une erreure sans information &#8220;An error occured, Application Error&#8221;<br />
+chez mon hebergeur OVH</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comment-493</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Mon, 09 Apr 2012 19:44:38 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724#comment-493</guid>
+		<description><![CDATA[En affichant les erreurs on avance toujours plus vite.
+Regarde du coté de l&#039;autoloader : http://framework.zend.com/manual/fr/zend.loader.autoloader.html]]></description>
+		<content:encoded><![CDATA[<p>En affichant les erreurs on avance toujours plus vite.<br />
+Regarde du coté de l&#8217;autoloader : <a href="http://framework.zend.com/manual/fr/zend.loader.autoloader.html" rel="nofollow">http://framework.zend.com/manual/fr/zend.loader.autoloader.html</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ruth</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comment-492</link>
+		<dc:creator><![CDATA[Ruth]]></dc:creator>
+		<pubDate>Mon, 09 Apr 2012 15:16:35 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724#comment-492</guid>
+		<description><![CDATA[Aux sujets des erreures, j&#039;ai basculé 
+phpSettings.display_startup_errors = 0
+phpSettings.display_errors = 0
+
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+
+afin de visualiser mes erreures pour les corrigées. et là :
+Fatal error: Class &#039;Application_Form_Log_Login&#039; not found in /homez.91/labis/prestime/application/controllers/LoginController.php on line 35
+
+problème de chargement de classes. sui marche bien en local mais pas chez OVH
+
+dans mon fichier bootstrap.php
+
+j&#039;ai bien cette fonction qui est appélée
+protected function _initAutoload()
+	{$moduleLoader = new Zend_Application_Module_Autoloader(array(
+			&#039;namespace&#039; =&gt; &#039;&#039;,
+			&#039;basePath&#039; =&gt; APPLICATION_PATH));
+		return $moduleLoader;
+	}
+
+et dans public/index.php
+
+// Define path to application directory
+defined(&#039;APPLICATION_PATH&#039;)
+    &#124;&#124; define(&#039;APPLICATION_PATH&#039;, realpath(dirname(__FILE__) . &#039;/../application&#039;));]]></description>
+		<content:encoded><![CDATA[<p>Aux sujets des erreures, j&#8217;ai basculé<br />
+phpSettings.display_startup_errors = 0<br />
+phpSettings.display_errors = 0</p>
+<p>phpSettings.display_startup_errors = 1<br />
+phpSettings.display_errors = 1</p>
+<p>afin de visualiser mes erreures pour les corrigées. et là :<br />
+Fatal error: Class &#8216;Application_Form_Log_Login&#8217; not found in /homez.91/labis/prestime/application/controllers/LoginController.php on line 35</p>
+<p>problème de chargement de classes. sui marche bien en local mais pas chez OVH</p>
+<p>dans mon fichier bootstrap.php</p>
+<p>j&#8217;ai bien cette fonction qui est appélée<br />
+protected function _initAutoload()<br />
+	{$moduleLoader = new Zend_Application_Module_Autoloader(array(<br />
+			&#8216;namespace&#8217; =&gt; &#8221;,<br />
+			&#8216;basePath&#8217; =&gt; APPLICATION_PATH));<br />
+		return $moduleLoader;<br />
+	}</p>
+<p>et dans public/index.php</p>
+<p>// Define path to application directory<br />
+defined(&#8216;APPLICATION_PATH&#8217;)<br />
+    || define(&#8216;APPLICATION_PATH&#8217;, realpath(dirname(__FILE__) . &#8216;/../application&#8217;));</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comment-491</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Thu, 05 Apr 2012 13:43:30 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724#comment-491</guid>
+		<description><![CDATA[L&#039;erreur semble explicite.. Il y a simplement une erreur de syntaxe dans le code.]]></description>
+		<content:encoded><![CDATA[<p>L&#8217;erreur semble explicite.. Il y a simplement une erreur de syntaxe dans le code.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ruth</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comment-490</link>
+		<dc:creator><![CDATA[Ruth]]></dc:creator>
+		<pubDate>Thu, 05 Apr 2012 13:39:53 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724#comment-490</guid>
+		<description><![CDATA[Merci! 
+mais premièremet, j&#039;ai cru que c&#039;etait le module Rewrite de mon hebergeur qui n&#039;etait pas activé. ce qui n&#039;est pas le cas
+deuxiement, j&#039;ai ajoute ces ligne de code dans mon fichier .htaccess à la recine de mon 
+SetEnv ZEND_OPTIMIZER 1
+SetEnv MAGIC_QUOTES 1
+SetEnv PHP_VER 5
+ce quidevrais permettre de reconnaitre architecture Zend
+
+j&#039;ai un page vide , en le supprimant j&#039;obtiens cette erreur
+
+Parse error: syntax error, unexpected T_OBJECT_OPERATOR in /...../public/index.php on line 26
+
+
+bootstrap()
+            -&gt;run();     &lt;= ici la ligne 26
+
+Hors la fonction run() existe bien dans mon bootstrap();]]></description>
+		<content:encoded><![CDATA[<p>Merci!<br />
+mais premièremet, j&#8217;ai cru que c&#8217;etait le module Rewrite de mon hebergeur qui n&#8217;etait pas activé. ce qui n&#8217;est pas le cas<br />
+deuxiement, j&#8217;ai ajoute ces ligne de code dans mon fichier .htaccess à la recine de mon<br />
+SetEnv ZEND_OPTIMIZER 1<br />
+SetEnv MAGIC_QUOTES 1<br />
+SetEnv PHP_VER 5<br />
+ce quidevrais permettre de reconnaitre architecture Zend</p>
+<p>j&#8217;ai un page vide , en le supprimant j&#8217;obtiens cette erreur</p>
+<p>Parse error: syntax error, unexpected T_OBJECT_OPERATOR in /&#8230;../public/index.php on line 26</p>
+<p>bootstrap()<br />
+            -&gt;run();     &lt;= ici la ligne 26</p>
+<p>Hors la fonction run() existe bien dans mon bootstrap();</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Thomas Tourlourat</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comment-489</link>
+		<dc:creator><![CDATA[Thomas Tourlourat]]></dc:creator>
+		<pubDate>Thu, 05 Apr 2012 12:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724#comment-489</guid>
+		<description><![CDATA[@Ruth, tu dois avoir une erreur PHP à l&#039;execution. Affiche les erreurs PHP tu aura surement la réponse à ta question en voyant le contenu de l&#039;erreur.]]></description>
+		<content:encoded><![CDATA[<p>@Ruth, tu dois avoir une erreur PHP à l&#8217;execution. Affiche les erreurs PHP tu aura surement la réponse à ta question en voyant le contenu de l&#8217;erreur.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 7/12 queries in 0.008 seconds using apc
+Object Caching 348/349 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:12:25 by W3 Total Cache -->

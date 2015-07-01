@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Server</title>
+	<atom:link href="http://www.armetiz.info/tag/server/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Install NodeJS on CentOS</title>
+		<link>http://www.armetiz.info/install-nodejs-on-centos/</link>
+		<comments>http://www.armetiz.info/install-nodejs-on-centos/#comments</comments>
+		<pubDate>Fri, 27 Jul 2012 09:58:22 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[English]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Real-Time]]></category>
+		<category><![CDATA[Server]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=2594</guid>
+		<description><![CDATA[NodeJS isn&#8217;t available neither on centos base repositories nor on EPEL. To install NodeJS, you can do it from a specific repository or you can compile it. From repository To.. <a href="http://www.armetiz.info/install-nodejs-on-centos/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://nodejs.org/">NodeJS</a> isn&#8217;t available neither on centos <a href="http://wiki.centos.org/AdditionalResources/Repositories/">base repositories</a> nor on <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a>.<br />
+To install NodeJS, you can do it from a <a href="http://nodejs.tchol.org/">specific repository</a> or you can compile it.</p>
+<h3>From repository</h3>
+<p>To install NodeJS from repository on a RHEL based distribution, including our CentOS, just do :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;nodejs.rpm&quot;</span> http:<span style="color: #000000; font-weight: bold;">//</span>nodejs.tchol.org<span style="color: #000000; font-weight: bold;">/</span>repocfg<span style="color: #000000; font-weight: bold;">/</span>el<span style="color: #000000; font-weight: bold;">/</span>nodejs-stable-release.noarch.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum localinstall</span> <span style="color: #660033;">--nogpgcheck</span> nodejs.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum install</span> nodejs-compat-symlinks npm<br />
+<span style="color: #c20cb9; font-weight: bold;">rm</span> nodejs.rpm</div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-v</span><br />
+<span style="color: #666666; font-style: italic;">#v0.6.18</span></div></td></tr></tbody></table></div>
+<h3>From source</h3>
+<p>To compile NodeJS from source on your CentOS, you have to install <strong>missing dependancies</strong> : <strong>gcc-c++, python and libssl-dev</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> gcc-c++ python libssl-dev<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #ff0000;">&quot;node.tar.gz&quot;</span> <span style="color: #ff0000;">&quot;http://nodejs.org/dist/node-latest.tar.gz&quot;</span><br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xzvf</span> node.tar.gz <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> node-v<span style="color: #000000; font-weight: bold;">*</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-v</span><br />
+<span style="color: #666666; font-style: italic;">#v0.8.4</span></div></td></tr></tbody></table></div>
+<h3>Play with a simple &#8220;Hello world&#8221;</h3>
+<p>Just launch node in <strong>interactive mode</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">node <span style="color: #660033;">-i</span></div></td></tr></tbody></table></div>
+<p>Type a Javascript command.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #339933;">&gt;</span> console.<span style="color: #660066;">log</span> <span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Hello World&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+Hello world<br />
+undefined<br />
+<span style="color: #339933;">&gt;</span></div></td></tr></tbody></table></div>
+<h3>About version</h3>
+<p>As you can see, the repository provides an old version of NodeJS (0.6.14) compared to the latest released (0.8.4).</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/install-nodejs-on-centos/feed/</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		</item>
+		<item>
+		<title>Livre &#8211; Node Up and Running</title>
+		<link>http://www.armetiz.info/livre-node-up-and-running/</link>
+		<comments>http://www.armetiz.info/livre-node-up-and-running/#comments</comments>
+		<pubDate>Thu, 21 Jun 2012 06:16:13 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Livres]]></category>
+		<category><![CDATA[Asynchrone]]></category>
+		<category><![CDATA[Découverte]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Livre]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Server]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2525</guid>
+		<description><![CDATA[Node &#8211; Up and Running est un livre sur NodeJS écrit par Tom Hughes-Croucher &#38; Mike Wilson. Ecrit en Anglais, il vous permettra de mettre le pied à l&#8217;étrier de.. <a href="http://www.armetiz.info/livre-node-up-and-running/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://nodejs.org/"><img src="http://www.armetiz.info/files/2012/06/nodejs1.gif" alt="nodejs" width="180" height="236" class="alignleft size-full wp-image-2527" /></a><a href="http://www.amazon.fr/Node-Up-Running-Tom-Hughes-Croucher/dp/1449398588/">Node &#8211; Up and Running</a> est un livre sur <a href="http://nodejs.org/">NodeJS</a> écrit par <em>Tom Hughes-Croucher</em> &amp; <em>Mike Wilson</em>.</p>
+<p>Ecrit en Anglais, il vous permettra de mettre le pied à l&#8217;étrier de <strong>NodeJS avec facilité</strong>.<br />
+Les 170 pages sont consacrées à la découverte et à la prise en main de NodeJS, ainsi qu&#8217;aux problématiques qu&#8217;il tente de résoudre par son approche &#8220;Even-Driven&#8221;.</p>
+<p>
+Personnellement, j&#8217;ai vraiment apprécié cet ouvrage. J&#8217;avais déjà envie de travailler avec NodeJS, et bien cela est confirmé !</p>
+<p>Voici les chapitres du livre:</p>
+<ul>
+<li>A Very Brief Introduction to Node.js</li>
+<li>Doing Interesting Things</li>
+<li>Building Robust Node Applications</li>
+<li>Core APIs</li>
+<li>Helper APIs</li>
+<li>Data Access</li>
+<li>Important External Modules</li>
+<li>Extending Node</li>
+</ul>
+<p>Il est à noter que l&#8217;exploration de la <a href="http://nodejs.org/api/">documentation API</a> est quasiment obligatoire une fois que vous avez terminé le livre. Cela vous permettra d&#8217;aller plus loin dans votre découverte et d&#8217;avoir toutes les clés en main.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/livre-node-up-and-running/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Authentification et Autorisation avec Zend AMF</title>
+		<link>http://www.armetiz.info/authentification-autorisation-zend-amf/</link>
+		<comments>http://www.armetiz.info/authentification-autorisation-zend-amf/#comments</comments>
+		<pubDate>Mon, 05 Jul 2010 08:23:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[AS3]]></category>
+		<category><![CDATA[CRUD]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Server]]></category>
+		<category><![CDATA[Service]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1786</guid>
+		<description><![CDATA[Nous allons voir comment mettre en place l&#8217;authentification et l&#8217;autorisation lorsque l&#8217;on souhaite travailler avec Zend et le protocole AMF. Au niveau des pré-requit, vous devez avoir une architecture Zend.. <a href="http://www.armetiz.info/authentification-autorisation-zend-amf/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Nous allons voir comment mettre en place <strong>l&#8217;authentification</strong> et <strong>l&#8217;autorisation</strong> lorsque l&#8217;on souhaite travailler avec Zend et le protocole AMF.</p>
+<p>Au niveau des pré-requit, vous devez avoir une architecture <strong>Zend et AMF opérationnelle</strong>.<br />
+Aussi, je vous conseils de lire la documentation sur <a href="http://framework.zend.com/manual/fr/zend.auth.introduction.html">Zend_Auth</a> et <a href="http://framework.zend.com/manual/fr/zend.acl.introduction.html">Zend_Acl</a>.<br />
+Vous devez avoir compris la notion de <strong>rôle</strong> et de <strong>ressource</strong>.</p>
+<h3>Objectifs</h3>
+<p>Si vous fournissez des services à travers le réseau, et qu&#8217;ils peuvent avoir un impact sur la cohérence des données, vous vous devez de sécuriser l&#8217;accès à ces services.</p>
+<p>Sécurisé l&#8217;accès signifie restreinte l&#8217;accès, mais aussi chiffrer les communications.<br />
+Nous ne traiterons pas la partie chiffrement des échanges, pour cela je vous laissez chercher de la documentation sur HTTPS.</p>
+<h3>Point de départ</h3>
+<p>Ci-dessous, un exemple de contrôleur Zend offrant des services AMF.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class ServiceController extends Zend_Controller_Action<br />
+{<br />
+&nbsp; &nbsp; public function init()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_helper-&amp;gt;viewRenderer-&amp;gt;setNoRender();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_helper-&amp;gt;layout-&amp;gt;disableLayout();<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public function amfAction()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; $server = new Zend_Amf_Server();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; //Liste des services<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;Service_User&quot; );<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;Service_Book&quot; );<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;ZendAmfServiceBrowser&quot; );<br />
+<br />
+&nbsp; &nbsp; //Mapping des objets PHP avec les objets ActionScript &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; $server-&amp;gt;setClassMap('UserDTO', 'Model_DTO_User');<br />
+&nbsp; &nbsp; $server-&amp;gt;setClassMap('BookDTO', 'Model_DTO_Book');<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; $server-&amp;gt;setProduction(false);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; ZendAmfServiceBrowser::$ZEND_AMF_SERVER = $server;<br />
+<br />
+&nbsp; &nbsp; echo ($server-&amp;gt;handle());<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Nous avons donc <u>deux services</u>, et <u>deux types d&#8217;objets</u> pouvant être utilisés.</p>
+<p>Vous remarquerez l&#8217;utilisation de <a href="http://www.zamfbrowser.org/">ZamfBrowser</a>, ce service couplé avec une application Adobe AIR permet de travailler facilement avec les services.</p>
+<p>Voici à quoi ressemble les prototypes d&#8217;un de mes services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Service_Book<br />
+{<br />
+&nbsp; &nbsp; public function createBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function readBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function updateBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function deleteBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function isRentBy (Model_DTO_User $oUser) {}<br />
+}</div></td></tr></tbody></table></div>
+<blockquote><p>L&#8217;autre service est composé lui aussi des méthodes <strong>CRUD</strong> (Create, Read, Update, Delete), ainsi que d&#8217;autres fonctions métiers.</p></blockquote>
+<p>Sachant que mon application cliente Flash utilise ces services, il est très facile à un utilisateur de découvrir <strong>l&#8217;URI de la passerelle AMF</strong>.<br />
+En l&#8217;état, une personne ayant l&#8217;accès à ma passerelle AMF pourrai utiliser toutes les fonctions de mes services. Ce qui implique qu&#8217;il puisse modifier ma base de données.</p>
+<p><em>Remarquer que si l&#8217;on supprime le service de ZamfBrowser, l&#8217;utilisateur n&#8217;aura pas accès à la liste exhaustive des services. Si vous êtes en production, je vous conseils donc de supprimer ce service pour des raisons de sécurité.</em></p>
+<h3>Mise en place de l&#8217;authentification</h3>
+<p>Nous allons commencer par mettre en place l&#8217;authentification,<br />
+Sachant que nous utilisons un client Flash, il est logique d&#8217;utiliser <strong>Zend_Amf_Adobe_Auth</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$authAdapter = new Zend_Amf_Adobe_Auth(APPLICATION_PATH . '/config/password.xml');<br />
+$server-&amp;gt;setAuth($authAdapter );</div></td></tr></tbody></table></div>
+<p>Avec ces deux lignes, nous avons mis en place l&#8217;authentification au niveau du serveur.<br />
+Il vous reste à définir le fichier password.xml</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Le fichier password.xml contient les identifiants et les mots de passe des utilisateurs.<br />
+C&#8217;est à ce niveau que vous définissez les affectations d&#8217;identifiants à un rôle.</p>
+<p>Si vous avez besoin de plus de souplesse au niveau de la gestion des identifiants, je vous conseils la lecture de <a href="http://framework.zend.com/manual/fr/zend.auth.adapter.dbtable.html">Authentification avec une table de base de données</a>.</p>
+<p><em>Il est à noter, que si vous ne spécifier aucun identifiant lors de votre connexion au serveur AMF vous serez considéré comme un invité : <strong>Zend_Amf_Constants::GUEST_ROLE</strong></em></p>
+<h3>Mise en place de l&#8217;autorisation</h3>
+<p>Maintenant que nous avons correctement définit l&#8217;authentification, passons à l&#8217;autorisation.<br />
+C&#8217;est maintenant que nous allons donner les autorisations ou refus d&#8217;accès aux services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Avec ces deux lignes, vous avez définit une <strong>Acces Control List</strong>.<br />
+Vous le constatez, aucune autorisation n&#8217;est définit; mais il est important de noter que maintenant, <strong>plus personne n&#8217;a accès à vos services</strong>.</p>
+<p>Pour donner l&#8217;accès à nos deux services à n&#8217;importe qui, nous allons procéder comme suit :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('Service_User') );<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('Service_Book') );<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('ZendAmfServiceBrowser') );<br />
+<br />
+$acl-&amp;gt;allow (null, 'Service_User');<br />
+$acl-&amp;gt;allow (null, 'Service_Book');<br />
+$acl-&amp;gt;allow (null, 'ZendAmfServiceBrowser);<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Ci-dessus, nous avons une liste explicite des autorisations.<br />
+Si nous avions voulu faire dans l&#8217;implicite, nous aurions procédé ainsi :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$acl-&amp;gt;allow ();<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Pour aller plus loin dans l&#8217;explication, nous allons maintenant définir l&#8217;ensemble de nos autorisations.</p>
+<blockquote><p>Nous souhaitons que le rôle administrateur est accès à tout, et nous souhaitons que les utilisateurs non authentifiés n&#8217;est pas accès aux fonctions de mise à jour.</p></blockquote>
+<p>Rappelez-vous, nous avons vu plus haut que vous étiez connecter avec le rôle invité lorsque vous ne spécifiez aucun identifiant.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+<br />
+//Définition les rôles.<br />
+$acl-&amp;gt;addRole ( new Zend_Acl_Role(Zend_Amf_Constants::GUEST_ROLE) );<br />
+<br />
+//Définition des autorisations<br />
+$acl-&amp;gt;allow ();<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;create&quot;);<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;update&quot;);<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;delete&quot;);<br />
+<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p><u>Premièrement,</u><br />
+Nous avons dû définir le rôle invité pour pouvoir travailler ses autorisations.</p>
+<p><u>Deuxièmement,</u><br />
+Nous avons utilisé le principe des listes noires. Si nous avions utilisez un système de liste blanche, nous aurions du définir l&#8217;ensemble des rôles, et l&#8217;ensemble des autorisations.<br />
+C&#8217;est donc en partant du principe que tout le monde a accès à tout, que nous avons fermé les portes aux anonymes.</p>
+<p><u><strong>Explication des fonctions Deny &amp; Allow :</strong></u><br />
+<strong>Zend_Acl::deny</strong> et <strong>Zend_Acl::allow</strong> utilisent les mêmes arguments.<br />
+Le premier paramètre correspond à un rôle, cela ne change pas des ACL Zend classique.<br />
+Le deuxième paramètre correspond à une ressource. Avec Zend AMF, une ressource correspond à un Service.<br />
+Le troisième paramètre correspond ici à la fonction d&#8217;un service AMF.</p>
+<p>Nous avons utiliser <strong>null</strong> au niveau du deuxième paramètre pour dire : <strong>tout les services</strong>.</p>
+<h3>initAcl</h3>
+<p>Ce dernier paragraphe pour vous parlez de mon opposition face aux spécifications de la documentation <a href="http://framework.zend.com/manual/1.10/en/zend.amf.server.html">Zend_AMF_Server</a> :</p>
+<blockquote><p><em>If the ACL object is set, and the class being called defines initAcl() method, this method will be called with the ACL object as an argument. The class then can create additional ACL rules and return TRUE, or return FALSE if no access control is required for this class.</em></p></blockquote>
+<p>En gros, il existe une autre manière de définir les autorisations,<br />
+Si vous avez définit un ACL au niveau de votre Serveur AMF. Ce dernier vérifiera l&#8217;existence d&#8217;une fonction <strong>initAcl</strong> sur les services lorsqu&#8217;ils seront appelés.</p>
+<p>Cette fonction est ce que l&#8217;on appel un <a href="http://fr.wikipedia.org/wiki/Hook_%28informatique%29">Hook</a>, et vous permets de définir les autorisations et refus au sein de la définition même de vos services.<br />
+Autant vous dire que <strong>niveau maintenance et centralisation de l&#8217;information c&#8217;est très moyen</strong>..<br />
+De plus, si l&#8217;on pend l&#8217;exemple de <strong>ZendAmfServiceBrowser</strong>, vous allez devoir modifier la définition de ce service, et cela à chaque fois qu&#8217;il y aura une nouvelle version ?</p>
+<p>Voici un exemple de fonctionnement</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Service_Book<br />
+{<br />
+&nbsp; &nbsp; public function initAcl ($acl)<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'create');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'update');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'delete');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return true;<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p><strong>Pour aller plus loin</strong> : Vous trouverez un article dédié à l&#8217;authentification pour Zend AMF Server avec une base de données : <a href="http://www.armetiz.info/zend-authentication-database/">AMF / Zend Authentication using Database</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/authentification-autorisation-zend-amf/feed/</wfw:commentRss>
+		<slash:comments>22</slash:comments>
+		</item>
+		<item>
+		<title>Statistique Windows Serveur / Workstation</title>
+		<link>http://www.armetiz.info/statistique-windows-serveur/</link>
+		<comments>http://www.armetiz.info/statistique-windows-serveur/#comments</comments>
+		<pubDate>Wed, 28 Apr 2010 08:52:35 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Windows]]></category>
+		<category><![CDATA[CLI]]></category>
+		<category><![CDATA[Commande]]></category>
+		<category><![CDATA[Core Edition]]></category>
+		<category><![CDATA[Server]]></category>
+		<category><![CDATA[Statistique]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1690</guid>
+		<description><![CDATA[Il existe un outil de statistique/évènement graphique intégré à Windows 2008 Serveur. Ici, nous allons voir un outil en ligne de commande qui restitue peu d&#8217;informations, mais qui peu être.. <a href="http://www.armetiz.info/statistique-windows-serveur/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Il existe un outil de statistique/évènement graphique intégré à Windows 2008 Serveur.</p>
+<p>Ici, nous allons voir un outil en ligne de commande qui restitue peu d&#8217;informations, mais qui peu être utilisé rapidement et sur les versions <strong>Windows Server Core Edition</strong>.</p>
+<p>Il s&#8217;agit de <strong>net statistics server</strong>.<br />
+Voici la sortie de cette commande.</p>
+<blockquote><p>Statistiques depuis 27/04/2010 20:20:14</p>
+<p>Sessions acceptées<br />
+Déconnexions automatiques<br />
+Déconnexions sur erreur</p>
+<p>Kilo-octets envoyés<br />
+Kilo-octets reçus</p>
+<p>Temps de réponse moyen (ms)</p>
+<p>Erreurs système<br />
+Violations d&#8217;autorisation<br />
+Violations de mot de passe</p>
+<p>Fichiers utilisés<br />
+Périphériques comm. utilisés<br />
+Travaux d&#8217;impression mis en file d&#8217;attente</p>
+<p>Saturation des zones tampon
+</p></blockquote>
+<p>Cette commande existe aussi pour les stations de travail : <strong>net statistics workstation</strong>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/statistique-windows-serveur/feed/</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.016 seconds using apc
+Object Caching 1065/1084 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:14:34 by W3 Total Cache -->

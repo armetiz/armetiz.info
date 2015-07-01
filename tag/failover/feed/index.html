@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Failover</title>
+	<atom:link href="http://www.armetiz.info/tag/failover/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Keepalived &#8211; Configuration firewall</title>
+		<link>http://www.armetiz.info/keepalived-configuration-firewall/</link>
+		<comments>http://www.armetiz.info/keepalived-configuration-firewall/#comments</comments>
+		<pubDate>Tue, 08 Feb 2011 17:40:16 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Cluster]]></category>
+		<category><![CDATA[Failover]]></category>
+		<category><![CDATA[Haute Disponibilité]]></category>
+		<category><![CDATA[ipvsadm]]></category>
+		<category><![CDATA[Keepalived]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[LVS]]></category>
+		<category><![CDATA[VRRP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1930</guid>
+		<description><![CDATA[Petit mémo pour se souvenir de la configuration Firewall à adopter pour faire fonctionner Keepalived correctement. Keepalived est un binaire qui utilise &#8211; entre autre &#8211; VRRP comme système de.. <a href="http://www.armetiz.info/keepalived-configuration-firewall/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/02/keepalived1.gif"><img src="http://www.armetiz.info/files/2011/02/keepalived1.gif" alt="Keepalived logo" width="125" height="79" class="size-full wp-image-1938 alignleft" /></a>Petit mémo pour se souvenir de la <strong>configuration Firewall</strong> à adopter pour faire fonctionner Keepalived correctement.</p>
+<p><strong>Keepalived</strong> est un binaire qui utilise &#8211; entre autre &#8211; VRRP comme système de vérification de santé (<a href="http://fr.wikipedia.org/wiki/Basculement_%28informatique%29">heartbeat</a>) afin de réaliser &#8211; entre autre &#8211; un cluster actif / passif.<br />
+<a href="http://fr.wikipedia.org/wiki/Virtual_Router_Redundancy_Protocol">VRRP</a> est un protocole IP multicast ayant le numéro de <strong>protocole 112</strong>.</p>
+<p>Il existe trois types d&#8217;authentification pour un <strong>cluster VRRP</strong> : </p>
+<ul>
+<li>Pas d&#8217;authentification</li>
+<li>Mot de passe en clair</li>
+<li>IP <a href="http://fr.wikipedia.org/wiki/Authentication_Header">Authentication Header (AH)</a></li>
+</ul>
+<p>Pour pouvoir fonctionner correctement, les différents membres du cluster VRRP doivent être capable de récupérer les trames IP du protocole 112.</p>
+<p><strong>En fonction du type d&#8217;authentification</strong>, il faudra adapter la configuration de votre Firewall.</p>
+<p>Voici la commande <strong>iptables</strong> lorsque vous n&#8217;avez <strong>pas d&#8217;authentification</strong> ou un <strong>mot de passe en clair</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">iptables -A INPUT -p vrrp -i eth0 -j ACCEPT</div></td></tr></tbody></table></div>
+<p>Lorsque vous utilisez <strong>IP AH</strong>, l&#8217;autorisation du protocole AH suffira.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">iptables -A INPUT -p ah -i eth0 -j ACCEPT</div></td></tr></tbody></table></div>
+<p><strong>A noter</strong> que Keepalived utilise VRRP définit par la <a href="http://tools.ietf.org/html/rfc2338">RFC2338</a>, cette RFC est devenue obsolète par la <a href="http://tools.ietf.org/html/rfc3768">RFC3768</a> depuis 2004.<br />
+Ce petit mot pour vous dire que la <a href="http://tools.ietf.org/html/rfc3768">RFC3768</a> (la dernière) ne définit plus les différents mécanisme d&#8217;authentification à cause de &#8211; je cite &#8211; &#8220;they did not provide any real security and would only cause multiple masters to be created.&#8221;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/keepalived-configuration-firewall/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.020 seconds using apc
+Object Caching 385/386 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:15:04 by W3 Total Cache -->

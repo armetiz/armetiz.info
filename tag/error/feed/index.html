@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Error</title>
+	<atom:link href="http://www.armetiz.info/tag/error/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Récursion infinie en Flash</title>
+		<link>http://www.armetiz.info/recursion-infini-en-flash/</link>
+		<comments>http://www.armetiz.info/recursion-infini-en-flash/#comments</comments>
+		<pubDate>Fri, 23 Oct 2009 08:44:19 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Debug]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[Error]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1392</guid>
+		<description><![CDATA[123456public function fooLoop () : void { &#160; &#160;//Pre traitement &#160; &#160;fooLoop (); &#160; &#160;//Post traitement } Voici le corps d&#8217;une fonction récursive. Lorsque la pile est pleine, une jolie.. <a href="http://www.armetiz.info/recursion-infini-en-flash/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">public function fooLoop () : void<br />
+{<br />
+&nbsp; &nbsp;//Pre traitement<br />
+&nbsp; &nbsp;fooLoop ();<br />
+&nbsp; &nbsp;//Post traitement<br />
+}</div></td></tr></tbody></table></div>
+<p>Voici le corps d&#8217;une fonction <a href="http://fr.wikipedia.org/wiki/R%C3%A9cursivit%C3%A9">récursive</a>. </p>
+<p>Lorsque la pile est pleine, une jolie erreur du type <a href="http://help.adobe.com/fr_FR/AS3LCR/Flash_10.0/flash/errors/StackOverflowError.html">StackOverFlowError</a> est déclenchée.</p>
+<p>Ce qui est intéressant de voir, c&#8217;est le comportement du Player et des navigateurs lorsque l&#8217;on traite cette erreur pour relancer la fonction récursive.</p>
+<p>Voici le code utilisé :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Avec Windows, en utilisant IE le navigateur monte en charge en utilisant la mémoire. Ce qui a pour conséquence logique de remplir le fichier d&#8217;échange. Une fois que la mémoire disponible est sèche, un mécanisme que je n&#8217;explique pas libère de la mémoire et le script continu son exécution.</p>
+<p>Contrairement à Firefox qui après 400Mo d&#8217;utilisation mémoire, se positionne en &#8220;Ne réponds pas&#8230;&#8221; et se freeze de lui même.</p>
+<p>Si vous voulez voir ce que cela donne, voici l&#8217;application.<br />
+Pensez à surveiller l&#8217;utilisation de votre mémoire <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br />
+[SWF]http://www.armetiz.info/wp-content/uploads/2009/10/Recucivity.swf, 400, 100[/SWF]</p>
+<h3>L&#8217;interet</h3>
+<p>Outre le fait de pouvoir faire joujou, ce script peut-être intéressant pour réaliser des traitements récursifs qui sont justement trop importants.<br />
+En, effet, vous pouvez le combiner à une <strong>variable statique</strong> pour continuer le traitement lorsque l&#8217;erreur de débordement est déclenchée.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/recursion-infini-en-flash/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.011 seconds using apc
+Object Caching 378/388 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:37 by W3 Total Cache -->

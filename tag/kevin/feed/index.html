@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Kévin</title>
+	<atom:link href="http://www.armetiz.info/tag/kevin/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Phishing Hotmail, Gmail, Yahoo &#8211; Attaque de Kevin</title>
+		<link>http://www.armetiz.info/attaque-phishing-hotmail-gmail-yahoo/</link>
+		<comments>http://www.armetiz.info/attaque-phishing-hotmail-gmail-yahoo/#comments</comments>
+		<pubDate>Wed, 10 Dec 2008 21:55:49 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Attaque]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[Kévin]]></category>
+		<category><![CDATA[Phishing]]></category>
+		<category><![CDATA[Protection]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=572</guid>
+		<description><![CDATA[Cela fait quelques semaines qu&#8217;un nouveau contact MSN s&#8217;est ajouté à notre carnet d&#8217;adresse, nous ne le connaissons pas, et nous n&#8217;y portons pas d&#8217;attention spécifique. Quelques jours après, ce.. <a href="http://www.armetiz.info/attaque-phishing-hotmail-gmail-yahoo/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cela fait quelques semaines qu&#8217;un nouveau contact MSN s&#8217;est ajouté à notre carnet d&#8217;adresse, nous ne le connaissons pas, et nous n&#8217;y portons pas d&#8217;attention spécifique.<br />
+Quelques jours après, ce contact nous parle, très peu et de manière courtoise.</p>
+<p>Ce n&#8217;est qu&#8217;après plusieurs &#8211; mini &#8211; échanges qu&#8217;il dit avoir des informations personnelles obtenues sur un tchat&#8230; Surpris, on demande quel tchat, et c&#8217;est à ce moment qu&#8217;il nous envoi une URL qui pointe vers la page de connexion Hotmail.</p>
+<p>A première vu, tout semble normal, mais si l&#8217;on regarde l&#8217;url de plus près, on y trouve :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">http://login.live.com.msn-holmail.com/...</div></td></tr></tbody></table></div>
+<p>Et voila comment l&#8217;on devient <strong>victime de <a href="http://fr.wikipedia.org/wiki/Phishing">phishing</a></strong>.</p>
+<p><img alt="" src="http://www.bitcity.it/immagini/news/ora-i-tentativi-di-phishing-arrivano-anche-dalla-r-1.jpg" class="aligncenter" width="150" height="150" /></p>
+<h3>Analyse de la page</h3>
+<p>En utilisant Firebug pour analyser les flux d&#8217;information, on se rend compte que beaucoup d&#8217;information provient du vrai Hotmail &#8211; JS / CSS &#8211; ce qui permet d&#8217;avoir une &#8220;fausse&#8221; page conforme à l&#8217;original et fonctionnel.<br />
+Deux autres URI tapent à l&#8217;œil :</p>
+<ul>
+<li>http://www.50dh.com/rerapid.php</li>
+<li>http://www.waspami.com/</li>
+</ul>
+<p>Grâce à Google et à sa traduction, nous avons pu en déduire que 50dh.com permettait d&#8217;obtenir des accès VPN/Rapidshare/etc. Tandis que Waspami.com permet de générer des pages de phishing pour Hotmail, Yahoo Mail et Gmail.<br />
+D&#8217;une utilisation très simple, il suffit de rentrer un email &#8211; pas forcement valide &#8211; et de choisir la langue. On obtient par la suite l&#8217;URL qui servira pour <a href="http://login.live.com.msn-holmail.com/fr/a3da64bf774eb14fb770675807ee0bfc.php">l&#8217;attaque.</a></p>
+<p>Chaque tentative de connexion est enregistrée par la fausse page, connexion qui échouera forcement et qui renverra vers la vrai page du service . L&#8217;utilisateur n&#8217;y verra donc que du feu, car il aura l&#8217;impression d&#8217;avoir tapé un mauvais mot de passe et ronchonnera sur le temps perdu à le retaper.<br />
+L&#8217;homme malveillant retournera sur l&#8217;URL qu&#8217;il envoi à toutes ses victimes et se connectera avec l&#8217;email qu&#8217;il a utilisé pour générer la page. Il aura ensuite accès à une liste de login, mot de passe et IP.</p>
+<h3>Comment se protéger ?</h3>
+<p><em>Et là c&#8217;est le drame</em>, car je n&#8217;ai trouvé aucun moyen de protection automatique. La seul protection, c&#8217;est le bon sens. Mais aller dire cela à votre grand-mère qui utilise internet depuis 4 mois ?</p>
+<p>Nous avons fait le test avec l&#8217;utilisation d&#8217;<a href="http://www.armetiz.info/alternative-fai-dns-opendns/">openDNS</a> qui est relié avec <a href="http://www.phishtank.com/">PhishTank</a> pour &#8211; justement &#8211; éviter les problèmes de phishing. Mais rien n&#8217;est bloqué, et nous pouvons tomber dans le panneau sans y faire gaffe.<br />
+<a href="http://www.phishtank.com/">PhishTank</a> est un service de protection contre le phishing qui fonctionne sur un principe de blacklist, donc tant que l&#8217;url n&#8217;a pas été ajoutée, elle n&#8217;est pas connue comme néfaste. Donc si le service de phishing est tout nouveau, il n&#8217;est pas référencé.</p>
+<p>Alors qu&#8217;openDNS aurait dû &#8211; à mes yeux &#8211; être la solution la plus efficace, nous pouvons nous demander que faire ?<br />
+Mais nous sommes techniquement impuissant contre cela, la seul solution possible, c&#8217;est l&#8217;éducation des utilisateurs. On y revient toujours, car c&#8217;est la dessus que se base les attaques du type phishing, sur l&#8217;imprudence des utilisateurs.<br />
+Un peu comme en voiture, on a beau mettre des radars, des ralentisseurs, une personne qui souhaite rouler à 180km/h roulera à cette vitesse.. Alors qu&#8217;en rabâchant du plus jeune age, au plus vielle age qu&#8217;il ne faut pas rouler vite, peut-être que là nous aurons des résultats, peut-être même sans radar <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Si l&#8217;attaque n&#8217;a pas fonctionné, c&#8217;est que les conditions étaient suspects. Donc <strong>Au moindre doute, il faut se méfier</strong>.</p>
+<h3>Histoire de l&#8217;article</h3>
+<p>L&#8217;article aurait dû paraitre plus tôt, et lorsqu&#8217;il y a eu la prise de décision sur sa publication, le service de phishing waspami.com n&#8217;existait plus dans son intégralité&#8230; Les liens qui sont données plus haut ne sont donc plus fonctionnels.<br />
+Il est quand même publié pour montrer que cela peut arriver à tout le monde, et pour moi c&#8217;était la première fois.<br />
+Et puis, c&#8217;est quand même de là que m&#8217;est venu l&#8217;inspiration de l&#8217;article sur <a href="http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/">les déboires d&#8217;anna</a> <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>PS : <a href="http://mod-mandy.forumactif.fr/discussions-en-tout-genre-f10/qu-est-ce-qu-un-kevin-t1604.htm">Qu&#8217;est-ce qu&#8217;un Kévin ?</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/attaque-phishing-hotmail-gmail-yahoo/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.011 seconds using apc
+Object Caching 339/340 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:11:20 by W3 Total Cache -->

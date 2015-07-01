@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Action Script</title>
+	<atom:link href="http://www.armetiz.info/tag/action-script/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>AS3 &#8211; Redimensionner un SWF chargé</title>
+		<link>http://www.armetiz.info/as3-redimensionner-swf-charger/</link>
+		<comments>http://www.armetiz.info/as3-redimensionner-swf-charger/#comments</comments>
+		<pubDate>Fri, 05 Sep 2008 08:01:47 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Action Script]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/blog/?p=90</guid>
+		<description><![CDATA[Mise en situation : deux animations A.SWF, B.SWF La taille des scènes est de 1024&#215;764 pour A, et 800&#215;600 pour B. A charge B, et redimensionne B pour le mettre.. <a href="http://www.armetiz.info/as3-redimensionner-swf-charger/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><strong>Mise en situation :</strong><br />
+deux animations A.SWF, B.SWF<br />
+La taille des scènes est de 1024&#215;764 pour A, et 800&#215;600 pour B.</p>
+<p>A charge B, et redimensionne B pour le mettre dans la liste d&#8217;affichage de A.</p>
+<p>Le problème qui peut ce poser est le suivant.<br />
+La zone d&#8217;affichage intéressante de B est celle de sa scène.<br />
+B est construit sur une base de 800&#215;600, et les graphistes placent des éléments graphiques qui font parfois bien plus de 800&#215;600. Lorsqu&#8217;on lit B dans le player en stand alone, on ne voit que les 800&#215;600 pixel de la scène, et les éléments qui sont à l&#8217;extérieur ne sont pas visibles (hormis si l&#8217;on redimensionne la fenêtre à la main).</p>
+<p>On va maintenant charger B dans A</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">var loaderB : Loader = new Loader ();<br />
+loaderB.contentLoaderInfo.addEventListener (Event.COMPLETE, onComplete);<br />
+loaderB.load (new URLRequest (&quot;B.swf&quot;));<br />
+<br />
+function onComplete (ev : Event) : void<br />
+{<br />
+&nbsp; &nbsp; trace (ev.target.content.width + &quot; &quot; + ev.target.content.height);<br />
+}</div></td></tr></tbody></table></div>
+<p>A première vu, on s&#8217;attend à obtenir nos 800&#215;600 et faire un règle de trois pour obtenir la taille adéquate.</p>
+<blockquote><p>
+<em><a href="http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/display/Loader.html#content">Loader.content</a></em><br />
+Contient l’objet d&#8217;affichage racine du fichier SWF ou du fichier d’image (JPG, PNG ou GIF) qui a été chargé à l’aide de la méthode load() ou loadBytes().
+</p></blockquote>
+<p>La propriété <em>Loader.content</em> nous retournera donc l&#8217;ensemble des éléments graphiques de notre fichier B.swf, et <em>Loader.content.width</em> ne retournera pas 800, mais la largeur de l&#8217;ensemble des éléments sur la scène de B.</p>
+<p>Pour pouvoir récupérer la taille de la scène de B, il faut regarder les propriétés du fichier SWF, et nous allons utiliser le LoaderInfo associé à notre Loader</p>
+<blockquote><p>
+<em><a href="http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/display/Loader.html#contentLoaderInfo">Loader.contentLoaderInfo</a></em><br />
+La classe LoaderInfo fournit des informations relatives à un fichier SWF ou à un fichier d’image (JPEG, GIF ou PNG) chargé. Les objets LoaderInfo sont disponibles pour n’importe quel objet d&#8217;affichage. Les informations indiquées comprennent la progression du chargement, les URL de l’objet Loader et du contenu chargé, le nombre total d’octets du média, <strong>ainsi que la hauteur et la largeur nominales de ce dernier. </strong>
+</p></blockquote>
+<p>Et voila, nous savons maintenant où trouver la taille de la scène.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">var loaderB : Loader = new Loader ();<br />
+loaderB.contentLoaderInfo.addEventListener (Event.COMPLETE, onComplete);<br />
+loaderB.load (new URLRequest (&quot;B.swf&quot;));<br />
+<br />
+function onComplete (ev : Event) : void<br />
+{<br />
+&nbsp; &nbsp; trace (ev.target.contentLoaderInfo.width + &quot; &quot; + ev.target.contentLoaderInfo.height);<br />
+}</div></td></tr></tbody></table></div>
+<p>A noter, sur le forum <a href="http://flash.mediabox.fr/index.php?showforum=91">MediaBox</a>, Dada m&#8217;a fait remarquer tout justement, que la propriété <a href="http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/display/DisplayObject.html#root">DisplayObject.root</a>.loaderInfo renvoyait la même référence que Loader.contentLoaderInfo.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/as3-redimensionner-swf-charger/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>AS : Evaluation ET/OU</title>
+		<link>http://www.armetiz.info/as-evaluation-etou/</link>
+		<comments>http://www.armetiz.info/as-evaluation-etou/#comments</comments>
+		<pubDate>Thu, 24 Jul 2008 15:09:05 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Action Script]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=7</guid>
+		<description><![CDATA[A votre avis, quel sera le résultat de ce bout de code ? 12345678910111213141516function un () : Boolean { &#160; &#160; &#160; &#160; trace (&#34;un&#34;); &#160; &#160; &#160; &#160; return.. <a href="http://www.armetiz.info/as-evaluation-etou/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>A votre avis, quel sera le résultat de ce bout de code ?</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">function un () : Boolean<br />
+{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; trace (&quot;un&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return false;<br />
+}<br />
+<br />
+function deux () : Boolean<br />
+{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; trace (&quot;deux&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return true;<br />
+}<br />
+<br />
+if (un() &amp;amp;&amp;amp; deux ())<br />
+&nbsp; &nbsp; &nbsp; &nbsp; trace (&quot;trois&quot;);<br />
+<br />
+//Affiche : un</div></td></tr></tbody></table></div>
+<p>Que peut-on retenir de cela ?<br />
+Simplement, lors de l&#8217;évaluation de deux conditions avec un ET, si l&#8217;on tombe sur une condition fausse, les autres ne sont pas évaluées.<br />
+Si vous ne voyez pas l&#8217;intérêt, je vais vous donner un exemple tout simple.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">for (var i : int = 0 ; i &amp;lt; numChildren ; i++)<br />
+{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if ((getChildAt (i) as MovieClip).hasOwnProperty)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; trace (&amp;quot;ok&amp;quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Ce bout de code peut nous donner une erreur à l&#8217;exécution dans le cas ou getChildAt (i) ne retourne pas un objet qui soit de type MovieClip.<br />
+Même si “as” retourne NULL lorsque l&#8217;objet ne peut être caster, contrairement au cast explicite qui génère une erreur, NULL n&#8217;ayant aucune propriété vous allez avoir une erreur “Vous essayer d&#8217;atteindre une propriété d&#8217;un objet de référence null.”</p>
+<p>Il faut donc vérifier le type de l&#8217;objet avant de l&#8217;utiliser.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">for (var i : int = 0 ; i &amp;lt; numChildren ; i++)<br />
+{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (getChildAt (i) is MovieClip)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if ((getChildAt (i) as MovieClip).hasOwnProperty)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; trace (&amp;quot;ok&amp;quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Ici, pour que l&#8217;on puisse utiliser hasOwnProperty, il faut que notre objet soit de type MovieClip. Mais, avouer que cela ne fait pas jolie, plus on peut limiter le nombre de boucles imbriquées, mieux c&#8217;est.</p>
+<p>Voici comment mettre en pratique la démonstration du début pour notre cas.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">for (var i : int = 0 ; i &amp;lt; numChildren ; i++)<br />
+{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if ((getChildAt (i) is MovieClip) &amp;amp;&amp;amp; ((getChildAt (i) as MovieClip).hasOwnProperty)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; trace (&amp;quot;ok&amp;quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Je ne vous ferai pas l&#8217;affront de vous dire que le poids du code source sera allégé, mais cela peut augmenter la facilité de lecture.</p>
+<p>De la même manière, pour l&#8217;étude d&#8217;un OU lorsque l&#8217;on rencontre une condition “vrai”, on ne regarde pas les autres valeurs.</p>
+<p>Démonstration :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">function un () : Boolean<br />
+{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; trace (&quot;un&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return true;<br />
+}<br />
+<br />
+function deux () : Boolean<br />
+{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; trace (&quot;deux&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return false;<br />
+}<br />
+<br />
+if (un () || deux ())<br />
+&nbsp; &nbsp; &nbsp; &nbsp; trace (&quot;trois&quot;);<br />
+<br />
+//Affiche &quot;un&quot; &quot;trois&quot;</div></td></tr></tbody></table></div>
+<p>Pour tout vous dire, je n&#8217;ai pas d&#8217;exemple concret en tête… Mais bon, vous en trouverez surement un <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/as-evaluation-etou/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.029 seconds using apc
+Object Caching 609/627 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:14:29 by W3 Total Cache -->

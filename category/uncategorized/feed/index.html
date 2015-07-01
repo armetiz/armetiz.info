@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Uncategorized</title>
+	<atom:link href="http://www.armetiz.info/category/uncategorized/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>iFrame &amp; Responsive Design</title>
+		<link>http://www.armetiz.info/iframe-responsive-design/</link>
+		<comments>http://www.armetiz.info/iframe-responsive-design/#comments</comments>
+		<pubDate>Thu, 24 Jan 2013 13:32:13 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Uncategorized]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2899</guid>
+		<description><![CDATA[Lorsque vous réalisez un site en Responsive Design. Si vous embarquez des services tiers via iFrame, il se peut que vous soyez embêté lors du redimensionnement de votre navigateur. L&#8217;objectif,.. <a href="http://www.armetiz.info/iframe-responsive-design/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Lorsque vous réalisez un site en <strong>Responsive Design</strong>. Si vous embarquez des services tiers via iFrame, il se peut que vous soyez embêté lors du redimensionnement de votre navigateur.</p>
+<p>L&#8217;objectif, c&#8217;est que les <strong>iFrames</strong> se comportent de la même manière que les <strong>images</strong> en Responsive Design. <strong>La taille doit s&#8217;adapter automatiquement</strong>.<br />
+Actuellement, on arrive à ce resultat avec les images en utilisant le CSS suivant :</p>
+<div class="codecolorer-container css blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="css codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">img <span style="color: #00AA00;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000000; font-weight: bold;">width</span><span style="color: #00AA00;">:</span> <span style="color: #933;">100%</span><span style="color: #00AA00;">;</span><br />
+&nbsp; &nbsp; <span style="color: #000000; font-weight: bold;">height</span><span style="color: #00AA00;">:</span> <span style="color: #993333;">auto</span><span style="color: #00AA00;">;</span><br />
+<span style="color: #00AA00;">&#125;</span></div></td></tr></tbody></table></div>
+<p><br clear="both"/></p>
+<h3>Solution</h3>
+<p>Pour obtenir ce comportement avec les iFrames, nous allons utiliser une image transparente ayant un ratio correspondant à celui de l&#8217;iFrames.<br />
+Avec les services vidéos, nous utiliserons donc une image d&#8217;un ratio 16/9.</p>
+<div class="codecolorer-container html4strict blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="html4strict codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #009900;">&lt;<a href="http://december.com/html/4/element/div.html"><span style="color: #000000; font-weight: bold;">div</span></a> <span style="color: #000066;">class</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;iframe-responsive-wrapper&quot;</span>&gt;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&lt;<a href="http://december.com/html/4/element/img.html"><span style="color: #000000; font-weight: bold;">img</span></a> <span style="color: #000066;">class</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;iframe-ratio&quot;</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;data:image/gif;base64,R0lGODlhEAAJAIAAAP///wAAACH5BAEAAAAALAAAAAAQAAkAAAIKhI+py+0Po5yUFQA7&quot;</span><span style="color: #66cc66;">/</span>&gt;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&lt;<a href="http://december.com/html/4/element/iframe.html"><span style="color: #000000; font-weight: bold;">iframe</span></a> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;http://player.vimeo.com/video/49823151?color=ffffff&quot;</span> <span style="color: #000066;">width</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;640&quot;</span> <span style="color: #000066;">height</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;360&quot;</span> <span style="color: #000066;">frameborder</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;0&quot;</span> webkitAllowFullScreen mozallowfullscreen allowFullScreen&gt;&lt;<span style="color: #66cc66;">/</span><a href="http://december.com/html/4/element/iframe.html"><span style="color: #000000; font-weight: bold;">iframe</span></a>&gt;</span><br />
+<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><a href="http://december.com/html/4/element/div.html"><span style="color: #000000; font-weight: bold;">div</span></a>&gt;</span></div></td></tr></tbody></table></div>
+<p>Voici le CSS à utiliser.</p>
+<div class="codecolorer-container css blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br /></div></td><td><div class="css codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #6666ff;">.iframe-responsive-wrapper</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #00AA00;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000000; font-weight: bold;">position</span><span style="color: #00AA00;">:</span> <span style="color: #993333;">relative</span><span style="color: #00AA00;">;</span><br />
+<span style="color: #00AA00;">&#125;</span><br />
+<br />
+<span style="color: #6666ff;">.iframe-responsive-wrapper</span> <span style="color: #6666ff;">.iframe-ratio</span> <span style="color: #00AA00;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000000; font-weight: bold;">display</span><span style="color: #00AA00;">:</span> <span style="color: #993333;">block</span><span style="color: #00AA00;">;</span><br />
+&nbsp; &nbsp; <span style="color: #000000; font-weight: bold;">width</span><span style="color: #00AA00;">:</span> <span style="color: #933;">100%</span><span style="color: #00AA00;">;</span><br />
+&nbsp; &nbsp; <span style="color: #000000; font-weight: bold;">height</span><span style="color: #00AA00;">:</span> <span style="color: #993333;">auto</span><span style="color: #00AA00;">;</span><br />
+<span style="color: #00AA00;">&#125;</span><br />
+<br />
+<span style="color: #6666ff;">.iframe-responsive-wrapper</span> iframe <span style="color: #00AA00;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000000; font-weight: bold;">position</span><span style="color: #00AA00;">:</span> <span style="color: #993333;">absolute</span><span style="color: #00AA00;">;</span><br />
+&nbsp; &nbsp; <span style="color: #000000; font-weight: bold;">top</span><span style="color: #00AA00;">:</span> <span style="color: #cc66cc;">0</span><span style="color: #00AA00;">;</span><br />
+&nbsp; &nbsp; <span style="color: #000000; font-weight: bold;">left</span><span style="color: #00AA00;">:</span> <span style="color: #cc66cc;">0</span><span style="color: #00AA00;">;</span><br />
+&nbsp; &nbsp; <span style="color: #000000; font-weight: bold;">width</span><span style="color: #00AA00;">:</span> <span style="color: #933;">100%</span><span style="color: #00AA00;">;</span><br />
+&nbsp; &nbsp; <span style="color: #000000; font-weight: bold;">height</span><span style="color: #00AA00;">:</span> <span style="color: #933;">100%</span><span style="color: #00AA00;">;</span><br />
+<span style="color: #00AA00;">&#125;</span></div></td></tr></tbody></table></div>
+<p><br clear="both"><br />
+Cette solution a été récupéré sur <a href="http://stackoverflow.com/questions/11122249/scale-iframe-css-width-100-like-an-image">Stack Overflow</a>.<br />
+Vous noterez que l&#8217;image est un <strong>base64url</strong>, il s&#8217;agit d&#8217;un GIF Transparent sans meta-donnée de 16&#215;9.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/iframe-responsive-design/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 7/13 queries in 0.002 seconds using apc
+Object Caching 411/414 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:09:12 by W3 Total Cache -->

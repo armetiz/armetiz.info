@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: CentOS – Installer le module h264 streaming pour Lighttpd</title>
+	<atom:link href="http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Thu, 03 Apr 2014 20:26:43 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>By: Thomas tourlourat</title>
+		<link>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/#comment-626</link>
+		<dc:creator><![CDATA[Thomas tourlourat]]></dc:creator>
+		<pubDate>Tue, 28 Aug 2012 15:42:59 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2505#comment-626</guid>
+		<description><![CDATA[Merci pour la remarque ;)]]></description>
+		<content:encoded><![CDATA[<p>Merci pour la remarque 😉</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: mohamed</title>
+		<link>http://www.armetiz.info/centos-install-module-h264-streaming-lighttpd/#comment-623</link>
+		<dc:creator><![CDATA[mohamed]]></dc:creator>
+		<pubDate>Tue, 28 Aug 2012 15:34:45 +0000</pubDate>
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2505#comment-623</guid>
+		<description><![CDATA[Salut,
+
+Merci pour ce tuto!
+
+Mais le code correct est:
+
+lib_LTLIBRARIES += mod_h264_streaming.la
+mod_h264_streaming_la_SOURCES = mod_h264_streaming.c \
+                                mod_streaming_export.h \
+                                moov.c moov.h \
+                                mp4_io.c mp4_io.h \
+                                mp4_reader.c mp4_reader.h \
+                                mp4_writer.c mp4_writer.h \
+                                mp4_process.c mp4_process.h \
+                                output_bucket.c output_bucket.h \
+                                output_mp4.c output_mp4.h
+mod_h264_streaming_la_CFLAGS = $(AM_CFLAGS) -DBUILDING_H264_STREAMING
+mod_h264_streaming_la_LDFLAGS = -module -export-dynamic -avoid-version -no-undefined
+mod_h264_streaming_la_LIBADD = $(common_libadd)]]></description>
+		<content:encoded><![CDATA[<p>Salut,</p>
+<p>Merci pour ce tuto!</p>
+<p>Mais le code correct est:</p>
+<p>lib_LTLIBRARIES += mod_h264_streaming.la<br />
+mod_h264_streaming_la_SOURCES = mod_h264_streaming.c \<br />
+                                mod_streaming_export.h \<br />
+                                moov.c moov.h \<br />
+                                mp4_io.c mp4_io.h \<br />
+                                mp4_reader.c mp4_reader.h \<br />
+                                mp4_writer.c mp4_writer.h \<br />
+                                mp4_process.c mp4_process.h \<br />
+                                output_bucket.c output_bucket.h \<br />
+                                output_mp4.c output_mp4.h<br />
+mod_h264_streaming_la_CFLAGS = $(AM_CFLAGS) -DBUILDING_H264_STREAMING<br />
+mod_h264_streaming_la_LDFLAGS = -module -export-dynamic -avoid-version -no-undefined<br />
+mod_h264_streaming_la_LIBADD = $(common_libadd)</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 7/12 queries in 0.011 seconds using apc
+Object Caching 275/276 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:09:30 by W3 Total Cache -->

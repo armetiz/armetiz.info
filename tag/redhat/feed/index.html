@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; RedHat</title>
+	<atom:link href="http://www.armetiz.info/tag/redhat/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Linux &#8211; Configurer une IP Alias sur Loopback</title>
+		<link>http://www.armetiz.info/configurer-ip-alias-loopback/</link>
+		<comments>http://www.armetiz.info/configurer-ip-alias-loopback/#comments</comments>
+		<pubDate>Tue, 01 Mar 2011 14:11:27 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Fedora]]></category>
+		<category><![CDATA[Haute Disponibilité]]></category>
+		<category><![CDATA[Keepalived]]></category>
+		<category><![CDATA[RedHat]]></category>
+		<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1895</guid>
+		<description><![CDATA[Cette configuration peut-être utile dans bien des cas. Sous Debian-like : Édition du fichier /etc/network/interfaces 1234auto lo:0 iface lo:0 inet static &#160; &#160; &#160; &#160; address 192.168.3.1 &#160; &#160; &#160;.. <a href="http://www.armetiz.info/configurer-ip-alias-loopback/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cette configuration peut-être utile dans bien des cas. </p>
+<p>Sous <strong>Debian-like</strong> :<br />
+Édition du fichier <strong>/etc/network/interfaces</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">auto lo:0<br />
+iface lo:0 inet static<br />
+&nbsp; &nbsp; &nbsp; &nbsp; address 192.168.3.1<br />
+&nbsp; &nbsp; &nbsp; &nbsp; netmask 255.255.255.255</div></td></tr></tbody></table></div>
+<p>Sous <strong>RedHat-like</strong> :<br />
+Édition du fichier <strong>/etc/sysconfig/network-scripts/ifcfg-lo.0</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">DEVICE=&quot;lo:0&quot;<br />
+BOOTPROTO=&quot;static&quot;<br />
+IPADDR=&quot;192.168.3.1&quot;<br />
+NETMASK=&quot;255.255.255.255&quot;<br />
+NM_CONTROLLED=&quot;yes&quot;<br />
+ONBOOT=&quot;yes&quot;</div></td></tr></tbody></table></div>
+<p>Si vous souhaitez désactiver certaines réponses aux requêtes ARP. Ce qui peut-etre utile lorsque vous configurez un environnement HA avec par exemple <a href="http://www.linuxvirtualserver.org/">LVS</a>.</p>
+<p>Édition du fichier <strong>/etc/sysctl.conf</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">net.ipv4.conf.lo.forwarding=0<br />
+net.ipv4.conf.lo.arp_ignore=1<br />
+net.ipv4.conf.lo.arp_announce=2<br />
+net.ipv4.conf.all.arp_ignore=1<br />
+net.ipv4.conf.all.arp_announce=2</div></td></tr></tbody></table></div>
+<p>Pour appliquer les modifications</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sysctl -p</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/configurer-ip-alias-loopback/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.002 seconds using apc
+Object Caching 467/468 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:26 by W3 Total Cache -->

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Pattern</title>
+	<atom:link href="http://www.armetiz.info/tag/pattern/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Transfer Object Assembler avec Doctrine 1</title>
+		<link>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/</link>
+		<comments>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/#comments</comments>
+		<pubDate>Mon, 31 May 2010 10:06:12 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Doctrine]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[DBAL]]></category>
+		<category><![CDATA[DTO]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Konbini]]></category>
+		<category><![CDATA[ORM]]></category>
+		<category><![CDATA[Pattern]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1693</guid>
+		<description><![CDATA[Le pattern Transfert Object TO, Data Transfert Object DTO, ou encore Value Object VO permet d&#8217;échanger des données entre deux applications. Wikipédia : Son but est de simplifier les transferts.. <a href="http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/05/doctrine1.gif"><img src="http://www.armetiz.info/files/2010/05/doctrine1.gif" alt="doctrine" width="191" height="53" class="alignright size-full wp-image-1710" /></a>Le <a href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/TransferObject.html">pattern Transfert Object</a> <strong>TO</strong>, <strong>Data Transfert Object DTO</strong>, ou encore <strong>Value Object VO</strong> permet d&#8217;échanger des données entre deux applications.</p>
+<p>Wikipédia : <em>Son but est de simplifier les transferts de données entre les sous-systèmes d&#8217;une application logiciel. Les objets de transfert de données sont souvent utilisés en conjonction des objets d&#8217;accès aux données.</em></p>
+<p>Qui dit <strong>Transfert Object</strong>, veux aussi dire <a href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/TransferObjectAssembler.html">Transfert Object Assembler</a>. </p>
+<h3>Conversion d&#8217;object</h3>
+<p>Le pattern <strong>Transfert Object Assembler</strong> permet de passer d&#8217;un DTO à un Objet d&#8217;accès au données, et inversement.<br />
+C&#8217;est le moyen le plus simple pour travailler avec le pattern Data Transert Object et un <strong>ORM</strong>.</p>
+<h3>Domain Object Model -&gt; Data Transfert Object</h3>
+<p>Avec l&#8217;<a href="http://www.doctrine-project.org/">ORM Doctrine</a>, le transfert d&#8217;un &#8220;<strong>Domain Object Model DOM</strong>&#8221; ou ici <strong>Doctrine_Record</strong> vers un <strong>DTO</strong> est très simple.<br />
+Il suffit de réaliser un parser qui analyse l&#8217;objet issu de Doctrine, et qui remplit les données du DTO.</p>
+<h3>Data Transfert Object -&gt; Domain Object Model</h3>
+<p>Convertir un DTO vers un DOM peut s&#8217;avère plus complexe.<br />
+En effet, Doctrine utilise des collections d&#8217;objet qui lui sont propres, mais a aussi besoin de connaitre les clés primaires et leurs contenus pour pouvoir créer un objet. Car un objet issu de Doctrine_Record n&#8217;a pas les même propriétés quand il est existant en base de donnée, ou qu&#8217;il est en phase d&#8217;être sauvegardé.</p>
+<h3>Implémentation de Transfer Object Assembler</h3>
+<p>Une implémentation du pattern <strong>Transfert Object Assembler</strong> vient de voir le jour après moult et moult péripéties.</p>
+<p>Cette implémentation permet donc le transférer de DTOs à partir de DOMs et inversement.<br />
+Associer au pattern Service Layer, cela peut s&#8217;avérer être très pratique.</p>
+<p>Voici un exemple simple d&#8217;utilisation :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$oProgram = new ProgramDTO ();<br />
+$oProgram-&amp;gt;title = &quot;Dorothe&quot;;<br />
+<br />
+$oVideoDTO = new VideoDTO ();<br />
+$oVideoDTO-&amp;gt;idVideo = 30;<br />
+$oVideoDTO-&amp;gt;program = $oProgram;<br />
+<br />
+$oAssembler = $new Assembler ();<br />
+$oVideo = $oAssembler-&amp;gt;createDomainObject ($oVideoDTO);<br />
+$oVideo-&amp;gt;save ();</div></td></tr></tbody></table></div>
+<p>Nous avons ici créé une nouvelle entrée dans la table programs, et réalisé une liaison entre ce nouvel objet et la vidéo existante d&#8217;identifiant 30.<br />
+Le tout one-shot !</p>
+<p>L&#8217;intérêt de cette implémentation, c&#8217;est d&#8217;être fonctionnel avec :</p>
+<ul>
+<li>Les objets persistant</li>
+<li>Les objets non-persistant</li>
+<li>Les compositions d&#8217;objets sur N niveau</li>
+</ul>
+<h3>Utilisation avec le pattern Service Layer</h3>
+<p>Nous allons voir l&#8217;exemple le plus simple, soit l&#8217;implémentation des méthodes CRUD pour un objet générique.<br />
+L&#8217;utilisation du nommage des classes provient de l&#8217;utilisation de Zend Framework.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br />50<br />51<br />52<br />53<br />54<br />55<br />56<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function create (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; &nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler &nbsp; &nbsp; = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; &nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, true);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;save ();<br />
+&nbsp; &nbsp; $poVideoDTO-&amp;gt;idShow&nbsp; = $oModelVideo-&amp;gt;idShow;<br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function read (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $query&nbsp; = Doctrine_Query::create ()<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;select (&quot;video.*&quot;)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;from (&quot;Model_Video video&quot;)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; -&amp;gt;where (&quot;video.id_show = ?&quot;, $piIdVideo);<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $query-&amp;gt;fetchOne ();<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; return $oAssembler-&amp;gt;createTransfertObject ($oModelVideo);<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function update (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, true);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;save ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}<br />
+<br />
+/**<br />
+&nbsp;* @param Model_DTO_Video<br />
+&nbsp;* @return Model_DTO_Video<br />
+&nbsp;*/<br />
+public function delete (Model_DTO_Video $poVideoDTO)<br />
+{<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = null;<br />
+&nbsp; &nbsp; $oAssembler = new Model_Utils_Assembler ();<br />
+&nbsp; &nbsp; $oModelVideo&nbsp; &nbsp; = $oAssembler-&amp;gt;createDomainObject($poVideoDTO, false);<br />
+&nbsp; &nbsp; $oModelVideo-&amp;gt;delete ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; return $poVideoDTO;<br />
+}</div></td></tr></tbody></table></div>
+<h3>Téléchargement</h3>
+<p>Contenu de l&#8217;archive :</p>
+<ul>
+<li>Implémentation du pattern Transfer Object Assembler</li>
+<li>Interface du pattern Transfer Object Assembler</li>
+<li>Classe de définition d&#8217;un DTO</li>
+</ul>
+<p>Pour faire fonctionner l&#8217;assembler. Vous devez définir une classe qui hérite de Assembler, et ainsi surchargez la propriété $_relationships avec vos liaisons entre DTO et DOM.</p>
+<p><strong>Dernière mise à jour : 20 Septembre 2010</strong><br />
+<a href='http://www.armetiz.info/wp-content/uploads/2010/09/Transfert_Object_Assembler_Doctrine_1.2.zip'>Transfert_Object_Assembler_Doctrine_1.2.zip</a> &#8211; 6 Ko.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/transfer-object-assembler-avec-doctrine-1/feed/</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+		<item>
+		<title>Pattern Singleton en Flash</title>
+		<link>http://www.armetiz.info/pattern-singleton-en-flash/</link>
+		<comments>http://www.armetiz.info/pattern-singleton-en-flash/#comments</comments>
+		<pubDate>Tue, 17 Nov 2009 09:49:41 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[ActionScript]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[Code]]></category>
+		<category><![CDATA[Pattern]]></category>
+		<category><![CDATA[Singleton]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1419</guid>
+		<description><![CDATA[Suite au commentaire de webstorming sur l&#8217;article : Flash – Restreindre l’instanciation d’une classe par un seul objet. Voici l&#8217;implémentation du pattern singleton en Flash. 1234567891011121314151617181920212223public class PatternSingleton { &#160;.. <a href="http://www.armetiz.info/pattern-singleton-en-flash/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Suite au commentaire de <a href="http://www.armetiz.info/flash-restreindre-instanciation-class-objet/#comment-333">webstorming</a> sur l&#8217;article : <a href="http://www.armetiz.info/flash-restreindre-instanciation-class-objet/">Flash – Restreindre l’instanciation d’une classe par un seul objet</a>.</p>
+<p>Voici l&#8217;implémentation du <a href="http://fr.wikipedia.org/wiki/Singleton_(patron_de_conception)">pattern singleton</a> en Flash.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">public class PatternSingleton<br />
+{<br />
+&nbsp; &nbsp; private static var _instance : Object;<br />
+<br />
+&nbsp; &nbsp; public function PatternSingleton () : void<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (_instance)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new Error (&quot;Pattern Singleton : only one instance is permit&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; _instance = this;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function sayHello () : String<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return &quot;Hello World&quot;;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public static function get instance () : PatternSingleton<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (!_instance)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; new PatternSingleton ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return PatternSingleton (_instance);<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Nous avons donc une class ne pouvant être instanciée qu&#8217;une seule fois, et accessible de n&#8217;importe où au sein de notre application.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">trace (PatternSingleton.instance.sayHello ());</div></td></tr></tbody></table></div>
+<h3>Wikipédia</h3>
+<p><a href="http://wiki.flexx.fr/doku.php?id=tutoriaux:flex:pattern_singleton_as3">L&#8217;implémentation</a> que l&#8217;on trouve sur <a href="http://fr.wikipedia.org/wiki/Singleton_%28patron_de_conception%29#Actionscript_3">Wikipédia</a> est différente de celle ci-dessus.<br />
+En effet, elle utilise la définition d&#8217;une constante globale sans modification du constructeur.<br />
+Le problème induit, c&#8217;est que l&#8217;instanciation multiple n&#8217;est pas interdite au sein de l&#8217;application. Et la compréhension par un débutant est moins aisée.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/pattern-singleton-en-flash/feed/</wfw:commentRss>
+		<slash:comments>11</slash:comments>
+		</item>
+		<item>
+		<title>Flash &#8211; Restreindre l&#8217;instanciation d&#8217;une classe par un seul objet</title>
+		<link>http://www.armetiz.info/flash-restreindre-instanciation-class-objet/</link>
+		<comments>http://www.armetiz.info/flash-restreindre-instanciation-class-objet/#comments</comments>
+		<pubDate>Thu, 01 Oct 2009 15:08:47 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Conception]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[Factory]]></category>
+		<category><![CDATA[Pattern]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1365</guid>
+		<description><![CDATA[Comment restreindre l&#8217;instanciation d&#8217;une classe à une autre classe. Voici une idée complètement &#8220;crazy&#8221; au quelle je vais apporter une solution à travers ce billet. Nous allons utiliser un principe.. <a href="http://www.armetiz.info/flash-restreindre-instanciation-class-objet/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Comment <strong>restreindre l&#8217;instanciation d&#8217;une classe</strong> à une autre classe.</p>
+<p>Voici une idée complètement &#8220;crazy&#8221; au quelle je vais apporter une solution à travers ce billet.<br />
+Nous allons utiliser un principe connu par de nombreux framework Web qui permet d&#8217;assurer la validité d&#8217;un formulaire: <strong>Le jeton</strong> !</p>
+<p>L&#8217;intérêt étant de combiner cela avec le <a href="http://fr.wikipedia.org/wiki/Fabrique_%28patron_de_conception%29">pattern Factory</a>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">public class Master<br />
+{<br />
+&nbsp; &nbsp; private static var _jeton &nbsp; : Number&nbsp; &nbsp; = -1;<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public function Master()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public static function createSlave () : Slave<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; var _tmpSlave &nbsp; : Slave;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; _jeton&nbsp; &nbsp; &nbsp; = Math.random() * 500;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; _tmpSlave &nbsp; = new Slave (_jeton);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; _jeton&nbsp; &nbsp; &nbsp; = -1;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; return _tmpSlave; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public static function get jeton () : Number<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return _jeton;<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">public class Slave<br />
+{<br />
+&nbsp; &nbsp; public function Slave(_pJeton : Number = 0) : void<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (Master.jeton !== _pJeton &amp;amp;&amp;amp; Master.jeton !== -1)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new Error (&quot;Instanciation obligatoire par Master.createSlave&quot;);<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">new Slave (); //throw Error<br />
+Master.createSlave (); //Retourne un objet du type Slave</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/flash-restreindre-instanciation-class-objet/feed/</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+		<item>
+		<title>Reflex : Architecture MVC</title>
+		<link>http://www.armetiz.info/reflex-architecture-mvc/</link>
+		<comments>http://www.armetiz.info/reflex-architecture-mvc/#comments</comments>
+		<pubDate>Thu, 15 Jan 2009 11:17:05 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[CairnGorm]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[IOC]]></category>
+		<category><![CDATA[MVC]]></category>
+		<category><![CDATA[Pattern]]></category>
+		<category><![CDATA[PureMVC]]></category>
+		<category><![CDATA[Reflex]]></category>
+		<category><![CDATA[Vegas]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=689</guid>
+		<description><![CDATA[Fabien de la Fabrick a publié une &#8220;micro-architecture&#8221; MVC pour Flex. Ces mots de présentation sont : Souvent dans le monde de Flex, les équipes ne sont pas forcement homogènes... <a href="http://www.armetiz.info/reflex-architecture-mvc/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Fabien de la <a href="http://www.lafabrick.com">Fabrick</a> a publié une &#8220;micro-architecture&#8221; MVC pour Flex.<br />
+Ces mots de présentation sont :</p>
+<blockquote><p>Souvent dans le monde de Flex, les équipes ne sont pas forcement homogènes. Certains sont habitués à la rigueur de Java, d’autres sont plus “devsigners freestyle” venant du monde Flash. Les premiers aiment les grosses mécaniques comme <a href="http://puremvc.org/">PureMVC</a>, ou <a href="http://www.pranaframework.org/">Prana Framework</a> “Spring like”. Les seconds connaissent au mieux <a href="http://opensource.adobe.com/wiki/display/cairngorm/Cairngorm">Cairngorm</a>, au pire confondent <a href="http://en.wikipedia.org/wiki/Model-view-controller">MVC</a> et <a href="http://fr.wikipedia.org/wiki/Ventilation_m%C3%A9canique_contr%C3%B4l%C3%A9e">VMC</a> &#8211; ce qui n’a rien a voir, sauf si vous faites une application riche sur le thème de la ventilation.</p></blockquote>
+<p>Pour l&#8217;instant deux didacticiels sont disponibles : <a href="http://www.lafabrick.com/blog/2009/01/13/786-reflex-1-une-micro-architecture-pour-flex-simple/">Introduction et Exemple</a> et <a href="http://www.lafabrick.com/blog/2009/01/15/819-reflex-2-vous-reprendez-bien-un-peu-de-ioc/">l&#8217;utilisation de l&#8217;IOC</a> où il faut comprendre &#8220;Injection Of Content&#8221; plutôt que &#8220;<a href="http://fr.wikipedia.org/wiki/Inversion_de_contr%C3%B4le">Inversion Of Control</a>&#8220;.</p>
+<p>Ceci est un article orienté publicité d&#8217;une part, mais aussi &#8220;déploiement&#8221;. Toute personne recherchant un <strong>framework MVC</strong> tombera sur <a href="http://puremvc.org/">PureMVC</a> ou <a href="http://opensource.adobe.com/wiki/display/cairngorm/Cairngorm">Cairngorm</a>, et bien maintenant, il y aura aussi <a href="http://www.lafabrick.com/blog/2009/01/13/786-reflex-1-une-micro-architecture-pour-flex-simple/">ReFlex</a> qui entrera dans la liste.</p>
+<p>Si vous utilisez ReFlex, n&#8217;hésitez pas à faire des retours à l&#8217;auteur.</p>
+<p><strong>Edit</strong> : Oubli de ma part, gros framework incluant le pattern MVC : <a href="http://code.google.com/p/vegas/">Vegas</a> développé par <a href="http://www.ekameleon.net/blog/">eKameleon</a>. D&#8217;ailleurs Vega n&#8217;inclue pas uniquement le pattern MVC, mais aussi beaucoup d&#8217;autres choses, il peut avoir l&#8217;air très difficile à appréhender. Mais comme toute nouvelle découverte, cela demande de l&#8217;investissement. Mais rassurez-vous, c&#8217;est un framework très riche en documentation.</p>
+<p>A vous de faire votre choix <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/reflex-architecture-mvc/feed/</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.011 seconds using apc
+Object Caching 730/731 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:08 by W3 Total Cache -->

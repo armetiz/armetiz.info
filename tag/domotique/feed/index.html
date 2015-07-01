@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Domotique</title>
+	<atom:link href="http://www.armetiz.info/tag/domotique/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Désactiver le WiFi de la Freebox à certaines heures</title>
+		<link>http://www.armetiz.info/desactiver-wifi-freebox-sdk/</link>
+		<comments>http://www.armetiz.info/desactiver-wifi-freebox-sdk/#comments</comments>
+		<pubDate>Tue, 09 Oct 2012 06:53:12 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Cron]]></category>
+		<category><![CDATA[Domotique]]></category>
+		<category><![CDATA[Freebox]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[npm]]></category>
+		<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Projet]]></category>
+		<category><![CDATA[SDK]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2745</guid>
+		<description><![CDATA[Je viens de sortir un SDK &#8211; short edition &#8211; sous NodeJS pour la Freebox: node-freebox-sdk. Actuellement, il n&#8217;y a que la gestion du wifi de disponible. Mon objectif étant.. <a href="http://www.armetiz.info/desactiver-wifi-freebox-sdk/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Je viens de sortir un SDK &#8211; short edition &#8211; sous NodeJS pour la Freebox: <a href="https://github.com/armetiz/node-freebox-sdk">node-freebox-sdk</a>.</p>
+<p>Actuellement, il n&#8217;y a que la gestion du wifi de disponible.<br />
+Mon objectif étant de pouvoir <strong>activer / désactiver le WiFi</strong> de notre domicile à certaines heures.</p>
+<p>Sur <a href="http://linuxfr.org/forums/programmationshell/posts/activerd%C3%A9sactiver-le-wifi-dune-freebox-v6-depuis-le-r%C3%A9seau-local">linuxfr.org</a> &#8211; 404 : Copier sur Github : <a href="https://github.com/armetiz/bash-freebox-wifi-manager/blob/master/freebox_wifi.sh">bash-freebox-wifi-manager</a> &#8211; , quelqu&#8217;un a rendu disponible une solution pour faire cela en utilisant le shell &#038; curl.<br />
+Cette solution fonctionne très bien, mais je souhaitais développer un peu avec <a href="http://nodejs.org/">NodeJS</a>.</p>
+<p>Voyons comment mettre en place la solution NodeJS avec une <a href="http://fr.wikipedia.org/wiki/Crontab">tâche planifiée</a>.</p>
+<p>Nous allons commencer par installer le SDK Freebox via npm.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">npm <span style="color: #c20cb9; font-weight: bold;">install</span> freebox-sdk</div></td></tr></tbody></table></div>
+<p>Ensuite, nous allons créer l&#8217;application <strong>/home/john.doe/freebox-wifi-manager</strong></p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #003366; font-weight: bold;">var</span> Freebox <span style="color: #339933;">=</span> require<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;freebox-sdk&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #003366; font-weight: bold;">var</span> freebox <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">new</span> Freebox<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; password<span style="color: #339933;">:</span> <span style="color: #3366CC;">&quot;&quot;</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; wifiChannel<span style="color: #339933;">:</span> <span style="color: #CC0000;">11</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; wifiHtMode<span style="color: #339933;">:</span> <span style="color: #3366CC;">&quot;disabled&quot;</span> &nbsp;<span style="color: #006600; font-style: italic;">//disabled, 20, 40_lower, 40_upper</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #003366; font-weight: bold;">var</span> command <span style="color: #339933;">=</span> process.<span style="color: #660066;">argv</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">2</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span><br />
+<br />
+freebox.<span style="color: #660066;">on</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;connect&quot;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">switch</span> <span style="color: #009900;">&#40;</span>command<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">&quot;wifi:on&quot;</span> <span style="color: #339933;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">wifiOn</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;wifi is on&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">break</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">&quot;wifi:off&quot;</span> <span style="color: #339933;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">wifiOff</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;wifi is off&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">break</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">&quot;wifi:status&quot;</span> <span style="color: #339933;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; freebox.<span style="color: #660066;">wifiStatus</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #000066;">status</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;wifi is &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span><span style="color: #000066;">status</span>.<span style="color: #660066;">active</span> <span style="color: #339933;">?</span> <span style="color: #3366CC;">&quot;on&quot;</span> <span style="color: #339933;">:</span> <span style="color: #3366CC;">&quot;off&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066; font-weight: bold;">break</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #003366; font-weight: bold;">default</span><span style="color: #339933;">:</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;command unknown&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+freebox.<span style="color: #660066;">on</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;error&quot;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>message<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;error: &quot;</span> <span style="color: #339933;">+</span> message<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+freebox.<span style="color: #660066;">connect</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Vous pouvez tester si cela fonctionne</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager<br />
+node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager wifi:on<br />
+node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager wifi:status<br />
+node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager wifi:off<br />
+node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager wifi:status</div></td></tr></tbody></table></div>
+<p>Pour finir,<br />
+Mise en place du <a href="http://fr.wikipedia.org/wiki/Crontab">crontab</a> qui permet d&#8217;allumer le WiFi en semaine de 7h à 9h, de 17h à 00h et le weekend. Le reste du temps, le WiFi sera désactivé.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;"># m h &nbsp;dom mon dow &nbsp; command</span><br />
+<span style="color: #000000;">0</span> <span style="color: #000000;">7</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000;">1</span>-<span style="color: #000000;">6</span> node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager on<br />
+<span style="color: #000000;">0</span> <span style="color: #000000;">9</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000;">1</span>-<span style="color: #000000;">5</span> node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager off<br />
+<span style="color: #000000;">0</span> <span style="color: #000000;">17</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000;">1</span>-<span style="color: #000000;">5</span> node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager on<br />
+<span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000;">0</span>-<span style="color: #000000;">5</span> node <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>john.doe<span style="color: #000000; font-weight: bold;">/</span>freebox-wifi-manager off</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/desactiver-wifi-freebox-sdk/feed/</wfw:commentRss>
+		<slash:comments>28</slash:comments>
+		</item>
+		<item>
+		<title>La révolution informatique de notre salon: Apple iPad</title>
+		<link>http://www.armetiz.info/apple-ipad/</link>
+		<comments>http://www.armetiz.info/apple-ipad/#comments</comments>
+		<pubDate>Thu, 28 Jan 2010 07:22:37 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[iPad]]></category>
+		<category><![CDATA[Apple]]></category>
+		<category><![CDATA[Domotique]]></category>
+		<category><![CDATA[Électronique]]></category>
+		<category><![CDATA[Révolution]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1599</guid>
+		<description><![CDATA[Whaou, je ne pensais pas tomber aussi croque love de ce nouvel outil ! Encore un nouveau produit Apple ? Un gros iPhone ? Et bien non, il s&#8217;agit là.. <a href="http://www.armetiz.info/apple-ipad/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/01/Logo-Apple7-1-253-31.jpg"><img src="http://www.armetiz.info/files/2010/01/Logo-Apple7-1-253-31.jpg" alt="" width="156" height="180" class="alignleft size-full wp-image-1602" /></a>Whaou, je ne pensais pas tomber aussi croque love de ce nouvel outil !</p>
+<p>Encore un nouveau produit Apple ? Un gros iPhone ?<br />
+Et bien non, il s&#8217;agit là d&#8217;une <strong>révolution électronique</strong> aussi bien qu&#8217;informatique qui va se faire dans notre salon.</p>
+<p><a href="http://www.apple.com/ipad/">iPad</a> va changer notre utilisation de l&#8217;informatique, surtout pour les plus jeunes qui vont grandir avec.<br />
+L&#8217;intégration du clavier à taille &#8211; quasi &#8211; réelle offrira une utilisation autre que celle du divertissement. Les étudiants pourront faire leurs dissertations dans le canapé sans faire attention à l&#8217;inclinaison de leurs portables&#8230;</p>
+<p><strong>L&#8217;accès à l&#8217;information</strong> va réellement être banalisée à toute la famille de manière totalement naturelle !<br />
+De plus, le prix de départ de <strong>$500 pour la version Wifi</strong> est proche du marché des laptop bas de gamme. On peut donc espérer une belle vie l&#8217;iPad !</p>
+<p>Voici la présentation officiel :</p>
+<div><b><a href="http://www.dailymotion.com/video/xc0irm_ipad-la-tablette-dapple-debarque-en_tech">iPad la tablette d&#039;Apple d&eacute;barque en vid&eacute;o</a></b><br /><i>envoy&eacute; par <a href="http://www.dailymotion.com/iQuid">iQuid</a>. &#8211; <a href="http://www.dailymotion.com/fr/channel/tech">Les derniers test hi-tech en vidéo.</a></i></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/apple-ipad/feed/</wfw:commentRss>
+		<slash:comments>8</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.021 seconds using apc
+Object Caching 514/525 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:14:02 by W3 Total Cache -->

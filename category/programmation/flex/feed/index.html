@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Flex</title>
+	<atom:link href="http://www.armetiz.info/category/programmation/flex/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>AMF / Zend Authentication using Database</title>
+		<link>http://www.armetiz.info/zend-authentication-database/</link>
+		<comments>http://www.armetiz.info/zend-authentication-database/#comments</comments>
+		<pubDate>Tue, 19 Oct 2010 08:16:06 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[Authentification]]></category>
+		<category><![CDATA[Base de données]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Service]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843</guid>
+		<description><![CDATA[Cet article s&#8217;inscrit à la suite du précèdent billet : Authentification &#38; Autorisation avec Zend AMF. Zend_Amf_Adobe_Auth est une classe livré avec Zend 1.10. Elle peut être utilisée comme service.. <a href="http://www.armetiz.info/zend-authentication-database/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cet article s&#8217;inscrit à la suite du précèdent billet : <a href="http://www.armetiz.info/authentification-autorisation-zend-amf">Authentification &amp; Autorisation avec Zend AMF</a>.</p>
+<p><strong>Zend_Amf_Adobe_Auth</strong> est une classe livré avec Zend 1.10. Elle peut être utilisée comme service d&#8217;authentification pour un serveur <strong>Zend_Amf_Server</strong>. Le soucis, c&#8217;est que cette classe fonctionne conjointement avec un fichier XML réputé statique.</p>
+<p>Voici donc le code d&#8217;une classe qui permet l&#8217;authentification d&#8217;un utilisateur AMF via la base de données.<br />
+Sachant que nous développons cela pour offrir des services AMF, cette classe utilisera la logique métier implémentée au sein des services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Auth_AmfDatabase extends Zend_Amf_Auth_Abstract<br />
+{<br />
+&nbsp; &nbsp; protected $_acl;<br />
+&nbsp; &nbsp; protected $_users = array();<br />
+<br />
+&nbsp; &nbsp; public function __construct()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_acl = new Zend_Acl();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oServiceRole &nbsp; = new Service_Role ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oRoles &nbsp; &nbsp; = $oServiceRole-&amp;gt;fetchAll ( );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; foreach ( $oRoles as $oRole )<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_acl-&amp;gt;addRole ( new Zend_Acl_Role( $oRole-&amp;gt;title ) );<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function getAcl()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return $this-&amp;gt;_acl;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function authenticate()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (empty($this-&amp;gt;_username) ||<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; empty($this-&amp;gt;_password)) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; require_once 'Zend/Auth/Adapter/Exception.php';<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new Zend_Auth_Adapter_Exception('Username/password should be set');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oServiceUser &nbsp; = new Service_User ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oUser&nbsp; &nbsp; &nbsp; = $oServiceUser-&amp;gt;authentication ( $this-&amp;gt;_username, $this-&amp;gt;_password );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; if ( null == $oUser )<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return new Zend_Auth_Result(Zend_Auth_Result::FAILURE,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; null,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('Username and / or Password not found')<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; else<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id = new stdClass();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id-&amp;gt;role = $oUser-&amp;gt;role-&amp;gt;code;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id-&amp;gt;name = $oUser-&amp;gt;username;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return new Zend_Auth_Result(Zend_Auth_Result::SUCCESS, $id);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Le <strong>constructeur</strong> récupère l&#8217;ensemble des rôles existants en base de données pour peupler l&#8217;objet ACL.<br />
+La méthode <strong>authenticate</strong> va vérifier le couple Login / Password, et en cas de succès va retourner un objet <strong>Zend_Auth_Result</strong> contenant lui même un objet standard.<br />
+Cet objet standard doit avoir une propriété <strong>role</strong> et <strong>name</strong>, le <strong>rôle</strong> contiendra l&#8217;identifiant que vous avez définit dans vos autorisations ACL. Le <strong>name</strong> devra contenir le login de votre utilisateur.</p>
+<p>Cette classe a été inspirée par <strong>Zend_Amf_Adobe_Auth</strong>. N&#8217;hésitez pas à l&#8217;adapter pour vos propres besoins.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/zend-authentication-database/feed/</wfw:commentRss>
+		<slash:comments>20</slash:comments>
+		</item>
+		<item>
+		<title>Flash &#8211; Restreindre l&#8217;instanciation d&#8217;une classe par un seul objet</title>
+		<link>http://www.armetiz.info/flash-restreindre-instanciation-class-objet/</link>
+		<comments>http://www.armetiz.info/flash-restreindre-instanciation-class-objet/#comments</comments>
+		<pubDate>Thu, 01 Oct 2009 15:08:47 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Conception]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[Factory]]></category>
+		<category><![CDATA[Pattern]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1365</guid>
+		<description><![CDATA[Comment restreindre l&#8217;instanciation d&#8217;une classe à une autre classe. Voici une idée complètement &#8220;crazy&#8221; au quelle je vais apporter une solution à travers ce billet. Nous allons utiliser un principe.. <a href="http://www.armetiz.info/flash-restreindre-instanciation-class-objet/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Comment <strong>restreindre l&#8217;instanciation d&#8217;une classe</strong> à une autre classe.</p>
+<p>Voici une idée complètement &#8220;crazy&#8221; au quelle je vais apporter une solution à travers ce billet.<br />
+Nous allons utiliser un principe connu par de nombreux framework Web qui permet d&#8217;assurer la validité d&#8217;un formulaire: <strong>Le jeton</strong> !</p>
+<p>L&#8217;intérêt étant de combiner cela avec le <a href="http://fr.wikipedia.org/wiki/Fabrique_%28patron_de_conception%29">pattern Factory</a>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">public class Master<br />
+{<br />
+&nbsp; &nbsp; private static var _jeton &nbsp; : Number&nbsp; &nbsp; = -1;<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public function Master()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public static function createSlave () : Slave<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; var _tmpSlave &nbsp; : Slave;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; _jeton&nbsp; &nbsp; &nbsp; = Math.random() * 500;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; _tmpSlave &nbsp; = new Slave (_jeton);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; _jeton&nbsp; &nbsp; &nbsp; = -1;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; return _tmpSlave; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public static function get jeton () : Number<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return _jeton;<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">public class Slave<br />
+{<br />
+&nbsp; &nbsp; public function Slave(_pJeton : Number = 0) : void<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (Master.jeton !== _pJeton &amp;amp;&amp;amp; Master.jeton !== -1)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new Error (&quot;Instanciation obligatoire par Master.createSlave&quot;);<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">new Slave (); //throw Error<br />
+Master.createSlave (); //Retourne un objet du type Slave</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/flash-restreindre-instanciation-class-objet/feed/</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+		<item>
+		<title>Configuration ASDoc FlexBuilder</title>
+		<link>http://www.armetiz.info/configuration-asdoc-flex-eclipse/</link>
+		<comments>http://www.armetiz.info/configuration-asdoc-flex-eclipse/#comments</comments>
+		<pubDate>Mon, 20 Jul 2009 12:37:39 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[AIR]]></category>
+		<category><![CDATA[ASDoc]]></category>
+		<category><![CDATA[Documentation]]></category>
+		<category><![CDATA[Eclipse]]></category>
+		<category><![CDATA[Flash]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1171</guid>
+		<description><![CDATA[Même si FlashBuilder pointe le bout de son nez, comme que je suis toujours en retard voici un petit mémo pour configurer ASDoc sous FlexBuilder. Sous Eclipse / FlexBuilder: Run.. <a href="http://www.armetiz.info/configuration-asdoc-flex-eclipse/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Même si FlashBuilder pointe le bout de son nez, comme que je suis toujours en retard voici un petit mémo pour configurer <strong>ASDoc sous FlexBuilder.</strong></p>
+<p>Sous Eclipse / FlexBuilder: <strong>Run &gt; External Tools &gt; Open External Tools Dialog&#8230;</strong></p>
+<ul>
+<li>Location: %programfiles%AdobeFlex Builder 3sdks3.3binasdoc.exe</li>
+<li>Working Directory: ${project_loc}</li>
+<li>Arguments: -source-path ./src/ -window-title &#8220;${project_name}&#8221; -main-title &#8220;${project_name}&#8221; -doc-sources &#8220;${project_loc}/src/&#8221;</li>
+</ul>
+<p>Par défaut, la documentation sera dans votre répertoire projet <strong>/asdoc-output</strong></p>
+<p>Aussi, si vous utilisez des librairies qui se croisent pour vos projets, il faudra indiquer à ASDoc où trouver les SWC correspondants. Pour cela <strong>-library-path</strong> fera l&#8217;affaire.<br />
+Pour conserver un lien vers les autres librairies dont Flex, utiliser l&#8217;argument comme suit : -library-path+=&#8221;${workspace_loc}/Project/bin/&#8221;</p>
+<p>PS: Pour le répertoire de ASDoc.exe pensez à utiliser votre version du SDK de Flex, car vous disposez peut-être d&#8217;une version différente de la mienne.<br />
+<img src="http://bp0.blogger.com/_uwXDfjmWSjM/R-P1LCWbh_I/AAAAAAAAAC8/TecO2ro05aY/s320/flex.png" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/configuration-asdoc-flex-eclipse/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Attirer des visiteurs sur un site éditorial grâce à un jeu</title>
+		<link>http://www.armetiz.info/attirer-des-visiteurs-sur-un-site-editorial-grace-a-un-jeu/</link>
+		<comments>http://www.armetiz.info/attirer-des-visiteurs-sur-un-site-editorial-grace-a-un-jeu/#comments</comments>
+		<pubDate>Wed, 21 Jan 2009 13:36:18 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Jeu]]></category>
+		<category><![CDATA[Original]]></category>
+		<category><![CDATA[Publicité]]></category>
+		<category><![CDATA[RIA]]></category>
+		<category><![CDATA[Site]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=713</guid>
+		<description><![CDATA[Comment une entreprise éditorial peut-elle intégrer une interface original et donnant envie de revenir.]]></description>
+				<content:encoded><![CDATA[<p><img src="http://www.armetiz.info/wp-content/uploads/2009/01/circuit-300x202.jpg" alt="circuit électrique" width="300" height="202" class="alignleft size-medium wp-image-714" />Les membres de l&#8217;équipe de <a href="http://www.magicsocket.com/">MagicSocket</a> ont développés leur site éditorial en intégrant un jeu assez prenant.</p>
+<p>L&#8217;idée du jeu est simple : représentation d&#8217;un circuit de <strong>voiture électrique</strong>, avec une <strong>compétition</strong> possible entre fantôme.</p>
+<p>L&#8217;intégration du circuit par rapport au contenu éditorial n&#8217;a pas été faite de manière classique, le jeu n&#8217;est pas dans une cellule d&#8217;un coin de la page, mais <strong>tout autours du site et entre les différents articles</strong>.</p>
+<p>Je trouve que l&#8217;idée est très bonne pour générer du trafic.<br />
+Alors attention, le type de trafic sera surement composé majoritairement de joueur qui n&#8217;auront rien à faire du contenu éditorial.<br />
+Mais pour une agence de communication / développement, quoi de mieux d&#8217;avoir se type d&#8217;interface qui fera parler d&#8217;elle.</p>
+<p>Par contre, nous retrouvons les <strong>inconvénients</strong> d&#8217;un site full flash : lourdeur au niveau du chargement et de l&#8217;utilisation, et <a href="http://www.google.fr/search?hl=fr&amp;q=site%3Ahttp%3A%2F%2Fwww.magicsocket.com%2F&amp;btnG=Recherche+Google&amp;meta=&amp;aq=f&amp;oq=">référencement naturel inexistant</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/attirer-des-visiteurs-sur-un-site-editorial-grace-a-un-jeu/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Reflex : Architecture MVC</title>
+		<link>http://www.armetiz.info/reflex-architecture-mvc/</link>
+		<comments>http://www.armetiz.info/reflex-architecture-mvc/#comments</comments>
+		<pubDate>Thu, 15 Jan 2009 11:17:05 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[CairnGorm]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[IOC]]></category>
+		<category><![CDATA[MVC]]></category>
+		<category><![CDATA[Pattern]]></category>
+		<category><![CDATA[PureMVC]]></category>
+		<category><![CDATA[Reflex]]></category>
+		<category><![CDATA[Vegas]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=689</guid>
+		<description><![CDATA[Fabien de la Fabrick a publié une &#8220;micro-architecture&#8221; MVC pour Flex. Ces mots de présentation sont : Souvent dans le monde de Flex, les équipes ne sont pas forcement homogènes... <a href="http://www.armetiz.info/reflex-architecture-mvc/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Fabien de la <a href="http://www.lafabrick.com">Fabrick</a> a publié une &#8220;micro-architecture&#8221; MVC pour Flex.<br />
+Ces mots de présentation sont :</p>
+<blockquote><p>Souvent dans le monde de Flex, les équipes ne sont pas forcement homogènes. Certains sont habitués à la rigueur de Java, d’autres sont plus “devsigners freestyle” venant du monde Flash. Les premiers aiment les grosses mécaniques comme <a href="http://puremvc.org/">PureMVC</a>, ou <a href="http://www.pranaframework.org/">Prana Framework</a> “Spring like”. Les seconds connaissent au mieux <a href="http://opensource.adobe.com/wiki/display/cairngorm/Cairngorm">Cairngorm</a>, au pire confondent <a href="http://en.wikipedia.org/wiki/Model-view-controller">MVC</a> et <a href="http://fr.wikipedia.org/wiki/Ventilation_m%C3%A9canique_contr%C3%B4l%C3%A9e">VMC</a> &#8211; ce qui n’a rien a voir, sauf si vous faites une application riche sur le thème de la ventilation.</p></blockquote>
+<p>Pour l&#8217;instant deux didacticiels sont disponibles : <a href="http://www.lafabrick.com/blog/2009/01/13/786-reflex-1-une-micro-architecture-pour-flex-simple/">Introduction et Exemple</a> et <a href="http://www.lafabrick.com/blog/2009/01/15/819-reflex-2-vous-reprendez-bien-un-peu-de-ioc/">l&#8217;utilisation de l&#8217;IOC</a> où il faut comprendre &#8220;Injection Of Content&#8221; plutôt que &#8220;<a href="http://fr.wikipedia.org/wiki/Inversion_de_contr%C3%B4le">Inversion Of Control</a>&#8220;.</p>
+<p>Ceci est un article orienté publicité d&#8217;une part, mais aussi &#8220;déploiement&#8221;. Toute personne recherchant un <strong>framework MVC</strong> tombera sur <a href="http://puremvc.org/">PureMVC</a> ou <a href="http://opensource.adobe.com/wiki/display/cairngorm/Cairngorm">Cairngorm</a>, et bien maintenant, il y aura aussi <a href="http://www.lafabrick.com/blog/2009/01/13/786-reflex-1-une-micro-architecture-pour-flex-simple/">ReFlex</a> qui entrera dans la liste.</p>
+<p>Si vous utilisez ReFlex, n&#8217;hésitez pas à faire des retours à l&#8217;auteur.</p>
+<p><strong>Edit</strong> : Oubli de ma part, gros framework incluant le pattern MVC : <a href="http://code.google.com/p/vegas/">Vegas</a> développé par <a href="http://www.ekameleon.net/blog/">eKameleon</a>. D&#8217;ailleurs Vega n&#8217;inclue pas uniquement le pattern MVC, mais aussi beaucoup d&#8217;autres choses, il peut avoir l&#8217;air très difficile à appréhender. Mais comme toute nouvelle découverte, cela demande de l&#8217;investissement. Mais rassurez-vous, c&#8217;est un framework très riche en documentation.</p>
+<p>A vous de faire votre choix <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/reflex-architecture-mvc/feed/</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+		<item>
+		<title>Le point sur la mise à jour Adobe</title>
+		<link>http://www.armetiz.info/mise-a-jour-adobe/</link>
+		<comments>http://www.armetiz.info/mise-a-jour-adobe/#comments</comments>
+		<pubDate>Wed, 19 Nov 2008 12:13:30 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Catalyst]]></category>
+		<category><![CDATA[Cocomo]]></category>
+		<category><![CDATA[Mise à jour]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=524</guid>
+		<description><![CDATA[On en parle un peu sur le net : InterfacesRiches.fr ou bit-101.com En résumé, AIR passe en version 1.5, apparition de Catalyst pour simplifier les échanges entre les Graphistes et.. <a href="http://www.armetiz.info/mise-a-jour-adobe/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>On en parle un peu sur le net : <a href="http://www.interfacesriches.fr/2008/11/17/flash-devient-une-marque-ombrelle-et-autres-annonces-dadobe/">InterfacesRiches.fr</a> ou <a href="http://www.bit-101.com/blog/?p=1695">bit-101.com</a></p>
+<p><a href="http://get.adobe.com/fr/air/"><img alt="" src="http://www.adobe.com/images/shared/product_mnemonics/50x50/air_50x50.gif" class="alignright" width="50" height="50" /></a>En résumé, AIR passe en <a href="http://get.adobe.com/fr/air/">version 1.5</a>, apparition de <a href="http://labs.adobe.com/technologies/flashcatalyst/">Catalyst</a> pour simplifier les échanges entre les Graphistes et les Développeurs, ainsi que l&#8217;arrivée de <a href="http://labs.adobe.com/technologies/cocomo/">Cocomo</a>.</p>
+<p>D&#8217;ailleurs, l&#8217;application <a href="http://www.armetiz.info/programmation/air/prendre-en-photo-une-grande-page-web/">AIR WebKut</a> qui limitait les images à 2880 pixels en dimension, devrait passer à 16 Millions de pixels, et sera donc capable de prendre Armetiz.info en entier :p</p>
+<h3>Catalyst &#8211; Travail collaboratif : Graphiste / Développeur</h3>
+<p>Adobe à fait de <a href="http://labs.adobe.com/technologies/flashcatalyst/">jolies vidéos</a> pour présenter leur futur produit.<br />
+Si l&#8217;on s&#8217;attarde dessus, on découvre une plate-forme d&#8217;échange pour les graphistes et les développeurs.</p>
+<ul>
+<li>Le graphiste pourra importer des ressources graphiques provenant de PhotoShop ou Illustrator, et de leur affecter des &#8220;comportements&#8221;.</li>
+<li>Suite à ça, le développeur récupérera ces éléments pour ajouter la couche logique.</li>
+<li>A chaque instant, nous serons capable de compiler le projet, que ce soit juste après l&#8217;importation des visuels, ou à la fin du projet.</li>
+</ul>
+<p>Nous remarquons aussi qu&#8217;Adobe a de nouveau choisi Eclipse comme interface de développement.</p>
+<p>Pour finir sur Catalyst, Adobe va nous permettre de faire un grand pas au niveau MVC Conceptuel sur les grands projets, mais concernant les petits projets, est-ce que le jeu en vaudra la chandelle ?</p>
+<h3>Social RIA</h3>
+<p><img alt="" src="http://wwwimages.adobe.com/labs.adobe.com/cdn/technologies/cocomo/images/cocomo_557x232.jpg" class="alignnone" width="557" height="232" /><br />
+<a href="http://labs.adobe.com/technologies/cocomo/">Cocomo</a>, un ensemble de composants mis à disposition pour concevoir des applications orientées <strong>Web Social</strong>.<br />
+Ces &#8220;composants&#8221; permettront une connexion simplifiée avec les serveurs Adobe, et vous aurez un <a href="https://cocomo.acrobat.com/">outil de monitoring</a> pour surveiller les transferts de donnée.</p>
+<p>Si l&#8217;on regarde les fonctionnalités proposées, on a de quoi être intéressé :</p>
+<ul>
+<li>VoIP Audio</li>
+<li>Webcam Video</li>
+<li>Chat</li>
+<li>Multi-User Whiteboards</li>
+<li>Real-Time File Sharing</li>
+<li>User Management</li>
+<li>Roles and Permissions</li>
+<li>Robust Data Messaging</li>
+</ul>
+<p>En effet, les tchats vidéo de type <a href="http://mebeam.com/">mebeam.com</a> qui étaient &#8220;innovants&#8221; pourront être imités très facilement sans réel investissement financier.</p>
+<p>Alors qu&#8217;il n&#8217;y a aucun cout de mentionné, on est libre de penser que ces opérations seront gratuites ?<br />
+Mais dans ce cas, comment peut-on attendre un service de qualité ? Peut-on construire un projet d&#8217;entreprise utilisant cette technologie ?</p>
+<h3>Adobe Flash Plateforme</h3>
+<p>Et pour finir, Adobe a décidé de regrouper les principales technologies sous une même entité : <a href="http://www.adobe.com/flashplatform/">Flash Plateforme</a>.<br />
+Du bien, du pas bien&#8230; Si ce n&#8217;est que le nom qui change, on peut y voir un simple coups marketing.</p>
+<p>Maintenant, si l&#8217;on croise les vidéos de Catalyst avec le beau <a href="http://www.adobe.com/flashplatform/features/include/home/modal_01.png">schéma</a>, on peut-être à même de penser que les prochaines versions du Flash Player intégreront les capacités du frameworks AIR, et grâce à une simple condition nous pourrons bénéficier d&#8217;un SWF qui s&#8217;adapte en fonction du mode de lecture ( desktop / on-line)</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">if(Capabilities.playerType == &quot;Desktop&quot;)<br />
+{<br />
+&nbsp; &nbsp; //Desktop<br />
+}<br />
+else<br />
+{<br />
+&nbsp; &nbsp; //On-line<br />
+}</div></td></tr></tbody></table></div>
+<p>PS : Après une mise à jour de AIR, les images générées par WebKut sont toujours coupées à 2880 pixels de hauteur&#8230;</p>
+<p>Edit : Concernant l&#8217;intégration de AIR/Flash/Flex au sein du player Flash, cela ne sera surement pas fait pour des raisons de poids. Flash étant un logiciel Web, son but est d&#8217;être le plus léger possible pour être chargé rapidement.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/mise-a-jour-adobe/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Apprendre Flex &#8211; Vidéo de formation Adobe</title>
+		<link>http://www.armetiz.info/apprendre-flex-video-formation-adobe/</link>
+		<comments>http://www.armetiz.info/apprendre-flex-video-formation-adobe/#comments</comments>
+		<pubDate>Tue, 21 Oct 2008 10:13:54 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Apprendre]]></category>
+		<category><![CDATA[Cours]]></category>
+		<category><![CDATA[Formation]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=314</guid>
+		<description><![CDATA[Cela fait quelques semaines déjà que des vidéos de formation Flex sont proposées par Adobe, mais cela ne fait que quelques jours qu&#8217;elles sont toutes disponibles. 5 Jours pour être.. <a href="http://www.armetiz.info/apprendre-flex-video-formation-adobe/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cela fait quelques semaines déjà que des <a href="http://www.adobe.com/devnet/flex/videotraining/">vidéos de formation Flex</a> sont proposées par Adobe, mais cela ne fait que quelques jours qu&#8217;elles sont toutes disponibles.</p>
+<h3>5 Jours pour être autonome sur Flex</h3>
+<p>C&#8217;est le slogan utilisé par Adobe pour introduire ces tutoriels entrelacés d&#8217;exercices.<br />
+Voici le programme :</p>
+<ul>
+<li>Day 1: Flex basics &#8211; Les bases de Flex</li>
+<li>Day 2: Component development &#8211; Développement de composant</li>
+<li>Day 3: Putting it all together &#8211; Mixer l&#8217;ensemble</li>
+<li>Day 4: Adding visual appeal &#8211; Améliorer l&#8217;aspect graphique</li>
+<li>Day 5: Architecture and advanced topics &#8211; Architecture et sujet avancé</li>
+</ul>
+<p>Une journée est composée d&#8217;une petite dizaine de vidéo durant 8 min en moyenne.<br />
+Il faut donc prendre une heure de son temps pour faire un module.</p>
+<p>Les vidéos sont très bien réalisée, l&#8217;anglais y est <strong>parfaitement compréhensible</strong> avec les sous-titres inclus.</p>
+<p>Aussi, <strong>l&#8217;illustration</strong> de notion élémentaire comme la gestion des <strong>événements</strong> est très formatrice et permet d&#8217;avoir un autre point de vue que celui fournit par les livres.</p>
+<p>Dans le même principe que la <a href="http://www.armetiz.info/programmation/decouvrir-la-poo-avec-flash/">découverte de la POO avec Flash</a>, prenez votre temps pour découvrir les vidéos et n&#8217;hésitez pas à revenir en arrière lorsqu&#8217;une notion n&#8217;est pas comprise.<br />
+La vertu du Elearning, c&#8217;est de pouvoir recommencer autant de fois que l&#8217;on souhaite notre formation, abusez de cela.</p>
+<p>Adobe propose même la <em>visualisation hors-ligne</em> des vidéos.</p>
+<p>PS : Si quelqu&#8217;un souhaite modifier mes traductions, qu&#8217;il le fasse maintenant ou se taise à jamais <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p><strong>Liens utiles</strong> :</p>
+<ul>
+<li><a href="http://www.adobe.com/devnet/flex/videotraining/">Formation Adobe Flex en E-learning</a></li>
+<li><a href="http://www.armetiz.info/programmation/decouvrir-la-poo-avec-flash/">La programmation objet avec Flash AS3</a></li>
+<li><a href="http://www.flex-tutorial.fr/">Flex tutorial</a></li>
+</ul>
+<p><strong>Edit du 25 Novembre 08</strong> :<br />
+Pour faire le tour des composants et possibilités de Flex, vous pouvez installer <a href="http://flex.org/tour">Tour de Flex</a> qui est une application AIR regroupant une très grande quantité de composant avec les codes sources associés.<br />
+C&#8217;est vraiment un must have quand on apprend ou même utilise Flex, car vous avez la dedans une grosse bibliothèque d&#8217;exemple fonctionnel.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/apprendre-flex-video-formation-adobe/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/15 queries in 0.004 seconds using apc
+Object Caching 802/812 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:11:55 by W3 Total Cache -->

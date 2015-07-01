@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; View</title>
+	<atom:link href="http://www.armetiz.info/tag/view/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Générer un flux RSS à partir d&#8217;une View avec Drupal</title>
+		<link>http://www.armetiz.info/generer-un-flux-rss-a-partir-dune-view-avec-drupal/</link>
+		<comments>http://www.armetiz.info/generer-un-flux-rss-a-partir-dune-view-avec-drupal/#comments</comments>
+		<pubDate>Fri, 11 Jan 2008 08:59:32 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Drupal]]></category>
+		<category><![CDATA[Module]]></category>
+		<category><![CDATA[RSS]]></category>
+		<category><![CDATA[View]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=29</guid>
+		<description><![CDATA[Cela va paraître bête, mais cet article fait suite à la demande d&#8217;un flux RSS de la part d&#8217;un ami pour pouvoir consulter sur NetVibes mes tips &#38; astuces concernant.. <a href="http://www.armetiz.info/generer-un-flux-rss-a-partir-dune-view-avec-drupal/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img src="http://www.armetiz.info/files/2008/01/drupal1-150x150.png" alt="Logo Drupal" width="150" height="150" class="alignright size-thumbnail wp-image-1438" />Cela va paraître bête, mais cet article fait suite à la demande d&#8217;un flux RSS de la part d&#8217;un ami pour pouvoir consulter sur <a title="NetVibes" href="http://www.netvibes.com/thomastourlourat" target="_blank">NetVibes</a> mes tips &amp; astuces concernant Drupal..</p>
+<p>Quand on installe Drupal, on voit avec le thème par défaut le petit Icône de syndication, je m&#8217;étais donc dit que cela était toujours le cas sans vraiment y réfléchir.</p>
+<p>Suite à la demande de cette ami, je m&#8217;aperçois qu&#8217;il n&#8217;y a plus l&#8217;icône.. Bon, je vais voir dans les options.. Gestion de contenu -&gt; Publication RSS (Content Management -&gt; RSS Publishing), les paramètres semblent correctes.</p>
+<p>Peut-être ai-je oublié la variable de l&#8217;API Drupal dans mon template.. Donc vérification de la présence de</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&amp;lt;?php<br />
+print &lt;a title=&quot;theme_feed_icons&quot; href=&quot;http://api.drupal.org/api/function/theme_feed_icon/5&quot; target=&quot;_blank&quot;&gt;feed_icons;&lt;/a&gt;<br />
+?&amp;gt;</div></td></tr></tbody></table></div>
+<p>Dans la liste des blocs, on peut trouver &#8216;Syndicate&#8217; qui permet d&#8217;afficher un lien RSS pour la page d&#8217;accueil, le problème c&#8217;est que je n&#8217;utilise plus la page d&#8217;accueil, j&#8217;utilise une View qui pourtant est la View frontpage. Et de toute manière, ce bloc affiche du texte que je ne veux pas..</p>
+<p>En fait, il existe un module livré avec View qui s&#8217;appel <strong>view_rss</strong>, et qu&#8217;il faut activer pour avoir une option supplémentaire dans la configuration d&#8217;une View.</p>
+<p>Dans la View que vous désirez, ajouter l&#8217;argument &#8216;<strong>RSS: RSS Feed Selector</strong>&#8216; et sélectionner &#8216;<strong>Display all Values</strong>&#8216; ou &#8216;Afficher toutes les valeurs&#8217;, enregistrer.</p>
+<p>Surprise, quand vous consultez votre page, le petit icône apparaît, et on parait tout de suite mon bête face à une question très con &#8216;T&#8217;as un lien RSS ?&#8217;.</p>
+<p>Maintenant, plusieurs questions :</p>
+<ul>
+<li>Pourquoi q=rss.xml qui correspond au flux RSS de la &#8216;frontpage&#8217; n&#8217;affiche pas le contenu de la View &#8216;frontpage&#8217; qui est un View par défaut.. Oublis des développeurs ?</li>
+<li>Pourquoi la configuration dans &#8216;Gestion de contenu -&gt; Publication RSS&#8217; n&#8217;affecte pas l&#8217;affichage RSS fournit par nos View.</li>
+</ul>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/generer-un-flux-rss-a-partir-dune-view-avec-drupal/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.003 seconds using apc
+Object Caching 335/336 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:36 by W3 Total Cache -->

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Amélioration</title>
+	<atom:link href="http://www.armetiz.info/tag/amelioration/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Enregistrer les sources Flash au format XML</title>
+		<link>http://www.armetiz.info/enregistrer-sources-flash-format-xml/</link>
+		<comments>http://www.armetiz.info/enregistrer-sources-flash-format-xml/#comments</comments>
+		<pubDate>Thu, 22 Apr 2010 08:25:51 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Amélioration]]></category>
+		<category><![CDATA[CS5]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[Tache]]></category>
+		<category><![CDATA[XML]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1671</guid>
+		<description><![CDATA[Adobe Creative Suite 5 va sortir dans les prochains jours, et hormis l&#8217;iPhone packager qui semblait être le cheval de bataille cette année, les autres améliorations sont passées un peu.. <a href="http://www.armetiz.info/enregistrer-sources-flash-format-xml/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2009/12/adobe-lq1.png"><img src="http://www.armetiz.info/files/2009/12/adobe-lq1.png" alt="" width="43" height="72" class="alignleft size-full wp-image-1665" /></a><strong>Adobe Creative Suite 5</strong> va sortir dans les prochains jours, et hormis <strong>l&#8217;iPhone packager</strong> qui semblait être le cheval de bataille cette année, les autres améliorations sont passées un peu à la trappe.</p>
+<p>Sur <a href="http://labs.adobe.com/technologies/flashcs5/">Adobe Labs</a> ont peut trouver les nouveautés de Flash CS5, et sur le nouveau <a href="http://blog.mediabox.fr/flash-pro-cs5-les-nouveautes">blog de mediabox</a> la traduction Française.</p>
+<p>Personnellement, je remarque un point très intéressant : <strong>XML based FLA files</strong>, où encore <strong>Fichiers FLA basés sur le XML</strong>.<br />
+Qu&#8217;est-ce que cela signifie ? Mediabox le définit comme tel :</p>
+<blockquote><p>En enregistrant votre document .fla, vous constaterez dans votre boite de dialogue <strong>la possibilité d’enregistrer</strong> votre travail sous un <strong>format non compressé .xfl</strong>. Vous aurez alors la <strong>création d’un dossier</strong> reprenant la structure de votre document et de votre librairie. Il sera alors facile à des personnes tiers non familières de Flash, de pouvoir modifier le contenu de la librairie, en changeant les textes, les images etc. Le tout sans avoir besoin de ré-ouvrir votre document dans Flash et de chercher où est le contenu à modifier.</p></blockquote>
+<p>Dans tout les cas, cela signifie que nous pourrons accéder à la structure de nos animations sans passer obligatoirement par les <strong>fichiers FLA</strong>, qui sont des fichiers au <strong>format binaire non ouvert</strong>.<br />
+Mais aussi et surtout, nous pourrons indirectement <strong>automatiser certaines tâches</strong> !</p>
+<p>Je prends l&#8217;exemple d&#8217;un <a href="http://www.projet-elearning.com/">projet eLearning</a> où le nombre de FLA dépasse la centaine. Sur chacun de ces FLA il y a des <strong>éléments redondants</strong>.<br />
+Après avoir livré la version de recette au client, celui-ci nous dit qu&#8217;il n&#8217;aime pas la tête du personnage Dupon.<br />
+Ce personnage est sur 80% des animations réalisées. </p>
+<p>Actuellement, plusieurs solutions s&#8217;offre à vous. Vous avez utilisé une <strong>librairie partagée</strong>, il va falloir ré-ouvrir tout les FLA, faire la mise à jour des symboles et re-compiler chaque FLA.<br />
+Si vous n&#8217;avez pas de librairie partagée, il faudra remplacer à la main le symbole du personnage dans chaque FLA et lancer la compilation sur chacun.</p>
+<p>Avec Adobe Flash CS5, il sera possible d&#8217;automatiser la modification d&#8217;un élément sur l&#8217;ensemble des sources. Celle-ci pouvant être enregistrée au format XML, un simple <strong>script PHP</strong> fera l&#8217;affaire.<br />
+Il est déjà possible d&#8217;<strong>automatiser la compilation de FLA</strong>, <a href="http://www.gskinner.com/blog/archives/2004/08/jsfl_fla_batch.html">gSkinner</a> et <a href="http://www.mikechambers.com/blog/2003/11/01/flashcommand-flash-2004-command-line-compiler/">Mike Chambers</a> l&#8217;ont fait. </p>
+<p><a href="http://www.armetiz.info/files/2009/11/adobe_air1.jpg"><img src="http://www.armetiz.info/files/2009/11/adobe_air1.jpg" alt="" width="150" height="150" class="alignright size-full wp-image-1425" /></a>Je n&#8217;ai pas pu tester cette nouvelle version de Flash.<br />
+Il faut donc prendre cela au conditionnel, car il n&#8217;est pas dit que Adobe ai pensé à réaliser un compilateur de fichier SWF à partir de source XML.</p>
+<p>Mais si tout cela s&#8217;avère être exact, il n&#8217;est pas impossible de voir apparaître des applications Adobe AIR permettant de modifier des éléments au sein d&#8217;un groupe de fichier source XML.</p>
+<p>Edit : Valerio Virgillito <strong>Ingénieur chez Adobe</strong> a publié un article concernant le format XFL de Flash CS5 : <a href="http://blog.mencio.com/?p=28">XFL and Live Editing</a>.<br />
+On peut y apprendre des informations intéressantes. Comme le fait que le fichier FLA ne sera plus un fichier binaire fermé, mais un <strong>package de fichier compressé XML</strong>; à la sauce des fichiers Docx surement.<br />
+Mais aussi que les modifications des fichiers composants l&#8217;animation seront automatiquement pris en compte par Flash CS5. Je vous conseils de regarder la <strong>vidéo</strong> de son article pour une meilleur visibilité.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/enregistrer-sources-flash-format-xml/feed/</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.009 seconds using apc
+Object Caching 305/306 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:10 by W3 Total Cache -->

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Recherche</title>
+	<atom:link href="http://www.armetiz.info/tag/recherche/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Linux &#8211; Trouver les fichiers contenant une chaine de caractere</title>
+		<link>http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/</link>
+		<comments>http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/#comments</comments>
+		<pubDate>Thu, 01 Mar 2012 10:43:15 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[automatique]]></category>
+		<category><![CDATA[Fichier]]></category>
+		<category><![CDATA[find]]></category>
+		<category><![CDATA[gnu]]></category>
+		<category><![CDATA[memo]]></category>
+		<category><![CDATA[Post-it]]></category>
+		<category><![CDATA[Recherche]]></category>
+		<category><![CDATA[unix]]></category>
+		<category><![CDATA[xargs]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2221</guid>
+		<description><![CDATA[Voici une commande Linux qui affichera les fichiers contenant The Big Brains Company Recherche au sein du répertoire /var/www/ avec un chemin absolu 123$ grep -lR &#34;The Big Brains Company&#34;.. <a href="http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Voici une commande Linux qui affichera les fichiers contenant <strong><a href="http://thebigbrainscompany.com">The Big Brains Company</a></strong></p>
+<p>Recherche au sein du répertoire <strong>/var/www/</strong> avec un chemin absolu</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #660033;">-lR</span> <span style="color: #ff0000;">&quot;The Big Brains Company&quot;</span> <span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span>com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>shared<span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml<br />
+<span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span>com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>releases<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">20140718184541</span><span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml</div></td></tr></tbody></table></div>
+<p>Recherche au sein du répertoire <strong>/var/www/</strong> avec un chemin relatif</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$ <span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>www<span style="color: #000000; font-weight: bold;">/</span><br />
+$ <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #660033;">-lR</span> <span style="color: #ff0000;">&quot;The Big Brains Company&quot;</span> <span style="color: #000000; font-weight: bold;">*</span><br />
+com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>shared<span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml<br />
+com.thebigbrainscompany.www<span style="color: #000000; font-weight: bold;">/</span>releases<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">20140718184541</span><span style="color: #000000; font-weight: bold;">/</span>app<span style="color: #000000; font-weight: bold;">/</span>config<span style="color: #000000; font-weight: bold;">/</span>parameters.yml</div></td></tr></tbody></table></div>
+<p>Pour finir,<br />
+Une alternative qui fera de vous un vrai barbu.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">find</span> . <span style="color: #000000; font-weight: bold;">|</span> <span style="color: #c20cb9; font-weight: bold;">xargs</span> <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #ff0000;">'The Big Brains Company'</span> <span style="color: #660033;">-sl</span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/linux-trouver-les-fichiers-contenant-string/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Recherche développeur PHP5 / ZEND &#8211; Paris</title>
+		<link>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/</link>
+		<comments>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/#comments</comments>
+		<pubDate>Thu, 31 Mar 2011 12:29:38 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Konbini]]></category>
+		<category><![CDATA[Annonce]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[CDI]]></category>
+		<category><![CDATA[Embauche]]></category>
+		<category><![CDATA[Emplois]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[R&D]]></category>
+		<category><![CDATA[Recherche]]></category>
+		<category><![CDATA[Recrutement]]></category>
+		<category><![CDATA[Zend]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1993</guid>
+		<description><![CDATA[L&#8217;équipe de technique de Konbini recrute ! On recherche un développeur passionné avec des compétences avancées sur le Framework Zend &#38; des connaissances sur le Framework Doctrine 1.2 et/ou 2... <a href="http://www.armetiz.info/recherche-developpeur-php5-zend-paris/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.konbini.com"><img alt="logo konbini" src="http://static.konbini.com/images/logo_130_130.gif" class="alignleft" width="130" height="130" /></a>L&#8217;équipe de technique de <a href="https://remixjobs.com/emploi/Developpement/Developpeur-euse-PHP5-MySQL-ZEND-H-F/4698">Konbini recrute</a> !</p>
+<p>On recherche un développeur passionné avec des compétences avancées sur le <strong>Framework Zend</strong> &amp; des connaissances sur le <strong>Framework Doctrine</strong> 1.2 et/ou 2.</p>
+<p>En description de poste, voici l&#8217;annonce officielle : <i>vos principales missions seront le développement continu de l’application métier de Konbini ayant pour finalité de développer un écosystème cohérent autour de l’activité de production, diffusion et monétisation de contenus vidéos. Vous participerez également à l’ingénierie et à la mise en place des services des applications client de la plateforme publique de Konbini.</i>.</p>
+<p>Des connaissances en HTML, XML, CSS &amp; jQuery sont bien évidemment necessaires.</p>
+<p>Nous travaillons beaucoup avec les technologies Adobe sur des projets <strong>ActionScript 3</strong> pure ou <strong>Flex</strong>. Si vous avez des notions sur ces langages, vous serez moins perdu lors de nos discutions en pause café <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>A titre personnel, l&#8217;ambiance chez <a href="http://blog.konbini.com">Konbini</a> est tres agréable et vous changera complètement des <strong>SSII</strong><strong> ou <strong>WebAgency</strong>. Si vous recherchez une aventure qui sorte de l&#8217;ordinaire avec des <strong>projets ambitieux</strong>, contactez nous !</p>
+<p>Lien vers l&#8217;offre <a href="https://remixjobs.com/emploi/Developpement/Developpeur-euse-PHP5-MySQL-ZEND-H-F/4698">RemixJobs</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/recherche-developpeur-php5-zend-paris/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Rechercher une musique en la chantant ou en la murmurant</title>
+		<link>http://www.armetiz.info/rechercher-une-musique-en-la-chantant-ou-en-la-murmurant/</link>
+		<comments>http://www.armetiz.info/rechercher-une-musique-en-la-chantant-ou-en-la-murmurant/#comments</comments>
+		<pubDate>Wed, 11 Mar 2009 12:06:46 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Interactive]]></category>
+		<category><![CDATA[Micro]]></category>
+		<category><![CDATA[Musique]]></category>
+		<category><![CDATA[Recherche]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=951</guid>
+		<description><![CDATA[Recherche de musique à l&#8217;aide de votre voix en chantant ou murmurant, il s&#8217;agit du slogan de midomi, et sa marche ! Enfin, ca marche pas toujours, mais assez souvent.. <a href="http://www.armetiz.info/rechercher-une-musique-en-la-chantant-ou-en-la-murmurant/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><strong>Recherche de musique à l&#8217;aide de votre voix en chantant ou murmurant</strong>, il s&#8217;agit du slogan de <a href="http://www.midomi.com">midomi</a>, et sa marche !<a href="http://www.midomi.com/index.php?action=main.midomi_iphone&amp;from=main.search"><img class="alignright" alt="Midomi iPhone" src="http://static.midomi.com/images/promo-sidebar-iphone.gif" width="146" height="146" /></a></p>
+<p>Enfin, ca marche pas toujours, mais assez souvent pour vous bluffer.<br />
+Le principe est simple, vous avez un micro, une plage de 20 secondes pour chanter, ensuite les chansons qui correspondes s&#8217;affichent en dessous.</p>
+<p>Personnellement j&#8217;ai passé une grosse demi-heure à m&#8217;amuser avec ce petit jouet.<br />
+Vous pouvez chanter des musiques anglaises et françaises, sachant que <a href="http://www.deezer.com/track/1182">Creep</a> et <a href="http://www.deezer.com/track/552362">Le lundi au soleil</a> fonctionnent à coups sur.</p>
+<p>Quelques conseils tout de même :
+<ul>
+<li>Chantez un échantillon d&#8217;au moins 10 secondes.</li>
+<li>Chantez une personne à la fois sans musique de fond.</li>
+<li><a href="http://www.midomi.com/index.php?action=main.mic_check&amp;from=voice_search_results">Tester votre micro.</a></li>
+</ul>
+<p>A quand l&#8217;utilisation de nos <strong>webcams</strong> pour rechercher un film ?!</p>
+<p><strong>Idée</strong> : Petit concours entre ami, pour une musique donnée amusez-vous à chanter chacun votre tour pour voir lequel de vous obtiendra la meilleur place.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/rechercher-une-musique-en-la-chantant-ou-en-la-murmurant/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Page 404 et moteur de recherche WordPress</title>
+		<link>http://www.armetiz.info/wordpress-erreur-404/</link>
+		<comments>http://www.armetiz.info/wordpress-erreur-404/#comments</comments>
+		<pubDate>Mon, 22 Sep 2008 19:46:16 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Wordpress]]></category>
+		<category><![CDATA[404]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Recherche]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=317</guid>
+		<description><![CDATA[Par défaut, WordPress génère une page des plus sobre suite à l&#8217;erreur 404. Lorsque j&#8217;étais sous Drupal, j&#8217;utilisais Search 404. Un module qui permet d&#8217;effectuer une recherche à partir des.. <a href="http://www.armetiz.info/wordpress-erreur-404/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Par défaut, WordPress génère une page des plus sobre suite à l&#8217;erreur 404.</p>
+<p>Lorsque j&#8217;étais sous <strong>Drupal</strong>, j&#8217;utilisais <a href="http://drupal.org/node/26010">Search 404</a>. Un module qui permet d&#8217;effectuer une recherche à partir des mots clés de l&#8217;URL.</p>
+<p>Tout fraîchement arrivé sous WP je trouve <a href="http://www.askapache.com/seo/404-google-wordpress-plugin.html">AskApache Google 404</a> comme étant &#8220;The must have&#8221;.</p>
+<p><a href="http://www.upland-ds.com/error_404.jpg"><img src="http://www.armetiz.info/wp-content/uploads/2008/09/error_404.jpg" alt="" width="126" height="132" class="alignright size-full wp-image-323" /></a></p>
+<p>Je ne sais pas vous, mais d&#8217;après mes statistiques 90% des erreurs 404 sont du à une mauvaise indexation de Google.<br />
+<a href="http://www.askapache.com/seo/404-google-wordpress-plugin.html">AskApache Google 404</a> propose d&#8217;afficher sur votre site, le résultat de la recherche que Google produit en fonction des mots clés de l&#8217;URL.<br />
+Dans mon cas, strictement aucun intérêt. Effectuer une boucle d&#8217;affichage sur des pages inexistantes n&#8217;a aucun sens.</p>
+<p>Le seul moyen d&#8217;afficher des articles dont je suis sur de l&#8217;existence, c&#8217;est de passer par le moteur de recherche interne à WP.<br />
+Je vous l&#8217;accorde que je perds la pertinence des requêtes Google, mais au moins les liens seront valides.</p>
+<p>Voici donc le code à mettre dans le fichier 404.php (&#8220;Admin -&gt; Apparence -&gt; Éditeur de page&#8221;)</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Petite explication :</p>
+<ul>
+<li>On récupère les paramètres de l&#8217;url</li>
+<li>On remplace &#8221; / &#8211; _&#8221; par &#8220;+&#8221; qui est le symbole AND entre deux expressions recherchées sous WordPress.</li>
+<li>On affiche brute de pomme le résultat qui aurai été effectué de manière manuelle.</li>
+</ul>
+<p>Avis aux amateurs de solution plus élégante.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/wordpress-erreur-404/feed/</wfw:commentRss>
+		<slash:comments>9</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.018 seconds using apc
+Object Caching 612/623 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:20 by W3 Total Cache -->

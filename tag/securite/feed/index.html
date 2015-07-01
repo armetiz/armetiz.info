@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Sécurité</title>
+	<atom:link href="http://www.armetiz.info/tag/securite/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Intégrité md5</title>
+		<link>http://www.armetiz.info/integrite-md5/</link>
+		<comments>http://www.armetiz.info/integrite-md5/#comments</comments>
+		<pubDate>Fri, 03 Aug 2012 08:22:43 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Hash]]></category>
+		<category><![CDATA[Intégrité]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[MD5]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2555</guid>
+		<description><![CDATA[Pour vérifier l&#8217;intégrité de vos fichiers, il faut enregistrer leur état à un instant T et vérifier cet été à un instant T+1. Pour cela, le plus simple est de.. <a href="http://www.armetiz.info/integrite-md5/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pour vérifier l&#8217;intégrité de vos fichiers, il faut enregistrer leur état à un <strong>instant T</strong> et vérifier cet été à un <strong>instant T+1</strong>.<br />
+Pour cela, le plus simple est de réaliser un hash de chacun des fichiers, et de vérifier ce hash régulièrement.</p>
+<p>Récupérer un <a href="http://fr.wikipedia.org/wiki/MD5">hash md5</a> de l&#8217;ensemble des fichiers d&#8217;un répertoire. Il s&#8217;agit ici de la prise de référence.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">find tld.domain.www/ -type f -print0 | xargs -0 md5sum &gt;&gt; tld.domain.www.md5</div></td></tr></tbody></table></div>
+<p>Pour vérifier l&#8217;intégrité de vos fichiers par rapport à votre référence.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">md5sum -c tld.domain.www.md5 | grep -v &quot;OK&quot;</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/integrite-md5/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>CentOS 6 &#8211; Varnish &amp; MaxMind GeoIP</title>
+		<link>http://www.armetiz.info/centos-6-varnish-geoip/</link>
+		<comments>http://www.armetiz.info/centos-6-varnish-geoip/#comments</comments>
+		<pubDate>Tue, 06 Mar 2012 10:10:27 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[GeoIP]]></category>
+		<category><![CDATA[Header]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[HTTPS]]></category>
+		<category><![CDATA[Infrastructure]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[MaxMind]]></category>
+		<category><![CDATA[Module]]></category>
+		<category><![CDATA[Pays]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Système]]></category>
+		<category><![CDATA[Varnish]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2202</guid>
+		<description><![CDATA[Nous allons voir comment déporter le système de géo-localisation IP sur Varnish. L&#8217;objectif final est de permettre à vos backends de récupérer le Pays de l&#8217;utilisateur au sein de la.. <a href="http://www.armetiz.info/centos-6-varnish-geoip/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/12/centos1.png"><img src="http://www.armetiz.info/files/2011/12/centos1.png" alt="centos" width="128" height="128" class="alignright size-full wp-image-2188" /></a>Nous allons voir comment déporter le système de <strong>géo-localisation IP</strong> sur Varnish.<br />
+L&#8217;objectif final est de permettre à vos backends de récupérer le Pays de l&#8217;utilisateur au sein de la requête HTTP.</p>
+<p>Par défault, Varnish n&#8217;intègre pas de système de géo-localisation par IP, en revanche il existe quelques plugins qui permettent l&#8217;utilisation de <a href="http://www.maxmind.com/app/c">GeoIP de MaxMind</a>.</p>
+<p>Voici les parties de l&#8217;article :</p>
+<ul>
+<li>Installation de Varnish</li>
+<li>Installation de GeoIP pour Varnish</li>
+<li>Configuration du Varnish Module</li>
+<li>Configuration de SELinux</li>
+</ul>
+<p>A noter que nous avons opter pour le <a href="https://www.varnish-cache.org/docs/3.0/reference/vmod.html">VMOD</a> <a href="https://github.com/leed25d/geoip-vmod">Geoip-vmod par leed25d</a>. Contrairement aux autres plugins, celui-ci ne travail pas le header HTTP de manière autonome. Ce sera à vous de le faire, et grâce à cela vous allez pouvoir choisir comment&#8230;</p>
+<h3>Varnish</h3>
+<p>Pour compiler le VMOD, il vous faudra récupérer les sources de Varnish et les compiler même si vous choisissez l&#8217;installation par YUM.<br />
+De mon coté, je n&#8217;utilise pas en production la version que je compile mais la version provenant du dépot <a href="https://www.varnish-cache.org/">varnish-cache.org</a>. A vous de voir.</p>
+<p>Commençons par l&#8217;installation de Varnish via YUM (cf. <a href="https://www.varnish-cache.org/installation/redhat">Doc officielle</a>):</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">rpm <span style="color: #660033;">--nosignature</span> <span style="color: #660033;">-i</span> http:<span style="color: #000000; font-weight: bold;">//</span>repo.varnish-cache.org<span style="color: #000000; font-weight: bold;">/</span>redhat<span style="color: #000000; font-weight: bold;">/</span>varnish-<span style="color: #000000;">3.0</span><span style="color: #000000; font-weight: bold;">/</span>el5<span style="color: #000000; font-weight: bold;">/</span>noarch<span style="color: #000000; font-weight: bold;">/</span>varnish-release-<span style="color: #000000;">3.0</span>-<span style="color: #000000;">1</span>.noarch.rpm<br />
+<span style="color: #c20cb9; font-weight: bold;">yum install</span> varnish</div></td></tr></tbody></table></div>
+<p>Pour compiler Varnish nous allons avoir besoin de quelques outils et des sources.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> pcre-devel <span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> curl <span style="color: #660033;">-o</span> varnish-source.tar.gz http:<span style="color: #000000; font-weight: bold;">//</span>repo.varnish-cache.org<span style="color: #000000; font-weight: bold;">/</span>source<span style="color: #000000; font-weight: bold;">/</span>varnish-3.0.2.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-xvzf</span> varnish-source.tar.gz</div></td></tr></tbody></table></div>
+<p>On lance la compilation de Varnish.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> varnish-3.0.2<span style="color: #000000; font-weight: bold;">/</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span></div></td></tr></tbody></table></div>
+<p>Normalement, Varnish a été compilé dans votre repertoire <strong>$HOME/varnish-3.0.2/</strong>.</p>
+<h3>GeoIP VMOD</h3>
+<p>On récupère les sources sur <a href="https://github.com/leed25d/geoip-vmod">github</a>.</p>
+<p>Après l&#8217;installation de quelques outils dont GeoIP, on lance la compilation du VMOD.<br />
+Attention, pour les version 32Bits utiliser <strong>VMODDIR=/usr/lib/varnish/vmods/</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">yum install</span> <span style="color: #c20cb9; font-weight: bold;">unzip</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> autoinstall libtool geoip geoip-devel<br />
+<span style="color: #c20cb9; font-weight: bold;">unzip</span> leed25d-geoip-vmod-<span style="color: #7a0874; font-weight: bold;">&#91;</span>REVISION<span style="color: #7a0874; font-weight: bold;">&#93;</span>.zip<br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> leed25d-geoip-vmod-<span style="color: #7a0874; font-weight: bold;">&#91;</span>REVISION<span style="color: #7a0874; font-weight: bold;">&#93;</span><br />
+.<span style="color: #000000; font-weight: bold;">/</span>autogen.sh<br />
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #007800;">VARNISHSRC</span>=<span style="color: #007800;">$HOME</span><span style="color: #000000; font-weight: bold;">/</span>varnish-3.0.2<span style="color: #000000; font-weight: bold;">/</span> <span style="color: #007800;">VMODDIR</span>=<span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>lib64<span style="color: #000000; font-weight: bold;">/</span>varnish<span style="color: #000000; font-weight: bold;">/</span>vmods<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>Suite à l&#8217;installation Varnish, penser à ouvrir votre firewall.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/sysconfig/iptables</span><br />
+<span style="color: #660033;">-A</span> INPUT <span style="color: #660033;">-m</span> tcp <span style="color: #660033;">-p</span> tcp <span style="color: #660033;">--dport</span> <span style="color: #000000;">80</span> <span style="color: #660033;">-j</span> ACCEPT</div></td></tr></tbody></table></div>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">service iptables restart</div></td></tr></tbody></table></div>
+<p>De même, il faut configurer Varnish pour écouter sur le <strong>port 80</strong> à la place du <strong>6081</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/sysconfig/varnish&lt;/strong&gt;</span><br />
+<span style="color: #007800;">VARNISH_LISTEN_PORT</span>=<span style="color: #000000;">80</span></div></td></tr></tbody></table></div>
+<p>Ensuite, on va vérifier que l&#8217;on peut lancer Varnish en chargeant le plugin GeoIP.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#/etc/varnish/default.vcl</span><br />
+<span style="color: #666666; font-style: italic;">#Top of file.</span><br />
+import geoip;</div></td></tr></tbody></table></div>
+<p>On va lancer le processus en debug pour voir si tout se passe bien :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">varnishd <span style="color: #660033;">-d</span> <span style="color: #660033;">-f</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>varnish<span style="color: #000000; font-weight: bold;">/</span>default.vcl<br />
+start</div></td></tr></tbody></table></div>
+<p>Si vous n&#8217;avez pas d&#8217;erreur, c&#8217;est une bonne chose. Sinon, vérifier les étapes ci-dessus.</p>
+<p>On va donc pouvoir inclure le pays de l&#8217;utilisateur dans le Header HTTP en suivant l&#8217;exemple de l&#8217;auteur du VMOD</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #339933;">#/etc/varnish/default.vcl</span><br />
+import geoip<span style="color: #339933;">;</span><br />
+<br />
+sub vcl_recv <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP <span style="color: #339933;">=</span> geoip.<span style="color: #202020;">country</span><span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For<span style="color: #009900;">&#41;</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>Maintenant on va pouvoir mettre Varnish en démarrage automatique.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">chkconfig varnish on<br />
+service varnish start</div></td></tr></tbody></table></div>
+<p><strong>Attention:</strong><br />
+Sachant que vous êtes sous CentOS, SELinux est surement activé et bloquera l&#8217;access au fichier de données <strong>/usr/share/GeoIP/GeoIP.dat</strong>. Vous pouvez le désactiver ou aller voir à la fin de l&#8217;article comment le configurer aux petits oignons.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">setenforce <span style="color: #000000;">0</span></div></td></tr></tbody></table></div>
+<p>Et pour finir, un peu de ménage.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-Rf</span> varnish-<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-Rf</span> leed25d-<span style="color: #000000; font-weight: bold;">*</span><br />
+<span style="color: #c20cb9; font-weight: bold;">yum remove</span> pcre-devel <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">unzip</span> <span style="color: #c20cb9; font-weight: bold;">automake</span> autoinstall geoip-devel</div></td></tr></tbody></table></div>
+<h3>Pour aller plus loin</h3>
+<p>Avec la configuration ci-dessus,<br />
+Si un client de France se connecte directement à Varnish, lorsqu&#8217;une requête sera générée pour atteindre vos backends elle contiendra : <strong>X-GeoIP: FR</strong></p>
+<p>Vous pourrez donc récupérer le pays de l&#8217;utilisateur en analysant le contenu de la requête HTTP.<br />
+Il est à noter que GeoIP retourne le code pays &#8220;<strong>AA</strong>&#8221; lorsqu&#8217;il ne parvient pas à faire la détection.</p>
+<p>Voici comment vous pouvez exploiter le contenu du header en PHP :</p>
+<div class="codecolorer-container php blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></div></td><td><div class="php codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000088;">$headers</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/apache_request_headers"><span style="color: #990000;">apache_request_headers</span></a><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">null</span><span style="color: #339933;">;</span><br />
+<br />
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000088;">$headers</span> <span style="color: #339933;">&amp;&amp;</span> <a href="http://www.php.net/is_array"><span style="color: #990000;">is_array</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$headers</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <a href="http://www.php.net/array_key_exists"><span style="color: #990000;">array_key_exists</span></a><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;X-GeoIP&quot;</span><span style="color: #339933;">,</span> <span style="color: #000088;">$headers</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$headers</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">&quot;X-GeoIP&quot;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><br />
+<br />
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #009900; font-weight: bold;">null</span> <span style="color: #339933;">==</span> <span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">||</span> <span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;AA&quot;</span> <span style="color: #339933;">==</span> <span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getDefaultCountry</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><br />
+<br />
+<span style="color: #000088;">$code</span> <span style="color: #339933;">=</span> <a href="http://www.php.net/strtoupper"><span style="color: #990000;">strtoupper</span></a><span style="color: #009900;">&#40;</span><span style="color: #000088;">$code</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Retournons du coté de Varnish.<br />
+Comment les choses vont se passer si vous ajoutez un <strong>Proxy en amont de Varnish</strong>. Par exemple, <a href="http://www.apsis.ch/pound">Pound</a> pour gérer le protocole HTTPS.</p>
+<p>La detection du pays ne fonctionnera plus normalement car la valeur contenu dans le script VCL &#8216;<strong>client.ip</strong>&#8216; correspondra à l&#8217;IP de votre serveur Pound.</p>
+<p>Nous allons donc devoir travailler avec un autre Header HTTP: <a href="http://en.wikipedia.org/wiki/X-Forwarded-For">X-Forwarded-For</a>. Celui-ci permet de conserver l&#8217;historique des différents point de passage d&#8217;une requête HTTP et contient l&#8217;IP du client qui a initié la connection HTTP.</p>
+<p>Lorsque les différents Proxy implementent correctement ce standard, le champs <strong>X-Forwarded-For</strong> contient l&#8217;IP du client, le proxy A, le proxy B, etc.. le tout séparé avec des virgules.</p>
+<p>Voici comment en tenir compte au sein de votre configuration VCL :</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sub vcl_recv <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">restarts</span> <span style="color: #339933;">==</span> <span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">x</span><span style="color: #339933;">-</span>forwarded<span style="color: #339933;">-</span><span style="color: #b1b100;">for</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">+</span> <span style="color: #ff0000;">&quot;, &quot;</span> <span style="color: #339933;">+</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For <span style="color: #339933;">=</span> client.<span style="color: #202020;">ip</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+<br />
+&nbsp; &nbsp; set req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP <span style="color: #339933;">=</span> geoip.<span style="color: #202020;">country</span><span style="color: #009900;">&#40;</span>regsub <span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>Forwarded<span style="color: #339933;">-</span>For<span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;(,.*)&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<p>Maintenant parlons un peu du <strong>système de cache de Varnish</strong>.<br />
+Si vous avez besoin de connaitre le pays de l&#8217;utilisateur, il y a donc fort à parier que le contenu retourné à l&#8217;utilisateur sera different en fonction de son Pays.</p>
+<p>En résumé, pour une URL : <strong>/mon-url</strong>, en fonction du Pays utilisateur le contenu sera different.<br />
+Si on conserve la spécification par défaut de Varnish qui consiste à mettre en cache les données provenant d&#8217;une même URL, vous allez avoir quelques mauvaises surprises.</p>
+<p>Voici comment tenir compte du pays de l&#8217;utilisateur pour gérer les données qui sont mises en cache.</p>
+<div class="codecolorer-container c blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="c codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sub vcl_hash <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; hash_data<span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">url</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; hash_data<span style="color: #009900;">&#40;</span>req.<span style="color: #202020;">http</span>.<span style="color: #202020;">X</span><span style="color: #339933;">-</span>GeoIP<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//...</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span>hash<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span></div></td></tr></tbody></table></div>
+<h3>SELinux</h3>
+<p>Sous Centos, il y a SELinux.<br />
+Si vous n&#8217;êtes pas un expert en <strong>sécurité Linux</strong>. Voici comment faire fonctionner <strong>Varnish &amp; GeoIP</strong> sans désactiver SELinux.<br />
+Le processus Varnish fait parti d&#8217;un contexte SELinux different du fichier GetIP.dat qui est installé avec GeoIP.<br />
+Du coup, nous allons faire un module pour SELinux afin d&#8217;autoriser varnish_t à lire les contextes de type usr_t.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">mkdir</span> ~<span style="color: #000000; font-weight: bold;">/</span>myvarnish; <span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>myvarnish;<br />
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;policy_module(myvarnish, 1.0.0) optional_policy(<span style="color: #780078;">` gen_require(`</span> type varnishd_t; ') files_read_usr_files(varnishd_t) ')&quot;</span> <span style="color: #000000; font-weight: bold;">&gt;</span> myvarnish.te<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #660033;">-f</span> <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>share<span style="color: #000000; font-weight: bold;">/</span>selinux<span style="color: #000000; font-weight: bold;">/</span>devel<span style="color: #000000; font-weight: bold;">/</span>Makefile myvarnish.pp<br />
+semodule <span style="color: #660033;">-i</span> myvarnish.pp</div></td></tr></tbody></table></div>
+<p>Pour le coup, cette partie provient d&#8217;une discussion avec une personne sur #SELinux on <em>freenode</em>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/centos-6-varnish-geoip/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Pound HTTPS 2 HTTP &#8211; Format Certificat</title>
+		<link>http://www.armetiz.info/pound-https-2-http-certificat-pem-format/</link>
+		<comments>http://www.armetiz.info/pound-https-2-http-certificat-pem-format/#comments</comments>
+		<pubDate>Fri, 02 Mar 2012 05:00:34 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Infrastructure]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[HTTPS]]></category>
+		<category><![CDATA[Pound]]></category>
+		<category><![CDATA[Proxy]]></category>
+		<category><![CDATA[SSL]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2224</guid>
+		<description><![CDATA[Au niveau de la configuration, Pound peut prendre un fichier .pem contenant les certificats du serveurs ainsi que des certificats intermédiaires jusqu&#8217;à l&#8217;autorité de certification ROOT. Ce que je ne.. <a href="http://www.armetiz.info/pound-https-2-http-certificat-pem-format/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Au niveau de la configuration, <strong><a href="http://www.apsis.ch/pound/">Pound</a></strong> peut prendre un fichier .pem contenant les <strong>certificats du serveurs</strong> ainsi que des <strong>certificats intermédiaires</strong> jusqu&#8217;à l&#8217;autorité de <strong>certification ROOT</strong>.</p>
+<p>Ce que je ne savais pas et que j&#8217;ai eu beaucoup de mal à trouver, c&#8217;est qu&#8217;il faut inclure la <strong>clé privée du certificat</strong> pour que Pound puisse démarrer.<br />
+Sans cette clé privée, voici l&#8217;erreur que vous pouvez avoir : SSL_CTX_use_PrivateKey_file Error</p>
+<p>Du coups, voici le format à utiliser :</p>
+<blockquote><p>
+&#8212;&#8211;BEGIN PRIVATE KEY&#8212;&#8211;<br />
+Server key (pasted in the new key here)<br />
+&#8212;&#8211;END PRIVATE KEY&#8212;&#8211;</p>
+<p>&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;<br />
+Server certificate<br />
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;</p>
+<p>&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;<br />
+Verisign Intermediate CA (for Extended Validation Certificates)<br />
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;</p>
+<p>&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;<br />
+Verisign Root CA (Self signed)<br />
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;
+</p></blockquote>
+<p>PS : Information trouvée sur une archive Mailing List :<a href="http://www.apsis.ch/pound/pound_list/archive/2007/2007-11/1195693266000">apsis</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/pound-https-2-http-certificat-pem-format/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Générateur de mot de passe</title>
+		<link>http://www.armetiz.info/generateur-password/</link>
+		<comments>http://www.armetiz.info/generateur-password/#comments</comments>
+		<pubDate>Fri, 14 Jan 2011 10:29:27 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Projets]]></category>
+		<category><![CDATA[Generateur]]></category>
+		<category><![CDATA[Installation]]></category>
+		<category><![CDATA[Password]]></category>
+		<category><![CDATA[Projet]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1903</guid>
+		<description><![CDATA[L&#8217;installation de serveur nécessite la saisie de mot de passe. Vous pouvez utiliser le même mot de passe sur l&#8217;ensemble de vos serveurs, mais cela n&#8217;est pas secure du tout... <a href="http://www.armetiz.info/generateur-password/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://password.armetiz.info/"><img src="http://www.armetiz.info/files/2011/01/Capture-d’écran-2011-01-14-à-11.11.031.png" alt="Générateur mot de passe" width="410" height="102" class="aligncenter size-full wp-image-1906" /></a></p>
+<p><strong>L&#8217;installation de serveur</strong> nécessite la saisie de mot de passe. Vous pouvez utiliser le même mot de passe sur l&#8217;ensemble de vos serveurs, mais cela n&#8217;est pas <strong>secure</strong> du tout.</p>
+<p>Afin de vous simplifier la <strong>création de mot de passe complexe</strong>, voici un <a href="http://password.armetiz.info">Générateur de mot de passe.</a><br />
+Celui-ci crée de manière aléatoire des mots de passe de 10 caractères, contenant lettre majuscule, minuscule ainsi que des chiffres. Les symboles ne sont pas utilisés.</p>
+<p>Il n&#8217;y a aucune option possible. L&#8217;intérêt étant d&#8217;avoir rapidement un mot de passe complexe. Les lettres portant à confusion ne sont pas utilisées : <strong>o, O, 0, i, I, l, L</strong>.</p>
+<p><a href="http://password.armetiz.info">Générateur de mot de passe.</a></p>
+<p><strong>Edit 28 Janvier 2011</strong> : En commentaires, <a href="http://www.armetiz.info/generateur-password/#comment-895">Armaury</a> parle du logiciel <strong>pwgen</strong> disponible dans les dépôts officiels des principales distributions.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/generateur-password/feed/</wfw:commentRss>
+		<slash:comments>13</slash:comments>
+		</item>
+		<item>
+		<title>AMF / Zend Authentication using Database</title>
+		<link>http://www.armetiz.info/zend-authentication-database/</link>
+		<comments>http://www.armetiz.info/zend-authentication-database/#comments</comments>
+		<pubDate>Tue, 19 Oct 2010 08:16:06 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[Authentification]]></category>
+		<category><![CDATA[Base de données]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Service]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843</guid>
+		<description><![CDATA[Cet article s&#8217;inscrit à la suite du précèdent billet : Authentification &#38; Autorisation avec Zend AMF. Zend_Amf_Adobe_Auth est une classe livré avec Zend 1.10. Elle peut être utilisée comme service.. <a href="http://www.armetiz.info/zend-authentication-database/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cet article s&#8217;inscrit à la suite du précèdent billet : <a href="http://www.armetiz.info/authentification-autorisation-zend-amf">Authentification &amp; Autorisation avec Zend AMF</a>.</p>
+<p><strong>Zend_Amf_Adobe_Auth</strong> est une classe livré avec Zend 1.10. Elle peut être utilisée comme service d&#8217;authentification pour un serveur <strong>Zend_Amf_Server</strong>. Le soucis, c&#8217;est que cette classe fonctionne conjointement avec un fichier XML réputé statique.</p>
+<p>Voici donc le code d&#8217;une classe qui permet l&#8217;authentification d&#8217;un utilisateur AMF via la base de données.<br />
+Sachant que nous développons cela pour offrir des services AMF, cette classe utilisera la logique métier implémentée au sein des services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Auth_AmfDatabase extends Zend_Amf_Auth_Abstract<br />
+{<br />
+&nbsp; &nbsp; protected $_acl;<br />
+&nbsp; &nbsp; protected $_users = array();<br />
+<br />
+&nbsp; &nbsp; public function __construct()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_acl = new Zend_Acl();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oServiceRole &nbsp; = new Service_Role ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oRoles &nbsp; &nbsp; = $oServiceRole-&amp;gt;fetchAll ( );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; foreach ( $oRoles as $oRole )<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_acl-&amp;gt;addRole ( new Zend_Acl_Role( $oRole-&amp;gt;title ) );<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function getAcl()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return $this-&amp;gt;_acl;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function authenticate()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (empty($this-&amp;gt;_username) ||<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; empty($this-&amp;gt;_password)) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; require_once 'Zend/Auth/Adapter/Exception.php';<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new Zend_Auth_Adapter_Exception('Username/password should be set');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oServiceUser &nbsp; = new Service_User ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oUser&nbsp; &nbsp; &nbsp; = $oServiceUser-&amp;gt;authentication ( $this-&amp;gt;_username, $this-&amp;gt;_password );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; if ( null == $oUser )<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return new Zend_Auth_Result(Zend_Auth_Result::FAILURE,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; null,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('Username and / or Password not found')<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; else<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id = new stdClass();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id-&amp;gt;role = $oUser-&amp;gt;role-&amp;gt;code;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id-&amp;gt;name = $oUser-&amp;gt;username;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return new Zend_Auth_Result(Zend_Auth_Result::SUCCESS, $id);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Le <strong>constructeur</strong> récupère l&#8217;ensemble des rôles existants en base de données pour peupler l&#8217;objet ACL.<br />
+La méthode <strong>authenticate</strong> va vérifier le couple Login / Password, et en cas de succès va retourner un objet <strong>Zend_Auth_Result</strong> contenant lui même un objet standard.<br />
+Cet objet standard doit avoir une propriété <strong>role</strong> et <strong>name</strong>, le <strong>rôle</strong> contiendra l&#8217;identifiant que vous avez définit dans vos autorisations ACL. Le <strong>name</strong> devra contenir le login de votre utilisateur.</p>
+<p>Cette classe a été inspirée par <strong>Zend_Amf_Adobe_Auth</strong>. N&#8217;hésitez pas à l&#8217;adapter pour vos propres besoins.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/zend-authentication-database/feed/</wfw:commentRss>
+		<slash:comments>20</slash:comments>
+		</item>
+		<item>
+		<title>Authentification et Autorisation avec Zend AMF</title>
+		<link>http://www.armetiz.info/authentification-autorisation-zend-amf/</link>
+		<comments>http://www.armetiz.info/authentification-autorisation-zend-amf/#comments</comments>
+		<pubDate>Mon, 05 Jul 2010 08:23:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[AS3]]></category>
+		<category><![CDATA[CRUD]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Server]]></category>
+		<category><![CDATA[Service]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1786</guid>
+		<description><![CDATA[Nous allons voir comment mettre en place l&#8217;authentification et l&#8217;autorisation lorsque l&#8217;on souhaite travailler avec Zend et le protocole AMF. Au niveau des pré-requit, vous devez avoir une architecture Zend.. <a href="http://www.armetiz.info/authentification-autorisation-zend-amf/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Nous allons voir comment mettre en place <strong>l&#8217;authentification</strong> et <strong>l&#8217;autorisation</strong> lorsque l&#8217;on souhaite travailler avec Zend et le protocole AMF.</p>
+<p>Au niveau des pré-requit, vous devez avoir une architecture <strong>Zend et AMF opérationnelle</strong>.<br />
+Aussi, je vous conseils de lire la documentation sur <a href="http://framework.zend.com/manual/fr/zend.auth.introduction.html">Zend_Auth</a> et <a href="http://framework.zend.com/manual/fr/zend.acl.introduction.html">Zend_Acl</a>.<br />
+Vous devez avoir compris la notion de <strong>rôle</strong> et de <strong>ressource</strong>.</p>
+<h3>Objectifs</h3>
+<p>Si vous fournissez des services à travers le réseau, et qu&#8217;ils peuvent avoir un impact sur la cohérence des données, vous vous devez de sécuriser l&#8217;accès à ces services.</p>
+<p>Sécurisé l&#8217;accès signifie restreinte l&#8217;accès, mais aussi chiffrer les communications.<br />
+Nous ne traiterons pas la partie chiffrement des échanges, pour cela je vous laissez chercher de la documentation sur HTTPS.</p>
+<h3>Point de départ</h3>
+<p>Ci-dessous, un exemple de contrôleur Zend offrant des services AMF.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class ServiceController extends Zend_Controller_Action<br />
+{<br />
+&nbsp; &nbsp; public function init()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_helper-&amp;gt;viewRenderer-&amp;gt;setNoRender();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_helper-&amp;gt;layout-&amp;gt;disableLayout();<br />
+&nbsp; &nbsp; }<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; public function amfAction()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; $server = new Zend_Amf_Server();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; //Liste des services<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;Service_User&quot; );<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;Service_Book&quot; );<br />
+&nbsp; &nbsp; $server-&amp;gt;setClass( &quot;ZendAmfServiceBrowser&quot; );<br />
+<br />
+&nbsp; &nbsp; //Mapping des objets PHP avec les objets ActionScript &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; $server-&amp;gt;setClassMap('UserDTO', 'Model_DTO_User');<br />
+&nbsp; &nbsp; $server-&amp;gt;setClassMap('BookDTO', 'Model_DTO_Book');<br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; $server-&amp;gt;setProduction(false);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; ZendAmfServiceBrowser::$ZEND_AMF_SERVER = $server;<br />
+<br />
+&nbsp; &nbsp; echo ($server-&amp;gt;handle());<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Nous avons donc <u>deux services</u>, et <u>deux types d&#8217;objets</u> pouvant être utilisés.</p>
+<p>Vous remarquerez l&#8217;utilisation de <a href="http://www.zamfbrowser.org/">ZamfBrowser</a>, ce service couplé avec une application Adobe AIR permet de travailler facilement avec les services.</p>
+<p>Voici à quoi ressemble les prototypes d&#8217;un de mes services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Service_Book<br />
+{<br />
+&nbsp; &nbsp; public function createBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function readBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function updateBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function deleteBook (Model_DTO_Book $oBook) {}<br />
+&nbsp; &nbsp; public function isRentBy (Model_DTO_User $oUser) {}<br />
+}</div></td></tr></tbody></table></div>
+<blockquote><p>L&#8217;autre service est composé lui aussi des méthodes <strong>CRUD</strong> (Create, Read, Update, Delete), ainsi que d&#8217;autres fonctions métiers.</p></blockquote>
+<p>Sachant que mon application cliente Flash utilise ces services, il est très facile à un utilisateur de découvrir <strong>l&#8217;URI de la passerelle AMF</strong>.<br />
+En l&#8217;état, une personne ayant l&#8217;accès à ma passerelle AMF pourrai utiliser toutes les fonctions de mes services. Ce qui implique qu&#8217;il puisse modifier ma base de données.</p>
+<p><em>Remarquer que si l&#8217;on supprime le service de ZamfBrowser, l&#8217;utilisateur n&#8217;aura pas accès à la liste exhaustive des services. Si vous êtes en production, je vous conseils donc de supprimer ce service pour des raisons de sécurité.</em></p>
+<h3>Mise en place de l&#8217;authentification</h3>
+<p>Nous allons commencer par mettre en place l&#8217;authentification,<br />
+Sachant que nous utilisons un client Flash, il est logique d&#8217;utiliser <strong>Zend_Amf_Adobe_Auth</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$authAdapter = new Zend_Amf_Adobe_Auth(APPLICATION_PATH . '/config/password.xml');<br />
+$server-&amp;gt;setAuth($authAdapter );</div></td></tr></tbody></table></div>
+<p>Avec ces deux lignes, nous avons mis en place l&#8217;authentification au niveau du serveur.<br />
+Il vous reste à définir le fichier password.xml</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">&nbsp;</div></td></tr></tbody></table></div>
+<p>Le fichier password.xml contient les identifiants et les mots de passe des utilisateurs.<br />
+C&#8217;est à ce niveau que vous définissez les affectations d&#8217;identifiants à un rôle.</p>
+<p>Si vous avez besoin de plus de souplesse au niveau de la gestion des identifiants, je vous conseils la lecture de <a href="http://framework.zend.com/manual/fr/zend.auth.adapter.dbtable.html">Authentification avec une table de base de données</a>.</p>
+<p><em>Il est à noter, que si vous ne spécifier aucun identifiant lors de votre connexion au serveur AMF vous serez considéré comme un invité : <strong>Zend_Amf_Constants::GUEST_ROLE</strong></em></p>
+<h3>Mise en place de l&#8217;autorisation</h3>
+<p>Maintenant que nous avons correctement définit l&#8217;authentification, passons à l&#8217;autorisation.<br />
+C&#8217;est maintenant que nous allons donner les autorisations ou refus d&#8217;accès aux services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Avec ces deux lignes, vous avez définit une <strong>Acces Control List</strong>.<br />
+Vous le constatez, aucune autorisation n&#8217;est définit; mais il est important de noter que maintenant, <strong>plus personne n&#8217;a accès à vos services</strong>.</p>
+<p>Pour donner l&#8217;accès à nos deux services à n&#8217;importe qui, nous allons procéder comme suit :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('Service_User') );<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('Service_Book') );<br />
+$acl-&amp;gt;addResource ( new Zend_Acl_Resource('ZendAmfServiceBrowser') );<br />
+<br />
+$acl-&amp;gt;allow (null, 'Service_User');<br />
+$acl-&amp;gt;allow (null, 'Service_Book');<br />
+$acl-&amp;gt;allow (null, 'ZendAmfServiceBrowser);<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Ci-dessus, nous avons une liste explicite des autorisations.<br />
+Si nous avions voulu faire dans l&#8217;implicite, nous aurions procédé ainsi :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+$acl-&amp;gt;allow ();<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p>Pour aller plus loin dans l&#8217;explication, nous allons maintenant définir l&#8217;ensemble de nos autorisations.</p>
+<blockquote><p>Nous souhaitons que le rôle administrateur est accès à tout, et nous souhaitons que les utilisateurs non authentifiés n&#8217;est pas accès aux fonctions de mise à jour.</p></blockquote>
+<p>Rappelez-vous, nous avons vu plus haut que vous étiez connecter avec le rôle invité lorsque vous ne spécifiez aucun identifiant.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$acl = new Zend_Acl();<br />
+<br />
+//Définition les rôles.<br />
+$acl-&amp;gt;addRole ( new Zend_Acl_Role(Zend_Amf_Constants::GUEST_ROLE) );<br />
+<br />
+//Définition des autorisations<br />
+$acl-&amp;gt;allow ();<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;create&quot;);<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;update&quot;);<br />
+$acl-&amp;gt;deny (Zend_Amf_Constants::GUEST_ROLE, null, &quot;delete&quot;);<br />
+<br />
+$server-&amp;gt;setAcl($acl);</div></td></tr></tbody></table></div>
+<p><u>Premièrement,</u><br />
+Nous avons dû définir le rôle invité pour pouvoir travailler ses autorisations.</p>
+<p><u>Deuxièmement,</u><br />
+Nous avons utilisé le principe des listes noires. Si nous avions utilisez un système de liste blanche, nous aurions du définir l&#8217;ensemble des rôles, et l&#8217;ensemble des autorisations.<br />
+C&#8217;est donc en partant du principe que tout le monde a accès à tout, que nous avons fermé les portes aux anonymes.</p>
+<p><u><strong>Explication des fonctions Deny &amp; Allow :</strong></u><br />
+<strong>Zend_Acl::deny</strong> et <strong>Zend_Acl::allow</strong> utilisent les mêmes arguments.<br />
+Le premier paramètre correspond à un rôle, cela ne change pas des ACL Zend classique.<br />
+Le deuxième paramètre correspond à une ressource. Avec Zend AMF, une ressource correspond à un Service.<br />
+Le troisième paramètre correspond ici à la fonction d&#8217;un service AMF.</p>
+<p>Nous avons utiliser <strong>null</strong> au niveau du deuxième paramètre pour dire : <strong>tout les services</strong>.</p>
+<h3>initAcl</h3>
+<p>Ce dernier paragraphe pour vous parlez de mon opposition face aux spécifications de la documentation <a href="http://framework.zend.com/manual/1.10/en/zend.amf.server.html">Zend_AMF_Server</a> :</p>
+<blockquote><p><em>If the ACL object is set, and the class being called defines initAcl() method, this method will be called with the ACL object as an argument. The class then can create additional ACL rules and return TRUE, or return FALSE if no access control is required for this class.</em></p></blockquote>
+<p>En gros, il existe une autre manière de définir les autorisations,<br />
+Si vous avez définit un ACL au niveau de votre Serveur AMF. Ce dernier vérifiera l&#8217;existence d&#8217;une fonction <strong>initAcl</strong> sur les services lorsqu&#8217;ils seront appelés.</p>
+<p>Cette fonction est ce que l&#8217;on appel un <a href="http://fr.wikipedia.org/wiki/Hook_%28informatique%29">Hook</a>, et vous permets de définir les autorisations et refus au sein de la définition même de vos services.<br />
+Autant vous dire que <strong>niveau maintenance et centralisation de l&#8217;information c&#8217;est très moyen</strong>..<br />
+De plus, si l&#8217;on pend l&#8217;exemple de <strong>ZendAmfServiceBrowser</strong>, vous allez devoir modifier la définition de ce service, et cela à chaque fois qu&#8217;il y aura une nouvelle version ?</p>
+<p>Voici un exemple de fonctionnement</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Service_Book<br />
+{<br />
+&nbsp; &nbsp; public function initAcl ($acl)<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'create');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'update');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $acl-&amp;gt;deny('editor', 'Services_Book', 'delete');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return true;<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p><strong>Pour aller plus loin</strong> : Vous trouverez un article dédié à l&#8217;authentification pour Zend AMF Server avec une base de données : <a href="http://www.armetiz.info/zend-authentication-database/">AMF / Zend Authentication using Database</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/authentification-autorisation-zend-amf/feed/</wfw:commentRss>
+		<slash:comments>22</slash:comments>
+		</item>
+		<item>
+		<title>Cours informatique gratuits</title>
+		<link>http://www.armetiz.info/cours-informatique-gratuits/</link>
+		<comments>http://www.armetiz.info/cours-informatique-gratuits/#comments</comments>
+		<pubDate>Fri, 15 May 2009 18:38:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Cours]]></category>
+		<category><![CDATA[Formation]]></category>
+		<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Sécurité]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1121</guid>
+		<description><![CDATA[Ce site regroupe de nombreux supports de cours informatique portant sur divers domaines. Les cours et formations informatiques que vous pourrez trouver ici sont toutes à télécharger gratuitement et sous.. <a href="http://www.armetiz.info/cours-informatique-gratuits/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.polymorphe.org"><img src="http://www.armetiz.info/wp-content/uploads/2009/05/polymorphe.png" alt="polymorphe" width="400" height="80" class="size-full wp-image-1124" /></a></p>
+<blockquote><p>Ce site regroupe de nombreux <strong>supports de cours informatique</strong> portant sur divers domaines. Les cours et formations informatiques que vous pourrez trouver ici sont toutes à <strong>télécharger gratuitement</strong> et sous divers formats :<strong> doc, html, pdf, ps</strong>.</p></blockquote>
+<p>Après la description, voyons le contenu:</p>
+<ul>
+<li><a href="http://www.polymorphe.org/index.php?/Bases-de-donnees/Voir-categorie">Base de données</a>, 58 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Bureautique/Voir-categorie">Bureautique</a>, 9 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Calcul-Scientifique/Voir-categorie">Calcul Scientifique</a>, 12 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Conception/Voir-categorie">Conception</a>, 7 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Divers/Voir-categorie">Divers</a>, 11 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Gestion-de-l-information/Voir-categorie">Gestion de l&#8217;information</a>, 22 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Programmation/Voir-categorie">Programmation</a>, 48 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Reseaux/Voir-categorie">Réseaux</a>, 38 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Statistiques/Voir-categorie">Statistiques</a>, 8 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Securite/Voir-categorie">Sécurité</a>, 23 fichiers</li>
+<li><a href="http://www.polymorphe.org/index.php?/Systemes-d-exploitation/Voir-categorie">Systèmes d&#8217;exploitation</a>, 28 fichiers</li>
+</ul>
+<p>Soit 264 fichiers le 15 Mai 2009. Cela ne représente pas une si grande base de documents par rapport à <a href="http://ocwfinder.com/">OpenCourseWare</a> (cf: <a href="http://fr.wikipedia.org/wiki/OpenCourseWare">Wikipédia</a>); mais quand même, tout les <strong>supports de cours sont en Françai</strong>s ce qui peut être très appréciable.</p>
+<p>PS: <a href="http://www.polymorphe.org/index.php?/component/option,com_docmanrss/id,1/lang,fr/">RSS des derniers documents</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/cours-informatique-gratuits/feed/</wfw:commentRss>
+		<slash:comments>15</slash:comments>
+		</item>
+		<item>
+		<title>Une solution pour afficher un site bloqué</title>
+		<link>http://www.armetiz.info/solution-afficher-site-bloque-proxy/</link>
+		<comments>http://www.armetiz.info/solution-afficher-site-bloque-proxy/#comments</comments>
+		<pubDate>Tue, 24 Feb 2009 12:30:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Consultation]]></category>
+		<category><![CDATA[Proxy]]></category>
+		<category><![CDATA[Restriction]]></category>
+		<category><![CDATA[Sécurité]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=906</guid>
+		<description><![CDATA[Découvert dans les commentaires de Korben.info qui demande à ses visiteurs une solution pour que son site puisse être consulté par les entreprises qui le blacklist. Picidae propose d&#8217;afficher une.. <a href="http://www.armetiz.info/solution-afficher-site-bloque-proxy/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/wp-content/uploads/2009/02/armetiz.png"><img src="http://www.armetiz.info/wp-content/uploads/2009/02/armetiz-150x150.png" class="alignright" alt="screenshot armetiz" width="150" height="150" /></a>Découvert dans <a href="http://www.korben.info/free-korben.html#comment-56815">les commentaires</a> de Korben.info qui demande à ses visiteurs une solution pour que son site puisse être consulté par les entreprises qui le <a href="http://www.korben.info/free-korben.html">blacklist</a>.</p>
+<p><a href="http://pici.picidae.net">Picidae</a> propose d&#8217;afficher <strong>une image d&#8217;un site</strong> que vous souhaitez consulter tout en concevant les liens hypertextes.</p>
+<p>Il semblerai que le serveur prenant la photo soit <strong>hébergé en Suisse</strong>, donc cela peut-être intéressant pour afficher des <strong>informations réservées</strong> aux connexions suisse :p</p>
+<p>Maintenant, il suffit à votre entreprise de bloquer aussi <a href="http://pici.picidae.net">Picidae</a> pour que vous soyez obliger de trouver une autre solution.</p>
+<p><strong>PS</strong> : Grâce à ce site j&#8217;ai pu avoir une <a href="http://www.armetiz.info/wp-content/uploads/2009/02/armetiz.png">jolie photo</a> de l&#8217;ensemble de mon site, du coups le programme <a href="http://www.armetiz.info/prendre-en-photo-une-grande-page-web/">WebKut</a> tombe à l&#8217;eau.</p>
+<p><strong>Edit</strong> : Dans les commentaires, <a href="http://www.armetiz.info/solution-afficher-site-bloque-proxy/#comment-242">raph</a> nous donne un lien pour <a href="http://dev.picidae.net/dev/wiki/InstallationInstructions">monter son propre serveur</a> et donc feinter encore plus votre administration ! Le mal est en vous comme en moi, j&#8217;en suis sûr :p</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/solution-afficher-site-bloque-proxy/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Et si monster.com se faisait pirater ?</title>
+		<link>http://www.armetiz.info/base-donne-monster-pirate-hack/</link>
+		<comments>http://www.armetiz.info/base-donne-monster-pirate-hack/#comments</comments>
+		<pubDate>Wed, 28 Jan 2009 12:16:49 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Amazon]]></category>
+		<category><![CDATA[Identité Numérique]]></category>
+		<category><![CDATA[Monster]]></category>
+		<category><![CDATA[Usurpation]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=755</guid>
+		<description><![CDATA[Divulgation de vos mots de passe personnels à cause d'un manque de professionnalisme des services IT de Monster.]]></description>
+				<content:encoded><![CDATA[<p><strong>4.5 Millions de comptes</strong> piratés ? Des <strong>mots de passe stockés en clair</strong> ? Une identité numérique en péril ? Un scénario catastrophe qui rappelle <a href="http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/">l&#8217;histoire d&#8217;anna</a>.</p>
+<p><a href="http://media.monster.com/mm/redux/logo/FRFR_298x76.gif"><img alt="Logo monster" src="http://media.monster.com/mm/redux/logo/FRFR_298x76.gif" width="298" height="76" class="alignright" /></a>Le problème, c&#8217;est qu&#8217;il ne s&#8217;agit pas d&#8217;une histoire mais d&#8217;un fait.<br />
+Monster.com s&#8217;est fait pirater sa base de donnée contenant &#8211; juste &#8211; 4.5 Millions d&#8217;utilisateurs ainsi que les mots de passe associés.<br />
+Cette actualité a été vu sur le site d&#8217;un <a href="http://sid.rstack.org/blog/index.php/319-oops-i-did-it-again">expert en sécurité</a> qui pète un câble face à l&#8217;incompétence des DSI en matière de sécurité.</p>
+<p><a href="http://aide.monster.fr/besafe/jobseeker/index.asp">Monster s&#8217;explique</a> :</p>
+<blockquote><p>Nous avons récemment appris qu’il y a eu un accès illégal à notre base de données et que certaines informations de contact et de compte ont été prises, notamment des <strong>identifiants utilisateur</strong> et <strong>des mots de passe</strong>, des <strong>adresses emails</strong>, des noms, numéros de téléphone et certaines données démographiques basiques. L’information ainsi collectée <strong>ne comprend pas de CV</strong>. Monster ne recueille généralement pas – et l’information collectée ne contient pas – de données sensibles telles que des numéros de <strong>sécurité sociale</strong> ou des <strong>données bancaires</strong>.</p></blockquote>
+<p>Seuls les identifiants, mots de passe et email on été volés, vos CV sont sains et saufs donc aucun risque.</p>
+<p><a href="http://www.armetiz.info/wp-content/uploads/2009/01/navamazonlogofooter_v28243280_.gif"><img src="http://www.armetiz.info/wp-content/uploads/2009/01/navamazonlogofooter_v28243280_.gif" alt="Logo amazon" width="100" height="28" class="size-full wp-image-766 alignleft" /></a>Quelqu&#8217;un devrait peut-être expliquer aux DSI que 90% des personnes utilisent le même mot de passe sur tout les sites à authentification.<br />
+Et que d&#8217;autres sites comme <a href="http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/">Amazon</a> qui ont une politique de sécurité digne d&#8217;un enfant peuvent fournir des informations très confidentielles : Carte Bleu / Cryptogramme &#8230;</p>
+<p>Rappelons que les problèmes de sécurité informatique sont à deux niveaux : utilisateur final et administrateur.<br />
+Alors que les règles de sécurité sur les mots de passe complexes commencent à se répandre, si les administrateurs ne respectent pas les règles de sécurité élémentaires le Web sera encore et toujours un lieu <strong>unsecure</strong>.</p>
+<p>De plus aucune excuse vis-à-vis des utilisateurs.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/base-donne-monster-pirate-hack/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Phishing Hotmail, Gmail, Yahoo &#8211; Attaque de Kevin</title>
+		<link>http://www.armetiz.info/attaque-phishing-hotmail-gmail-yahoo/</link>
+		<comments>http://www.armetiz.info/attaque-phishing-hotmail-gmail-yahoo/#comments</comments>
+		<pubDate>Wed, 10 Dec 2008 21:55:49 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Attaque]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[Kévin]]></category>
+		<category><![CDATA[Phishing]]></category>
+		<category><![CDATA[Protection]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=572</guid>
+		<description><![CDATA[Cela fait quelques semaines qu&#8217;un nouveau contact MSN s&#8217;est ajouté à notre carnet d&#8217;adresse, nous ne le connaissons pas, et nous n&#8217;y portons pas d&#8217;attention spécifique. Quelques jours après, ce.. <a href="http://www.armetiz.info/attaque-phishing-hotmail-gmail-yahoo/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cela fait quelques semaines qu&#8217;un nouveau contact MSN s&#8217;est ajouté à notre carnet d&#8217;adresse, nous ne le connaissons pas, et nous n&#8217;y portons pas d&#8217;attention spécifique.<br />
+Quelques jours après, ce contact nous parle, très peu et de manière courtoise.</p>
+<p>Ce n&#8217;est qu&#8217;après plusieurs &#8211; mini &#8211; échanges qu&#8217;il dit avoir des informations personnelles obtenues sur un tchat&#8230; Surpris, on demande quel tchat, et c&#8217;est à ce moment qu&#8217;il nous envoi une URL qui pointe vers la page de connexion Hotmail.</p>
+<p>A première vu, tout semble normal, mais si l&#8217;on regarde l&#8217;url de plus près, on y trouve :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">http://login.live.com.msn-holmail.com/...</div></td></tr></tbody></table></div>
+<p>Et voila comment l&#8217;on devient <strong>victime de <a href="http://fr.wikipedia.org/wiki/Phishing">phishing</a></strong>.</p>
+<p><img alt="" src="http://www.bitcity.it/immagini/news/ora-i-tentativi-di-phishing-arrivano-anche-dalla-r-1.jpg" class="aligncenter" width="150" height="150" /></p>
+<h3>Analyse de la page</h3>
+<p>En utilisant Firebug pour analyser les flux d&#8217;information, on se rend compte que beaucoup d&#8217;information provient du vrai Hotmail &#8211; JS / CSS &#8211; ce qui permet d&#8217;avoir une &#8220;fausse&#8221; page conforme à l&#8217;original et fonctionnel.<br />
+Deux autres URI tapent à l&#8217;œil :</p>
+<ul>
+<li>http://www.50dh.com/rerapid.php</li>
+<li>http://www.waspami.com/</li>
+</ul>
+<p>Grâce à Google et à sa traduction, nous avons pu en déduire que 50dh.com permettait d&#8217;obtenir des accès VPN/Rapidshare/etc. Tandis que Waspami.com permet de générer des pages de phishing pour Hotmail, Yahoo Mail et Gmail.<br />
+D&#8217;une utilisation très simple, il suffit de rentrer un email &#8211; pas forcement valide &#8211; et de choisir la langue. On obtient par la suite l&#8217;URL qui servira pour <a href="http://login.live.com.msn-holmail.com/fr/a3da64bf774eb14fb770675807ee0bfc.php">l&#8217;attaque.</a></p>
+<p>Chaque tentative de connexion est enregistrée par la fausse page, connexion qui échouera forcement et qui renverra vers la vrai page du service . L&#8217;utilisateur n&#8217;y verra donc que du feu, car il aura l&#8217;impression d&#8217;avoir tapé un mauvais mot de passe et ronchonnera sur le temps perdu à le retaper.<br />
+L&#8217;homme malveillant retournera sur l&#8217;URL qu&#8217;il envoi à toutes ses victimes et se connectera avec l&#8217;email qu&#8217;il a utilisé pour générer la page. Il aura ensuite accès à une liste de login, mot de passe et IP.</p>
+<h3>Comment se protéger ?</h3>
+<p><em>Et là c&#8217;est le drame</em>, car je n&#8217;ai trouvé aucun moyen de protection automatique. La seul protection, c&#8217;est le bon sens. Mais aller dire cela à votre grand-mère qui utilise internet depuis 4 mois ?</p>
+<p>Nous avons fait le test avec l&#8217;utilisation d&#8217;<a href="http://www.armetiz.info/alternative-fai-dns-opendns/">openDNS</a> qui est relié avec <a href="http://www.phishtank.com/">PhishTank</a> pour &#8211; justement &#8211; éviter les problèmes de phishing. Mais rien n&#8217;est bloqué, et nous pouvons tomber dans le panneau sans y faire gaffe.<br />
+<a href="http://www.phishtank.com/">PhishTank</a> est un service de protection contre le phishing qui fonctionne sur un principe de blacklist, donc tant que l&#8217;url n&#8217;a pas été ajoutée, elle n&#8217;est pas connue comme néfaste. Donc si le service de phishing est tout nouveau, il n&#8217;est pas référencé.</p>
+<p>Alors qu&#8217;openDNS aurait dû &#8211; à mes yeux &#8211; être la solution la plus efficace, nous pouvons nous demander que faire ?<br />
+Mais nous sommes techniquement impuissant contre cela, la seul solution possible, c&#8217;est l&#8217;éducation des utilisateurs. On y revient toujours, car c&#8217;est la dessus que se base les attaques du type phishing, sur l&#8217;imprudence des utilisateurs.<br />
+Un peu comme en voiture, on a beau mettre des radars, des ralentisseurs, une personne qui souhaite rouler à 180km/h roulera à cette vitesse.. Alors qu&#8217;en rabâchant du plus jeune age, au plus vielle age qu&#8217;il ne faut pas rouler vite, peut-être que là nous aurons des résultats, peut-être même sans radar <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Si l&#8217;attaque n&#8217;a pas fonctionné, c&#8217;est que les conditions étaient suspects. Donc <strong>Au moindre doute, il faut se méfier</strong>.</p>
+<h3>Histoire de l&#8217;article</h3>
+<p>L&#8217;article aurait dû paraitre plus tôt, et lorsqu&#8217;il y a eu la prise de décision sur sa publication, le service de phishing waspami.com n&#8217;existait plus dans son intégralité&#8230; Les liens qui sont données plus haut ne sont donc plus fonctionnels.<br />
+Il est quand même publié pour montrer que cela peut arriver à tout le monde, et pour moi c&#8217;était la première fois.<br />
+Et puis, c&#8217;est quand même de là que m&#8217;est venu l&#8217;inspiration de l&#8217;article sur <a href="http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/">les déboires d&#8217;anna</a> <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>PS : <a href="http://mod-mandy.forumactif.fr/discussions-en-tout-genre-f10/qu-est-ce-qu-un-kevin-t1604.htm">Qu&#8217;est-ce qu&#8217;un Kévin ?</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/attaque-phishing-hotmail-gmail-yahoo/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 8/14 queries in 0.014 seconds using apc
+Object Caching 1946/1980 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:08:27 by W3 Total Cache -->

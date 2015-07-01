@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Tutorial</title>
+	<atom:link href="http://www.armetiz.info/tag/tutorial/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Les bonnes pratiques d&#8217;un serveur LAMP</title>
+		<link>http://www.armetiz.info/bonnes-pratiques-serveur-lamp/</link>
+		<comments>http://www.armetiz.info/bonnes-pratiques-serveur-lamp/#comments</comments>
+		<pubDate>Mon, 04 May 2009 19:27:29 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[CMS]]></category>
+		<category><![CDATA[Conseils]]></category>
+		<category><![CDATA[Infogérance]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Tutorial]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1060</guid>
+		<description><![CDATA[Suite à l&#8217;acquisition d&#8217;un serveur dédié chez OVH pour en faire principalement un serveur LAMP. Nous avons cherché à configurer au mieux notre serveur. Les questions que nous avons eu.. <a href="http://www.armetiz.info/bonnes-pratiques-serveur-lamp/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Suite à l&#8217;acquisition d&#8217;un serveur dédié chez OVH pour en faire principalement un <a href="http://fr.wikipedia.org/wiki/LAMP">serveur LAMP</a>. Nous avons cherché à configurer au mieux notre serveur.</p>
+<p><a href="http://www.armetiz.info/wp-content/uploads/2009/05/debian-logo-portrait.jpg"><img src="http://www.armetiz.info/wp-content/uploads/2009/05/debian-logo-portrait.jpg" alt="debian-logo-portrait" width="105" height="140" class="alignright size-full wp-image-1075" /></a>Les questions que nous avons eu sont du type : &#8220;<strong>Où mettre mes scripts PHP ?</strong>&#8220;, &#8220;<strong>Comment gérer les partitions systèmes ?</strong>&#8220;, &#8220;<strong>Quelles sont les paquets à installer ?</strong>&#8220;, ou encore &#8220;<strong>Comment sécuriser son serveur, et quel niveau de paranoïa avoir ?</strong>&#8220;.</p>
+<p>Dans un soucis de professionnalisme, nous avons souhaité confirmer nos connaissances en utilisant Google, des forums et même des livres (C&#8217;est pour dire !)</p>
+<p>Plusieurs articles verront donc le jour pour répondre à ces questions et par la même occasion <strong>centraliser l&#8217;information</strong>. Voici le plan :</p>
+<ul>
+<li>Système d&#8217;exploitation : GNU/Linux Debian</li>
+<li>Apache</li>
+<li>MySQL</li>
+<li>PHP</li>
+</ul>
+<p><a href="http://www.armetiz.info/wp-content/uploads/2009/05/mysql.jpeg"><img src="http://www.armetiz.info/wp-content/uploads/2009/05/mysql-150x117.jpg" alt="mysql" width="150" height="117" class="alignleft size-thumbnail wp-image-1076" /></a></p>
+<h3>Introduction aux bonnes pratiques LAMP.</h3>
+<p>Les raisons qui nous poussent à sécuriser notre serveur sont évidentes, et l&#8217;utilisation de normes aussi. De nombreuses personnes laissent à désirer la configuration de leur serveur en faisant confiance aux paramètres par défaut. Ce n&#8217;est pas forcement un tord car parfois, il vaut mieux ne rien faire que faire mal. Mais quitte à ne rien faire, prenez un serveur mutualisé ou <a href="http://www.armetiz.info/contact/">demander nous</a> <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br />
+Un serveur en production que l&#8217;on n&#8217;a pas configuré, qui s&#8217;arrête sans raison ou qui ne fonctionne pas correctement peut s&#8217;avérer être un vrai calvaire pour l&#8217;administrateur qui s&#8217;en occupe.</p>
+<h4>On ne sait rien, on a tout à apprendre</h4>
+<p>Commencer par vous dire que vous ne savez rien et vérifier par étape vos connaissances.<br />
+On devient trop facilement un vieux grigou qui croit tout savoir et qui ne fait que des conneries.<br />
+Si l&#8217;on est venu à écrire cette article, c&#8217;est que nous avons commencé par nous dire &#8220;<em>Bon, nous voulons un serveur LAMP, comment procéder ? Je ne suis plus sûr de&#8230;</em>&#8221; Et c&#8217;est d&#8217;ailleurs grâce à ce genre de question que l&#8217;on apprend pleins de nouvelles choses. Car d&#8217;un lien hypertexte à un autre, on en apprend des choses.</p>
+<p>Vraiment, ne soyez sûr de rien, vérifiez toujours à deux fois vos connaissances.</p>
+<h4>Utilisation de machine virtuelle</h4>
+<p>Pensez à avoir une <strong>machine virtuelle ayant le plus de caractéristiques communes avec votre serveur dédié</strong>.<br />
+<a href="http://www.virtualbox.org/"><img src="http://www.armetiz.info/wp-content/uploads/2009/05/virtualbox-140x150.png" alt="virtualbox" width="140" height="150" class="alignright size-thumbnail wp-image-1077" /></a>Lorsque vous souhaitez ajouter un paquet ou faire une modification même la plus simple, effectué là sur votre machine virtuelle.</p>
+<p>Optez pour les mêmes conditions d&#8217;accès au prompt.<br />
+Il est fort probable que vous utilisiez un accès SSH pour vous connecter sur le dédié, faite de même pour votre machine virtuelle. L&#8217;exemple qui donne raison à cette bonne pratique, c&#8217;est l&#8217;ajout d&#8217;une règle au firewall qui bloque l&#8217;accès SSH. Résultat vous n&#8217;avez plus aucun accès à votre serveur dédié et vous devrez dans de nombreux cas réinstaller le système.</p>
+<h4>Ne pas bruler la corde par les deux bouts</h4>
+<p>Commencez par le début, et profitez du temps que vous avez avant de mettre en production pour effectuer vos réglages. Car ce n&#8217;est pas une fois en production qu&#8217;il faudra faire de belles gaffes.<br />
+L&#8217;utilisation d&#8217;une VM &#8211; <strong>V</strong>irtual <strong>M</strong>achine &#8211; est ici mise en avant. Car en production, vous pourrez faire vos testes sur la VM sans risquer d&#8217;avoir des <strong>erreurs 404</strong>.<br />
+De plus, si vous avez installé en parallèle votre dédié et votre VM, vous aurez une configuration réellement identique l&#8217;une pour l&#8217;autre, ce qui vous permettra d&#8217;assurer encore plus au niveau de vos tests.</p>
+<h4>Être à jour</h4>
+<p>Vous pensez que je vais vous parlez de votre machine ? Et bien non, pas encore, cela viendra dans le chapitre approprié sur votre <a href="http://www.armetiz.info/bonnes-pratiqu…serveur-apachebonnes-pratiques-serveur-linux">Système d&#8217;exploitation GNU/Linux</a> <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br />
+Le sujet de cette sous-partie, c&#8217;est vous. Nous avons commencé par dire que vous ne saviez rien. Vous devez donc vous tenir informé sur l&#8217;ensemble des logiciels de votre machine.<br />
+Je ne dit pas que vous devez suivre une formation pour administrateur système expérimenté.<br />
+Mais vous devez au moins faire l&#8217;effort de vous abonner à un flux <strong>RSS sur la sécurité</strong> de votre distribution, de ces nouveaux paquets, des failles sur PHP ou sur les applications hébergées.</p>
+<h4>Postscriptum</h4>
+<p>Les articles ne sont pas encore écrit, si vous souhaitez avoir des explications sur la configuration Linux, Apache, MySQL ou PHP. N&#8217;hésitez pas à le demander dans les commentaires.<br />
+C&#8217;est avant tout pour moi un moyen de mettre au clair mes idées, de savoir comment je vais configurer le serveur et surtout d&#8217;avoir un post-it amélioré.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/bonnes-pratiques-serveur-lamp/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.014 seconds using apc
+Object Caching 305/306 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:21 by W3 Total Cache -->

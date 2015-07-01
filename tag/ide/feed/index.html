@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; IDE</title>
+	<atom:link href="http://www.armetiz.info/tag/ide/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Simple composants avec Flash CS3 et AS3</title>
+		<link>http://www.armetiz.info/simple-composants-avec-flash-cs3-et-as3/</link>
+		<comments>http://www.armetiz.info/simple-composants-avec-flash-cs3-et-as3/#comments</comments>
+		<pubDate>Wed, 24 Dec 2008 08:27:21 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Composant]]></category>
+		<category><![CDATA[IDE]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=620</guid>
+		<description><![CDATA[Étrangement j&#8217;ai toujours eu beaucoup de mal à trouver de la documentation simple pour concevoir des composants en AS3. Surement que je découvre un truc &#8211; presque &#8211; vieux de.. <a href="http://www.armetiz.info/simple-composants-avec-flash-cs3-et-as3/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Étrangement j&#8217;ai toujours eu beaucoup de mal à trouver de la documentation simple pour concevoir des composants en AS3.</p>
+<p>Surement que je découvre un truc &#8211; presque &#8211; vieux de cent ans, mais c&#8217;est tout bête à concevoir.<br />
+Voici donc la démarche à suivre pour construire un MovieClip dans l&#8217;IDE Flash, que le graphiste pourra paramétrer comme bon lui semble via l&#8217;inspecteur de composant de l&#8217;IDE.</p>
+<p><strong>Attention</strong>, ce n&#8217;est qu&#8217;un aspect très léger sur la fabrication de composant, si vous souhaitez en savoir plus sur le sujet, voici un article très complet : &#8220;<a href="http://www.adobe.com/devnet/flash/articles/creating_as3_components.html">Creating ActionScript 3.0 components in Flash</a>&#8221;</p>
+<p>A partir d&#8217;une classe quelconque :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">Class extends MovieClip<br />
+{<br />
+&nbsp; &nbsp; [Inspectable (name=&quot;Autre&quot;, type=&quot;String&quot;)]<br />
+&nbsp; &nbsp; public var autre : String;<br />
+<br />
+&nbsp; &nbsp; [Inspectable (name=&quot;Toto&quot;, type=&quot;String&quot;)]<br />
+&nbsp; &nbsp; public function get toto () : String<br />
+&nbsp; &nbsp; {}<br />
+<br />
+&nbsp; &nbsp; [Inspectable (name=&quot;Toto&quot;, type=&quot;String&quot;)]<br />
+&nbsp; &nbsp; public function set toto (unString : String) : void<br />
+&nbsp; &nbsp; {}<br />
+}</div></td></tr></tbody></table></div>
+<p>Dans l&#8217;IDE, lier le MovieClip à la classe, ensuite sur &#8220;Définition de composant&#8221;, il faut remettre le nom de la classe et valider par &#8220;Ok&#8221;. Votre symbole doit normalement changer d&#8217;apparence.<br />
+Lorsque vous poserez une occurrence sur la scène, dans l&#8217;onglet paramètre vous trouverez deux variables &#8220;Autre&#8221;, et &#8220;Toto&#8221;.</p>
+<p>Pour connaitre les autres valeurs que peut prendre la meta balise Inspectable, voici le site d&#8217;<a href="http://livedocs.adobe.com/flex/201/html/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Book_Parts&amp;file=metadata_141_11.html">Adobe</a>.</p>
+<p>Petit explication, lorsque vous valider votre composant, la classe est analysée par le compilateur. si erreurs il y&#8217;a, elles s&#8217;affichent dans le panneaux des erreurs de compilation.<br />
+Aussi, à chaque modification de votre classe, penser à mettre à jours votre composant.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/simple-composants-avec-flash-cs3-et-as3/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.002 seconds using apc
+Object Caching 333/334 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:17:44 by W3 Total Cache -->

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Production</title>
+	<atom:link href="http://www.armetiz.info/tag/production/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>NodeJS &#8211; Mise en production</title>
+		<link>http://www.armetiz.info/node-js-mise-production-simple/</link>
+		<comments>http://www.armetiz.info/node-js-mise-production-simple/#comments</comments>
+		<pubDate>Tue, 11 Sep 2012 10:07:39 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Système]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Déploiement]]></category>
+		<category><![CDATA[Didacticiel]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[MEP]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[Tutoriel]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2748</guid>
+		<description><![CDATA[La mise en production d&#8217;une application NodeJS est une étape importante dans la vie de votre application. Il existe de nombreuses solutions utilisant forever, upstart, monit ou le script shell.. <a href="http://www.armetiz.info/node-js-mise-production-simple/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>La mise en production d&#8217;une application <a href="http://nodejs.org/">NodeJS</a> est une étape importante dans la vie de votre application.</p>
+<p>Il existe de nombreuses solutions utilisant <a href="https://github.com/nodejitsu/forever">forever</a>, <a href="http://upstart.ubuntu.com/">upstart</a>, <a href="http://mmonit.com/monit/">monit</a> ou le script shell <a href="http://fr.wikipedia.org/wiki/Linux_Standard_Base">LSB</a> personnalisé.<br />
+Aucune de ces solutions ne m&#8217;a convaincu; du coup la solution que je vous propose est la mise en place d&#8217;un script LSB fait en <strong>Javascript</strong>.</p>
+<h3>Pré-requit</h3>
+<p>Pour réaliser correctement ce petit tutoriel, il faut :</p>
+<ul>
+<li>Un utilisateur système &#8220;node&#8221; avec son répertoire personnel: <strong>adduser &#8211;shell /sbin/nologin node</strong></li>
+<li><a href="http://www.armetiz.info/install-nodejs-on-centos/">NodeJS installé</a></li>
+<li>Installer <strong><a href="http://blog.nodejs.org/2011/03/23/npm-1-0-global-vs-local-installation/">globalement</a></strong> le module <a href="https://npmjs.org/package/simple-daemon">simple-daemon</a> : <strong>npm install -g simple-daemon</strong>
+</ul>
+<h3>Exemple d&#8217;application</h3>
+<p>L&#8217;application que nous souhaitons lancer automatiquement au démarrage du serveur est un simple serveur HTTP.</p>
+<p><strong>/home/node/funky-server/funky-server.js</strong></p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #003366; font-weight: bold;">var</span> http <span style="color: #339933;">=</span> require<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'http'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+http.<span style="color: #660066;">createServer</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>req<span style="color: #339933;">,</span> res<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'New client'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; res.<span style="color: #660066;">writeHead</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">200</span><span style="color: #339933;">,</span> <span style="color: #009900;">&#123;</span><span style="color: #3366CC;">'Content-Type'</span><span style="color: #339933;">:</span> <span style="color: #3366CC;">'text/plain'</span><span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; res.<span style="color: #660066;">end</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Hello Funky World<span style="color: #000099; font-weight: bold;">\n</span>'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">listen</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">80</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Server running, listen on port 80'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Cette application a de particulier qu&#8217;elle écoute toujours sur le port 80 et donc qu&#8217;une seule instance ne peut-être exécutée.<br />
+De plus, pour ouvrir un socket sur un port inférieur à 1024, il faut les privileges root.<br />
+Une fois le serveur sur écoute, les privileges <strong>root</strong> ne sont plus nécessaires.</p>
+<h3>Déploiement</h3>
+<p>Vous remarquerez qu&#8217;au sein de l&#8217;application, il n&#8217;y a aucune gestion de l&#8217;utilisateur gérant le processus ou de vérification de l&#8217;unicité de l&#8217;execution.<br />
+Cela sera géré directement par notre <strong>Wrapper</strong> LSB dont voici le contenu.</p>
+<p><strong>/etc/init.d/funky-server.js</strong></p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">#<span style="color: #339933;">!/</span>usr<span style="color: #339933;">/</span>bin<span style="color: #339933;">/</span>env node<br />
+<span style="color: #003366; font-weight: bold;">var</span> daemon <span style="color: #339933;">=</span> require<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'/usr/local/lib/node_modules/simple-daemon'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <br />
+<span style="color: #006600; font-style: italic;">//En fonction de votre système, ce chemin peut-être different</span><br />
+<br />
+daemon.<span style="color: #660066;">simple</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; pidfile <span style="color: #339933;">:</span> <span style="color: #3366CC;">'/var/run/funky-server.pid'</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; logfile <span style="color: #339933;">:</span> <span style="color: #3366CC;">'/var/log/funky-server.log'</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; command <span style="color: #339933;">:</span> process.<span style="color: #660066;">argv</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">3</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; runSync &nbsp; &nbsp; <span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; require <span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;/home/node/funky-server/funky-server.js&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; process.<span style="color: #660066;">setuid</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;node&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Comme vous le remarquez, une fois le require fait, nous changeons l&#8217;utilisateur du processus.</p>
+<p>Rendons le fichier executable.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js</div></td></tr></tbody></table></div>
+<p>Vous pouvez tester</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js start<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js status<br />
+<br />
+curl <span style="color: #660033;">-o</span> <span style="color: #000000; font-weight: bold;">/</span>dev<span style="color: #000000; font-weight: bold;">/</span>null http:<span style="color: #000000; font-weight: bold;">//</span>localhost<span style="color: #000000; font-weight: bold;">/</span><br />
+<span style="color: #c20cb9; font-weight: bold;">tail</span> <span style="color: #000000; font-weight: bold;">/</span>var<span style="color: #000000; font-weight: bold;">/</span>log<span style="color: #000000; font-weight: bold;">/</span>funky-server.log<br />
+<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js stop<br />
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>funky-server.js status</div></td></tr></tbody></table></div>
+<p>Pour ajouter le Wrapper ci-dessus aux scripts de demarrage système, il est préférable de le rendre compatible à votre distribution.</p>
+<p>Sous Linux, il faut rajouter des headers pour être conforme <a href="http://fedoraproject.org/wiki/Packaging:SysVInitScript">SysVInitScript</a> / <a href="http://wiki.debian.org/LSBInitScripts">LSBinitScript Debian</a></p>
+<p>Voici le code complet du script de démarrage.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#!/usr/bin/env node</span><br />
+<span style="color: #666666; font-style: italic;">### BEGIN INIT INFO</span><br />
+<span style="color: #666666; font-style: italic;"># Provides: funky-server</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Start: $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Stop: $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Start: 2 3 4 5</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Stop: 0 1 6</span><br />
+<span style="color: #666666; font-style: italic;"># Short-Description: Start daemon at boot time</span><br />
+<span style="color: #666666; font-style: italic;"># Description: Enable service provided by funky-server.</span><br />
+<span style="color: #666666; font-style: italic;">### END INIT INFO</span><br />
+<br />
+var daemon = require<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">'/usr/local/lib/node_modules/simple-daemon'</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>; <br />
+<span style="color: #000000; font-weight: bold;">//</span>En fonction de votre système, ce chemin peut-être different<br />
+<br />
+daemon.simple<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #7a0874; font-weight: bold;">&#123;</span><br />
+&nbsp; &nbsp; pidfile : <span style="color: #ff0000;">'/var/run/funky-server.pid'</span>,<br />
+&nbsp; &nbsp; logfile : <span style="color: #ff0000;">'/var/log/funky-server.log'</span>,<br />
+&nbsp; &nbsp; <span style="color: #7a0874; font-weight: bold;">command</span> : process.argv<span style="color: #7a0874; font-weight: bold;">&#91;</span><span style="color: #000000;">3</span><span style="color: #7a0874; font-weight: bold;">&#93;</span>,<br />
+&nbsp; &nbsp; runSync &nbsp; &nbsp; : <span style="color: #000000; font-weight: bold;">function</span> <span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span> <span style="color: #7a0874; font-weight: bold;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; require <span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">&quot;/home/node/funky-server/funky-server.js&quot;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; process.setuid<span style="color: #7a0874; font-weight: bold;">&#40;</span><span style="color: #ff0000;">&quot;node&quot;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;<br />
+&nbsp; &nbsp; <span style="color: #7a0874; font-weight: bold;">&#125;</span><br />
+<span style="color: #7a0874; font-weight: bold;">&#125;</span><span style="color: #7a0874; font-weight: bold;">&#41;</span>;</div></td></tr></tbody></table></div>
+<p>Sous Debian &#038; Ubuntu, rajouter les headers suivant pour etre conforme :</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#!/usr/bin/env node</span><br />
+<span style="color: #666666; font-style: italic;">### BEGIN INIT INFO</span><br />
+<span style="color: #666666; font-style: italic;"># Provides: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;funky-server</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Start: &nbsp; &nbsp;$local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Required-Stop: &nbsp; &nbsp; $local_fs $network $syslog</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Start: &nbsp; &nbsp; 2 3 4 5</span><br />
+<span style="color: #666666; font-style: italic;"># Default-Stop: &nbsp; &nbsp; &nbsp;0 1 6</span><br />
+<span style="color: #666666; font-style: italic;"># Short-Description: Start daemon at boot time</span><br />
+<span style="color: #666666; font-style: italic;"># Description: &nbsp; &nbsp; &nbsp; Enable service provided by funky-server.</span><br />
+<span style="color: #666666; font-style: italic;">### END INIT INFO</span></div></td></tr></tbody></table></div>
+<p>On ajoute notre module au système de démarrage.<br />
+Sous RedHat &#038; CentOS</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">chkconfig <span style="color: #660033;">--add</span> funky-server.js</div></td></tr></tbody></table></div>
+<p>Sous Debian &#038; Ubuntu</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">updaterc.d default funky-server.js</div></td></tr></tbody></table></div>
+<h3>Pour aller plus loin</h3>
+<p><img src="http://www.armetiz.info/files/2012/09/logo-developer-github.png" alt="" title="logo-developer-github" width="128" height="128" class="alignleft size-full wp-image-2781" /></a><a href="https://github.com/armetiz/node-simple-daemon">Simple-daemon</a> est un module NodeJS qui est le fork de <a href="https://github.com/frodwith/node-init">node-init</a>. A ce module il manquait une fonction synchrone pour lancer le processus et être parfaitement fonctionnel.<br />
+En effet, basé sur <a href="https://github.com/indexzero/daemon.node">daemon.node</a> qui est un <strong>add-on C</strong> avec une restriction importante : &#8220;all daemonization should happen on the first <a href="http://howtonode.org/understanding-process-next-tick">tick</a> and not as part of an asynchronous action&#8221;.</p>
+<p>Vous pouvez coupler cette solution à <a href="https://github.com/nodejitsu/forever">forever</a> pour que l&#8217;application survive à un crash impromptu.</p>
+<p>Aussi,<br />
+L&#8217;ouverture du serveur HTTP est une <strong>opération asynchrone</strong>, le changement d&#8217;utilisateur apparait après la demande d&#8217;écoute du serveur mais pas forcement après que le serveur soit sur écoute.<br />
+Après lecture du <a href="https://github.com/joyent/node">code NodeJS</a> et de la <a href="https://github.com/joyent/libuv">libuv</a> concernant l&#8217;écoute d&#8217;un serveur HTTP, il me semble que la reservation du socket soit fait dans le même <a href="http://howtonode.org/understanding-process-next-tick">tick</a> que la fonction JS <strong>http.Server::listen()</strong>. Du moins, pour les systèmes Unix.<br />
+Si quelqu&#8217;un est apte à me le confirmer, les commentaires sont là pour.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/node-js-mise-production-simple/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Livre &#8211; Beginning PhoneGap</title>
+		<link>http://www.armetiz.info/livre-beginning-phonegap/</link>
+		<comments>http://www.armetiz.info/livre-beginning-phonegap/#comments</comments>
+		<pubDate>Thu, 19 Apr 2012 07:35:33 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Livres]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[jquery]]></category>
+		<category><![CDATA[Mobile]]></category>
+		<category><![CDATA[PhoneGap]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[Projet]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2302</guid>
+		<description><![CDATA[Beginning PhoneGap, Mobile Web Framework for JavaScript and HTML5 se propose de vous faire découvrir PhoneGap. Ce livre n&#8217;a pas été pour moi un coups de coeur. Vous trouverez une.. <a href="http://www.armetiz.info/livre-beginning-phonegap/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.amazon.fr/Beginning-PhoneGap-Mobile-Framework-JavaScript/dp/1430239034/"><img src="http://www.armetiz.info/files/2012/04/beginning_phonegap1.jpg" alt="beginning_phonegap" width="150" height="150" class="alignleft size-full wp-image-2303" /></a><a href="http://www.amazon.fr/gp/product/1430239034/">Beginning PhoneGap, Mobile Web Framework for JavaScript and HTML5</a> se propose de vous faire découvrir <a href="http://phonegap.com/">PhoneGap</a>.</p>
+<p>Ce livre n&#8217;a pas été pour moi un coups de coeur. Vous trouverez une centaine de pages sur PhoneGap, les autres 200 pages seront sur <a href="http://jquerymobile.com/">jQueryMobile</a>, <a href="http://www.sencha.com/">Sencha</a> ou autres frameworks.</p>
+<p>Du coups, <strong>je ne vous recommande pas</strong> la lecture de ce livre pour découvrir <strong>PhoneGap</strong>.<br />
+Afin d&#8217;aller plus loin, <a href="http://www.kitpages.fr/news">Kitpages</a> m&#8217;a conseillé la lecture de <a href="http://www.amazon.fr/Phonegap-Beginners-Guide-Andrew-Lunny/dp/1849515360/">Phonegap Beginner&#8217;s Guide</a> qui semble être un ouvrage portant sur l&#8217;utilisation de PhoneGap lui meme plus que sur les frameworks qui peuvent améliorer la production de projet via PhoneGap.<br />
+<a href="http://phonegap.com/"><img src="http://www.armetiz.info/files/2012/04/phonegap1.jpg" alt="phonegap" width="130" height="130" class="alignright size-full wp-image-2307" /></a></p>
+<h3>PhoneGap</h3>
+<p>D&#8217;après ce que j&#8217;en ai vu le produit semble très interessant pour de <strong>petit projet</strong>. </p>
+<p>L&#8217;interêt principal étant de pouvoir réaliser rapidement une WebAPP HTML/CSS/JS et compiler sans effort via <a href="https://build.phonegap.com/">PhoneGap Builder</a> pour les principaux acteurs mobiles.</p>
+<p>Les projets un peu <strong>touchy</strong> auront sans doute plus de difficulté à trouver un avantage à l&#8217;utilisation de PhoneGap. </p>
+<p><a href="http://wallbase.cc/wallpaper/903289">Illustration</a> </p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/livre-beginning-phonegap/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Mise en production de Zend Framework sur un serveur mutualisé</title>
+		<link>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/</link>
+		<comments>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/#comments</comments>
+		<pubDate>Fri, 04 Jun 2010 08:06:56 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Zend]]></category>
+		<category><![CDATA[Astuces]]></category>
+		<category><![CDATA[Conseils]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[htaccess]]></category>
+		<category><![CDATA[Mutualisé]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[RewriteRule]]></category>
+		<category><![CDATA[Serveur]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1724</guid>
+		<description><![CDATA[Lorsque l&#8217;on dispose d&#8217;un serveur dédié, la mise en production d&#8217;une application Zend Framework est assez simple; il suffit de modifier le DocumentRoot du VirtualHost. Si l&#8217;on dispose d&#8217;un hébergement.. <a href="http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/06/zend-framework1.png"><img src="http://www.armetiz.info/files/2010/06/zend-framework1.png" alt="Zend Framework Logo" width="185" height="187" class="alignright size-full wp-image-1727" /></a>Lorsque l&#8217;on dispose d&#8217;un serveur dédié, la mise en production d&#8217;une application Zend Framework est assez simple; il suffit de modifier le <strong>DocumentRoot</strong> du <strong>VirtualHost</strong>.</p>
+<p>Si l&#8217;on dispose d&#8217;un hébergement mutualisé, il faut aussi pouvoir proposer à nos visiteurs un accès au site via <strong>www.domain.tld</strong> et non pas www.domain.tld/public/</p>
+<h3>Première solution</h3>
+<p>La première solution, consiste à déplacer le fichier /public/index.php à la racine du domaine et de modifier la définition de la constante <strong>APPLICATION_PATH</strong> de ce même fichier.<br />
+Le seul soucis de cette solution, c&#8217;est que les appels aux ressources de type <strong>CSS</strong> ou <strong>JS</strong> devront être modifiés pour pointer vers www.domain.tld/public/<br />
+Personnellement, je trouve cela complètement nul&#8230;</p>
+<h3>Deuxième solution</h3>
+<p>La deuxième solution &#8211; bien plus élégante &#8211; passe par l&#8217;ajout d&#8217;un .htaccess à la racine du domaine.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">RewriteEngine On<br />
+# Only apply to URLs on this domain<br />
+RewriteCond %{HTTP_HOST} ^(www.)?domain.tld$<br />
+<br />
+# Only apply to URLs that aren't already under folder.<br />
+RewriteCond %{REQUEST_URI} !^/public/<br />
+<br />
+# Don't apply to URLs that go to existing files or folders.<br />
+RewriteCond %{REQUEST_FILENAME} !-f<br />
+RewriteCond %{REQUEST_FILENAME} !-d<br />
+<br />
+# Rewrite all those to insert /folder.<br />
+RewriteRule ^(.*)$ /public/$1<br />
+<br />
+# Also redirect the root folder.<br />
+RewriteCond %{HTTP_HOST} ^(www.)?domain.tld$<br />
+RewriteRule ^(/)?$ public/index.php [L]</div></td></tr></tbody></table></div>
+<p>Là, tout est magique et fonctionne sans <strong>aucune autre modification</strong> de l&#8217;application.<br />
+Pour protéger l&#8217;accès à vos autres répertoires, et principalement <strong>/application</strong> qui contient surement vos <strong>mots de passe BDD</strong> non chiffrés. Rajouter un fichier .htaccess contenant</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">deny from all</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/mise-production-zend-framework-serveur-mutualise/feed/</wfw:commentRss>
+		<slash:comments>19</slash:comments>
+		</item>
+		<item>
+		<title>Enregistrer les sources Flash au format XML</title>
+		<link>http://www.armetiz.info/enregistrer-sources-flash-format-xml/</link>
+		<comments>http://www.armetiz.info/enregistrer-sources-flash-format-xml/#comments</comments>
+		<pubDate>Thu, 22 Apr 2010 08:25:51 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Elearning]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[AIR]]></category>
+		<category><![CDATA[Amélioration]]></category>
+		<category><![CDATA[CS5]]></category>
+		<category><![CDATA[Production]]></category>
+		<category><![CDATA[Tache]]></category>
+		<category><![CDATA[XML]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1671</guid>
+		<description><![CDATA[Adobe Creative Suite 5 va sortir dans les prochains jours, et hormis l&#8217;iPhone packager qui semblait être le cheval de bataille cette année, les autres améliorations sont passées un peu.. <a href="http://www.armetiz.info/enregistrer-sources-flash-format-xml/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2009/12/adobe-lq1.png"><img src="http://www.armetiz.info/files/2009/12/adobe-lq1.png" alt="" width="43" height="72" class="alignleft size-full wp-image-1665" /></a><strong>Adobe Creative Suite 5</strong> va sortir dans les prochains jours, et hormis <strong>l&#8217;iPhone packager</strong> qui semblait être le cheval de bataille cette année, les autres améliorations sont passées un peu à la trappe.</p>
+<p>Sur <a href="http://labs.adobe.com/technologies/flashcs5/">Adobe Labs</a> ont peut trouver les nouveautés de Flash CS5, et sur le nouveau <a href="http://blog.mediabox.fr/flash-pro-cs5-les-nouveautes">blog de mediabox</a> la traduction Française.</p>
+<p>Personnellement, je remarque un point très intéressant : <strong>XML based FLA files</strong>, où encore <strong>Fichiers FLA basés sur le XML</strong>.<br />
+Qu&#8217;est-ce que cela signifie ? Mediabox le définit comme tel :</p>
+<blockquote><p>En enregistrant votre document .fla, vous constaterez dans votre boite de dialogue <strong>la possibilité d’enregistrer</strong> votre travail sous un <strong>format non compressé .xfl</strong>. Vous aurez alors la <strong>création d’un dossier</strong> reprenant la structure de votre document et de votre librairie. Il sera alors facile à des personnes tiers non familières de Flash, de pouvoir modifier le contenu de la librairie, en changeant les textes, les images etc. Le tout sans avoir besoin de ré-ouvrir votre document dans Flash et de chercher où est le contenu à modifier.</p></blockquote>
+<p>Dans tout les cas, cela signifie que nous pourrons accéder à la structure de nos animations sans passer obligatoirement par les <strong>fichiers FLA</strong>, qui sont des fichiers au <strong>format binaire non ouvert</strong>.<br />
+Mais aussi et surtout, nous pourrons indirectement <strong>automatiser certaines tâches</strong> !</p>
+<p>Je prends l&#8217;exemple d&#8217;un <a href="http://www.projet-elearning.com/">projet eLearning</a> où le nombre de FLA dépasse la centaine. Sur chacun de ces FLA il y a des <strong>éléments redondants</strong>.<br />
+Après avoir livré la version de recette au client, celui-ci nous dit qu&#8217;il n&#8217;aime pas la tête du personnage Dupon.<br />
+Ce personnage est sur 80% des animations réalisées. </p>
+<p>Actuellement, plusieurs solutions s&#8217;offre à vous. Vous avez utilisé une <strong>librairie partagée</strong>, il va falloir ré-ouvrir tout les FLA, faire la mise à jour des symboles et re-compiler chaque FLA.<br />
+Si vous n&#8217;avez pas de librairie partagée, il faudra remplacer à la main le symbole du personnage dans chaque FLA et lancer la compilation sur chacun.</p>
+<p>Avec Adobe Flash CS5, il sera possible d&#8217;automatiser la modification d&#8217;un élément sur l&#8217;ensemble des sources. Celle-ci pouvant être enregistrée au format XML, un simple <strong>script PHP</strong> fera l&#8217;affaire.<br />
+Il est déjà possible d&#8217;<strong>automatiser la compilation de FLA</strong>, <a href="http://www.gskinner.com/blog/archives/2004/08/jsfl_fla_batch.html">gSkinner</a> et <a href="http://www.mikechambers.com/blog/2003/11/01/flashcommand-flash-2004-command-line-compiler/">Mike Chambers</a> l&#8217;ont fait. </p>
+<p><a href="http://www.armetiz.info/files/2009/11/adobe_air1.jpg"><img src="http://www.armetiz.info/files/2009/11/adobe_air1.jpg" alt="" width="150" height="150" class="alignright size-full wp-image-1425" /></a>Je n&#8217;ai pas pu tester cette nouvelle version de Flash.<br />
+Il faut donc prendre cela au conditionnel, car il n&#8217;est pas dit que Adobe ai pensé à réaliser un compilateur de fichier SWF à partir de source XML.</p>
+<p>Mais si tout cela s&#8217;avère être exact, il n&#8217;est pas impossible de voir apparaître des applications Adobe AIR permettant de modifier des éléments au sein d&#8217;un groupe de fichier source XML.</p>
+<p>Edit : Valerio Virgillito <strong>Ingénieur chez Adobe</strong> a publié un article concernant le format XFL de Flash CS5 : <a href="http://blog.mencio.com/?p=28">XFL and Live Editing</a>.<br />
+On peut y apprendre des informations intéressantes. Comme le fait que le fichier FLA ne sera plus un fichier binaire fermé, mais un <strong>package de fichier compressé XML</strong>; à la sauce des fichiers Docx surement.<br />
+Mais aussi que les modifications des fichiers composants l&#8217;animation seront automatiquement pris en compte par Flash CS5. Je vous conseils de regarder la <strong>vidéo</strong> de son article pour une meilleur visibilité.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/enregistrer-sources-flash-format-xml/feed/</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.019 seconds using apc
+Object Caching 880/918 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:14:00 by W3 Total Cache -->

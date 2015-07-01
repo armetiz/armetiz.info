@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; SSL</title>
+	<atom:link href="http://www.armetiz.info/tag/ssl/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Pound HTTPS 2 HTTP &#8211; Format Certificat</title>
+		<link>http://www.armetiz.info/pound-https-2-http-certificat-pem-format/</link>
+		<comments>http://www.armetiz.info/pound-https-2-http-certificat-pem-format/#comments</comments>
+		<pubDate>Fri, 02 Mar 2012 05:00:34 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Infrastructure]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[HTTPS]]></category>
+		<category><![CDATA[Pound]]></category>
+		<category><![CDATA[Proxy]]></category>
+		<category><![CDATA[SSL]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=2224</guid>
+		<description><![CDATA[Au niveau de la configuration, Pound peut prendre un fichier .pem contenant les certificats du serveurs ainsi que des certificats intermédiaires jusqu&#8217;à l&#8217;autorité de certification ROOT. Ce que je ne.. <a href="http://www.armetiz.info/pound-https-2-http-certificat-pem-format/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Au niveau de la configuration, <strong><a href="http://www.apsis.ch/pound/">Pound</a></strong> peut prendre un fichier .pem contenant les <strong>certificats du serveurs</strong> ainsi que des <strong>certificats intermédiaires</strong> jusqu&#8217;à l&#8217;autorité de <strong>certification ROOT</strong>.</p>
+<p>Ce que je ne savais pas et que j&#8217;ai eu beaucoup de mal à trouver, c&#8217;est qu&#8217;il faut inclure la <strong>clé privée du certificat</strong> pour que Pound puisse démarrer.<br />
+Sans cette clé privée, voici l&#8217;erreur que vous pouvez avoir : SSL_CTX_use_PrivateKey_file Error</p>
+<p>Du coups, voici le format à utiliser :</p>
+<blockquote><p>
+&#8212;&#8211;BEGIN PRIVATE KEY&#8212;&#8211;<br />
+Server key (pasted in the new key here)<br />
+&#8212;&#8211;END PRIVATE KEY&#8212;&#8211;</p>
+<p>&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;<br />
+Server certificate<br />
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;</p>
+<p>&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;<br />
+Verisign Intermediate CA (for Extended Validation Certificates)<br />
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;</p>
+<p>&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;<br />
+Verisign Root CA (Self signed)<br />
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;
+</p></blockquote>
+<p>PS : Information trouvée sur une archive Mailing List :<a href="http://www.apsis.ch/pound/pound_list/archive/2007/2007-11/1195693266000">apsis</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/pound-https-2-http-certificat-pem-format/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.015 seconds using apc
+Object Caching 303/304 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:15:02 by W3 Total Cache -->

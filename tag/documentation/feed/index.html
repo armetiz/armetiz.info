@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Documentation</title>
+	<atom:link href="http://www.armetiz.info/tag/documentation/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Configuration ASDoc FlexBuilder</title>
+		<link>http://www.armetiz.info/configuration-asdoc-flex-eclipse/</link>
+		<comments>http://www.armetiz.info/configuration-asdoc-flex-eclipse/#comments</comments>
+		<pubDate>Mon, 20 Jul 2009 12:37:39 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[AIR]]></category>
+		<category><![CDATA[ASDoc]]></category>
+		<category><![CDATA[Documentation]]></category>
+		<category><![CDATA[Eclipse]]></category>
+		<category><![CDATA[Flash]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1171</guid>
+		<description><![CDATA[Même si FlashBuilder pointe le bout de son nez, comme que je suis toujours en retard voici un petit mémo pour configurer ASDoc sous FlexBuilder. Sous Eclipse / FlexBuilder: Run.. <a href="http://www.armetiz.info/configuration-asdoc-flex-eclipse/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Même si FlashBuilder pointe le bout de son nez, comme que je suis toujours en retard voici un petit mémo pour configurer <strong>ASDoc sous FlexBuilder.</strong></p>
+<p>Sous Eclipse / FlexBuilder: <strong>Run &gt; External Tools &gt; Open External Tools Dialog&#8230;</strong></p>
+<ul>
+<li>Location: %programfiles%AdobeFlex Builder 3sdks3.3binasdoc.exe</li>
+<li>Working Directory: ${project_loc}</li>
+<li>Arguments: -source-path ./src/ -window-title &#8220;${project_name}&#8221; -main-title &#8220;${project_name}&#8221; -doc-sources &#8220;${project_loc}/src/&#8221;</li>
+</ul>
+<p>Par défaut, la documentation sera dans votre répertoire projet <strong>/asdoc-output</strong></p>
+<p>Aussi, si vous utilisez des librairies qui se croisent pour vos projets, il faudra indiquer à ASDoc où trouver les SWC correspondants. Pour cela <strong>-library-path</strong> fera l&#8217;affaire.<br />
+Pour conserver un lien vers les autres librairies dont Flex, utiliser l&#8217;argument comme suit : -library-path+=&#8221;${workspace_loc}/Project/bin/&#8221;</p>
+<p>PS: Pour le répertoire de ASDoc.exe pensez à utiliser votre version du SDK de Flex, car vous disposez peut-être d&#8217;une version différente de la mienne.<br />
+<img src="http://bp0.blogger.com/_uwXDfjmWSjM/R-P1LCWbh_I/AAAAAAAAAC8/TecO2ro05aY/s320/flex.png" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/configuration-asdoc-flex-eclipse/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.011 seconds using apc
+Object Caching 301/302 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:16 by W3 Total Cache -->

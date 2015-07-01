@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Web</title>
+	<atom:link href="http://www.armetiz.info/tag/web/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Configurer YUI en phase de développement</title>
+		<link>http://www.armetiz.info/configurer-yui-phase-developpement/</link>
+		<comments>http://www.armetiz.info/configurer-yui-phase-developpement/#comments</comments>
+		<pubDate>Wed, 13 Mar 2013 09:00:30 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Développement]]></category>
+		<category><![CDATA[Framework]]></category>
+		<category><![CDATA[Mojito]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[V8]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[Yahoo]]></category>
+		<category><![CDATA[YUI]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2956</guid>
+		<description><![CDATA[Actuellement je suis en pleine découverte du framework Yahoo YUI 3 que je vous recommande vivement ! Comme tout bon novice, je fais des erreurs. Javascript étant un language peu.. <a href="http://www.armetiz.info/configurer-yui-phase-developpement/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Actuellement je suis en pleine découverte du framework <strong>Yahoo YUI 3</strong> que je vous recommande vivement !<br />
+Comme tout bon novice, je fais des erreurs. Javascript étant un language peu bavard les erreurs sont parfois difficiles à diagnostiquer.</p>
+<p><img src="http://www.armetiz.info/files/2013/03/yui-logo.png" alt="yui-logo" width="117" height="52" class="alignright size-full wp-image-2963" />Par défaut,<br />
+Le <a href="http://yuilibrary.com/yui/docs/yui/#loading-modules">chargement des modules YUI</a> est optimisé pour la production, soit <strong>un seul fichier minifié</strong>.</p>
+<p><a href="https://github.com/yui/yui3/issues/513">Dernièrement</a> j&#8217;ai eu une mauvaise utilisation du YUI, et l&#8217;erreur impactait le Framework lui meme sans message explicite&#8230; Du coups, difficile de savoir ce que j&#8217;avais fait de mal car tout le code source de YUI était illisible.</p>
+<p>Bref,<br />
+Voici la configuration YUI à utiliser pour récupérer des modules dont la source est lisible :</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">YUI<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; debug<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; combine<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">false</span><span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; filter<span style="color: #339933;">:</span> <span style="color: #3366CC;">&quot;raw&quot;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>.<span style="color: #003366; font-weight: bold;">use</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;app&quot;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>Y<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #006600; font-style: italic;">//here your Y code</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/configurer-yui-phase-developpement/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Google Analytics &#8211; Callback on JS TrackEvent</title>
+		<link>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/</link>
+		<comments>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/#comments</comments>
+		<pubDate>Wed, 16 Jan 2013 10:44:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Analytics]]></category>
+		<category><![CDATA[Astuce]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[Web]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2890</guid>
+		<description><![CDATA[En utilisant le système Tracking Event de Google Analytics. Parfois, vous avez besoin de vous assurer qu&#8217;un évenement est correctement enregistré par Google avant de réaliser une action. L&#8217;exemple le.. <a href="http://www.armetiz.info/google-analytics-callback-on-js-trackevent/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>En utilisant le système <a href="https://developers.google.com/analytics/devguides/collection/gajs/">Tracking Event</a> de Google Analytics.<br />
+Parfois, vous avez besoin de vous assurer qu&#8217;un évenement est correctement enregistré par Google avant de réaliser une action.<br />
+L&#8217;exemple le plus concret, c&#8217;est le changement de page juste après avoir enregistré un clic sur un lien.</p>
+<p>L&#8217;ensemble des tracking de l&#8217;API Google Analytics sont asynchrones, comment s&#8217;assurer que l&#8217;évenement a bien été enregistré ?</p>
+<p>Voici <strong>deux manières de faire</strong>, l&#8217;une étant plus officielle que l&#8217;autre.</p>
+<p>La premiere méthode utilise la possibilité de mettre des &#8220;<strong>Callback</strong>&#8221; au sein de la Queue (<strong>GAQ : Google Analytics Queue</strong>).<br />
+La documentation <a href="https://developers.google.com/analytics/devguides/collection/gajs/#PushingFunctions">Google Analytics</a> est assez explicite : &#8220;<em>The functions can contain any arbitrary JavaScript and like command arrays, they are executed in the order in which they are pushed onto _gaq</em>&#8220;.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #3366CC;">'_trackEvent'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Test'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Clicked'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;event tracked&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Pour la deuxième méthode &#8211; récupérée sur Stack Overflow &#8211; je n&#8217;ai pas trouvé de validation au sein de la documentation. Mais après quelques tests, elle semble fonctionner.<br />
+On part du principe que la méthode &#8220;push&#8221; de l&#8217;objet &#8220;_gaq&#8221; prends en 2° paramètres une fonction &#8220;callback&#8221; exécutée lorsque la commande a été traité.</p>
+<div class="codecolorer-container javascript blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="javascript codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">_gaq.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #3366CC;">'_trackEvent'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Test'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Clicked'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><br />
+&nbsp; &nbsp; console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;event tracked&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><br />
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div></td></tr></tbody></table></div>
+<p>Bien sûr,<br />
+La deuxième méthode n&#8217;étant pas officielle, bien que plus élégante elle n&#8217;est pas recommandée.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/google-analytics-callback-on-js-trackevent/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Monopoly City Street : Le MMO qui va cartonner</title>
+		<link>http://www.armetiz.info/monopoly-city-street/</link>
+		<comments>http://www.armetiz.info/monopoly-city-street/#comments</comments>
+		<pubDate>Thu, 10 Sep 2009 07:55:18 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Jeu]]></category>
+		<category><![CDATA[MMO]]></category>
+		<category><![CDATA[Monopoly]]></category>
+		<category><![CDATA[No life]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1285</guid>
+		<description><![CDATA[Monopoly &#8211; surement en partenariat avec Google &#8211; va lancer son jeu en ligne. La nouveauté issu du partenariat ? Le plateau sera remplacé par la carte du monde en.. <a href="http://www.armetiz.info/monopoly-city-street/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><strong>Monopoly</strong> &#8211; surement en partenariat avec <strong>Google</strong> &#8211; va lancer son jeu en ligne. La nouveauté issu du partenariat ? Le plateau sera remplacé par la <strong>carte du monde</strong> en utilisant Google Maps.</p>
+<p><img src="http://www.armetiz.info/files/2009/09/File1.png" alt="Monopoly" width="220" height="110" class="aligncenter size-full wp-image-1286" /><br />
+A mon &#8211; humble &#8211; avis, cela va être une sacrée réussite en terme d&#8217;utilisation et de <strong>coups marketing</strong>. Il y a de forte chance pour que cela passe au 20h de TF1 et re-dynamise le jeu historique.</p>
+<blockquote><p>Le but est simple : Jouez pour battre vos amis et le monde en devenant le magnat de l&#8217;immobilier le plus riche du monde avant le 30 janvier 2010.</p></blockquote>
+<p><del datetime="2009-09-10T09:13:06+00:00">Actuellement les <strong>inscriptions</strong> ne sont pas ouvertes.</del> Et il me tarde de devenir ce <strong>riche magnat de l&#8217;immobilier</strong> :p<br />
+Au niveau de l&#8217;inscription, il faut vouloir acheter pour avoir le formulaire. Je pensais trouver un lien au niveau de la connexion&#8230; Pas très ergonomique.</p>
+<p>D&#8217;ailleurs il semblerai que je ne sois pas le seul au vu de certains messages d&#8217;erreurs liés à une surcharge d&#8217;utilisation. &#8220;<em>Euh&#8230; Nos serveurs ne fonctionnent pas. Nous tentons de trouver si leur immeuble a été démoli Il vaut mieux nous accorder quelques minutes et revenir plus tard.</em>&#8221;</p>
+<p>En bref, si vous avez quatre mois de votre vie à claquer dans un jeu en ligne : <a href="http://www.monopolycitystreets.com">Monopoly Street City</a></p>
+<p>Monopoly <strong>utilise à haute dose Google</strong> pour sa communication. Leur <a href="http://blog.monopolycitystreets.com/">blog</a> est sous blogspot, et la <a href="http://docs.google.com/View?id=dfzghp76_3f3s5b6gr">documentation</a> publié avec GDocs.</p>
+<p>PS: On voit que certains rues sont déjà achetées. Ce n&#8217;est pas juste&#8230;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/monopoly-city-street/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Une solution pour afficher un site bloqué</title>
+		<link>http://www.armetiz.info/solution-afficher-site-bloque-proxy/</link>
+		<comments>http://www.armetiz.info/solution-afficher-site-bloque-proxy/#comments</comments>
+		<pubDate>Tue, 24 Feb 2009 12:30:10 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Consultation]]></category>
+		<category><![CDATA[Proxy]]></category>
+		<category><![CDATA[Restriction]]></category>
+		<category><![CDATA[Sécurité]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=906</guid>
+		<description><![CDATA[Découvert dans les commentaires de Korben.info qui demande à ses visiteurs une solution pour que son site puisse être consulté par les entreprises qui le blacklist. Picidae propose d&#8217;afficher une.. <a href="http://www.armetiz.info/solution-afficher-site-bloque-proxy/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/wp-content/uploads/2009/02/armetiz.png"><img src="http://www.armetiz.info/wp-content/uploads/2009/02/armetiz-150x150.png" class="alignright" alt="screenshot armetiz" width="150" height="150" /></a>Découvert dans <a href="http://www.korben.info/free-korben.html#comment-56815">les commentaires</a> de Korben.info qui demande à ses visiteurs une solution pour que son site puisse être consulté par les entreprises qui le <a href="http://www.korben.info/free-korben.html">blacklist</a>.</p>
+<p><a href="http://pici.picidae.net">Picidae</a> propose d&#8217;afficher <strong>une image d&#8217;un site</strong> que vous souhaitez consulter tout en concevant les liens hypertextes.</p>
+<p>Il semblerai que le serveur prenant la photo soit <strong>hébergé en Suisse</strong>, donc cela peut-être intéressant pour afficher des <strong>informations réservées</strong> aux connexions suisse :p</p>
+<p>Maintenant, il suffit à votre entreprise de bloquer aussi <a href="http://pici.picidae.net">Picidae</a> pour que vous soyez obliger de trouver une autre solution.</p>
+<p><strong>PS</strong> : Grâce à ce site j&#8217;ai pu avoir une <a href="http://www.armetiz.info/wp-content/uploads/2009/02/armetiz.png">jolie photo</a> de l&#8217;ensemble de mon site, du coups le programme <a href="http://www.armetiz.info/prendre-en-photo-une-grande-page-web/">WebKut</a> tombe à l&#8217;eau.</p>
+<p><strong>Edit</strong> : Dans les commentaires, <a href="http://www.armetiz.info/solution-afficher-site-bloque-proxy/#comment-242">raph</a> nous donne un lien pour <a href="http://dev.picidae.net/dev/wiki/InstallationInstructions">monter son propre serveur</a> et donc feinter encore plus votre administration ! Le mal est en vous comme en moi, j&#8217;en suis sûr :p</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/solution-afficher-site-bloque-proxy/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Ca va couper !</title>
+		<link>http://www.armetiz.info/ca-va-couper/</link>
+		<comments>http://www.armetiz.info/ca-va-couper/#comments</comments>
+		<pubDate>Wed, 05 Nov 2008 13:05:43 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[Liberté]]></category>
+		<category><![CDATA[Politique]]></category>
+		<category><![CDATA[Video]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=507</guid>
+		<description><![CDATA[Pour ceux qui ne sont pas au courant de la loi en débat : Hadopi. Voici une parodie qui résume assez bien un &#8211; hypothétique &#8211; futur : Salut c&#8217;est.. <a href="http://www.armetiz.info/ca-va-couper/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Pour ceux qui ne sont pas au courant de la loi en débat : <a href="http://fr.wikipedia.org/wiki/Loi_Hadopi">Hadopi</a>.<br />
+Voici une parodie qui résume assez bien un &#8211; hypothétique &#8211; futur :</p>
+<blockquote><p>
+Salut c&#8217;est Dédé. Dédé, de Ca-va-couper.fr !</p>
+<p>J&#8217;ai l&#8217;immense plaisir de t&#8217;annoncer qu&#8217;il y a 72 heures, tu t&#8217;es fait flasher à 9072 kbit/s en train de télécharger, illégalement, de la musique sur Internet.</p>
+<p>Du coup, j&#8217;ai la joie et l&#8217;honneur de procéder à la coupure de ta connexion Internet. Quoi ? T&#8217;es pas content ?
+</p></blockquote>
+<div><b><a href="http://www.dailymotion.com/swf/kU0hzt5DE7HQLdO73p">Episode 1 de Dédé Ca va couper : Loi Création et Internet</a></b><br /><i>par <a href="http://www.dailymotion.com/dedecavacouper">dedecavacouper</a></i></div>
+<p>Vous pouvez retrouver 4 autres épisodes sur <a href="http://www.ca-va-couper.fr">Ca va couper</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/ca-va-couper/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Un terminal pour Google</title>
+		<link>http://www.armetiz.info/terminal-google/</link>
+		<comments>http://www.armetiz.info/terminal-google/#comments</comments>
+		<pubDate>Tue, 09 Sep 2008 18:24:43 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Web]]></category>
+		<category><![CDATA[geek]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[terminal]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=130</guid>
+		<description><![CDATA[Spécialement pour les geeks, un développeur allemand s&#8217;est servit de l&#8217;API Google pour faire un moteur de recherche exotique sous forme de Terminal avec un prompt. Pour voir le résultat,.. <a href="http://www.armetiz.info/terminal-google/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Spécialement pour les geeks, un développeur allemand s&#8217;est servit de l&#8217;API Google pour faire un moteur de recherche exotique sous forme de Terminal avec un prompt.</p>
+<p>Pour voir le résultat, rendez-vous sur <a href="http://www.goosh.org">goosh.org</a>.<br />
+Notre allemand à bien réalisé son œuvre, en effet on peut trouver les classiques de nos shell avec par exemple des pages de man.</p>
+<p>Sous ses allures de gadget, le navigateur est réellement utilisable au quotidien.<br />
+Voyons la liste des commandes &#8211; non exhaustive &#8211; ainsi que leurs utilisations.</p>
+<ul>
+<li>Rechercher sur le net : &#8220;web armetiz&#8221;</li>
+<li>Rechercher une image : &#8220;images armetiz&#8221;</li>
+<li>Rechercher sur Wikipédia : &#8220;wiki polymorphisme&#8221;</li>
+<li>Obtenir la carte géographique d&#8217;un lieu : &#8220;place paris&#8221;</li>
+<li>Spécifier la langue utilisateur : &#8220;setting lang fr&#8221;</li>
+<li>Traduire une expression : &#8220;translate work&#8221;</li>
+<li>Effacer l&#8217;écran : &#8220;clear&#8221;</li>
+<li>Afficher plus de résultat que les 4 par défaut : &#8220;more&#8221;</li>
+</ul>
+<p>Grâce à ces 8 commandes, on peut faire énormément de chose très utiles comme vous vous en doutez.<br />
+Alors, oui on peut le faire avec <a href="http://www.google.fr">google.fr</a> directement, mais sommes-nous des geeks ou pas ?<br />
+Pour les autres commandes de <a href="http://www.goosh.org">Goosh.org</a>, je ne peut que vous renvoyez vers : RTFM <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/terminal-google/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.004 seconds using apc
+Object Caching 638/650 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:08:31 by W3 Total Cache -->

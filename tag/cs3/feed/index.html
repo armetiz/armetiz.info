@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; CS3</title>
+	<atom:link href="http://www.armetiz.info/tag/cs3/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Windows 7 &#8211; Pas d&#8217;accès Internet</title>
+		<link>http://www.armetiz.info/windows-7-pas-acces-internet/</link>
+		<comments>http://www.armetiz.info/windows-7-pas-acces-internet/#comments</comments>
+		<pubDate>Mon, 28 Dec 2009 13:16:23 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Windows]]></category>
+		<category><![CDATA[Adobe]]></category>
+		<category><![CDATA[Bonjour]]></category>
+		<category><![CDATA[bug]]></category>
+		<category><![CDATA[CS3]]></category>
+		<category><![CDATA[DHCP]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Routage]]></category>
+		<category><![CDATA[Seven]]></category>
+		<category><![CDATA[Windows 7]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1483</guid>
+		<description><![CDATA[L&#8217;article a été mis à jours le 14 Avril 2010. Si vous recherchez une entreprise de maintenance informatique proposant des services de qualité pour un faible coût, je vous conseille.. <a href="http://www.armetiz.info/windows-7-pas-acces-internet/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><em>L&#8217;article a été mis à jours le 14 Avril 2010.</em></p>
+<blockquote><p>Si vous recherchez une entreprise de <strong>maintenance informatique</strong> proposant des services de qualité pour un <strong>faible coût</strong>, je vous conseille de contacter <a href="http://www.turnaway.fr">Turnaway.fr</a>.</p></blockquote>
+<p>Lorsque l&#8217;on allume son ordinateur équipé de Windows 7, il arrive que l&#8217;on ne puisse pas accéder à Internet alors que tout les autres ordinateurs fonctionnent parfaitement.<br />
+Les configurations réseaux sont fournies par un <strong>serveur DHCP</strong> correctement configuré et testé depuis longtemps.</p>
+<h3>Les syndromes</h3>
+<p>Des messages : <strong>Réseau non identifié</strong> ou <strong>Pas d&#8217;accès Internet</strong></p>
+<p><a href="http://www.armetiz.info/files/2009/12/taskbar1.png"><img src="http://www.armetiz.info/files/2009/12/taskbar1.png" alt="Pas d&#039;acces Internet" width="295" height="216" class="size-full wp-image-1493" /></a><br />
+<a href="http://www.armetiz.info/files/2009/12/reseau1.png"><img src="http://www.armetiz.info/files/2009/12/reseau1.png" alt="Pas d&#039;acces Internet" width="466" height="140" class="size-full wp-image-1491" /></a></p>
+<p>Ce qui est étrange sur le screenshot ci-dessus, c&#8217;est qu&#8217;il existe deux &#8220;réseaux&#8221; sur une seule connexion physique alors qu&#8217;il s&#8217;agit d&#8217;une configuration réseau standard.</p>
+<h3>L&#8217;explication</h3>
+<p>L&#8217;explication se situe au niveau de la<strong> table de routage IPv4</strong>.<br />
+<a href="http://www.armetiz.info/files/2009/12/route1.png"><img src="http://www.armetiz.info/files/2009/12/route1.png" alt="Table de routage" width="488" height="205" class="aligncenter size-full wp-image-1492" /></a></p>
+<p>En effet, nous remarquons à travers la table de routage qu&#8217;il existe <strong>deux routes par défaut</strong>. A la limite, cela peut arriver, mais avec une métrique identique cela risque de ne pas fonctionner correctement.</p>
+<h3>La solution 1 &#8211; Temporaire</h3>
+<p>Voici la solution que j&#8217;utilise :<br />
+<strong>Supprimer les routes par défaut</strong>; avec un Invité de commande lancé avec les droits d&#8217;administrateur :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">route DELETE 0.0.0.0</div></td></tr></tbody></table></div>
+<p><strong>relancer la découverte DHCP</strong></p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">ipconfig /renew</div></td></tr></tbody></table></div>
+<h3>La solution 2 &#8211; Permanente</h3>
+<p>A ceux qui ont le problème, avez-vous un logiciel Adobe ? Comme <strong>Photoshop CS3</strong> ou <strong>Flash CS3</strong> ? Si oui, nous avons trouver le fautif !<br />
+<strong>Adobe CS3</strong> installe un logiciel de découverte réseau basé sur le protocole <a href="http://en.wikipedia.org/wiki/Bonjour_%28software%29">Bonjour</a> de <strong>Apple</strong>. Celui-ci lui permet de trouver les serveurs <a href="http://www.adobe.com/fr/products/creativesuite/versioncue">Version Cue</a> qui sont à proximités. </p>
+<blockquote><p><em>Pour plus d&#8217;information sur l&#8217;utilisation de Bonjour par Adobe CS3, voici une <a href="http://kb2.adobe.com/cps/400/kb400982.html">TechNote</a> en anglais.</em></p></blockquote>
+<p><a href="http://www.armetiz.info/files/2009/12/adobe-lq1.png"><img src="http://www.armetiz.info/files/2009/12/adobe-lq1.png" alt="" width="43" height="72" class="alignright size-full wp-image-1665" /></a></p>
+<p>Le logiciel est installé sous forme de service ce qui nous permet de le désactiver simplement.</p>
+<p>Pour désactiver le service :</p>
+<ul>
+<li>Aller dans le gestionnaire de service : <strong>services.msc</strong></li>
+<li>Clique droit sur &#8220;la chose&#8221; qui commence par <strong>##Id_String1&#8230;.##</strong>, allez dans les  <strong>propriétés</strong></li>
+<li>Pour <strong>Type de démarrage</strong>, sélectionner <strong>Désactivé</strong></li>
+</ul>
+<p>En redémarrant votre ordinateur, vous ne devriez plus avoir le problème.</p>
+<blockquote><p><em>Nous pouvons signifier que le problème ne touche que les utilisateurs de Adobe CS3 et Windows 7.<br />
+Cela s&#8217;explique par une implémentation différente de Bonjour au sein de Adobe CS4 et supérieur.</em></p></blockquote>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/windows-7-pas-acces-internet/feed/</wfw:commentRss>
+		<slash:comments>24</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.006 seconds using apc
+Object Caching 389/390 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:13:58 by W3 Total Cache -->

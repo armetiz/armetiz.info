@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Réseau</title>
+	<atom:link href="http://www.armetiz.info/category/infrastructure/reseau/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Raspberry Pi &#8211; Proxy HTTP Transparent &amp; Bridge Wifi</title>
+		<link>http://www.armetiz.info/raspberry-pi-proxy-http-transparent-bridge-wifi/</link>
+		<comments>http://www.armetiz.info/raspberry-pi-proxy-http-transparent-bridge-wifi/#comments</comments>
+		<pubDate>Sat, 29 Nov 2014 11:15:06 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Proxy]]></category>
+		<category><![CDATA[raspberry]]></category>
+		<category><![CDATA[Réseaux]]></category>
+		<category><![CDATA[squid]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3517</guid>
+		<description><![CDATA[Suite à l&#8217;installation de notre point d&#8217;accès Wifi sur le Raspberry Pi, passons à l&#8217;installation d&#8217;un serveur Proxy HTTP Transparent pour l&#8217;ensemble des clients Wifi. La distribution Raspbian propose SQUID.. <a href="http://www.armetiz.info/raspberry-pi-proxy-http-transparent-bridge-wifi/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Suite à l&#8217;installation de notre <a href="http://www.armetiz.info/raspberry-pi-point-dacces-wifi/">point d&#8217;accès Wifi sur le Raspberry Pi</a>, passons à l&#8217;installation d&#8217;un serveur <strong>Proxy HTTP Transparent</strong> pour l&#8217;ensemble des clients Wifi.</p>
+<p>La distribution Raspbian propose <strong>SQUID 2.7 stable9</strong>, attention aux différences de configuration entre les versions si vous allez piocher sur Internet.</p>
+<p>Personnellement j&#8217;utilise une clé <strong>USB montée sur le Raspberry</strong> pour stocker les fichiers cache de SQUID. N&#8217;hésitez pas à adapter la procédure à votre environnement.</p>
+<p><strong>Attention</strong>, mon Raspberry est configuré avec un bail DHCP statique IP 192.168.10.45.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get install</span> squid<br />
+<span style="color: #c20cb9; font-weight: bold;">mkdir</span> <span style="color: #000000; font-weight: bold;">/</span>mnt<span style="color: #000000; font-weight: bold;">/</span>usb<span style="color: #000000; font-weight: bold;">/</span>squid<br />
+<span style="color: #c20cb9; font-weight: bold;">chown</span> proxy:proxy <span style="color: #000000; font-weight: bold;">/</span>mnt<span style="color: #000000; font-weight: bold;">/</span>usb<span style="color: #000000; font-weight: bold;">/</span>squid<br />
+cmod <span style="color: #000000;">750</span> <span style="color: #000000; font-weight: bold;">/</span>mnt<span style="color: #000000; font-weight: bold;">/</span>usb<span style="color: #000000; font-weight: bold;">/</span>squid<br />
+<br />
+iptables <span style="color: #660033;">-t</span> nat <span style="color: #660033;">-A</span> PREROUTING <span style="color: #660033;">-i</span> br0 <span style="color: #660033;">-p</span> tcp <span style="color: #660033;">-m</span> tcp <span style="color: #660033;">--dport</span> <span style="color: #000000;">80</span> <span style="color: #660033;">-j</span> DNAT <span style="color: #660033;">--to-destination</span> 192.168.10.45:<span style="color: #000000;">3128</span></div></td></tr></tbody></table></div>
+<p>Petite note sur la partie <strong>iptables</strong>. Tous les flux TCP/80 qui entrent sur l&#8217;interface <strong>br0</strong> seront transmis à SQUID.</p>
+<p>Terminons avec la configuration <strong>SQUID</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#FILE /etc/squid/squid.conf</span><br />
+visible_hostname proxy<br />
+<br />
+acl wozbe src 192.168.10.0<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">24</span><br />
+<br />
+http_port <span style="color: #000000;">3128</span> transparent<br />
+http_access allow wozbe<br />
+http_reply_access allow wozbe<br />
+<br />
+cache_access_log none<br />
+cache_log none<br />
+cache_store_log none<br />
+<br />
+cache_dir ufs <span style="color: #000000; font-weight: bold;">/</span>mnt<span style="color: #000000; font-weight: bold;">/</span>usb<span style="color: #000000; font-weight: bold;">/</span>squid <span style="color: #000000;">1000</span> <span style="color: #000000;">16</span> <span style="color: #000000;">256</span><br />
+cache_mem <span style="color: #000000;">256</span> MB<br />
+maximum_object_size <span style="color: #000000;">10</span> MB</div></td></tr></tbody></table></div>
+<p>Les points que vous devez adapter sont le masque réseau &#8211; ici <strong>192.168.10.0/24</strong> &#8211; et le répertoire de cache &#8211; ici <strong>/mnt/usb/squid</strong>.</p>
+<p>Appliquons la configuration en relançant SQUID.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">service squid restart</div></td></tr></tbody></table></div>
+<p>Si vous avez des retours, n&#8217;hésitez pas via les commentaires.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/raspberry-pi-proxy-http-transparent-bridge-wifi/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Raspberry Pi &#8211; Point d&#8217;accès Wifi</title>
+		<link>http://www.armetiz.info/raspberry-pi-point-dacces-wifi/</link>
+		<comments>http://www.armetiz.info/raspberry-pi-point-dacces-wifi/#comments</comments>
+		<pubDate>Sat, 29 Nov 2014 10:02:57 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[access]]></category>
+		<category><![CDATA[Network]]></category>
+		<category><![CDATA[point]]></category>
+		<category><![CDATA[raspberry]]></category>
+		<category><![CDATA[wifi]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=3508</guid>
+		<description><![CDATA[A la maison la Freebox est un peu isolée par rapport au salon et la connexion Wifi est très mauvaise. Voyons comme utiliser le Raspberry Pi en tant que point.. <a href="http://www.armetiz.info/raspberry-pi-point-dacces-wifi/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>A la maison la Freebox est un peu isolée par rapport au salon et la connexion Wifi est très mauvaise.</p>
+<p>Voyons comme utiliser le <strong>Raspberry Pi</strong> en tant que <strong>point d&#8217;accès WiFi</strong>.</p>
+<p>Au niveau matériel,<br />
+Cela a été réalisé avec un Raspberry Pi B+, et un dongle <a href="http://www.amazon.fr/Edimax-EW-7811UN-Nano-Adaptateur-sans/dp/B003MTTJOY/">Wifi USB Edimax</a>.</p>
+<p>Au niveau logiciel,<br />
+<a href="http://doc.ubuntu-fr.org/hostapd">Hostapd</a> a été utilisé pour créer le point d&#8217;accès Wifi. Comme la version présente dans le repository de <strong>Raspbian</strong> ne supporte par le <strong>Chipset RTL8188</strong> du dongle Edimax, nous compilerons une version adaptée par <a href="https://github.com/jenssegers">Jenssegers</a> qui en a le support.</p>
+<p>Après avoir banché le dongle USB,<br />
+Voici les étapes d&#8217;installation <strong>hostapd</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #c20cb9; font-weight: bold;">apt-get install</span> <span style="color: #c20cb9; font-weight: bold;">gcc</span> <span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> <span style="color: #000000; font-weight: bold;">/</span>tmp<br />
+<span style="color: #c20cb9; font-weight: bold;">wget</span> https:<span style="color: #000000; font-weight: bold;">//</span>github.com<span style="color: #000000; font-weight: bold;">/</span>jenssegers<span style="color: #000000; font-weight: bold;">/</span>RTL8188-hostapd<span style="color: #000000; font-weight: bold;">/</span>archive<span style="color: #000000; font-weight: bold;">/</span>v1.1.tar.gz<br />
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-zxvf</span> v1.1.tar.gz<br />
+<span style="color: #7a0874; font-weight: bold;">cd</span> RTL8188-hostapd-<span style="color: #000000;">1.1</span><span style="color: #000000; font-weight: bold;">/</span>hostapd<br />
+<span style="color: #c20cb9; font-weight: bold;">make</span><br />
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span></div></td></tr></tbody></table></div>
+<p>Maintenant,<br />
+Editons la <strong>configuration réseau</strong> pour créer un bridge entre <strong>eth0 &#038; wlan0</strong></p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#FILE /etc/network/interfaces</span><br />
+<br />
+uto lo<br />
+<br />
+iface lo inet loopback<br />
+<br />
+auto br0<br />
+iface br0 inet dhcp<br />
+bridge_ports eth0 wlan0</div></td></tr></tbody></table></div>
+<p>Passons à la configuration du <strong>point d&#8217;accès Wifi</strong>.</p>
+<div class="codecolorer-container ini blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br /></div></td><td><div class="ini codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">#FILE /etc/hostapd/hostapd.conf<br />
+<br />
+# Basic configuration<br />
+<br />
+<span style="color: #000099;">ssid</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">Wozbe</span><br />
+<span style="color: #000099;">channel</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">1</span><br />
+<span style="color: #000099;">wpa_passphrase</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">TheBigBrainsCompany</span><br />
+<br />
+<span style="color: #000099;">interface</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">wlan0</span><br />
+<span style="color: #000099;">bridge</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">br0</span><br />
+<br />
+# WPA and WPA2 configuration<br />
+<span style="color: #000099;">wmm_enabled</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">0</span><br />
+<br />
+<span style="color: #000099;">macaddr_acl</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">0</span><br />
+<span style="color: #000099;">auth_algs</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">1</span><br />
+<span style="color: #000099;">ignore_broadcast_ssid</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">0</span><br />
+<span style="color: #000099;">wpa</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">3</span><br />
+<br />
+<span style="color: #000099;">wpa_key_mgmt</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">WPA-PSK</span><br />
+<span style="color: #000099;">wpa_pairwise</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">TKIP</span><br />
+<span style="color: #000099;">rsn_pairwise</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">CCMP</span><br />
+<br />
+# Hardware configuration<br />
+<br />
+<span style="color: #000099;">driver</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">rtl871xdrv</span><br />
+<span style="color: #000099;">ieee80211n</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">1</span><br />
+<span style="color: #000099;">hw_mode</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">g</span><br />
+<span style="color: #000099;">device_name</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">RTL8192CU</span><br />
+<span style="color: #000099;">manufacturer</span><span style="color: #000066; font-weight:bold;">=</span><span style="color: #660066;">Realtek</span></div></td></tr></tbody></table></div>
+<p>Je vous laisse adapter la configuration ci-dessus en fonction de votre réseau.</p>
+<p>Ajoutons une configuration permettant le <strong>forward du traffic IPv4</strong>.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap"><span style="color: #666666; font-style: italic;">#FILE /etc/sysctl.conf</span><br />
+<br />
+net.ipv4.ip_forward=<span style="color: #000000;">1</span></div></td></tr></tbody></table></div>
+<p>Une fois l&#8217;ensemble des configurations établies,<br />
+Appliquez les configurations et lancez votre point d&#8217;accès.</p>
+<div class="codecolorer-container bash blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="bash codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">sysctl <span style="color: #660033;">--system</span><br />
+service networking restart<br />
+service hostapd restart</div></td></tr></tbody></table></div>
+<p>Modifier la configuration Wifi de votre périphérique réseau et profitez du Wifi.</p>
+<p>Vous trouverez plus d&#8217;information sur les sites suivants :</p>
+<ul>
+<li><a href="http://doc.ubuntu-fr.org/hostapd">Configuration hostapd</a></li>
+<li><a href="http://jenssegers.be/blog/43/realtek-rtl8188-based-access-point-on-raspberry-pi">Installation hostapd pour Realtek RTL8188</a></li>
+</ul>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/raspberry-pi-point-dacces-wifi/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Beanstalkd &#8211; Job Queuing</title>
+		<link>http://www.armetiz.info/beanstalkd-service-job-queuing/</link>
+		<comments>http://www.armetiz.info/beanstalkd-service-job-queuing/#comments</comments>
+		<pubDate>Wed, 10 Jul 2013 06:00:05 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Programmation]]></category>
+		<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Asynchrone]]></category>
+		<category><![CDATA[Beanstalkd]]></category>
+		<category><![CDATA[IO]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Message]]></category>
+		<category><![CDATA[NodeJS]]></category>
+		<category><![CDATA[RabbitMQ]]></category>
+		<category><![CDATA[ZeroMQ]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2716</guid>
+		<description><![CDATA[Beanstalkd est un service de Job Queuing efficace et surtout simple que je souhaite vous présentez depuis un long moment. Pour rappel, les systèmes de Job Queuing sont utilisés sur.. <a href="http://www.armetiz.info/beanstalkd-service-job-queuing/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://kr.github.io/beanstalkd/">Beanstalkd</a> est un service de <a href="http://en.wikipedia.org/wiki/Job_queue">Job Queuing</a> <strong>efficace et surtout simple</strong> que je souhaite vous présentez depuis un long moment.</p>
+<p>Pour rappel, les systèmes de Job Queuing sont utilisés sur des traitements type <strong>Producteur-Consommateur asynchrone</strong>, ils permettent une évolution horizontale de vos projets.</p>
+<p>Des services réseaux comme <a href="http://kr.github.io/beanstalkd/">Beanstalkd</a>, <a href="http://www.rabbitmq.com/">RabbitMQ</a> ou <a href="http://www.zeromq.org/">ZeroMQ</a> simplifient le transfert de message entre différents serveurs, d&#8217;où l&#8217;évolution horizontale.</p>
+<p>On différencie <strong>Beanstalkd</strong> de ses concurrents par la simplicité d&#8217;utilisation et d&#8217;administration.<br />
+Par exemple, <a href="http://www.rabbitmq.com/">RabbitMQ</a> est un outil de <strong>Message Queuing</strong> très complet mais dont la mise en place, l&#8217;utilisation et l&#8217;administration sont plus difficiles. <a href="http://www.zeromq.org/">ZeroMQ</a> est un protocole Socket à faible latence, il s&#8217;agit d&#8217;un Framework plus que d&#8217;un <strong>service d&#8217;entreprise</strong>.</p>
+<p><strong>Beanstalkd</strong> en plus de sa simplicité, dispose d&#8217;autres avantages :</p>
+<ul>
+<li>Des clients dans de <a href="https://github.com/kr/beanstalkd/wiki/Client-Libraries">nombreux languages</a></li>
+<li>Système de Tubes</li>
+<li>Rapide et peu consommateur de cycle CPU</li>
+<li>Persistance des messages</li>
+<li>Et bien d&#8217;autres&#8230;</li>
+</ul>
+<p>Pour les utilisateurs PHP,<br />
+Vous pouvez utiliser directement la librairie <a href="https://github.com/pda/pheanstalk/">pda/peanstalk</a>.<br />
+Si vous êtes développeur <strong>Symfony 2</strong>, <a href="https://github.com/armetiz/LeezyPheanstalkBundle">LeezyPheanstalkBundle</a> fournit une intégration de la librairie ainsi que differentes fonctions liées à Symfony :</p>
+<ul>
+<li>Interface Ligne de Commande &#8211; CLI &#8211; pour gérer les Tubes &#038; Messages.</li>
+<li>Une intégration au <a href="http://symfony.com/doc/current/components/event_dispatcher/introduction.html">système d&#8217;évenement Symfony</a>.</li>
+<li>Une intégration au <a href="http://symfony.com/doc/current/book/internals.html#profiler">Profiler de Symfony</a> pour analyser vos serveurs Beanstalkd.</li>
+<li>Une intégration au système de <a href="http://symfony.com/doc/master/cookbook/logging/monolog.html">Journalisation monolog de Symfony.</a></li>
+</ul>
+<p>Si vous voulez poursuivre un peu vos lectures sur Beanstalk, voici quelques liens en Anglais : <a href="http://www.quora.com/Beanstalk-work-queue/What-are-the-advantages-and-disadvantages-of-Beanstalkd-as-a-work-queue">Les avantages et désavantages de Beanstalkd</a>, <a href="http://dev.af83.com/2013/03/13/why-you-should-consider-beanstalkd.html">Pourquoi devez-vous étudier Beanstalkd</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/beanstalkd-service-job-queuing/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Linux &#8211; Monitoring network via SNMP</title>
+		<link>http://www.armetiz.info/monitoring-network-snmp-debian/</link>
+		<comments>http://www.armetiz.info/monitoring-network-snmp-debian/#comments</comments>
+		<pubDate>Mon, 14 Feb 2011 06:00:07 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Compilation]]></category>
+		<category><![CDATA[Debian]]></category>
+		<category><![CDATA[Kernel]]></category>
+		<category><![CDATA[Patch]]></category>
+		<category><![CDATA[Problème]]></category>
+		<category><![CDATA[SNMP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1943</guid>
+		<description><![CDATA[Les distributions Debian utilisant un Kernel inférieur à la version 2.36 sont touchées par ce problème. Parce que SNMPD n&#8217;est pas lancé avec l&#8217;utilisateur Root, celui-ci n&#8217;est pas capable de.. <a href="http://www.armetiz.info/monitoring-network-snmp-debian/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><img src="http://www.armetiz.info/files/2011/02/debian1.png" alt="debian" width="128" height="128" class="alignleft size-full wp-image-1955" />Les distributions Debian utilisant un <strong>Kernel inférieur à la version 2.36</strong> sont touchées par ce problème.</p>
+<p>Parce que <strong>SNMPD</strong> n&#8217;est pas lancé avec l&#8217;utilisateur Root, celui-ci n&#8217;est pas capable de connaitre la vitesse réelle des interfaces réseaux.<br />
+Voici le résultat que l&#8217;on obtient après une requête <a href="http://fr.wikipedia.org/wiki/Simple_network_management_protocol">SNMP</a>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">IF-MIB::ifSpeed.1 = Gauge32: 10000000<br />
+IF-MIB::ifSpeed.2 = Gauge32: 10000000</div></td></tr></tbody></table></div>
+<p>D&#8217;après SNMP, nous avons donc affaire à des cartes 10Mbps, or il s&#8217;agit de carte 100Mbps.</p>
+<p><strong>Ce bug</strong> est identifié <a href="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=609226">#609226</a> chez Debian.</p>
+<p>Afin d&#8217;obtenir la bonne vitesse de vos cartes réseaux, soit vous attendez que le Kernel 2.36 soit intégré à Debian soit vous appliquez le patch et <a href="http://pyfourmond.free.fr/Compilation-Noyau-Linux.htm">re-compiler un noyaux</a>.</p>
+<p>Voici le fichier <strong>diff</strong> contenant le patch :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">Signed-off-by: Stephen Hemminger <br />
+Signed-off-by: David S. Miller <br />
+<br />
+<br />
+diff --git a/net/core/ethtool.c b/net/core/ethtool.c<br />
+index d2c4da5..970eb98 100644<br />
+--- a/net/core/ethtool.c<br />
++++ b/net/core/ethtool.c<br />
+@@ -1423,6 +1423,7 @@ int dev_ethtool(struct net *net, struct ifreq *ifr)<br />
+&nbsp;<br />
+&nbsp; &nbsp; /* Allow some commands to be done by anyone */<br />
+&nbsp; &nbsp; switch (ethcmd) {<br />
++ &nbsp; case ETHTOOL_GSET:<br />
+&nbsp; &nbsp; case ETHTOOL_GDRVINFO:<br />
+&nbsp; &nbsp; case ETHTOOL_GMSGLVL:<br />
+&nbsp; &nbsp; case ETHTOOL_GCOALESCE:</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/monitoring-network-snmp-debian/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Keepalived &#8211; Configuration firewall</title>
+		<link>http://www.armetiz.info/keepalived-configuration-firewall/</link>
+		<comments>http://www.armetiz.info/keepalived-configuration-firewall/#comments</comments>
+		<pubDate>Tue, 08 Feb 2011 17:40:16 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Réseau]]></category>
+		<category><![CDATA[Cluster]]></category>
+		<category><![CDATA[Failover]]></category>
+		<category><![CDATA[Haute Disponibilité]]></category>
+		<category><![CDATA[ipvsadm]]></category>
+		<category><![CDATA[Keepalived]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[LVS]]></category>
+		<category><![CDATA[VRRP]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1930</guid>
+		<description><![CDATA[Petit mémo pour se souvenir de la configuration Firewall à adopter pour faire fonctionner Keepalived correctement. Keepalived est un binaire qui utilise &#8211; entre autre &#8211; VRRP comme système de.. <a href="http://www.armetiz.info/keepalived-configuration-firewall/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2011/02/keepalived1.gif"><img src="http://www.armetiz.info/files/2011/02/keepalived1.gif" alt="Keepalived logo" width="125" height="79" class="size-full wp-image-1938 alignleft" /></a>Petit mémo pour se souvenir de la <strong>configuration Firewall</strong> à adopter pour faire fonctionner Keepalived correctement.</p>
+<p><strong>Keepalived</strong> est un binaire qui utilise &#8211; entre autre &#8211; VRRP comme système de vérification de santé (<a href="http://fr.wikipedia.org/wiki/Basculement_%28informatique%29">heartbeat</a>) afin de réaliser &#8211; entre autre &#8211; un cluster actif / passif.<br />
+<a href="http://fr.wikipedia.org/wiki/Virtual_Router_Redundancy_Protocol">VRRP</a> est un protocole IP multicast ayant le numéro de <strong>protocole 112</strong>.</p>
+<p>Il existe trois types d&#8217;authentification pour un <strong>cluster VRRP</strong> : </p>
+<ul>
+<li>Pas d&#8217;authentification</li>
+<li>Mot de passe en clair</li>
+<li>IP <a href="http://fr.wikipedia.org/wiki/Authentication_Header">Authentication Header (AH)</a></li>
+</ul>
+<p>Pour pouvoir fonctionner correctement, les différents membres du cluster VRRP doivent être capable de récupérer les trames IP du protocole 112.</p>
+<p><strong>En fonction du type d&#8217;authentification</strong>, il faudra adapter la configuration de votre Firewall.</p>
+<p>Voici la commande <strong>iptables</strong> lorsque vous n&#8217;avez <strong>pas d&#8217;authentification</strong> ou un <strong>mot de passe en clair</strong>.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">iptables -A INPUT -p vrrp -i eth0 -j ACCEPT</div></td></tr></tbody></table></div>
+<p>Lorsque vous utilisez <strong>IP AH</strong>, l&#8217;autorisation du protocole AH suffira.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">iptables -A INPUT -p ah -i eth0 -j ACCEPT</div></td></tr></tbody></table></div>
+<p><strong>A noter</strong> que Keepalived utilise VRRP définit par la <a href="http://tools.ietf.org/html/rfc2338">RFC2338</a>, cette RFC est devenue obsolète par la <a href="http://tools.ietf.org/html/rfc3768">RFC3768</a> depuis 2004.<br />
+Ce petit mot pour vous dire que la <a href="http://tools.ietf.org/html/rfc3768">RFC3768</a> (la dernière) ne définit plus les différents mécanisme d&#8217;authentification à cause de &#8211; je cite &#8211; &#8220;they did not provide any real security and would only cause multiple masters to be created.&#8221;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/keepalived-configuration-firewall/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 9/15 queries in 0.021 seconds using apc
+Object Caching 985/999 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:05:09 by W3 Total Cache -->

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Mot de passe</title>
+	<atom:link href="http://www.armetiz.info/tag/mot-de-passe/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Avis à la population : la gestion des mots de passe</title>
+		<link>http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/</link>
+		<comments>http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/#comments</comments>
+		<pubDate>Thu, 04 Dec 2008 16:46:24 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Système]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[Conseils]]></category>
+		<category><![CDATA[Cryptographie]]></category>
+		<category><![CDATA[Développeur]]></category>
+		<category><![CDATA[Hebergeur]]></category>
+		<category><![CDATA[Identité]]></category>
+		<category><![CDATA[Individu]]></category>
+		<category><![CDATA[Mot de passe]]></category>
+		<category><![CDATA[Qualité]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=575</guid>
+		<description><![CDATA[Cet article fait suite à un petit raz le bol envers les développeurs et les concepteurs peu soucieux de la gestion des mots de passe. Nous allons voir pourquoi il.. <a href="http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cet article fait suite à un petit raz le bol envers les développeurs et les concepteurs peu soucieux de la gestion des mots de passe.<br />
+Nous allons voir pourquoi il ne <strong>faut pas stocker les mots de passe en clair</strong>, les <strong>risques</strong> que cela peut engendrer et <strong>les alternatives du stockage en clair</strong>.</p>
+<h3>Stocker les mots de passe en clair</h3>
+<p>Avez-vous déjà eu ces mails désagréables vous confirmant votre inscription, ces mails qui vous font un rappel de login et de mot de passe ?</p>
+<blockquote><p>Rappel pour votre prochaine connexion :</p>
+<ul>
+<li>login: armetiz</li>
+<li>password: biloute</li>
+</ul>
+</blockquote>
+<p>Mais comment diable ce fait-il que le site connaisse mon mot de passe et l&#8217;affiche en clair dans un email ?</p>
+<ul>
+<li>Premièrement, le mail arrivera dans ma boite au lettre, il sera consulter sans condition de sécurité particulière, malheureusement quelqu&#8217;un qui regardait mon écran à vu cette information tellement confidentiel : <strong>mon mot de passe</strong>.</li>
+<li>Deuxièmement, comme 95% des mails non publicitaire ne sont pas supprimés, cela signifie que si l&#8217;on subit un phising réussi, on offre à notre attaquant une vue complète de notre anatomie.</li>
+<li>Troisièmement, le mot de passe en clair a de forte chance d&#8217;avoir été stocké en base de donnée. Comment l&#8217;utilisateur peut-être sur de la sécurité de l&#8217;entreprise ? Un développeur stagiaire qui a accès à la base de donnée peut récupérer tout ce qu&#8217;il désire pour les ré-utiliser autrement.</li>
+</ul>
+<p>Dans la catégorie poids lourd, on peut nommer Amazon.fr qui stocke les numéros de carte bleu ainsi que le cryptogramme ! Une fois inscrit, on peut revenir et commander un article sans même avoir sa CB sous les yeux.</p>
+<p><img alt="" src="http://upload.wikimedia.org/wikipedia/commons/a/a9/OneTimePadExcerpt.agr.jpg" class="aligncenter" width="290" height="87" /></p>
+<h3>Les risques de l&#8217;individu</h3>
+<p>Nous allons commencer par les risques des individus.<br />
+D&#8217;après les exemples ci-dessus, il peut se produire pas mal de scénario catastrophiques. Voici l&#8217;exemple imaginé d&#8217;Anna.</p>
+<blockquote><p>Anna travaillant dans une grande PME, a suivie une formation interne sur les bases de la sécurité informatique, la chose qu&#8217;elle a retenue : des mots de passe <strong>diversifiés</strong> et <strong>complexes</strong> en fonction du type de site. Après cette formation, elle a modifiée son mot de passe, et utilise désormais <strong>trois mots de passe complexes</strong> pour trois types de site</p>
+<ul>
+<li>Commerciaux.</li>
+<li>Non commerciaux.</li>
+<li>Professionnel &#8211; Accès VPN, Connexion système de fichier, etc&#8230;</li>
+</ul>
+<p>Malheureusement, Anna a subit une attaque de <strong>phising Hotmail</strong> qu&#8217;elle utilise comme messagerie principal.<br />
+Cette attaque ayant été correctement orchestré, elle n&#8217;y a vue que du feu et ne s&#8217;est même pas rendue compte que son mot de passe non commercial venait de lui être volé.</p>
+<p>Ses attaquants ont <strong>parcouru ses emails</strong>, ils sont tombés sur une confirmation d&#8217;inscription à un site de vente en ligne pour de la lingerie, rien de bien méchant, sauf que cet email contient le <strong>login de connexion</strong>, ainsi que <strong>le mot de passe</strong> affecté.<br />
+Ils ont aussi vu qu&#8217;une commande sur Amazon avait été passée.</p>
+<p>Pas de bol pour Anna, les attaquants ont été voir sur Amazon si un des deux mots de passe fonctionnait, et c&#8217;est le cas, car elle a bien respectée la règle qu&#8217;on lui a apprise en formation, le mot de passe commercial utilisé pour la vente de lingerie est le même que pour Amazon.<br />
+Les attaquants ont commandés une télévision à 1000€, et ce n&#8217;est pas Anna qui sera livrée&#8230; Sachant qu&#8217;ils ont accès à la boite email, ils ont supprimés le bon de commande et elle ne sera rien avant que son banquier ne l&#8217;appel ou qu&#8217;elle consulte l&#8217;état de son compte.</p>
+<p>Le calvaire de la pauvre Anna ne s&#8217;est pas arrêtée à un téléviseur, car quand on est acteur &#8211; pseudo &#8211; influant sur Internet, les choses vont vite. Et les attaquants se sont amusés avec <strong>l&#8217;identité numérique</strong>, les blogs qu&#8217;elle animait l&#8217;ont bannis, et la réputation qu&#8217;elle avait construit avec cœur s&#8217;est détériorées très rapidement.</p></blockquote>
+<p>Si l&#8217;on regarde l&#8217;expérience d&#8217;Anna, on se rend compte que le phising qu&#8217;elle a subit est sous sa responsabilité, car c&#8217;est son manque d&#8217;attention qui a mené à bien l&#8217;attaque.<br />
+Par contre, le fait que le mot de passe soit affiché en clair dans l&#8217;email est sous l&#8217;entière responsabilité du site web où s&#8217;est inscrit Anna.<br />
+Et si amazon avait ne serai-ce que demandé le cryptogramme de 3 chiffres avant de passer la commande, les 1000€ serai toujours sur son compte bancaire.</p>
+<h3>Les risques des hébergeurs / administrateur</h3>
+<p>&#8220;<em>Moins on en sait, moins on cours de risque</em>&#8220;. Si l&#8217;on part de ce principe, ceux qui conservent les mots de passe en clairs se heurtent à d&#8217;énormes risques légaux.</p>
+<p>Nous allons continuer avec l&#8217;exemple d&#8217;Anna qui a été <strong>porté plainte</strong>, sachant que le débiteur des 1 000€ est Amazon, la banque se retournera contre cette enseigne qui devait s&#8217;assurer que la demande de la vente provenait bien d&#8217;Anna.<br />
+Comme nous ne pouvons pas être sur à 100% de l&#8217;identité de la personne connectée, ils ne doivent pas conserver les codes de carte bleu.</p>
+<p>Anna qui n&#8217;a vraiment pas de chance, s&#8217;est fait usurpée son identité par un stagiaire de la boutique de vente de lingerie qui s&#8217;est amusé à récupérer les mots de passe et à tester l&#8217;accès à des forums en fonction de l&#8217;email et du mot de passe.<br />
+Le stagiaire est itinérant, mais pas la boutique, elle peut être accuser d&#8217;avoir utiliser des données confidentiels et d&#8217;une haute importance, car ces données peuvent ouvrir l&#8217;accès à d&#8217;autres données personnelles. Comment la boutique pourra justifier qu&#8217;elle n&#8217;a pas utiliser à des fins &#8220;personnels&#8221; le mot de passe d&#8217;Anna ?</p>
+<h3>Les alternatives du stockage en claire</h3>
+<p>Pour empêcher que d&#8217;autres personnes ne subissent l&#8217;expérience de la pauvre Anna, qui rappelons le, a usée de méthode d&#8217;utilisateur conscient de la sécurité informatique. Il existe des méthodes très simple à mettre en place.<br />
+Mais pour cela, il faut que les concepteurs, développeurs et même administrateur soit au courant de ces pratiques.</p>
+<p>Lorsque l&#8217;on s&#8217;inscrit sur un site, on ne conserve qu&#8217;un <a href="http://fr.wikipedia.org/wiki/Fonction_de_hachage">Hash</a> du mot de passe, et si un utilisateur redemande le mot de passe, on le <strong>ré-initialise</strong> avec un tout autre mot, libre à la personne de le changer par la suite.</p>
+<p>Amazon a vraiment fait quelque chose de pas &#8220;secure&#8221;. A l&#8217;heure où l&#8217;on <a href="http://www.emilieogez.com/2008/11/20/gemalto-la-securite-numerique-en-question/">se bat pour que messieurs tout le monde ai droit à une sécurité informatique</a>, si de grandes enseignes ne respectent pas les règles élémentaires, c&#8217;est mission impossible.</p>
+<p>Car il faut le rappeler, la sécurité informatique tient du respect des règles par l&#8217;ensemble des acteurs de l&#8217;informatique.<br />
+Si les utilisateurs se forcent à utiliser des mots de passe complexe, et que les sites ne font rien pour en assurer leurs sécurités&#8230; Nous ne seront jamais tranquille.</p>
+<p>PS : Si une loi obligeait tout les développeurs à avoir connaissance des règles de sécurité pour pouvoir exercer&#8230; Nous vivrions dans un monde sans pirate :p</p>
+<p>Pour aller plus loin, voici <a href="http://securite.developpez.com/livres/">une liste de livre traitant de la sécurité informatique</a>, disponible sur Amazon bien sur <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/gestion-mots-de-passe-clair-cryptographie/feed/</wfw:commentRss>
+		<slash:comments>5</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.005 seconds using apc
+Object Caching 309/310 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:15:58 by W3 Total Cache -->

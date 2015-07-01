@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; rewrite</title>
+	<atom:link href="http://www.armetiz.info/tag/rewrite/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Apache 2.2 &#8211; Custom HTTP Header &amp; Redirect</title>
+		<link>http://www.armetiz.info/apache-2-2-custom-http-header-redirect/</link>
+		<comments>http://www.armetiz.info/apache-2-2-custom-http-header-redirect/#comments</comments>
+		<pubDate>Fri, 24 Aug 2012 13:54:46 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[Configuration]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[HTTPS]]></category>
+		<category><![CDATA[Libre]]></category>
+		<category><![CDATA[Pound]]></category>
+		<category><![CDATA[rewrite]]></category>
+		<category><![CDATA[Varnish]]></category>
+
+		<guid isPermaLink="false">http://hosting.armetiz.info/armetiz/?p=2702</guid>
+		<description><![CDATA[Derniérement j&#8217;ai eu besoin de fournir une ressource differente en fonction du protocole utilisé. Un fichier robots.txt pour autoriser l&#8217;indéxation sur HTTP et le refuser sur HTTPS. Le soucis, c&#8217;est.. <a href="http://www.armetiz.info/apache-2-2-custom-http-header-redirect/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Derniérement j&#8217;ai eu besoin de fournir une ressource differente en fonction du protocole utilisé.<br />
+Un fichier <strong>robots.txt</strong> pour autoriser l&#8217;indéxation sur <strong>HTTP</strong> et le refuser sur <strong>HTTPS</strong>.</p>
+<p>Le soucis, c&#8217;est que notre serveur HTTP est derrière un reverse proxy HTTPS to HTTP (<a href="http://www.apsis.ch/pound">Pound</a>), et qu&#8217;en l&#8217;état le serveur HTTP n&#8217;a pas moyen de savoir si l&#8217;utilisateur a demandé une connexion SSL ou non.</p>
+<p>Pour pouvoir réaliser ce besoin, nous injectons un header HTTP au niveau du reverse proxy Pound : <strong>X-Forwarded-Proto</strong> qui contient la valeur &#8220;https&#8221;</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">ListenHTTPS<br />
+&nbsp; &nbsp; xHTTP 2<br />
+&nbsp; &nbsp; Address 1.2.3.4<br />
+&nbsp; &nbsp; Port &nbsp; &nbsp;443<br />
+&nbsp; &nbsp; Cert &nbsp; &nbsp;&quot;/etc/ssl/certs/private/domain.tld.pem&quot;<br />
+&nbsp; &nbsp; HeadRemove &quot;X-Forwarded-Proto&quot;<br />
+&nbsp; &nbsp; AddHeader &quot;X-Forwarded-Proto: https&quot;<br />
+End</div></td></tr></tbody></table></div>
+<p><img src="http://www.armetiz.info/files/2012/08/apache_logo.png" alt="" title="apache_logo" width="150" height="149" class="alignleft size-full wp-image-2710" />Maintenant,<br />
+Le serveur HTTP peut savoir si l&#8217;utilisateur a établit une connexion sécurisé ou non.<br />
+Nous réalisons donc une ré-écriture d&#8217;URL en fonction de ce Custom HTTP Header.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">RewriteCond %{HTTP:X-Forwarded-Proto} ^https$<br />
+RewriteCond %{REQUEST_URI} ^/robots.txt$<br />
+RewriteRule ^(.*)$ /robots_https.txt [L]</div></td></tr></tbody></table></div>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/apache-2-2-custom-http-header-redirect/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.010 seconds using apc
+Object Caching 385/386 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:14:30 by W3 Total Cache -->

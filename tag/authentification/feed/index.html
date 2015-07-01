@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; Authentification</title>
+	<atom:link href="http://www.armetiz.info/tag/authentification/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>AMF / Zend Authentication using Database</title>
+		<link>http://www.armetiz.info/zend-authentication-database/</link>
+		<comments>http://www.armetiz.info/zend-authentication-database/#comments</comments>
+		<pubDate>Tue, 19 Oct 2010 08:16:06 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Flash]]></category>
+		<category><![CDATA[Flex]]></category>
+		<category><![CDATA[Zend]]></category>
+		<category><![CDATA[AMF]]></category>
+		<category><![CDATA[Authentification]]></category>
+		<category><![CDATA[Base de données]]></category>
+		<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Serveur]]></category>
+		<category><![CDATA[Service]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1843</guid>
+		<description><![CDATA[Cet article s&#8217;inscrit à la suite du précèdent billet : Authentification &#38; Autorisation avec Zend AMF. Zend_Amf_Adobe_Auth est une classe livré avec Zend 1.10. Elle peut être utilisée comme service.. <a href="http://www.armetiz.info/zend-authentication-database/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Cet article s&#8217;inscrit à la suite du précèdent billet : <a href="http://www.armetiz.info/authentification-autorisation-zend-amf">Authentification &amp; Autorisation avec Zend AMF</a>.</p>
+<p><strong>Zend_Amf_Adobe_Auth</strong> est une classe livré avec Zend 1.10. Elle peut être utilisée comme service d&#8217;authentification pour un serveur <strong>Zend_Amf_Server</strong>. Le soucis, c&#8217;est que cette classe fonctionne conjointement avec un fichier XML réputé statique.</p>
+<p>Voici donc le code d&#8217;une classe qui permet l&#8217;authentification d&#8217;un utilisateur AMF via la base de données.<br />
+Sachant que nous développons cela pour offrir des services AMF, cette classe utilisera la logique métier implémentée au sein des services.</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br />37<br />38<br />39<br />40<br />41<br />42<br />43<br />44<br />45<br />46<br />47<br />48<br />49<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">class Auth_AmfDatabase extends Zend_Amf_Auth_Abstract<br />
+{<br />
+&nbsp; &nbsp; protected $_acl;<br />
+&nbsp; &nbsp; protected $_users = array();<br />
+<br />
+&nbsp; &nbsp; public function __construct()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_acl = new Zend_Acl();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oServiceRole &nbsp; = new Service_Role ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oRoles &nbsp; &nbsp; = $oServiceRole-&amp;gt;fetchAll ( );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; foreach ( $oRoles as $oRole )<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $this-&amp;gt;_acl-&amp;gt;addRole ( new Zend_Acl_Role( $oRole-&amp;gt;title ) );<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function getAcl()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; return $this-&amp;gt;_acl;<br />
+&nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; public function authenticate()<br />
+&nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (empty($this-&amp;gt;_username) ||<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; empty($this-&amp;gt;_password)) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; require_once 'Zend/Auth/Adapter/Exception.php';<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new Zend_Auth_Adapter_Exception('Username/password should be set');<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oServiceUser &nbsp; = new Service_User ();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; $oUser&nbsp; &nbsp; &nbsp; = $oServiceUser-&amp;gt;authentication ( $this-&amp;gt;_username, $this-&amp;gt;_password );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; if ( null == $oUser )<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return new Zend_Auth_Result(Zend_Auth_Result::FAILURE,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; null,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array('Username and / or Password not found')<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; );<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; else<br />
+&nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id = new stdClass();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id-&amp;gt;role = $oUser-&amp;gt;role-&amp;gt;code;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $id-&amp;gt;name = $oUser-&amp;gt;username;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return new Zend_Auth_Result(Zend_Auth_Result::SUCCESS, $id);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; }<br />
+}</div></td></tr></tbody></table></div>
+<p>Le <strong>constructeur</strong> récupère l&#8217;ensemble des rôles existants en base de données pour peupler l&#8217;objet ACL.<br />
+La méthode <strong>authenticate</strong> va vérifier le couple Login / Password, et en cas de succès va retourner un objet <strong>Zend_Auth_Result</strong> contenant lui même un objet standard.<br />
+Cet objet standard doit avoir une propriété <strong>role</strong> et <strong>name</strong>, le <strong>rôle</strong> contiendra l&#8217;identifiant que vous avez définit dans vos autorisations ACL. Le <strong>name</strong> devra contenir le login de votre utilisateur.</p>
+<p>Cette classe a été inspirée par <strong>Zend_Amf_Adobe_Auth</strong>. N&#8217;hésitez pas à l&#8217;adapter pour vos propres besoins.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/zend-authentication-database/feed/</wfw:commentRss>
+		<slash:comments>20</slash:comments>
+		</item>
+		<item>
+		<title>Sécurité des systèmes de reconnaissance faciale</title>
+		<link>http://www.armetiz.info/securite-systemes-reconnaissance-faciale/</link>
+		<comments>http://www.armetiz.info/securite-systemes-reconnaissance-faciale/#comments</comments>
+		<pubDate>Fri, 08 Jan 2010 12:56:47 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Authentification]]></category>
+		<category><![CDATA[Dell]]></category>
+		<category><![CDATA[Faille]]></category>
+		<category><![CDATA[Windows]]></category>
+
+		<guid isPermaLink="false">http://www.armetiz.info/?p=1520</guid>
+		<description><![CDATA[Installer sur les portables Dell par défaut, le système de reconnaissance faciale FastAccessprésente un gros problème de sécurité. Avec un simple appareil photo numérique de téléphone portable, nous avons réussi.. <a href="http://www.armetiz.info/securite-systemes-reconnaissance-faciale/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.armetiz.info/files/2010/01/photo_identite1.jpg"><img src="http://www.armetiz.info/files/2010/01/photo_identite1.jpg" alt="photo_identite" width="120" height="150" class="alignright size-full wp-image-1522" /></a>Installer sur les portables Dell par défaut, le système de reconnaissance faciale <strong><a href="http://www.sensiblevision.com">FastAccess</a></strong>présente un gros problème de sécurité.</p>
+<p>Avec un simple appareil photo numérique de téléphone portable, nous avons réussi à usurper l&#8217;identité d&#8217;un utilisateur.</p>
+<p>Cela pour dire que le mot de passe a encore de beaux jours devant lui.</p>
+<p>Aussi, il y aura dans les prochains jours un article sur comment &#8220;pourrir&#8221; la vie d&#8217;un utilisateur sous Windows. Cela sera du grand art !</p>
+<p><img alt="FastAccess" src="http://i.dell.com/images/global/learnmore/face-analysis-login-screen.jpg" class="aligncenter" width="380" height="237" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/securite-systemes-reconnaissance-faciale/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/11 queries in 0.003 seconds using apc
+Object Caching 388/389 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:15:43 by W3 Total Cache -->

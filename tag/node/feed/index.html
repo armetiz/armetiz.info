@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Armetiz &#187; node</title>
+	<atom:link href="http://www.armetiz.info/tag/node/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.armetiz.info</link>
+	<description>Thomas Tourlourat - Ingénieur Informatique, CEO @Wozbe.com</description>
+	<lastBuildDate>Mon, 01 Dec 2014 09:47:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Liste des termes d&#8217;un vocabulaire, et nombre de nœuds référents</title>
+		<link>http://www.armetiz.info/liste-des-termes-dun-vocabulaire-et-nombre-de-noeuds-referents/</link>
+		<comments>http://www.armetiz.info/liste-des-termes-dun-vocabulaire-et-nombre-de-noeuds-referents/#comments</comments>
+		<pubDate>Thu, 03 Jan 2008 09:53:09 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+				<category><![CDATA[Drupal]]></category>
+		<category><![CDATA[node]]></category>
+
+		<guid isPermaLink="false">http://armetiz.info/?p=35</guid>
+		<description><![CDATA[Si vous chercher à faire un menu qui affiche la liste de vos termes pour un vocabulaire donné, ainsi que le nombre de nœuds contenus dans le terme. Voici le.. <a href="http://www.armetiz.info/liste-des-termes-dun-vocabulaire-et-nombre-de-noeuds-referents/" class="readmore">read more</a>]]></description>
+				<content:encoded><![CDATA[<p>Si vous chercher à faire un menu qui affiche la liste de vos termes pour un vocabulaire donné, ainsi que le nombre de nœuds contenus dans le terme.</p>
+<p>Voici le code suivant :</p>
+<div class="codecolorer-container text blackboard" style="overflow:auto;white-space:nowrap;border:1px solid #9F9F9F;width:435px;"><table cellspacing="0" cellpadding="0"><tbody><tr><td style="padding:5px;text-align:center;color:#888888;background-color:#EEEEEE;border-right: 1px solid #9F9F9F;font: normal 12px/1.4em Monaco, Lucida Console, monospace;"><div>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></div></td><td><div class="text codecolorer" style="padding:5px;font:normal 12px/1.4em Monaco, Lucida Console, monospace;white-space:nowrap">$vid = 1; /* &amp;lt;—- put correct vocabulary ID here */<br />
+<br />
+$terms = taxonomy_get_tree($vid); /* need code from below to handle nesting */<br />
+<br />
+print &amp;quot;&lt;ul&gt;&quot;;<br />
+foreach ( $terms as $term ) {<br />
+$count = db_result(db_query(&quot;SELECT COUNT(nid) FROM {term_node} WHERE tid = %d &quot;, $term-&amp;gt;tid));<br />
+if ($count) { /* don't show terms with 0 count */<br />
+print &quot;&lt;li&gt;&quot;.$term-&amp;gt;name.&quot; (&quot;.$count.&quot;)&lt;/li&gt;&quot;;<br />
+}<br />
+} /* end foreach */<br />
+print &quot;&lt;/ul&gt;&quot;;</div></td></tr></tbody></table></div>
+<p>Source : <a href="http://drupalfr.org/forum/support/634-afficher_une_listes_de_termes_tries_par_vocabulaire" title="forum drupalfr.org">forum drupalfr.org</a><br />
+Si vous trouvez une solution pour faire ca avec un View, je suis preneur.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.armetiz.info/liste-des-termes-dun-vocabulaire-et-nombre-de-noeuds-referents/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using apc
+Database Caching 6/14 queries in 0.022 seconds using apc
+Object Caching 332/342 objects using apc
+
+ Served from: www.armetiz.info @ 2015-07-01 11:16:37 by W3 Total Cache -->
